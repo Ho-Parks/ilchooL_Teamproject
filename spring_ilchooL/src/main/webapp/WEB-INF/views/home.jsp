@@ -17,7 +17,6 @@
             transition: all 0.3s ease-in-out; }
       #contents_box a:hover img { opacity: 1; transform: scale(1.2); }
       #img_box { overflow: hidden; width: 100%; height: 100%; }
-
    </style>
 	<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
