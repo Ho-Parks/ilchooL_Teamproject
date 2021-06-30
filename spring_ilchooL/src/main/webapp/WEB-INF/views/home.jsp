@@ -6,16 +6,63 @@
 <html>
 <head>
 	<c:import url="assets/head.jsp" />
+	 <style type="text/css">
+   	  .p_container { padding: 30px 0; }
+      #contents { text-align: center; overflow: hidden; padding-bottom: 100px; }
+      h1 { padding-bottom: 30px; }
+      #contents_box { height: 500px; overflow: hidden !important; padding: 0 40px !important; }
+      #contents_box span { position: absolute; font-size: 30px; margin: auto; color: white; z-index: 1;
+            text-align: center; position: absolute; top: 50%; left: 50%; transform: translate( -50%, -50% ); }
+      #contents_box a img { width: 100%; height: 100%; opacity: 0.6; text-decoration: none;
+            transition: all 0.3s ease-in-out; }
+      #contents_box a:hover img { opacity: 1; transform: scale(1.2); }
+      #img_box { overflow: hidden; width: 100%; height: 100%; }
+
+   </style>
+	<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 	<c:import url="assets/header.jsp" />
-
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
-
+   
+   	<c:import url="main_forecast.jsp"/>
+   <div id="forecast_box" class="container p_container">
+	   <c:import url="main_forecast_graph.jsp" />
+   </div>
+   
+   <div id="covid_box" class="container p_container">
+      <c:import url="covid_graph.jsp" />
+   </div>
+   
+   
+   <div id="contents" class="container p_container">
+      <h1>CONTENTS</h1>
+      <div id="contents_list" class="row">
+         <div id="contents_box" class="col-md-4">
+            <div id="img_box">
+               <a href="../contents/contents_transport.jsp">
+                  <span>교 통</span>
+                  <img alt="" src="../assets/img/transport.jpeg">         
+               </a>            
+            </div>
+         </div>
+         <div id="contents_box" class="col-md-4">
+            <div id="img_box">
+               <a href="../contents/contents_news.jsp">
+                  <span>뉴 스</span>
+                  <img alt="" src="../assets/img/news.jpeg">
+               </a>
+            </div>
+         </div>
+         <div id="contents_box" class="col-md-4">
+            <div id="img_box">            
+               <a href="../contents/contents_finance.jsp">   
+                  <span>금 융</span>
+                  <img alt="" src="../assets/img/stock.jpg">
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
 	<c:import url="assets/footer.jsp" />
 </body>
 </html>
