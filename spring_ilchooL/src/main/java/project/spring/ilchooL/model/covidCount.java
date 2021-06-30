@@ -1,27 +1,27 @@
 package project.spring.ilchooL.model;
 
+import java.util.List;
+
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Data;
 
 @Data
 public class covidCount {
-	private String S_DT;
-	private String SN_HJ;
-	private String S_HJ;
-	private String S_DEATH;
-	private String S_RECOVER;
-	private String S_CARE;
+	@SerializedName("TbCorona19CountStatus") private TbCorona19CountStatus tbCorona19CountStatus;
 	
-	public covidCount(String s_DT, String sN_HJ, String s_HJ, String s_DEATH, String s_RECOVER, String s_CARE) {
-		super();
-		S_DT = s_DT;
-		SN_HJ = sN_HJ;
-		S_HJ = s_HJ;
-		S_DEATH = s_DEATH;
-		S_RECOVER = s_RECOVER;
-		S_CARE = s_CARE;
-	}
-	
-	public covidCount() {
-		super();
+	@Data
+	public class TbCorona19CountStatus {
+		@SerializedName("row") private List<Row> row;
+		
+		@Data
+		public class Row {
+			@SerializedName("S_DT") private String S_DT;
+			@SerializedName("SN_HJ") private String SN_HJ;
+			@SerializedName("S_HJ") private String S_HJ;
+			@SerializedName("S_DEATH") private String S_DEATH;
+			@SerializedName("S_RECOVER") private String S_RECOVER;
+			@SerializedName("S_CARE") private String S_CARE;
+		}
 	}
 }
