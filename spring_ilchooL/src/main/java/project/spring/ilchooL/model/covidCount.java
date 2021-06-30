@@ -16,12 +16,12 @@ public class covidCount {
 		
 		@Data
 		public class Row {
-			@SerializedName("S_DT") private String S_DT;
-			@SerializedName("SN_HJ") private String SN_HJ;
-			@SerializedName("S_HJ") private String S_HJ;
-			@SerializedName("S_DEATH") private String S_DEATH;
-			@SerializedName("S_RECOVER") private String S_RECOVER;
-			@SerializedName("S_CARE") private String S_CARE;
+			@SerializedName("S_DT") private String s_dt;
+			@SerializedName("SN_HJ") private String sn_hj;
+			@SerializedName("S_HJ") private String s_hj;
+			@SerializedName("S_DEATH") private String s_death;
+			@SerializedName("S_RECOVER") private String s_recover;
+			@SerializedName("S_CARE") private String s_care;
 		}
 	}
 }

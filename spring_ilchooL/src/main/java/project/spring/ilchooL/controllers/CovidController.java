@@ -1,6 +1,5 @@
 package project.spring.ilchooL.controllers;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class CovidController {
 		
 		try {
 			cCount = call.execute().body();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

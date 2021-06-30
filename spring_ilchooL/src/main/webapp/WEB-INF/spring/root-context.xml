@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	
+	<!-- Helper 구동에 필요한 환경설정 값 -->
+	<util:properties id="config">
+		<prop key="encType">UTF-8</prop>
+	</util:properties>
+	
+	<!-- WebHelper 주입 설정 -->
+	<bean id="webHelper" class="project.spring.ilchooL.helper.WebHelper">
+		<property name="encType" value="#{config['encType']}" />
+	</bean>
+	
+	<!-- RegexHelper 주입 설정 -->
+	<bean id="regexHelper" class="project.spring.ilchooL.helper.RegexHelper" />
+	
+	<!-- RetrofitHelper 주입 설정 -->
+	<bean id="retrofitHelper" class="project.spring.ilchooL.helper.RetrofitHelper" />
 </beans>

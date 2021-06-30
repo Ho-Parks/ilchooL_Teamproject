@@ -1,4 +1,4 @@
-package project.spring.ilchooL;
+package project.spring.ilchooL.controllers;
 
 import java.text.DateFormat;
 import java.util.Date;
