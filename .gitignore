@@ -303,3 +303,5 @@ $RECYCLE.BIN/
 *.lnk
 
 Servers/
+MANIFEST.MF
+pom.properties
