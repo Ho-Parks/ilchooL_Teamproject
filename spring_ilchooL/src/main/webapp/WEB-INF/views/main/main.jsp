@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
-	<c:import url="assets/head.jsp" />
+	<c:import url="../assets/head.jsp" />
 	 <style type="text/css">
    	  .p_container { padding: 30px 0; }
       #contents { text-align: center; overflow: hidden; padding-bottom: 100px; }
@@ -21,11 +21,11 @@
 	<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-	<c:import url="assets/header.jsp" />
+	<c:import url="../assets/header.jsp" />
    
-   	<c:import url="main_forecast.jsp"/>
+   	<%-- <c:import url="main_forecast.jsp"/> --%>
    <div id="forecast_box" class="container p_container">
-	   <c:import url="main_forecast_graph.jsp" />
+	   <%-- <c:import url="main_forecast_graph.jsp" /> --%>
    </div>
    
    <div id="covid_box" class="container p_container">
@@ -38,30 +38,30 @@
       <div id="contents_list" class="row">
          <div id="contents_box" class="col-md-4">
             <div id="img_box">
-               <a href="../contents/contents_transport.jsp">
+               <a href="${pageContext.request.contextPath}/contents/contents_transport.do">
                   <span>교 통</span>
-                  <img alt="" src="../assets/img/transport.jpeg">         
+                  <img alt="" src="${pageContext.request.contextPath}/assets/img/transport.jpeg">         
                </a>            
             </div>
          </div>
          <div id="contents_box" class="col-md-4">
             <div id="img_box">
-               <a href="../contents/contents_news.jsp">
+               <a href="#">
                   <span>뉴 스</span>
-                  <img alt="" src="../assets/img/news.jpeg">
+                  <img alt="" src="${pageContext.request.contextPath}/assets/img/news.jpeg">
                </a>
             </div>
          </div>
          <div id="contents_box" class="col-md-4">
             <div id="img_box">            
-               <a href="../contents/contents_finance.jsp">   
+               <a href="#">   
                   <span>금 융</span>
-                  <img alt="" src="../assets/img/stock.jpg">
+                  <img alt="stock" src="${pageContext.request.contextPath}/assets/img/stock.jpg">
                </a>
             </div>
          </div>
       </div>
    </div>
-	<c:import url="assets/footer.jsp" />
+	<c:import url="../assets/footer.jsp" />
 </body>
 </html>

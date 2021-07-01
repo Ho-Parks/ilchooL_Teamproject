@@ -50,7 +50,7 @@
 								${list[0].s_death - list[1].s_death }&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
 							</c:when>
 							<c:when test="${list[0].s_death - list[1].s_death < 0 }">
-								Math.abs(${list[1].s_death - list[2].s_death })&nbsp;<i class="glyphicon glyphicon-arrow-down" id="down"></i>
+								${list[1].s_death - list[0].s_death }&nbsp;<i class="glyphicon glyphicon-arrow-down" id="down"></i>
 							</c:when>
 							<c:otherwise>
 								0
@@ -67,7 +67,7 @@
 								${list[0].s_recover - list[1].s_recover }&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
 							</c:when>
 							<c:when test="${list[0].s_recover - list[1].s_recover < 0 }">
-								Math.abs(${list[1].s_recover - list[2].s_recover })&nbsp;<i class="glyphicon glyphicon-arrow-down" id="down"></i>
+								${list[1].s_recover - list[0].s_recover }&nbsp;<i class="glyphicon glyphicon-arrow-down" id="down"></i>
 							</c:when>
 							<c:otherwise>
 								0
@@ -84,7 +84,7 @@
 								${list[0].s_care - list[1].s_care }&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
 							</c:when>
 							<c:when test="${list[0].s_care - list[1].s_care < 0 }">
-								Math.abs(${list[1].s_care - list[2].s_care })&nbsp;<i class="glyphicon glyphicon-arrow-down" id="down"></i>
+								${list[1].s_care - list[0].s_care }&nbsp;<i class="glyphicon glyphicon-arrow-down" id="down"></i>
 							</c:when>
 							<c:otherwise>
 								0

@@ -16,14 +16,19 @@ import project.spring.ilchooL.service.ApiCovidService;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 
+/**
+ *	메인 페이지 컨트롤러 
+ */
 @Controller
-public class CovidController {
+public class MainController {
 	@Autowired WebHelper webHelper;
 	@Autowired RetrofitHelper retrofitHelper;
 	
-	@RequestMapping(value = "/main/covid_graph.do", method = RequestMethod.GET)
-	public String covidData(Model model) {
-		
+	/**
+	 * 날씨, 미세먼지, 코로나19, 그래프 영역은 메인컨트롤러에서 구현하면 될것같아요! 
+	 */
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Model model) {
 		Retrofit retrofit = retrofitHelper.getRetrofit(ApiCovidService.BASE_URL);
 		
 		ApiCovidService apiCovidService = retrofit.create(ApiCovidService.class);
@@ -45,6 +50,12 @@ public class CovidController {
 		
 		model.addAttribute("list", list);
 		
-		return "main/covid_graph";
-	}	// end covidData()
+		return "main/main";
+	}
+	
+	/** 교통 페이지 이동 컨트롤러 */
+	@RequestMapping(value = "/contents/contents_transport.do", method = RequestMethod.GET)
+	public String transport(Model model) {
+		return "contents/contents_transport";
+	}
 }
