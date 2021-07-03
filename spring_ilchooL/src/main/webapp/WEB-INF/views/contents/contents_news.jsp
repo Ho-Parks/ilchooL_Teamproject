@@ -6,24 +6,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
-<!-- Bootstrap CSS -->
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/ico/favicon.png" />
-<link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/assets/ico/apple-touch-icon-144-precomposed.png" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap-theme.min.css" />
-
+<c:import url="../assets/head.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/datepicker.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/datepicker.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/contents_news.css" />
 
-<script src="${pageContext.request.contextPath }/assets/js/bootstrap.min.js" /></script>
-<script src="${pageContext.request.contextPath }/assets/js/bootstrap.js" /></script>
 </head>
 <body>
-	
+	<div id="header">
+		<c:import url="../assets/header.jsp" />
+	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-1 col-sm-12">
@@ -361,6 +353,7 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-
+	
+	<c:import url="../assets/footer.jsp" />
 </body>
 </html>
