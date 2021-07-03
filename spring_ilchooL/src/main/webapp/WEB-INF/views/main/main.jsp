@@ -46,7 +46,7 @@
          </div>
          <div id="contents_box" class="col-md-4">
             <div id="img_box">
-               <a href="#">
+               <a href="${pageContext.request.contextPath}/contents/contents_news.do">
                   <span>뉴 스</span>
                   <img alt="" src="${pageContext.request.contextPath}/assets/img/news.jpeg">
                </a>
@@ -54,7 +54,7 @@
          </div>
          <div id="contents_box" class="col-md-4">
             <div id="img_box">            
-               <a href="#">   
+               <a href="${pageContext.request.contextPath}/contents/contents_finance.do">   
                   <span>금 융</span>
                   <img alt="stock" src="${pageContext.request.contextPath}/assets/img/stock.jpg">
                </a>
