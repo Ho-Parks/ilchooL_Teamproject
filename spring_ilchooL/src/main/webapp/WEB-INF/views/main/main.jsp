@@ -30,8 +30,8 @@
    
    <div id="covid_box" class="container p_container">
       <c:import url="covid_graph.jsp" />
+      <c:import url="phpCovid.jsp" />
    </div>
-   
    
    <div id="contents" class="container p_container">
       <h1>CONTENTS</h1>
