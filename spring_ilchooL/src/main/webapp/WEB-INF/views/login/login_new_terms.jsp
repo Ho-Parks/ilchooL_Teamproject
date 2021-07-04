@@ -13,7 +13,7 @@
 <body>
 	<div class="wrap">
 		<div class="logo">
-			<img class="logo_img" src="../assets/img/Logo(line).png">
+			<img class="logo_img" src="${pageContext.request.contextPath}/assets/img/Logo(line).png">
 		</div>
 		<div class="contents">
 			<form action="/" method="POST" id="form_wrap">
@@ -64,10 +64,10 @@
 							이때에도 수신 동의에 대해 별도로 안내하고 동의를 받습니다.</div>
 					</li>
 				</ul>
-				<button type="submit" class="next-button" disabled onclick="location.href='../login/login_new.jsp'">확인</button>
+				<button type="submit" class="next-button" disabled onclick="location.href='${pageContext.request.contextPath}/login/login_new.do'">확인</button>
 			</form>
 		</div>
 	</div>
-	<script src="../assets/js/login_new_terms.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/login_new_terms.js"></script>
 </body>
 </html>

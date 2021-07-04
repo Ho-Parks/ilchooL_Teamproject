@@ -14,7 +14,7 @@
 
 <body>
 	<div id="header">
-		<c:import url="assets/header.jsp" />
+		<c:import url="../assets/header.jsp" />
 	</div>
 	<!-- wrapper -->
 	<div id="wrapper">
@@ -212,13 +212,13 @@
 		<c:import url="../assets/footer.jsp" />
 	</div>
 
-	<script src="../assets/js/login_new.js"></script>
-	<script src="../assets/js/login_new2.js"></script>
-	<script src="../assets/js/address_1.js"></script>
-	<script src="../assets/js/address.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/login_new.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/login_new2.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/address_1.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/address.js"></script>
 	<!-- validate 플러그인 참조 -->
-	<script src="../assets/plugins/validate/jquery.validate.min.js"></script>
-	<script src="../assets/plugins/validate/additional-methods.min.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/plugins/validate/jquery.validate.min.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/plugins/validate/additional-methods.min.js"></script>
 	
 	<!-- 
 	$("#join_form").bind('submit', function() {

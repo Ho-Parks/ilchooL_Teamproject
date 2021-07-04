@@ -33,7 +33,7 @@
 					<button type="submit" class="btn_login" id="btn_login">로그인</button>
 				</form>
 				<button type="submit"
-						class="btn_new" onclick="location.href='../login/login_new_terms.jsp'">회원가입</button>
+						class="btn_new" onclick="location.href='../login/login_new_terms.do'">회원가입</button>
 				<div class="login_append">
 					<div class="log_chk">
 						<!-- 체크시 checked 추가 -->

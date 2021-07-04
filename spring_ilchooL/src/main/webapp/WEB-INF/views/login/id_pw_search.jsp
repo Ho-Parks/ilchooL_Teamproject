@@ -6,7 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/assets/css/login_new.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/assets/css/login_new.css">
 <c:import url="../assets/head.jsp" />
 <style type="text/css">
 
@@ -32,7 +33,7 @@
 <body>
 	<!-- header 파일 -->
 	<div class="header">
-		<c:import url="assets/header.jsp" />
+		<c:import url="../assets/header.jsp" />
 	</div>
 	
 	<!-- Modal -->

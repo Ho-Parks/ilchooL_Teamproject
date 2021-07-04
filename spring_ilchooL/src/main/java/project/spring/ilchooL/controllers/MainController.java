@@ -99,10 +99,6 @@ public class MainController {
 		return "contents/contents_transport";
 	}
 
-	/** 로그인 페이지 이동 컨트롤러 */
-	@RequestMapping(value = "/login/Login.do", method = RequestMethod.GET)
-	public String login(Model model) {
-		return "login/Login";
-	}
+	
 
 }
