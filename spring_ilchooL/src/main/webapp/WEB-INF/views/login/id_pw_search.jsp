@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="../assets/css/login_new.css">
-<c:import url="assets/head.jsp" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/assets/css/login_new.css">
+<c:import url="../assets/head.jsp" />
 <style type="text/css">
 
 	* { margin: 0; padding: 0; }
@@ -210,7 +210,7 @@
 	</div>
 	
 	<div class="footer">
-		<c:import url="assets/footer.jsp" />
+		<c:import url="../assets/footer.jsp" />
 	</div>
 	
 	<script type="text/javascript">

@@ -19,44 +19,46 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 
 /**
- *	메인 페이지 컨트롤러 
+ * 메인 페이지 컨트롤러
  */
 @Controller
 public class MainController {
-	@Autowired WebHelper webHelper;
-	@Autowired RetrofitHelper retrofitHelper;
-	
+	@Autowired
+	WebHelper webHelper;
+	@Autowired
+	RetrofitHelper retrofitHelper;
+
 	/**
-	 * 날씨, 미세먼지, 코로나19, 그래프 영역은 메인컨트롤러에서 구현하면 될것같아요! 
+	 * 날씨, 미세먼지, 코로나19, 그래프 영역은 메인컨트롤러에서 구현하면 될것같아요!
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		Retrofit retrofit_apiCovid = retrofitHelper.getRetrofit(ApiCovidService.BASE_URL);
 		Retrofit retrofit_phpCovid = retrofitHelper.getRetrofit(PhpCovidService.BASE_URL);
-		
+
 		ApiCovidService apiCovidService = retrofit_apiCovid.create(ApiCovidService.class);
 		PhpCovidService phpCovidService = retrofit_phpCovid.create(PhpCovidService.class);
-		
+
 		Call<covidCount> call_apiCovid = apiCovidService.getCovidCount();
 		Call<Covid19Item> call_phpCovid = phpCovidService.getCovidCount();
 		covidCount cCount = null;
 		Covid19Item cI = null;
-	
+
 		try {
 			cCount = call_apiCovid.execute().body();
 			cI = call_phpCovid.execute().body();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		List<Row> list = null;
-		
+
 		if (cCount != null) {
 			list = cCount.getTbCorona19CountStatus().getRow();
 		}
-		
+
 		model.addAttribute("list", list);
-		
+
 		String datetime = null;
 		String[] active = null;
 		String[] confirmed = null;
@@ -77,7 +79,7 @@ public class MainController {
 			released = cI.getData_covid().getSeoul().getReleased();
 			released_acc = cI.getData_covid().getSeoul().getReleased_acc();
 		}
-		
+
 		model.addAttribute("datetime", datetime);
 		model.addAttribute("active", active[active.length - 1]);
 		model.addAttribute("confirmed", confirmed[confirmed.length - 1]);
@@ -87,13 +89,20 @@ public class MainController {
 		model.addAttribute("death_acc", death_acc[death_acc.length - 1]);
 		model.addAttribute("released", released[released.length - 1]);
 		model.addAttribute("released_acc", released_acc[released_acc.length - 1]);
-		
+
 		return "main/main";
 	}
-	
+
 	/** 교통 페이지 이동 컨트롤러 */
 	@RequestMapping(value = "/contents/contents_transport.do", method = RequestMethod.GET)
 	public String transport(Model model) {
 		return "contents/contents_transport";
 	}
+
+	/** 로그인 페이지 이동 컨트롤러 */
+	@RequestMapping(value = "/login/Login.do", method = RequestMethod.GET)
+	public String login(Model model) {
+		return "login/Login";
+	}
+
 }

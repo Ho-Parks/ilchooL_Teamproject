@@ -7,9 +7,9 @@
 <html>
 
 <head>
-<c:import url="assets/head.jsp" />
+<c:import url="../assets/head.jsp" />
 <link rel="stylesheet" type="text/css"
-	href="../assets/css/login_new.css">
+	href="${pageContext.request.contextPath}/assets/css/login_new.css">
 </head>
 
 <body>
@@ -209,7 +209,7 @@
 	<!-- wrapper -->
 
 	<div id="footer">
-		<c:import url="assets/footer.jsp" />
+		<c:import url="../assets/footer.jsp" />
 	</div>
 
 	<script src="../assets/js/login_new.js"></script>

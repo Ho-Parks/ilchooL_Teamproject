@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="assets/head.jsp" />
-<link rel="stylesheet" href="../assets/css/login_new_terms.css">
+<c:import url="../assets/head.jsp" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/login_new_terms.css">
 </head>
 <body>
 <body>

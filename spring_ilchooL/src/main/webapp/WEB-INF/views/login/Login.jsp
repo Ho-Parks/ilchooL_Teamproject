@@ -7,14 +7,14 @@
 <html>
 
 <head>
-<c:import url="assets/head.jsp" />
-<link rel="stylesheet" type="text/css" href="../assets/css/login.css">
+<c:import url="../assets/head.jsp" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/login.css">
 
 </head>
 
 <body>
 	<div class="wrapper">
-		<c:import url="assets/header.jsp" />
+		<c:import url="../assets/header.jsp" />
 		<div class="container">
 			<div class="inner_login">
 				<form id="login-form">
@@ -43,7 +43,7 @@
 								상태 유지</span>
 						</label>
 					</div>
-					<span class="txt_find"> <a href="../login/id_pw_search.jsp" class="link_find">아이디 / 비밀번호 찾기</a>
+					<span class="txt_find"> <a href="${pageContext.request.contextPath}/login/id_pw_search.do" class="link_find" >아이디 / 비밀번호 찾기</a>
 					</span>
 				</div>
 
@@ -51,7 +51,7 @@
 		</div>
 	</div>
 
-	<c:import url="assets/footer.jsp" />
+	<c:import url="../assets/footer.jsp" />
 
 
 	<!-- 사용자 정의 스크립트 -->
