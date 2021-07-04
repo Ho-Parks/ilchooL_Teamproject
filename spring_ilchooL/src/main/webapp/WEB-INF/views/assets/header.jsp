@@ -12,16 +12,16 @@
 		</div>
 		<div id="menuNav" class="overlay">
 			<div class="overlay-content">
-				<a href="${pageContext.request.contextPath}/main/main.jsp">Home</a>
-				<a href="${pageContext.request.contextPath}/contents/contents_transport.jsp">Transport</a>
-				<a href="${pageContext.request.contextPath}/contents/contents_news.jsp">News</a>
-				<a href="${pageContext.request.contextPath}/contents/contents_finance.jsp">Finance</a>
-				<a href="${pageContext.request.contextPath}/mypage/mypage.jsp" class="MyPage">MyPage</a>
-				<a href="${pageContext.request.contextPath}/login/Login.jsp" class="login">Login</a>
+				<a href="${pageContext.request.contextPath}">Home</a>
+				<a href="${pageContext.request.contextPath}/contents/contents_transport.do">Transport</a>
+				<a href="${pageContext.request.contextPath}/contents/contents_news.do">News</a>
+				<a href="${pageContext.request.contextPath}/contents/contents_finance.do">Finance</a>
+				<a href="${pageContext.request.contextPath}/mypage/mypage.do" class="MyPage">MyPage</a>
+				<a href="${pageContext.request.contextPath}/login/Login.do" class="login">Login</a>
 			</div>
 		</div>
 		<div id="logo">
-			<a href="${pageContext.request.contextPath}/main/main.jsp"> <img alt="logo"
+			<a href="${pageContext.request.contextPath}"> <img alt="logo"
 				src="${pageContext.request.contextPath}/assets/img/Logo(line).png"
 				style="height: 30px;">
 			</a>
