@@ -64,71 +64,93 @@ public class NewsSearchController {
       model.addAttribute("keyword", keyword);
       model.addAttribute("list", list);
       
-	  /** 뉴스 원문 크롤링 시작 */
-      items item1 = list.get(1);
-      items item2 = list.get(2);
-      items item3 = list.get(3);
-      items item4 = list.get(4);
-      items item5 = list.get(5);
-      items item6 = list.get(6);
-      items item7 = list.get(7);
-      items item8 = list.get(8);
-      items item9 = list.get(9);
+      /** 뉴스 원문 크롤링 시작 */
+      items[] item = new items[100];
+      int j = 0;
+      for(int i=1; i<100; i++) {
+    	  if(list.get(i).getLink().contains("news.naver.com")) {
+    		item[j] = list.get(i);
+    		j++;
+    	  }
+      }
       
-	  // 뉴스 박스 클릭시 모달 창에서 뉴스 제목
-	  String connUrl1 = item1.getLink();
+      
+     
+	  // 뉴스 제목
+	  String connUrl1 = item[0].getLink();
 	  Document doc1 = Jsoup.connect(connUrl1).get();
 	  Elements ele1 = doc1.select("h3#articleTitle");
 	  String str1 = ele1.text();
 	  model.addAttribute("str1",str1);
 	
-	  String connUrl2 = item2.getLink();
+	  String connUrl2 = item[1].getLink();
 	  Document doc2 = Jsoup.connect(connUrl2).get();
 	  Elements ele2 = doc2.select("h3#articleTitle");
 	  String str2 = ele2.text();
 	  model.addAttribute("str2",str2);
 	
-	  String connUrl3 = item3.getLink();
+	  String connUrl3 = item[2].getLink();
 	  Document doc3 = Jsoup.connect(connUrl3).get();
 	  Elements ele3 = doc3.select("h3#articleTitle");
 	  String str3 = ele3.text();
 	  model.addAttribute("str3",str3);
 	
-	  String connUrl4 = item4.getLink();
+	  String connUrl4 = item[3].getLink();
 	  Document doc4 = Jsoup.connect(connUrl4).get();
 	  Elements ele4 = doc4.select("h3#articleTitle");
 	  String str4 = ele4.text();
 	  model.addAttribute("str4",str4);
 	
-	  String connUrl5 = item5.getLink();
+	  String connUrl5 = item[4].getLink();
 	  Document doc5 = Jsoup.connect(connUrl5).get();
 	  Elements ele5 = doc5.select("h3#articleTitle");
 	  String str5 = ele5.text();
 	  model.addAttribute("str5",str5);
 	
-	  String connUrl6 = item6.getLink();
+	  String connUrl6 = item[5].getLink();
 	  Document doc6 = Jsoup.connect(connUrl6).get();
 	  Elements ele6 = doc6.select("h3#articleTitle");
 	  String str6 = ele6.text();
 	  model.addAttribute("str6",str6);
 	
-	  String connUrl7 = item7.getLink();
+	  String connUrl7 = item[6].getLink();
 	  Document doc7 = Jsoup.connect(connUrl7).get();
 	  Elements ele7 = doc7.select("h3#articleTitle");
 	  String str7 = ele7.text();
 	  model.addAttribute("str7",str7);
 	
-	  String connUrl8 = item8.getLink();
+	  String connUrl8 = item[7].getLink();
 	  Document doc8 = Jsoup.connect(connUrl8).get();
 	  Elements ele8 = doc8.select("h3#articleTitle");
 	  String str8 = ele8.text();
 	  model.addAttribute("str8",str8);
 	
-	  String connUrl9 = item9.getLink();
+	  String connUrl9 = item[8].getLink();
 	  Document doc9 = Jsoup.connect(connUrl9).get();
 	  Elements ele9 = doc9.select("h3#articleTitle");
 	  String str9 = ele9.text();
 	  model.addAttribute("str9",str9);
+	  
+	  // 뉴스 날짜
+	  Elements news_date1 = doc1.select("div.article_info div.sponsor span.t11");
+	  Elements news_date2 = doc1.select("div.article_info div.sponsor span.t11");
+	  Elements news_date3 = doc1.select("div.article_info div.sponsor span.t11");
+	  Elements news_date4 = doc1.select("div.article_info div.sponsor span.t11");
+	  Elements news_date5 = doc1.select("div.article_info div.sponsor span.t11");
+	  Elements news_date6 = doc1.select("div.article_info div.sponsor span.t11");
+	  Elements news_date7 = doc1.select("div.article_info div.sponsor span.t11");
+	  Elements news_date8 = doc1.select("div.article_info div.sponsor span.t11");
+	  Elements news_date9 = doc1.select("div.article_info div.sponsor span.t11");
+	  model.addAttribute("news_date1", news_date1);
+	  model.addAttribute("news_date2", news_date2);
+	  model.addAttribute("news_date3", news_date3);
+	  model.addAttribute("news_date4", news_date4);
+	  model.addAttribute("news_date5", news_date5);
+	  model.addAttribute("news_date6", news_date6);
+	  model.addAttribute("news_date7", news_date7);
+	  model.addAttribute("news_date8", news_date8);
+	  model.addAttribute("news_date9", news_date9);
+	  
 	
 	   // 뉴스 박스 클릭시 모달창에서 뉴스 원문 내용
 	  Elements element1 = doc1.select("div#articleBodyContents");
@@ -153,7 +175,7 @@ public class NewsSearchController {
 	
 	  Elements element6 = doc6.select("div#articleBodyContents");
 	  String text6 = element6.text();
-	  model.addAttribute("telement6", element6);
+	  model.addAttribute("element6", element6);
 	
 	  Elements element7 = doc7.select("div#articleBodyContents");
 	  String text7 = element7.text();

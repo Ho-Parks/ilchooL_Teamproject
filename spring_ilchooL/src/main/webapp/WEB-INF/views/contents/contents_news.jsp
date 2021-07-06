@@ -44,8 +44,8 @@
 				<div class="col-md-12">
 					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
 						<a data-toggle="modal" href="#news_modal1"> <span
-							class="news_contents_box"> <span id="text"> ${list[1].title}
-							</span> <span id="text_date"> ${list[1].pubDate}
+							class="news_contents_box"> <span id="text"> ${str1}
+							</span> <span id="text_date"> ${news_date1}
 							</span>
 						</span>
 						</a>
@@ -53,8 +53,8 @@
 				
 					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
 						<a data-toggle="modal" href="#news_modal2"> <span
-							class="news_contents_box"> <span id="text"> ${list[2].title}
-							</span> <span id="text_date"> ${list[2].pubDate}
+							class="news_contents_box"> <span id="text"> ${str2}
+							</span> <span id="text_date"> ${news_date2}
 							</span>
 						</span>
 						</a>
@@ -62,8 +62,8 @@
 				
 					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
 						<a data-toggle="modal" href="#news_modal3"> <span
-							class="news_contents_box"> <span id="text"> ${list[3].title}
-							</span> <span id="text_date"> ${list[3].pubDate}
+							class="news_contents_box"> <span id="text"> ${str3}
+							</span> <span id="text_date"> ${news_date3}
 							</span>
 						</span>
 						</a>
@@ -71,8 +71,8 @@
 				
 					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
 						<a data-toggle="modal" href="#news_modal4"> <span
-							class="news_contents_box"> <span id="text"> ${list[4].title}
-							</span> <span id="text_date"> ${list[4].pubDate}
+							class="news_contents_box"> <span id="text"> ${str4}
+							</span> <span id="text_date"> ${news_date4}
 							</span>
 						</span>
 						</a>
@@ -80,8 +80,8 @@
 				
 					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
 						<a data-toggle="modal" href="#news_modal5"> <span
-							class="news_contents_box"> <span id="text"> ${list[5].title}
-							</span> <span id="text_date"> ${list[5].pubDate}
+							class="news_contents_box"> <span id="text"> ${str5}
+							</span> <span id="text_date"> ${news_date5}
 							</span>
 						</span>
 						</a>
@@ -89,8 +89,8 @@
 				
 					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
 						<a data-toggle="modal" href="#news_modal6"> <span
-							class="news_contents_box"> <span id="text"> ${list[6].title}
-							</span> <span id="text_date"> ${list[6].pubDate}
+							class="news_contents_box"> <span id="text"> ${str6}
+							</span> <span id="text_date"> ${news_date6}
 							</span>
 						</span>
 						</a>
@@ -98,8 +98,8 @@
 				
 					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
 						<a data-toggle="modal" href="#news_modal7"> <span
-							class="news_contents_box"> <span id="text"> ${list[7].title}
-							</span> <span id="text_date"> ${list[7].pubDate}
+							class="news_contents_box"> <span id="text"> ${str7}
+							</span> <span id="text_date"> ${news_date7}
 							</span>
 						</span>
 						</a>
@@ -107,8 +107,8 @@
 				
 					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
 						<a data-toggle="modal" href="#news_modal8"> <span
-							class="news_contents_box"> <span id="text"> ${list[8].title}
-							</span> <span id="text_date"> ${list[8].pubDate}
+							class="news_contents_box"> <span id="text"> ${str8}
+							</span> <span id="text_date"> ${news_date8}
 							</span>
 						</span>
 						</a>
@@ -116,8 +116,8 @@
 				
 					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
 						<a data-toggle="modal" href="#news_modal9"> <span
-							class="news_contents_box"> <span id="text"> ${list[9].title}
-							</span> <span id="text_date"> ${list[9].pubDate}
+							class="news_contents_box"> <span id="text"> ${str9}
+							</span> <span id="text_date"> ${news_date9}
 							</span>
 						</span>
 						</a>
