@@ -23,46 +23,15 @@
 						<fmt:formatDate value="${parseDate }" pattern="yyyy-mm-dd" />
 					</li>
 					<li id="today_title">오늘 확진자수<br/>
-						<span>${active}명</span>
+						<span>${confirmed}명</span>
 					</li>
-					<li class="col-md-3">확진자<br/>
-						<span class="shj main_count">${list[0].s_hj }</span>
+					<li class="col-md-3">누적 확진자<br/>
+						<span class="shj main_count">${confirmed_acc}</span>
 						<br/>
 						<span class="shj_box d_box">
 						<c:choose>
-							<c:when test="${list[0].sn_hj - list[1].sn_hj > 0 }">
-								${list[0].sn_hj - list[1].sn_hj }&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
-							</c:when>
-							<c:when test="${list[0].sn_hj - list[1].sn_hj < 0 }">
-								${list[1].sn_hj - list[0].sn_hj }&nbsp;<i class="glyphicon glyphicon-arrow-down" id="down"></i>
-							</c:when>
-							<c:otherwise>
-								0
-							</c:otherwise>
-						</c:choose>
-						</span>
-					</li>
-					<li class="col-md-3">사망자<br/>
-						<span class="main_count">${death_acc}</span>
-						<br/>
-						<span class="sdeath_box d_box">
-						<c:choose>
-							<c:when test="${death > 0 }">
-								${death}&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
-							</c:when>
-							<c:otherwise>
-								0
-							</c:otherwise>
-						</c:choose>
-						</span>
-					</li>
-					<li class="col-md-3">완치자<br/>
-						<span class="srecover main_count">${confirmed_acc}</span>
-						<br/>
-						<span class="srecover_box d_box">
-						<c:choose>
 							<c:when test="${confirmed > 0 }">
-								${confirmed}&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
+								${confirmed }&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
 							</c:when>
 							<c:otherwise>
 								0
@@ -70,7 +39,7 @@
 						</c:choose>
 						</span>
 					</li>
-					<li class="col-md-3">격리해제<br/>
+					<li class="col-md-3">누적 격리해제<br/>
 						<span class="scare main_count">${released_acc}</span>
 						<br/>
 						<span class="scare_box d_box">
@@ -84,6 +53,37 @@
 						</c:choose>
 						</span>
 					</li>				
+					<li class="col-md-3">격리중<br/>
+						<span class="srecover main_count">${active}</span>
+						<br/>
+						<span class="srecover_box d_box">
+						<c:choose>
+							<c:when test="${active - y_active > 0 }">
+								${active - y_active }&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
+							</c:when>
+							<c:when test="${active - y_active < 0 }">
+								${y_active - active }&nbsp;<i class="glyphicon glyphicon-arrow-down" id="down"></i>
+							</c:when>
+							<c:otherwise>
+								0
+							</c:otherwise>
+						</c:choose>
+						</span>
+					</li>
+					<li class="col-md-3">누적 사망자<br/>
+						<span class="main_count">${death_acc}</span>
+						<br/>
+						<span class="sdeath_box d_box">
+						<c:choose>
+							<c:when test="${death > 0 }">
+								${death}&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
+							</c:when>
+							<c:otherwise>
+								0
+							</c:otherwise>
+						</c:choose>
+						</span>
+					</li>
 				</ul>
 			</div>
 		</div>

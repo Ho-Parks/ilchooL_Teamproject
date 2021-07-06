@@ -1,7 +1,5 @@
 package project.spring.ilchooL.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import project.spring.ilchooL.helper.RetrofitHelper;
 import project.spring.ilchooL.helper.WebHelper;
 import project.spring.ilchooL.model.Covid19Item;
-import project.spring.ilchooL.model.covidCount;
-import project.spring.ilchooL.model.covidCount.TbCorona19CountStatus.Row;
-import project.spring.ilchooL.service.ApiCovidService;
 import project.spring.ilchooL.service.PhpCovidService;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -33,32 +28,31 @@ public class MainController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		Retrofit retrofit_apiCovid = retrofitHelper.getRetrofit(ApiCovidService.BASE_URL);
+		// Retrofit 객체 선언 부분
 		Retrofit retrofit_phpCovid = retrofitHelper.getRetrofit(PhpCovidService.BASE_URL);
-
-		ApiCovidService apiCovidService = retrofit_apiCovid.create(ApiCovidService.class);
+		// 이부분에 수인님 코드 추가
+		
+		// Service 인터페이스 선언부분
 		PhpCovidService phpCovidService = retrofit_phpCovid.create(PhpCovidService.class);
+		// 이부분에 수인님 코드 추가
 
-		Call<covidCount> call_apiCovid = apiCovidService.getCovidCount();
+		// Call 객체를 service 인터페이스를 할당하여 선언
 		Call<Covid19Item> call_phpCovid = phpCovidService.getCovidCount();
-		covidCount cCount = null;
+		// 이부분에 수인님 코드 추가
+		
+		// pojo 클래스 선언
 		Covid19Item cI = null;
+		// 이부분에 수인님 코드 추가
 
 		try {
-			cCount = call_apiCovid.execute().body();
+			// 데이터 받는 부분
 			cI = call_phpCovid.execute().body();
+			// 이부분에 수인님 코드 추가
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		List<Row> list = null;
-
-		if (cCount != null) {
-			list = cCount.getTbCorona19CountStatus().getRow();
-		}
-
-		model.addAttribute("list", list);
-
+		// 사용할 변수, 배열 선언
 		String datetime = null;
 		String[] active = null;
 		String[] confirmed = null;
@@ -68,7 +62,9 @@ public class MainController {
 		String[] death_acc = null;
 		String[] released = null;
 		String[] released_acc = null;
-		if (cCount != null) {
+		
+		// null 값인지 검사후 getter를 사용해 데이터를 가져온다.
+		if (cI != null) {
 			datetime = cI.getDatetime();
 			active = cI.getData_covid().getSeoul().getActive();
 			confirmed = cI.getData_covid().getSeoul().getConfirmed();
@@ -79,9 +75,12 @@ public class MainController {
 			released = cI.getData_covid().getSeoul().getReleased();
 			released_acc = cI.getData_covid().getSeoul().getReleased_acc();
 		}
-
+		
+		
+		// model에 받아온 데이터 주입
 		model.addAttribute("datetime", datetime);
 		model.addAttribute("active", active[active.length - 1]);
+		model.addAttribute("y_active", active[active.length - 2]);
 		model.addAttribute("confirmed", confirmed[confirmed.length - 1]);
 		model.addAttribute("confirmed_acc", confirmed_acc[confirmed_acc.length - 1]);
 		model.addAttribute("date", date[date.length - 1]);
@@ -89,7 +88,9 @@ public class MainController {
 		model.addAttribute("death_acc", death_acc[death_acc.length - 1]);
 		model.addAttribute("released", released[released.length - 1]);
 		model.addAttribute("released_acc", released_acc[released_acc.length - 1]);
+		// 이부분에 수인님 코드 추가
 
+		// View 처리
 		return "main/main";
 	}
 

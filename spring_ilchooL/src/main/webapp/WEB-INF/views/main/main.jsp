@@ -29,7 +29,6 @@
    </div>
    
    <div id="covid_box" class="container p_container">
-      <c:import url="covid_graph.jsp" />
       <c:import url="phpCovid.jsp" />
    </div>
    
