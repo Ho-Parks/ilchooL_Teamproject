@@ -78,25 +78,30 @@ public class MainController {
 		
 		String con_item = null;
 		String date_item = null;
+		String death_item = null;
+		String released_item = null;
+		String active_item = null;
 		
-		for(int i = 0; i < 7; i++) {
+		for(int i = 0; i < 8; i++) {
 			con_item = confirmed[confirmed.length - i - 1];
 			date_item = date[date.length - i - 1].substring(4);
 			date_item = Integer.parseInt(date_item.substring(0, 2)) + "월 " + Integer.parseInt(date_item.substring(2)) + "일";
+			death_item = death[death.length - i - 1];
+			released_item = released[released.length - i - 1];
+			active_item = active[active.length - i - 1];
+			
 			model.addAttribute("date_" + i, date_item);
 			model.addAttribute("confirmed_" + i, con_item);
-			System.out.println(date_item);
+			model.addAttribute("death_" + i, death_item);
+			model.addAttribute("released_" + i, released_item);
+			model.addAttribute("active_" + i, active_item);
 		}
 		
 		// model에 받아온 데이터 주입
 		model.addAttribute("datetime", datetime);
-		model.addAttribute("active", active[active.length - 1]);
-		model.addAttribute("y_active", active[active.length - 2]);
 		model.addAttribute("confirmed_acc", confirmed_acc[confirmed_acc.length - 1]);
 		model.addAttribute("date", date[date.length - 1]);
-		model.addAttribute("death", death[death.length - 1]);
 		model.addAttribute("death_acc", death_acc[death_acc.length - 1]);
-		model.addAttribute("released", released[released.length - 1]);
 		model.addAttribute("released_acc", released_acc[released_acc.length - 1]);
 		// 이부분에 수인님 코드 추가
 

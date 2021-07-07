@@ -19,19 +19,21 @@
 			<div class="row">
 				<ul>
 					<li style="text-align: left; padding-left: 30px;">
+						데이터 기준 : 
 						<fmt:parseDate value="${date }" var="parseDate" pattern="yyyymmdd" />
 						<fmt:formatDate value="${parseDate }" pattern="yyyy-mm-dd" />
+						(서울시)
 					</li>
 					<li id="today_title">오늘 확진자수<br/>
-						<span>${confirmed}명</span>
+						<span>${confirmed_0}명</span>
 					</li>
 					<li class="col-md-3">누적 확진자<br/>
-						<span class="shj main_count">${confirmed_acc}</span>
+						<span class="s_confirmed main_count">${confirmed_acc}</span>
 						<br/>
-						<span class="shj_box d_box">
+						<span class="confirmed_box d_box">
 						<c:choose>
-							<c:when test="${confirmed > 0 }">
-								${confirmed }&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
+							<c:when test="${confirmed_0 > 0 }">
+								${confirmed_0 }&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
 							</c:when>
 							<c:otherwise>
 								0
@@ -40,12 +42,12 @@
 						</span>
 					</li>
 					<li class="col-md-3">누적 격리해제<br/>
-						<span class="scare main_count">${released_acc}</span>
+						<span class="s_released main_count">${released_acc}</span>
 						<br/>
-						<span class="scare_box d_box">
+						<span class="released_box d_box">
 						<c:choose>
-							<c:when test="${released > 0 }">
-								${released}&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
+							<c:when test="${released_0 > 0 }">
+								${released_0}&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
 							</c:when>
 							<c:otherwise>
 								0
@@ -54,15 +56,15 @@
 						</span>
 					</li>				
 					<li class="col-md-3">격리중<br/>
-						<span class="srecover main_count">${active}</span>
+						<span class="s_active main_count">${active_0}</span>
 						<br/>
-						<span class="srecover_box d_box">
+						<span class="active_box d_box">
 						<c:choose>
-							<c:when test="${active - y_active > 0 }">
-								${active - y_active }&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
+							<c:when test="${active_0 - active_1 > 0 }">
+								${active_0 - active_1 }&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
 							</c:when>
-							<c:when test="${active - y_active < 0 }">
-								${y_active - active }&nbsp;<i class="glyphicon glyphicon-arrow-down" id="down"></i>
+							<c:when test="${active_0 - active_1 < 0 }">
+								${active_1 - active_0 }&nbsp;<i class="glyphicon glyphicon-arrow-down" id="down"></i>
 							</c:when>
 							<c:otherwise>
 								0
@@ -71,52 +73,56 @@
 						</span>
 					</li>
 					<li class="col-md-3">누적 사망자<br/>
-						<span class="main_count">${death_acc}</span>
+						<span class="s_death main_count">${death_acc}</span>
 						<br/>
-						<span class="sdeath_box d_box">
+						<span class="death_box d_box">
 						<c:choose>
-							<c:when test="${death > 0 }">
-								${death}&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
+							<c:when test="${death_0 > 0 }">
+								${death_0}&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
 							</c:when>
 							<c:otherwise>
 								0
 							</c:otherwise>
 						</c:choose>
 						</span>
-					</li>
+					</li>					
 				</ul>
 			</div>
 		</div>
 		<div id="covid_graph" class="jumbotron">
+			<div class="covid_graph_btn_box">
+				<p class="pull-left">데이터 기준 : ${datetime } (서울시)</p>
+				<button type="button" id="dea_btn" class="btn btn-warning pull-right">사망자</button>
+				<button type="button" id="act_btn" class="btn btn-success pull-right">격리중</button>
+				<button type="button" id="rel_btn" class="btn btn-primary pull-right">격리해제</button>
+				<button type="button" id="con_btn" class="btn btn-danger pull-right">확진자</button>
+			</div>
 			<canvas id="covidChart"></canvas>
 		</div>
 	</div>
 	
 	<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-	<script>		
+	<script>
+		let con_data = [ ${confirmed_6}, ${confirmed_5}, ${confirmed_4}, ${confirmed_3}, ${confirmed_2}, ${confirmed_1}, ${confirmed_0} ];
+		let death_data = [ ${death_6}, ${death_5}, ${death_4}, ${death_3}, ${death_2}, ${death_1}, ${death_0} ];
+		let rel_data = [ ${released_6}, ${released_5}, ${released_4}, ${released_3}, ${released_2}, ${released_1}, ${released_0} ];
+		let act_data = [
+			${active_6 - active_7}, ${active_5 - active_6}, ${active_4 - active_5}, ${active_3 - active_4},
+			${active_2 - active_3}, ${active_1 - active_2}, ${active_0 - active_1} ];
+		
 		var ctx = document.getElementById('covidChart').getContext('2d');
-		var myChart = new Chart(ctx, {
+		var covidChart = new Chart(ctx, {
 		    type: 'line',
 		    data: {
 		        labels: [ '${date_6}', '${date_5}', '${date_4}', '${date_3}', '${date_2}', '${date_1}', '${date_0}'],
 		        datasets: [{
-		            label: '확진자 추이',
-		            data: [${confirmed_6}, ${confirmed_5}, ${confirmed_4}, ${confirmed_3}, ${confirmed_2}, ${confirmed_1}, ${confirmed_0}],
+		            label: '일일 확진자 수',
+		            data: con_data,
 		            backgroundColor: [
-		                'rgba(255, 99, 132, 0.2)',
-		                'rgba(54, 162, 235, 0.2)',
-		                'rgba(255, 206, 86, 0.2)',
-		                'rgba(75, 192, 192, 0.2)',
-		                'rgba(153, 102, 255, 0.2)',
-		                'rgba(255, 159, 64, 0.2)'
+		                'rgba(185, 44, 40, 0.2)'
 		            ],
 		            borderColor: [
-		                'rgba(255, 99, 132, 1)',
-		                'rgba(54, 162, 235, 1)',
-		                'rgba(255, 206, 86, 1)',
-		                'rgba(75, 192, 192, 1)',
-		                'rgba(153, 102, 255, 1)',
-		                'rgba(255, 159, 64, 1)'
+		            	'rgba(185, 44, 40, 1)'
 		            ],
 		            borderWidth: 1,
 		            lineTension: 0
@@ -124,16 +130,72 @@
 		    },
 		    options: {
 		        scales: {
-		            y: {
-		                beginAtZero: true
-		            }
+		        	yAxes: {
+		        		ticks: {
+		                	beginAtZero: true
+		        		}
+		            },
+		            xAxes: [{
+			            offset: false
+		            }]
 		        },
 			    title: {
 		    		display: true,
 		    		position: 'top',
-		    		text: '누적 확진자'
+		    		text: '확진자 추이',
+		    		fontSize: 20 
 		    	}
 		    }
+		});
+		
+		$(function() {
+			$("#con_btn").click(function() {
+				covidChart.config.type = 'line';
+				covidChart.config.options.title.text = '확진자 추이';
+				covidChart.config.options.scales.xAxes[0].offset = false;
+				covidChart.config.data.datasets[0].label = '일일 확진자 수';
+				covidChart.config.data.datasets[0].data = con_data;
+				covidChart.config.data.datasets[0].backgroundColor = 'rgba(217, 83, 79, 0.2)';
+				covidChart.config.data.datasets[0].borderColor = 'rgba(217, 83, 79, 1)';
+				
+				covidChart.update();
+			});
+			
+			$("#rel_btn").click(function() {
+				covidChart.config.type = 'line';
+				covidChart.config.options.title.text = '격리해제 추이';
+				covidChart.config.options.scales.xAxes[0].offset = false;
+				covidChart.config.data.datasets[0].label = '일일 격리해제 수';
+				covidChart.config.data.datasets[0].data = rel_data;
+				covidChart.config.data.datasets[0].backgroundColor = 'rgba(66, 139, 202, 0.2)';
+				covidChart.config.data.datasets[0].borderColor = 'rgba(66, 139, 202, 1)';
+				
+				covidChart.update();
+			});
+			
+			$("#act_btn").click(function() {
+				covidChart.config.type = 'bar';
+				covidChart.config.options.title.text = '격리자 추이';
+				covidChart.config.options.scales.xAxes[0].offset = true;
+				covidChart.config.data.datasets[0].label = '전일 대비 격리자 수';
+				covidChart.config.data.datasets[0].data = act_data;
+				covidChart.config.data.datasets[0].backgroundColor = 'rgba(92, 184, 92, 0.2)';
+				covidChart.config.data.datasets[0].borderColor = 'rgba(92, 184, 92, 1)';
+				
+				covidChart.update();
+			});
+			
+			$("#dea_btn").click(function() {
+				covidChart.config.type = 'bar';
+				covidChart.config.options.title.text = '사망자 추이';
+				covidChart.config.options.scales.xAxes[0].offset = true;
+				covidChart.config.data.datasets[0].label = '일일 사망자 수';
+				covidChart.config.data.datasets[0].data = death_data;
+				covidChart.config.data.datasets[0].backgroundColor = 'rgba(240, 173, 78, 0.2)';
+				covidChart.config.data.datasets[0].borderColor = 'rgba(240, 173, 78, 1)';
+				
+				covidChart.update();
+			});
 		});
 	</script>
 </body>
