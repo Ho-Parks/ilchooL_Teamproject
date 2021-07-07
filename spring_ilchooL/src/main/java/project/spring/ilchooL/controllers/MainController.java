@@ -76,12 +76,22 @@ public class MainController {
 			released_acc = cI.getData_covid().getSeoul().getReleased_acc();
 		}
 		
+		String con_item = null;
+		String date_item = null;
+		
+		for(int i = 0; i < 7; i++) {
+			con_item = confirmed[confirmed.length - i - 1];
+			date_item = date[date.length - i - 1].substring(4);
+			date_item = Integer.parseInt(date_item.substring(0, 2)) + "월 " + Integer.parseInt(date_item.substring(2)) + "일";
+			model.addAttribute("date_" + i, date_item);
+			model.addAttribute("confirmed_" + i, con_item);
+			System.out.println(date_item);
+		}
 		
 		// model에 받아온 데이터 주입
 		model.addAttribute("datetime", datetime);
 		model.addAttribute("active", active[active.length - 1]);
 		model.addAttribute("y_active", active[active.length - 2]);
-		model.addAttribute("confirmed", confirmed[confirmed.length - 1]);
 		model.addAttribute("confirmed_acc", confirmed_acc[confirmed_acc.length - 1]);
 		model.addAttribute("date", date[date.length - 1]);
 		model.addAttribute("death", death[death.length - 1]);

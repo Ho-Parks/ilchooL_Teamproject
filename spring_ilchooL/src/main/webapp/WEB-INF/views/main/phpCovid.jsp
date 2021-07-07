@@ -7,7 +7,7 @@
 <html>
 <head>
 	<c:import url="../assets/head.jsp" />
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/covid_graph.css" />
 </head>
 <body>
@@ -88,8 +88,53 @@
 			</div>
 		</div>
 		<div id="covid_graph" class="jumbotron">
-			<h3>그래프영역</h3>
+			<canvas id="covidChart"></canvas>
 		</div>
 	</div>
+	
+	<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+	<script>		
+		var ctx = document.getElementById('covidChart').getContext('2d');
+		var myChart = new Chart(ctx, {
+		    type: 'line',
+		    data: {
+		        labels: [ '${date_6}', '${date_5}', '${date_4}', '${date_3}', '${date_2}', '${date_1}', '${date_0}'],
+		        datasets: [{
+		            label: '확진자 추이',
+		            data: [${confirmed_6}, ${confirmed_5}, ${confirmed_4}, ${confirmed_3}, ${confirmed_2}, ${confirmed_1}, ${confirmed_0}],
+		            backgroundColor: [
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(255, 159, 64, 0.2)'
+		            ],
+		            borderColor: [
+		                'rgba(255, 99, 132, 1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)'
+		            ],
+		            borderWidth: 1,
+		            lineTension: 0
+		        }]
+		    },
+		    options: {
+		        scales: {
+		            y: {
+		                beginAtZero: true
+		            }
+		        },
+			    title: {
+		    		display: true,
+		    		position: 'top',
+		    		text: '누적 확진자'
+		    	}
+		    }
+		});
+	</script>
 </body>
 </html>
