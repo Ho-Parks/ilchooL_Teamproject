@@ -33,4 +33,10 @@ public class LoginController {
 	public String id_pw_search(Model model) {
 		return "login/id_pw_search";
 	}
+	
+	/** 로그인 페이지 이동 컨트롤러 */
+	@RequestMapping(value = "/api/login_ok.do", method = RequestMethod.POST)
+	public String login_ok(Model model) {
+		return "api/login_ok";
+	}
 }

@@ -52,10 +52,10 @@
 	</div>
 
 	<c:import url="../assets/footer.jsp" />
-
+	<script src="${pageContext.request.contextPath}/assets/js/Login.js"></script> 
 
 	<!-- 사용자 정의 스크립트 -->
-	<script type="text/javascript">
+	 <!-- <script type="text/javascript">
 		$(function() {
 
 			/** Ajax에 의해서 로드 되는 폼에 대한 submit 이벤트 */
@@ -69,7 +69,7 @@
 				var uid = $(this).find("#user_id");
 				var upw = $(this).find("#user_pw");
 
-				$.post('../asssts/api/login_ok.do', {
+				$.post('${pageContext.request.contextPath}/asssts/api/login_ok.do', {
 					user_id : uid.val(),
 					user_pw : upw.val()
 
@@ -89,7 +89,7 @@
 			});
 		});
 		
-	</script>
+	</script>  -->
 
 </body>
 
