@@ -27,43 +27,48 @@ public class FinanceController {
 		Elements elestock21 = doc.select("div.aside_stock table.tbl_home tbody tr:nth-child(2) th:nth-child(1)");
 		Elements elestock22 = doc.select("div.aside_stock table.tbl_home tbody tr:nth-child(2) td:nth-child(2)");
 		Elements elestock23 = doc.select("div.aside_stock table.tbl_home tbody tr:nth-child(2) td:nth-child(3)");
-
+		
 		Elements elestock31 = doc.select("div.aside_stock table.tbl_home tbody tr:nth-child(3) th:nth-child(1)");
 		Elements elestock32 = doc.select("div.aside_stock table.tbl_home tbody tr:nth-child(3) td:nth-child(2)");
 		Elements elestock33 = doc.select("div.aside_stock table.tbl_home tbody tr:nth-child(3) td:nth-child(3)");
-
+		
 		Elements elestock41 = doc.select("div.aside_stock table.tbl_home tbody tr:nth-child(4) th:nth-child(1)");
 		Elements elestock42 = doc.select("div.aside_stock table.tbl_home tbody tr:nth-child(4) td:nth-child(2)");
 		Elements elestock43 = doc.select("div.aside_stock table.tbl_home tbody tr:nth-child(4) td:nth-child(3)");
-
+		
 		Elements elestock51 = doc.select("div.aside_stock table.tbl_home tbody tr:nth-child(5) th:nth-child(1)");
 		Elements elestock52 = doc.select("div.aside_stock table.tbl_home tbody tr:nth-child(5) td:nth-child(2)");
 		Elements elestock53 = doc.select("div.aside_stock table.tbl_home tbody tr:nth-child(5) td:nth-child(3)");
+		
+		String[] f_name = new String[5];
+		String[] f_amount = new String[5];
+		String[] f_updown = new String[5];
+		String[] f_prev = new String[5];
+		
+		f_name[0] = elestock11.text();
+		f_amount[0] = elestock12.text();
+		f_prev[0] = elestock13.text().substring(2);
+		f_updown[0] = elestock13.text().substring(0,2);
+		
+		f_name[1] = elestock21.text();
+		f_amount[1] = elestock22.text();
+		f_prev[1] = elestock23.text().substring(2);
+		f_updown[1] = elestock23.text().substring(0,2);
 
-		String strstock11 = elestock11.text();
-		String strstock12 = elestock12.text();
-		String strstock13 = elestock13.text().substring(2);
-		String stockud1 = elestock13.text().substring(0,2);
+		f_name[2] = elestock31.text();
+		f_amount[2] = elestock32.text();
+		f_prev[2] = elestock33.text().substring(2);
+		f_updown[2] = elestock33.text().substring(0,2);
 
-		String strstock21 = elestock21.text();
-		String strstock22 = elestock22.text();
-		String strstock23 = elestock23.text().substring(2);
-		String stockud2 = elestock23.text().substring(0,2);
+		f_name[3] = elestock41.text();
+		f_amount[3] = elestock42.text();
+		f_prev[3] = elestock43.text().substring(2);
+		f_updown[3] = elestock43.text().substring(0,2);
 
-		String strstock31 = elestock31.text();
-		String strstock32 = elestock32.text();
-		String strstock33 = elestock33.text().substring(2);
-		String stockud3 = elestock33.text().substring(0,2);
-
-		String strstock41 = elestock41.text();
-		String strstock42 = elestock42.text();
-		String strstock43 = elestock43.text().substring(2);
-		String stockud4 = elestock43.text().substring(0,2);
-
-		String strstock51 = elestock51.text();
-		String strstock52 = elestock52.text();
-		String strstock53 = elestock53.text().substring(2);
-		String stockud5 = elestock53.text().substring(0,2);
+		f_name[4] = elestock51.text();
+		f_amount[4] = elestock52.text();
+		f_prev[4] = elestock53.text().substring(2);
+		f_updown[4] = elestock53.text().substring(0,2);
 
 
 		/** 인기 검색 종목 (인기 종목) */
@@ -98,35 +103,41 @@ public class FinanceController {
 		Elements elepopularup5 = doc.select("div.aside_popular table.tbl_home tbody tr:nth-child(5).up");
 		Elements elepopulardown5 = doc.select("div.aside_popular table.tbl_home tbody tr:nth-child(5).down");
 
-		String strpopular11 = elepopular11.text();
-		String strpopular12 = elepopular12.text();
-		String strpopular13 = elepopular13.text();
-		String popularup1 = elepopularup1.text();
-		String populardown1 = elepopulardown1.text();
+		String[] p_name = new String[5];
+		String[] p_amount = new String[5];
+		String[] p_up = new String[5];
+		String[] p_down = new String[5];
+		String[] p_prev = new String[5];
+		
+		p_name[0] = elepopular11.text();
+		p_amount[0] = elepopular12.text();
+		p_prev[0] = elepopular13.text();
+		p_up[0] = elepopularup1.text();
+		p_down[0] = elepopulardown1.text();
 
-		String strpopular21 = elepopular21.text();
-		String strpopular22 = elepopular22.text();
-		String strpopular23 = elepopular23.text();
-		String popularup2 = elepopularup2.text();
-		String populardown2 = elepopulardown2.text();
+		p_name[1] = elepopular21.text();
+		p_amount[1] = elepopular22.text();
+		p_prev[1] = elepopular23.text();
+		p_up[1] = elepopularup2.text();
+		p_down[1] = elepopulardown2.text();
 
-		String strpopular31 = elepopular31.text();
-		String strpopular32 = elepopular32.text();
-		String strpopular33 = elepopular33.text();
-		String popularup3 = elepopularup3.text();
-		String populardown3 = elepopulardown3.text();
+		p_name[2] = elepopular31.text();
+		p_amount[2] = elepopular32.text();
+		p_prev[2] = elepopular33.text();
+		p_up[2] = elepopularup3.text();
+		p_down[2] = elepopulardown3.text();
 
-		String strpopular41 = elepopular41.text();
-		String strpopular42 = elepopular42.text();
-		String strpopular43 = elepopular43.text();
-		String popularup4 = elepopularup4.text();
-		String populardown4 = elepopulardown4.text();
+		p_name[3] = elepopular41.text();
+		p_amount[3] = elepopular42.text();
+		p_prev[3] = elepopular43.text();
+		p_up[3] = elepopularup4.text();
+		p_down[3] = elepopulardown4.text();
 
-		String strpopular51 = elepopular51.text();
-		String strpopular52 = elepopular52.text();
-		String strpopular53 = elepopular53.text();
-		String popularup5 = elepopularup5.text();
-		String populardown5 = elepopulardown5.text();
+		p_name[4] = elepopular51.text();
+		p_amount[4] = elepopular52.text();
+		p_prev[4] = elepopular53.text();
+		p_up[4] = elepopularup5.text();
+		p_down[4] = elepopulardown5.text();
 
 
 		/** TOP 종목 (거래 상위) */
@@ -156,114 +167,121 @@ public class FinanceController {
 		Elements eletop53 = doc.select("table.tbl_home tbody#_topItems1 tr:nth-child(5) td:nth-child(3)");
 		Elements eletop54 = doc.select("table.tbl_home tbody#_topItems1 tr:nth-child(5) td:nth-child(4)");
 
-		String strtop11 = eletop11.text();
-		String strtop12 = eletop12.text();
-		String strtop13 = eletop13.text().substring(2);
-		String strtop14 = eletop14.text();
-		String topud1 = eletop13.text().substring(0,2);
+		String[] t_name = new String[5];
+		String[] t_amount  = new String[5];
+		String[] t_updown = new String[5];
+		String[] t_prev = new String[5];
+		String[] t_rate = new String[5];
+		
+		t_name[0] = eletop11.text();
+		t_amount[0] = eletop12.text();
+		t_prev[0] = eletop13.text().substring(2);
+		t_rate[0] = eletop14.text();
+		t_updown[0] = eletop13.text().substring(0,2);
 
-		String strtop21 = eletop21.text();
-		String strtop22 = eletop22.text();
-		String strtop23 = eletop23.text().substring(2);
-		String strtop24 = eletop24.text();
-		String topud2 = eletop23.text().substring(0,2);
+		t_name[1] = eletop21.text();
+		t_amount[1] = eletop22.text();
+		t_prev[1] = eletop23.text().substring(2);
+		t_rate[1] = eletop24.text();
+		t_updown[1] = eletop23.text().substring(0,2);
 
-		String strtop31 = eletop31.text();
-		String strtop32 = eletop32.text();
-		String strtop33 = eletop33.text().substring(2);
-		String strtop34 = eletop34.text();
-		String topud3 = eletop33.text().substring(0,2);
+		t_name[2] = eletop31.text();
+		t_amount[2] = eletop32.text();
+		t_prev[2] = eletop33.text().substring(2);
+		t_rate[2] = eletop34.text();
+		t_updown[2] = eletop33.text().substring(0,2);
 
-		String strtop41 = eletop41.text();
-		String strtop42 = eletop42.text();
-		String strtop43 = eletop43.text().substring(2);
-		String strtop44 = eletop44.text();
-		String topud4 = eletop43.text().substring(0,2);
+		t_name[3] = eletop41.text();
+		t_amount[3] = eletop42.text();
+		t_prev[3] = eletop43.text().substring(2);
+		t_rate[3] = eletop44.text();
+		t_updown[3] = eletop43.text().substring(0,2);
 
-		String strtop51 = eletop51.text();
-		String strtop52 = eletop52.text();
-		String strtop53 = eletop53.text().substring(2);
-		String strtop54 = eletop54.text();
-		String topud5 = eletop53.text().substring(0,2);
+		t_name[4] = eletop51.text();
+		t_amount[4] = eletop52.text();
+		t_prev[4] = eletop53.text().substring(2);
+		t_rate[4] = eletop54.text();
+		t_updown[4] = eletop53.text().substring(0,2);
 
 
 		
 		/** View 처리 */
 		// 해외증시
-		model.addAttribute("strstock11", strstock11);
-		model.addAttribute("strstock12", strstock12);
-		model.addAttribute("strstock13", strstock13);
-		model.addAttribute("strstock21", strstock21);
-		model.addAttribute("strstock22", strstock22);
-		model.addAttribute("strstock23", strstock23);
-		model.addAttribute("strstock31", strstock31);
-		model.addAttribute("strstock32", strstock32);
-		model.addAttribute("strstock33", strstock33);
-		model.addAttribute("strstock41", strstock41);
-		model.addAttribute("strstock42", strstock42);
-		model.addAttribute("strstock43", strstock43);
-		model.addAttribute("strstock51", strstock51);
-		model.addAttribute("strstock52", strstock52);
-		model.addAttribute("strstock53", strstock53);
-		model.addAttribute("stockud1", stockud1);
-		model.addAttribute("stockud2", stockud2);
-		model.addAttribute("stockud3", stockud3);
-		model.addAttribute("stockud4", stockud4);
-		model.addAttribute("stockud5", stockud5);
+		model.addAttribute("strstock11", f_name[0]);
+		model.addAttribute("strstock12", f_amount[0]);
+		model.addAttribute("strstock13", f_prev[0]);
+		model.addAttribute("strstock21", f_name[1]);
+		model.addAttribute("strstock22", f_amount[1]);
+		model.addAttribute("strstock23", f_prev[1]);
+		model.addAttribute("strstock31", f_name[2]);
+		model.addAttribute("strstock32", f_amount[2]);
+		model.addAttribute("strstock33", f_prev[2]);
+		model.addAttribute("strstock41", f_name[3]);
+		model.addAttribute("strstock42", f_amount[3]);
+		model.addAttribute("strstock43", f_prev[3]);
+		model.addAttribute("strstock51", f_name[4]);
+		model.addAttribute("strstock52", f_amount[4]);
+		model.addAttribute("strstock53", f_prev[4]);
+		model.addAttribute("stockud1", f_updown[0]);
+		model.addAttribute("stockud2", f_updown[1]);
+		model.addAttribute("stockud3", f_updown[2]);
+		model.addAttribute("stockud4", f_updown[3]);
+		model.addAttribute("stockud5", f_updown[4]);
 		
 		// 인기종목
-		model.addAttribute("strpopular11", strpopular11);
-		model.addAttribute("strpopular12", strpopular12);
-		model.addAttribute("strpopular13", strpopular13);
-		model.addAttribute("strpopular21", strpopular21);
-		model.addAttribute("strpopular22", strpopular22);
-		model.addAttribute("strpopular23", strpopular23);
-		model.addAttribute("strpopular31", strpopular31);
-		model.addAttribute("strpopular32", strpopular32);
-		model.addAttribute("strpopular33", strpopular33);
-		model.addAttribute("strpopular41", strpopular41);
-		model.addAttribute("strpopular42", strpopular42);
-		model.addAttribute("strpopular43", strpopular43);
-		model.addAttribute("strpopular51", strpopular51);
-		model.addAttribute("strpopular52", strpopular52);
-		model.addAttribute("strpopular53", strpopular53);
-		model.addAttribute("popularup1", popularup1);
-		model.addAttribute("popularup2", popularup2);
-		model.addAttribute("popularup3", popularup3);
-		model.addAttribute("popularup4", popularup4);
-		model.addAttribute("popularup5", popularup5);
-		model.addAttribute("populardown1", populardown1);
-		model.addAttribute("populardown2", populardown2);
-		model.addAttribute("populardown3", populardown3);
-		model.addAttribute("populardown4", populardown4);
-		model.addAttribute("populardown5", populardown5);
+		model.addAttribute("strpopular11", p_name[0]);
+		model.addAttribute("strpopular12", p_amount[0]);
+		model.addAttribute("strpopular13", p_prev[0]);
+		model.addAttribute("strpopular21", p_name[1]);
+		model.addAttribute("strpopular22", p_amount[1]);
+		model.addAttribute("strpopular23",  p_prev[1]);
+		model.addAttribute("strpopular31", p_name[2]);
+		model.addAttribute("strpopular32", p_amount[2]);
+		model.addAttribute("strpopular33",  p_prev[2]);
+		model.addAttribute("strpopular41", p_name[3]);
+		model.addAttribute("strpopular42", p_amount[3]);
+		model.addAttribute("strpopular43",  p_prev[3]);
+		model.addAttribute("strpopular51", p_name[4]);
+		model.addAttribute("strpopular52", p_amount[4]);
+		model.addAttribute("strpopular53",  p_prev[4]);
+		model.addAttribute("popularup1", p_up[0]);
+		model.addAttribute("popularup2", p_up[1]);
+		model.addAttribute("popularup3", p_up[2]);
+		model.addAttribute("popularup4", p_up[3]);
+		model.addAttribute("popularup5", p_up[4]);
+		model.addAttribute("populardown1", p_down[0]);
+		model.addAttribute("populardown2", p_down[1]);
+		model.addAttribute("populardown3", p_down[2]);
+		model.addAttribute("populardown4", p_down[3]);
+		model.addAttribute("populardown5", p_down[4]);
 		
 		// 거래상위
-		model.addAttribute("strtop11", strtop11);
-		model.addAttribute("strtop12", strtop12);
-		model.addAttribute("strtop13", strtop13);
-		model.addAttribute("strtop14", strtop14);
-		model.addAttribute("strtop21", strtop21);
-		model.addAttribute("strtop22", strtop22);
-		model.addAttribute("strtop23", strtop23);
-		model.addAttribute("strtop24", strtop24);
-		model.addAttribute("strtop31", strtop31);
-		model.addAttribute("strtop32", strtop32);
-		model.addAttribute("strtop33", strtop33);
-		model.addAttribute("strtop34", strtop34);
-		model.addAttribute("strtop41", strtop41);
-		model.addAttribute("strtop42", strtop42);
-		model.addAttribute("strtop43", strtop43);
-		model.addAttribute("strtop44", strtop44);
-		model.addAttribute("strtop51", strtop51);
-		model.addAttribute("strtop52", strtop52);
-		model.addAttribute("strtop53", strtop53);
-		model.addAttribute("strtop54", strtop54);
-		model.addAttribute("topud1", topud1);
-		model.addAttribute("topud2", topud2);
-		model.addAttribute("topud3", topud3);
-		model.addAttribute("topud4", topud4);
-		model.addAttribute("topud5", topud5);
+		model.addAttribute("strtop11", t_name[0]);
+		model.addAttribute("strtop12", t_amount[0]);
+		model.addAttribute("strtop13", t_prev[0]);
+		model.addAttribute("strtop14", t_rate[0]);
+		model.addAttribute("strtop21", t_name[1]);
+		model.addAttribute("strtop22", t_amount[1]);
+		model.addAttribute("strtop23", t_prev[1]);
+		model.addAttribute("strtop24", t_rate[1]);
+		model.addAttribute("strtop31", t_name[2]);
+		model.addAttribute("strtop32", t_amount[2]);
+		model.addAttribute("strtop33", t_prev[2]);
+		model.addAttribute("strtop34", t_rate[2]);
+		model.addAttribute("strtop41", t_name[3]);
+		model.addAttribute("strtop42", t_amount[3]);
+		model.addAttribute("strtop43", t_prev[3]);
+		model.addAttribute("strtop44", t_rate[3]);
+		model.addAttribute("strtop51", t_name[4]);
+		model.addAttribute("strtop52", t_amount[4]);
+		model.addAttribute("strtop53", t_prev[4]);
+		model.addAttribute("strtop54", t_rate[4]);
+		model.addAttribute("topud1", t_updown[0]);
+		model.addAttribute("topud2", t_updown[1]);
+		model.addAttribute("topud3", t_updown[2]);
+		model.addAttribute("topud4", t_updown[3]);
+		model.addAttribute("topud5", t_updown[4]);
+		
 		
 		return "contents/contents_finance";
 
