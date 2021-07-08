@@ -17,7 +17,7 @@
 		<c:import url="../assets/header.jsp" />
 		<div class="container">
 			<div class="inner_login">
-				<form id="login-form">
+				<form id="login-form" method="post" >
 					<div class="box_login">
 						<div id="login_w">로그인</div>
 						<div class="form-group">

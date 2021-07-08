@@ -22,7 +22,7 @@
 		<!-- content-->
 		<div id="inner_join">
 			<div id="new_box">회원가입</div>
-			<form class="form-horizontal" name="join_form" id="join_form" action="Login.jsp" method="post">
+			<form class="form-horizontal" name="join_form" id="join_form" action="${pageContext.request.contextPath}/Login.do" method="post">
 			<!-- ID -->
 				<div>
 					<div class="join">
@@ -177,10 +177,10 @@
 					<span class="box3 new_detailAddress "> 
 						<input type="text" id="new_detailAddress" class="new" placeholder="상세주소">
 					</span> 
-					<span class="box4 new_extraAddress "> 
+					<!-- <span class="box4 new_extraAddress "> 
 						<input type="text" id="new_extraAddress" class="new" placeholder="참고항목" readonly>
 					</span>
-
+ -->
 
 					<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 					<div id="layer" style="display: none; position: absolute; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">

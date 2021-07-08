@@ -112,7 +112,6 @@ function check() {
 		confirmButtonText: '확인', // 확인버튼 표시 문구
 	}).then(function(result) {
 		if (result.value) {
-			console.log("gg");
 			$("#join_form").submit();
 		}
 	});

@@ -11,7 +11,7 @@ $(function() {
 		var uid = $(this).find("#user_id");
 		var upw = $(this).find("#user_pw");
 
-		$.post("${pageContext.request.contextPath}/asssts/api/login_ok", {
+		$.post("../asssts/api/login_ok", {
 			user_id: uid.val(),
 			user_pw: upw.val()
 
