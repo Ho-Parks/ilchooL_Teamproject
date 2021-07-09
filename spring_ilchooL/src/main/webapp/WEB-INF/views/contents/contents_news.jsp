@@ -25,7 +25,11 @@
 
 			<div class="col-md-11 col-sm-12 news_graph">
 				<div id="graph">
-					<img src="../assets/img/contents_news_graph.png" />
+					<div id="news1" class="news"><p>${rank0}</p></div>
+					<div id="news2" class="news"><p>${rank1}</p></div>
+					<div id="news3" class="news"><p>${rank2}</p></div>
+					<div id="news4" class="news"><p>${rank3}</p></div>
+					<div id="news5" class="news"><p>${rank4}</p></div>
 				</div>
 			</div>
 			

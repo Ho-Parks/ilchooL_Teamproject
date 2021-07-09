@@ -30,6 +30,31 @@ public class NewsSearchController {
 
    @RequestMapping(value = "/contents/contents_news.do", method = RequestMethod.GET)
    public String NaverNewsSearch(Model model) throws IOException {
+	   
+	   /** 뉴스 키워드 크롤링 */
+	   String url_keyword = "https://www.nate.com";
+	   Document doc = Jsoup.connect(url_keyword).get();
+
+	   Elements key1 = doc.select("div#news_area div.bizCnt ol.isKeywordList li:nth-child(1) span.txt_rank");
+	   Elements key2 = doc.select("div#news_area div.bizCnt ol.isKeywordList li:nth-child(2) span.txt_rank");
+	   Elements key3 = doc.select("div#news_area div.bizCnt ol.isKeywordList li:nth-child(3) span.txt_rank");
+	   Elements key4 = doc.select("div#news_area div.bizCnt ol.isKeywordList li:nth-child(4) span.txt_rank");
+	   Elements key5 = doc.select("div#news_area div.bizCnt ol.isKeywordList li:nth-child(5) span.txt_rank");
+
+	   String[] rank = new String[5];
+
+	   rank[0] = key1.text();
+	   rank[1] = key2.text();
+	   rank[2] = key3.text();
+	   rank[3] = key4.text();
+	   rank[4] = key5.text();
+	   
+	   model.addAttribute("rank0", rank[0]);
+	   model.addAttribute("rank1", rank[1]);
+	   model.addAttribute("rank2", rank[2]);
+	   model.addAttribute("rank3", rank[3]);
+	   model.addAttribute("rank4", rank[4]);
+	   
 
       /** API 연동 객체 생성 */
       // Retrofit 객체 생성

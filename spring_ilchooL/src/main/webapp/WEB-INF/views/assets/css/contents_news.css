@@ -13,6 +13,7 @@
 	height: 800px;
 	border: 1px solid #e0e0e0;
 	margin: 0 7%;
+	padding: 20px;
 }
 
 .row {
@@ -143,4 +144,49 @@
 .row #datepicker {
 	width: 150px;
 	padding-left: 20px;
+}
+
+.news {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	display: inline-block;
+	opacity: 0.85;
+	padding: 10% 10px;
+	
+}
+div#news1 {
+	background: #3366FF;
+    width: 400px;
+    height: 400px;
+}
+div#news2 {
+    background: #8FE222;
+	width: 300px;
+    height: 300px;
+    margin-left: 50px
+}
+div#news3 {
+	background: #3BBAF9;
+    width: 270px;
+    height: 270px;
+}
+div#news4 {
+	background: #FFC43A;
+    height: 200px;
+    width: 200px;
+}
+div#news5 {
+	background: #FF543A;
+    width: 300px;
+    height: 300px;
+}
+.news p {
+	font-size: 30px;
+    word-spacing: 5px;
+    letter-spacing: 2px;
+    padding: 20px 10px;
+    text-align: center;
+    color: #f0f0f0f0;
+	
 }
