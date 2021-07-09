@@ -15,9 +15,9 @@ body {
 	background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
 }
 
-#wrapper {
+.wrapper {
 	position: relative;
-	height: 100%;
+	height: 150%;
 	margin-bottom: 670px;
 }
 
@@ -25,7 +25,7 @@ body {
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%);
-	width: 460px;
+	
 }
 
 /* 입력폼 */
@@ -55,7 +55,7 @@ body {
 
 .box1 {
 	display: block;
-	width: 30%;
+	width: 35%;
 	height: 51px;
 	border: solid 2px #87CEFA;
 	padding: 10px 14px 10px 14px;
@@ -245,4 +245,3 @@ select {
 	float: right;
 	margin-bottom: 20px;
 }
-

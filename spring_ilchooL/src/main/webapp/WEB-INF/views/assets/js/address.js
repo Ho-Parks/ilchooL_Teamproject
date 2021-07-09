@@ -68,14 +68,14 @@
     // resize이벤트나, orientationchange이벤트를 이용하여 값이 변경될때마다 아래 함수를 실행 시켜 주시거나,
     // 직접 element_layer의 top,left값을 수정해 주시면 됩니다.
     function initLayerPosition(){
-        var width = 460; //우편번호서비스가 들어갈 element의 width
+        var width = 100; //우편번호서비스가 들어갈 element의 width
         var height = 400; //우편번호서비스가 들어갈 element의 height
         var borderWidth = 5; //샘플에서 사용하는 border의 두께
       	var top = 930;
       	//var left = 300;
 
         // 위에서 선언한 값들을 실제 element에 넣는다.
-        element_layer.style.width = width + 'px';
+        element_layer.style.width = width + '%';
         element_layer.style.height = height + 'px';
         element_layer.style.border = borderWidth + 'px solid';
         element_layer.style.top = top + 'px';

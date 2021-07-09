@@ -13,12 +13,11 @@
 </head>
 
 <body>
-	<div id="header">
+	<div class="wrapper">
 		<c:import url="../assets/header.jsp" />
-	</div>
+	<div class="row">
 	<!-- wrapper -->
-	<div id="wrapper">
-
+	<div class="container">
 		<!-- content-->
 		<div id="inner_join">
 			<div id="new_box">회원가입</div>
@@ -167,7 +166,7 @@
 							<input type="text" id="new_postcode" class="new_1" placeholder="우편번호" readonly>
 						</span> 
 						<span class="click"> 
-							<input type="button" id="address_btn" onclick="new_execDaumPostcode()" value="우편번호 찾기">
+							<input type="button" id="address_btn" class="btn btn-info" onclick="new_execDaumPostcode()" value="우편번호 찾기">
 						</span>
 					</div>
 
@@ -205,9 +204,10 @@
 			</form>
 		</div>
 		<!-- content-->
+		</div>
 	</div>
 	<!-- wrapper -->
-
+	</div>
 	<div id="footer">
 		<c:import url="../assets/footer.jsp" />
 	</div>
@@ -233,7 +233,6 @@
 			e.preventDefault();
 			console.log("11");
 			check();
-
 		});
 	</script>
 </body>
