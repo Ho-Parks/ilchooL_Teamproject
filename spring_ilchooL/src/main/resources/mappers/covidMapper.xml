@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="covidMapper">
+	
+	<insert id="insertCovidItem"
+		parameterType="project.spring.ilchooL.model.CovidItem">
+		Insert Into covid19 (
+			date, active, confirmed, confirmed_acc, released, released_acc, death, death_acc
+		) Values (
+			#{date}, #{active}, #{confirmed}, #{confirmed_acc}, #{released}, #{released_acc}, #{death}, #{death_acc}
+		);
+	</insert>
+	
+	<update id="updateCovidItem" parameterType="project.spring.ilchooL.model.CovidItem">
+		Update covid19 Set
+			date = #{date},
+			active = #{active},
+			confirmed = #{confirmed},
+			confirmed_acc = #{confirmed_acc},
+			released = #{released},
+			released_acc = #{released_acc},
+			death = #{death},
+			death_acc = #{death_acc}
+		Where date = #{date};
+	</update>
+</mapper>

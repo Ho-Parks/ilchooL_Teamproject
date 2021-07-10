@@ -1,1 +1,0 @@
-# MyBatis Mapper 파일이 위치할 디렉토리

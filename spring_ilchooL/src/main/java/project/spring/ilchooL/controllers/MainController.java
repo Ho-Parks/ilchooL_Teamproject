@@ -66,14 +66,14 @@ public class MainController {
 		// null 값인지 검사후 getter를 사용해 데이터를 가져온다.
 		if (cI != null) {
 			datetime = cI.getDatetime();
-			active = cI.getData_covid().getSeoul().getActive();
-			confirmed = cI.getData_covid().getSeoul().getConfirmed();
-			confirmed_acc = cI.getData_covid().getSeoul().getConfirmed_acc();
-			date = cI.getData_covid().getSeoul().getDate();
-			death = cI.getData_covid().getSeoul().getDeath();
-			death_acc = cI.getData_covid().getSeoul().getDeath_acc();
-			released = cI.getData_covid().getSeoul().getReleased();
-			released_acc = cI.getData_covid().getSeoul().getReleased_acc();
+			active = cI.getData_covid().getSeoul().getPhp_active();
+			confirmed = cI.getData_covid().getSeoul().getPhp_confirmed();
+			confirmed_acc = cI.getData_covid().getSeoul().getPhp_confirmed_acc();
+			date = cI.getData_covid().getSeoul().getPhp_date();
+			death = cI.getData_covid().getSeoul().getPhp_death();
+			death_acc = cI.getData_covid().getSeoul().getPhp_death_acc();
+			released = cI.getData_covid().getSeoul().getPhp_released();
+			released_acc = cI.getData_covid().getSeoul().getPhp_released_acc();
 		}
 		
 		String con_item = null;
