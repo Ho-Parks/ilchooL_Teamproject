@@ -1,5 +1,7 @@
 package project.spring.ilchooL.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import project.spring.ilchooL.helper.RetrofitHelper;
 import project.spring.ilchooL.helper.WebHelper;
 import project.spring.ilchooL.model.Covid19Item;
-import project.spring.ilchooL.service.PhpCovidService;
-import retrofit2.Call;
-import retrofit2.Retrofit;
+import project.spring.ilchooL.model.CovidItem;
+import project.spring.ilchooL.service.CovidService;
 
 /**
  * 메인 페이지 컨트롤러
@@ -22,6 +23,7 @@ public class MainController {
 	WebHelper webHelper;
 	@Autowired
 	RetrofitHelper retrofitHelper;
+	@Autowired CovidService covidService;
 
 	/**
 	 * 날씨, 미세먼지, 코로나19, 그래프 영역은 메인컨트롤러에서 구현하면 될것같아요!
@@ -29,66 +31,45 @@ public class MainController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		// Retrofit 객체 선언 부분
-		Retrofit retrofit_phpCovid = retrofitHelper.getRetrofit(PhpCovidService.BASE_URL);
 		// 이부분에 수인님 코드 추가
 		
 		// Service 인터페이스 선언부분
-		PhpCovidService phpCovidService = retrofit_phpCovid.create(PhpCovidService.class);
 		// 이부분에 수인님 코드 추가
 
 		// Call 객체를 service 인터페이스를 할당하여 선언
-		Call<Covid19Item> call_phpCovid = phpCovidService.getCovidCount();
 		// 이부분에 수인님 코드 추가
 		
 		// pojo 클래스 선언
-		Covid19Item cI = null;
+		List<CovidItem> covid_output = null;
+		Covid19Item cI = new Covid19Item();
 		// 이부분에 수인님 코드 추가
 
 		try {
 			// 데이터 받는 부분
-			cI = call_phpCovid.execute().body();
+			covid_output = covidService.getCovidList();
+			
+			for (CovidItem item : covid_output) {
+				System.out.println(item.toString());
+			}
 			// 이부분에 수인님 코드 추가
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		// 사용할 변수, 배열 선언
-		String datetime = null;
-		String[] active = null;
-		String[] confirmed = null;
-		String[] confirmed_acc = null;
-		String[] date = null;
-		String[] death = null;
-		String[] death_acc = null;
-		String[] released = null;
-		String[] released_acc = null;
 		
-		// null 값인지 검사후 getter를 사용해 데이터를 가져온다.
-		if (cI != null) {
-			datetime = cI.getDatetime();
-			active = cI.getData_covid().getSeoul().getPhp_active();
-			confirmed = cI.getData_covid().getSeoul().getPhp_confirmed();
-			confirmed_acc = cI.getData_covid().getSeoul().getPhp_confirmed_acc();
-			date = cI.getData_covid().getSeoul().getPhp_date();
-			death = cI.getData_covid().getSeoul().getPhp_death();
-			death_acc = cI.getData_covid().getSeoul().getPhp_death_acc();
-			released = cI.getData_covid().getSeoul().getPhp_released();
-			released_acc = cI.getData_covid().getSeoul().getPhp_released_acc();
-		}
-		
-		String con_item = null;
+		int con_item = 0;
 		String date_item = null;
-		String death_item = null;
-		String released_item = null;
-		String active_item = null;
+		int death_item = 0;
+		int released_item = 0;
+		int active_item = 0;
 		
-		for(int i = 0; i < 8; i++) {
-			con_item = confirmed[confirmed.length - i - 1];
-			date_item = date[date.length - i - 1].substring(4);
+		
+		for(int i = 0; i < covid_output.size(); i++) {
+			con_item = covid_output.get(i).getConfirmed();
+			date_item = covid_output.get(i).getDate().substring(4);
 			date_item = Integer.parseInt(date_item.substring(0, 2)) + "월 " + Integer.parseInt(date_item.substring(2)) + "일";
-			death_item = death[death.length - i - 1];
-			released_item = released[released.length - i - 1];
-			active_item = active[active.length - i - 1];
+			death_item = covid_output.get(i).getDeath();
+			released_item = covid_output.get(i).getReleased();
+			active_item = covid_output.get(i).getActive();
 			
 			model.addAttribute("date_" + i, date_item);
 			model.addAttribute("confirmed_" + i, con_item);
@@ -97,12 +78,14 @@ public class MainController {
 			model.addAttribute("active_" + i, active_item);
 		}
 		
-		// model에 받아온 데이터 주입
+		String datetime = null;
+		datetime = cI.getDatetime();
+		
 		model.addAttribute("datetime", datetime);
-		model.addAttribute("confirmed_acc", confirmed_acc[confirmed_acc.length - 1]);
-		model.addAttribute("date", date[date.length - 1]);
-		model.addAttribute("death_acc", death_acc[death_acc.length - 1]);
-		model.addAttribute("released_acc", released_acc[released_acc.length - 1]);
+		model.addAttribute("confirmed_acc", covid_output.get(0).getConfirmed_acc());
+		model.addAttribute("date", covid_output.get(0).getDate());
+		model.addAttribute("death_acc", covid_output.get(0).getDeath_acc());
+		model.addAttribute("released_acc", covid_output.get(0).getReleased_acc());
 		// 이부분에 수인님 코드 추가
 
 		// View 처리

@@ -24,9 +24,21 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="project.spring.ilchooL.controllers" />
-	<context:component-scan base-package="project.spring.ilchooL.schedulers" />
+	<!-- <context:component-scan base-package="project.spring.ilchooL.schedulers" /> -->
 	
 	<!-- 서비스 구현체가 배치될 패키지 정의하기 -->
 	<context:component-scan base-package="project.spring.ilchooL.service.impl" />
+	
+	<!-- 스케줄러 어노테이션 선언 -->
+	<task:annotation-driven/>
+	
+	<!-- 스케줄러로 동작할 객체 생성 -->
+	<beans:bean id="scheduleJob" class="project.spring.ilchooL.schedulers.CovidScheduler" />
+	
+	<!-- 생성한 스케줄러 객체에 대한 작업 스케줄 지정 -->
+	<task:scheduled-tasks>
+		<!-- 매일 11시에 실행되는 스케줄러 -->
+		<task:scheduled ref="scheduleJob" method="collecCovid" cron="0 0 11 * * ?" />
+	</task:scheduled-tasks>
 	
 </beans:beans>

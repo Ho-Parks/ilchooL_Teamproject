@@ -54,7 +54,7 @@ public class CovidScheduler {
 
 		CovidItem ci = new CovidItem();
 
-		for (int i = 0; i < date.length; i++) {
+		for (int i = date.length - 7; i < date.length; i++) {
 			ci.setDate(date[i]);
 			ci.setActive(Integer.parseInt(active[i]));
 			ci.setConfirmed(Integer.parseInt(confirmed[i]));
