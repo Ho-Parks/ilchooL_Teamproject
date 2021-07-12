@@ -10,6 +10,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/datepicker.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/datepicker.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/contents_news.css" />
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
 
 </head>
 <body>
@@ -18,18 +20,10 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-1 col-sm-12">
-				<input type="text" id="datepicker" placeholder="Date"
-					class="form-control">
-			</div>
 
 			<div class="col-md-11 col-sm-12 news_graph">
-				<div id="graph">
-					<div id="news1" class="news"><p>${rank0}</p></div>
-					<div id="news2" class="news"><p>${rank1}</p></div>
-					<div id="news3" class="news"><p>${rank2}</p></div>
-					<div id="news4" class="news"><p>${rank3}</p></div>
-					<div id="news5" class="news"><p>${rank4}</p></div>
+				<div id="container">
+					
 				</div>
 			</div>
 			
@@ -359,5 +353,35 @@
 	<!-- /.modal -->
 	
 	<c:import url="../assets/footer.jsp" />
+	<script type="text/javascript">
+	var rank0 = "${rank0}";
+	var rank1 = "${rank1}";
+	var rank2 = "${rank2}";
+	var rank3 = "${rank3}";
+	var rank4 = "${rank4}";
+
+	anychart.onDocumentReady(function() {
+		var data = [
+		    {"x": rank0, "value": 100, category: "5"},
+		    {"x": rank1, "value": 100, category: "1"},
+		    {"x": rank2, "value": 90, category: "9"},
+		    {"x": rank3, "value": 90, category: "5"},
+		    {"x": rank4, "value": 80, category: "9"}
+		  ];
+		
+		var chart = anychart.tagCloud(data);
+		
+		chart.title('');
+		chart.angles([0]);
+		
+		chart.container("container");
+		chart.draw();
+		
+	});
+
+	
+	
+	</script>
+	
 </body>
 </html>
