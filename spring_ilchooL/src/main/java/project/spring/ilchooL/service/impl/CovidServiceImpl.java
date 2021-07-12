@@ -8,10 +8,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jdk.internal.org.jline.utils.Log;
+import lombok.extern.slf4j.Slf4j;
 import project.spring.ilchooL.model.CovidItem;
 import project.spring.ilchooL.service.CovidService;
 
+@Slf4j
 @Service
 public class CovidServiceImpl implements CovidService {
 
@@ -25,7 +26,7 @@ public class CovidServiceImpl implements CovidService {
 				sqlSession.insert("covidMapper.insertCovidItem", covid_item);
 			}
 		} catch (Exception e) {
-			Log.error(e.getLocalizedMessage());
+			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 저장에 실패했습니다.");
 		}
 	} // end collectCovid
@@ -41,10 +42,10 @@ public class CovidServiceImpl implements CovidService {
 				throw new NullPointerException("result=null");
 			}
 		} catch (NullPointerException e) {
-			Log.error(e.getLocalizedMessage());
+			log.error(e.getLocalizedMessage());
 			throw new Exception("조회된 데이터가 없습니다.");
 		} catch (Exception e) {
-			Log.error(e.getLocalizedMessage());
+			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");
 		}
 		
@@ -61,10 +62,10 @@ public class CovidServiceImpl implements CovidService {
 				throw new NullPointerException("result=null");
 			}
 		} catch (NullPointerException e) {
-			Log.error(e.getLocalizedMessage());
+			log.error(e.getLocalizedMessage());
 			throw new Exception("조회된 데이터가 없습니다.");
 		} catch (Exception e) {
-			Log.error(e.getLocalizedMessage());
+			log.error(e.getLocalizedMessage());
 			throw new Exception("데이터 조회에 실패했습니다.");
 		}
 		
