@@ -1,4 +1,4 @@
-package project.spring.ilchooL.controllers;
+package project.spring.ilchooL.schedulers;
 
 import java.io.IOException;
 
@@ -8,21 +8,24 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
+import lombok.extern.slf4j.Slf4j;
 import project.spring.ilchooL.model.Finance;
 import project.spring.ilchooL.model.FinancePopular;
 import project.spring.ilchooL.model.FinanceTop;
+import project.spring.ilchooL.service.FinanceService;
 
+@Slf4j
 @Controller
-public class FinanceController {
+public class FinanceScheduler {
+	
+	@Autowired
+	FinanceService financeService;
+	
 	@Autowired
 	SqlSession sqlSession;
 	
-	@RequestMapping(value = "/contents/contents_finance.do", method = RequestMethod.GET)
-	public String Finance(Model model) throws IOException {
+	public void everyHours() throws IOException {
 		
 		String url = "https://finance.naver.com/main/main.nhn";
 		Document doc = Jsoup.connect(url).get();
@@ -77,7 +80,7 @@ public class FinanceController {
 		f_name[4] = elestock51.text();
 		f_amount[4] = elestock52.text();
 		f_prev[4] = elestock53.text().substring(2);
-		f_updown[4] = elestock53.text().substring(0,2);
+		f_updown[4] = elestock53.text().substring(0,2); 
 
 
 		/** 인기 검색 종목 (인기 종목) */
@@ -211,85 +214,6 @@ public class FinanceController {
 		t_prev[4] = eletop53.text().substring(2);
 		t_rate[4] = eletop54.text();
 		t_updown[4] = eletop53.text().substring(0,2);
-
-
-		
-		/** View 처리 */
-		// 해외증시
-		model.addAttribute("strstock11", f_name[0]);
-		model.addAttribute("strstock12", f_amount[0]);
-		model.addAttribute("strstock13", f_prev[0]);
-		model.addAttribute("strstock21", f_name[1]);
-		model.addAttribute("strstock22", f_amount[1]);
-		model.addAttribute("strstock23", f_prev[1]);
-		model.addAttribute("strstock31", f_name[2]);
-		model.addAttribute("strstock32", f_amount[2]);
-		model.addAttribute("strstock33", f_prev[2]);
-		model.addAttribute("strstock41", f_name[3]);
-		model.addAttribute("strstock42", f_amount[3]);
-		model.addAttribute("strstock43", f_prev[3]);
-		model.addAttribute("strstock51", f_name[4]);
-		model.addAttribute("strstock52", f_amount[4]);
-		model.addAttribute("strstock53", f_prev[4]);
-		model.addAttribute("stockud1", f_updown[0]);
-		model.addAttribute("stockud2", f_updown[1]);
-		model.addAttribute("stockud3", f_updown[2]);
-		model.addAttribute("stockud4", f_updown[3]);
-		model.addAttribute("stockud5", f_updown[4]);
-		
-		// 인기종목
-		model.addAttribute("strpopular11", p_name[0]);
-		model.addAttribute("strpopular12", p_amount[0]);
-		model.addAttribute("strpopular13", p_prev[0]);
-		model.addAttribute("strpopular21", p_name[1]);
-		model.addAttribute("strpopular22", p_amount[1]);
-		model.addAttribute("strpopular23",  p_prev[1]);
-		model.addAttribute("strpopular31", p_name[2]);
-		model.addAttribute("strpopular32", p_amount[2]);
-		model.addAttribute("strpopular33",  p_prev[2]);
-		model.addAttribute("strpopular41", p_name[3]);
-		model.addAttribute("strpopular42", p_amount[3]);
-		model.addAttribute("strpopular43",  p_prev[3]);
-		model.addAttribute("strpopular51", p_name[4]);
-		model.addAttribute("strpopular52", p_amount[4]);
-		model.addAttribute("strpopular53",  p_prev[4]);
-		model.addAttribute("popularup1", p_up[0]);
-		model.addAttribute("popularup2", p_up[1]);
-		model.addAttribute("popularup3", p_up[2]);
-		model.addAttribute("popularup4", p_up[3]);
-		model.addAttribute("popularup5", p_up[4]);
-		model.addAttribute("populardown1", p_down[0]);
-		model.addAttribute("populardown2", p_down[1]);
-		model.addAttribute("populardown3", p_down[2]);
-		model.addAttribute("populardown4", p_down[3]);
-		model.addAttribute("populardown5", p_down[4]);
-		
-		// 거래상위
-		model.addAttribute("strtop11", t_name[0]);
-		model.addAttribute("strtop12", t_amount[0]);
-		model.addAttribute("strtop13", t_prev[0]);
-		model.addAttribute("strtop14", t_rate[0]);
-		model.addAttribute("strtop21", t_name[1]);
-		model.addAttribute("strtop22", t_amount[1]);
-		model.addAttribute("strtop23", t_prev[1]);
-		model.addAttribute("strtop24", t_rate[1]);
-		model.addAttribute("strtop31", t_name[2]);
-		model.addAttribute("strtop32", t_amount[2]);
-		model.addAttribute("strtop33", t_prev[2]);
-		model.addAttribute("strtop34", t_rate[2]);
-		model.addAttribute("strtop41", t_name[3]);
-		model.addAttribute("strtop42", t_amount[3]);
-		model.addAttribute("strtop43", t_prev[3]);
-		model.addAttribute("strtop44", t_rate[3]);
-		model.addAttribute("strtop51", t_name[4]);
-		model.addAttribute("strtop52", t_amount[4]);
-		model.addAttribute("strtop53", t_prev[4]);
-		model.addAttribute("strtop54", t_rate[4]);
-		model.addAttribute("topud1", t_updown[0]);
-		model.addAttribute("topud2", t_updown[1]);
-		model.addAttribute("topud3", t_updown[2]);
-		model.addAttribute("topud4", t_updown[3]);
-		model.addAttribute("topud5", t_updown[4]);
 		
 		
 		/** 해외증시 테이블 DB 저장 */
@@ -419,9 +343,12 @@ public class FinanceController {
 		input_t.setT_rate0(t_rate[4]);
 		sqlSession.insert("financeTopMapper.insertFinanceTop", input_t);
 		
-		
-		return "contents/contents_finance";
-
+		try {
+			log.debug("한 시간 단위로 실행되는 작업 >> " + financeService.addFinance());
+		} catch (Exception e) {
+			log.debug("데이터 저장에 실패했습니다.");
+			e.printStackTrace();
+		}
 	}
 
 }
