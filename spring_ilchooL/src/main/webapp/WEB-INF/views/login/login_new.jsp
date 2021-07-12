@@ -21,7 +21,7 @@
 		<!-- content-->
 		<div id="inner_join">
 			<div id="new_box">회원가입</div>
-			<form class="form-horizontal" name="join_form" id="join_form" action="${pageContext.request.contextPath}/Login.do" method="post">
+			<form class="form-horizontal" name="join_form" id="join_form" action="${pageContext.request.contextPath}/login/Login.do" method="get">
 			<!-- ID -->
 				<div>
 					<div class="join">
@@ -183,7 +183,7 @@
 
 					<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 					<div id="layer" style="display: none; position: absolute; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
-						<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor: pointer; position: absolute; right: -3px; top: -3px; z-index: 1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+						<img src="../assets/img/address_close.png" id="btnCloseLayer" style="cursor: pointer; position: absolute; right: -3px; top: -3px; z-index: 1" onclick="closeDaumPostcode()" alt="닫기 버튼">
 					</div>
 				</div>
 

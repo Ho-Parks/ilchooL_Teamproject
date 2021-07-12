@@ -16,12 +16,12 @@ public class LoginController {
 		return "login/Login";
 	}
 	
-	/** 로그인 페이지 이동 컨트롤러 */
-	@RequestMapping(value = "/Login.do", method = RequestMethod.POST)
-	public String login1(Model model) {
-		return "/Login";
-	}
-	
+//	/** 로그인 페이지 이동 컨트롤러 */
+//	@RequestMapping(value = "/Login.do", method = RequestMethod.POST)
+//	public String login1(Model model) {
+//		return "/Login";
+//	}
+//	
 	/** 회원가입 페이지 이동 컨트롤러 */
 	@RequestMapping(value = "/login/login_new.do", method = RequestMethod.GET)
 	public String login_new(Model model) {
@@ -44,5 +44,11 @@ public class LoginController {
 	@RequestMapping(value = "/api/login_ok.do", method = RequestMethod.POST)
 	public String login_ok(Model model) {
 		return "api/login_ok";
+	}
+	
+	/** 로그인 페이지 이동 컨트롤러 */
+	@RequestMapping(value = "/mypage/mypage.do", method = RequestMethod.GET)
+	public String mypage(Model model) {
+		return "mypage/mypage";
 	}
 }
