@@ -46,7 +46,7 @@ public class LoginController {
 		return "api/login_ok";
 	}
 	
-	/** 로그인 페이지 이동 컨트롤러 */
+	/** 마이페이지 이동 컨트롤러 */
 	@RequestMapping(value = "/mypage/mypage.do", method = RequestMethod.GET)
 	public String mypage(Model model) {
 		return "mypage/mypage";
