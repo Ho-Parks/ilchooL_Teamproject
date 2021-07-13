@@ -27,7 +27,7 @@
 					<li id="today_title">오늘 확진자수<br/>
 						<span>${confirmed_0}명</span>
 					</li>
-					<li class="col-md-3">누적 확진자<br/>
+					<li class="col-md-3 col-xs-6">누적 확진자<br/>
 						<span class="s_confirmed main_count">${confirmed_acc}</span>
 						<br/>
 						<span class="confirmed_box d_box">
@@ -41,7 +41,7 @@
 						</c:choose>
 						</span>
 					</li>
-					<li class="col-md-3">누적 격리해제<br/>
+					<li class="col-md-3 col-xs-6">누적 격리해제<br/>
 						<span class="s_released main_count">${released_acc}</span>
 						<br/>
 						<span class="released_box d_box">
@@ -55,7 +55,7 @@
 						</c:choose>
 						</span>
 					</li>				
-					<li class="col-md-3">격리중<br/>
+					<li class="col-md-3 col-xs-6">격리중<br/>
 						<span class="s_active main_count">${active_0}</span>
 						<br/>
 						<span class="active_box d_box">
@@ -72,7 +72,7 @@
 						</c:choose>
 						</span>
 					</li>
-					<li class="col-md-3">누적 사망자<br/>
+					<li class="col-md-3 col-xs-6">누적 사망자<br/>
 						<span class="s_death main_count">${death_acc}</span>
 						<br/>
 						<span class="death_box d_box">
@@ -89,15 +89,29 @@
 				</ul>
 			</div>
 		</div>
-		<div id="covid_graph" class="jumbotron">
-			<div class="covid_graph_btn_box">
-				<p class="pull-left">데이터 기준 : ${datetime } (서울시)</p>
-				<button type="button" id="dea_btn" class="btn btn-warning pull-right">사망자</button>
-				<button type="button" id="act_btn" class="btn btn-success pull-right">격리중</button>
-				<button type="button" id="rel_btn" class="btn btn-primary pull-right">격리해제</button>
-				<button type="button" id="con_btn" class="btn btn-danger pull-right">확진자</button>
+		<div id="covid_graph" class="well row">
+			<div class="covid_graph_btn_box col-md-12 col-xs-12 row">
+				<p class="pull-left col-xs-12">데이터 기준 :
+					<fmt:parseDate value="${date }" var="parseDate" pattern="yyyymmdd" />
+					<fmt:formatDate value="${parseDate }" pattern="yyyy-mm-dd" />
+					(서울시)
+				</p>
+				<div class="btn_box col-md-3 col-xs-6">
+					<button type="button" id="con_btn" class="btn btn-danger graph_btn">확진자</button>
+				</div>
+				<div class="btn_box col-md-3 col-xs-6">
+					<button type="button" id="rel_btn" class="btn btn-primary graph_btn">격리해제</button>
+				</div>
+				<div class="btn_box col-md-3 col-xs-6">
+					<button type="button" id="act_btn" class="btn btn-success graph_btn">격리중</button>
+				</div>
+				<div class="btn_box col-md-3 col-xs-6">
+					<button type="button" id="dea_btn" class="btn btn-warning graph_btn">사망자</button>
+				</div>
 			</div>
-			<canvas id="covidChart"></canvas>
+			<div class="canvas_chart_container col-md-12 col-xs-12">
+				<canvas id="covidChart"></canvas>
+			</div>
 		</div>
 	</div>
 	
@@ -144,7 +158,9 @@
 		    		position: 'top',
 		    		text: '확진자 추이',
 		    		fontSize: 20 
-		    	}
+		    	},
+		    	maintainAspectRatio: false,
+		        aspectRatio: 1
 		    }
 		});
 		
