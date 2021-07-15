@@ -377,6 +377,12 @@
 		chart.container("container");
 		chart.draw();
 		
+		// add an event listener to open a url on click
+	    chart.listen("pointClick", function(e){
+		var keyword = "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=" + e.point.get("x");
+		window.open(keyword, "_blank");
+	 	   });
+		
 	});
 
 	
