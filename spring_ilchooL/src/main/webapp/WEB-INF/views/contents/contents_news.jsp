@@ -12,7 +12,59 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/contents_news.css" />
 <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
 <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+<script type="text/javascript">
+	var rank0 = "${rank0}";
+	var rank1 = "${rank1}";
+	var rank2 = "${rank2}";
+	var rank3 = "${rank3}";
+	var rank4 = "${rank4}";
+	
+	var key = "${key}";
+	
+	var param;
 
+		anychart.onDocumentReady(function() {
+			var data = [
+			    {"x": rank0, "value": 100, category: "5"},
+			    {"x": rank1, "value": 100, category: "1"},
+			    {"x": rank2, "value": 90, category: "9"},
+			    {"x": rank3, "value": 90, category: "5"},
+			    {"x": rank4, "value": 80, category: "9"}
+			  ];
+			
+			// create a chart and set the data
+		    var chart = anychart.tagCloud(data);
+	
+		    // enable HTML for tooltips
+		    chart.tooltip().useHtml(true);
+	
+		    // configure tooltips
+		    chart.tooltip().format(function() {
+		      var percentOfTotal = (this.getData("value")*100)/this.getStat("sum");
+		      if (percentOfTotal < 7)
+		        return percentOfTotal.toFixed(1);
+		      if (percentOfTotal > 15)
+		        return "";
+		      return "";
+		    });
+			
+			chart.title('news');
+			chart.angles([0]);
+			
+			chart.container("container");
+			chart.draw();	
+			
+	
+		    chart.listen("pointClick", function(e){
+			param = e.point.get("x");
+		
+			var search = JSON.stringify(param);
+			document.getElementById('search').value = search.substring(1, search.length-1);
+			
+		 	   });
+		});
+		
+	</script>
 </head>
 <body>
 	<div id="header">
@@ -35,6 +87,10 @@
 				</div>
 				<div>
 					<h3>${keyword}</h3>
+					<form action="${pageContext.request.contextPath}/contents/contents_search.do" method="post" >
+						<input id="search" type="text" name="search" placeholder="키워드를 입력하세요" />
+						<input type="submit" class="btn" value="전송" />
+					</form>
 				</div>
 			</div>
 
@@ -353,41 +409,7 @@
 	<!-- /.modal -->
 	
 	<c:import url="../assets/footer.jsp" />
-	<script type="text/javascript">
-	var rank0 = "${rank0}";
-	var rank1 = "${rank1}";
-	var rank2 = "${rank2}";
-	var rank3 = "${rank3}";
-	var rank4 = "${rank4}";
-
-	anychart.onDocumentReady(function() {
-		var data = [
-		    {"x": rank0, "value": 100, category: "5"},
-		    {"x": rank1, "value": 100, category: "1"},
-		    {"x": rank2, "value": 90, category: "9"},
-		    {"x": rank3, "value": 90, category: "5"},
-		    {"x": rank4, "value": 80, category: "9"}
-		  ];
-		
-		var chart = anychart.tagCloud(data);
-		
-		chart.title('');
-		chart.angles([0]);
-		
-		chart.container("container");
-		chart.draw();
-		
-		// add an event listener to open a url on click
-	    chart.listen("pointClick", function(e){
-		var keyword = "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=" + e.point.get("x");
-		window.open(keyword, "_blank");
-	 	   });
-		
-	});
-
 	
-	
-	</script>
 	
 </body>
 </html>
