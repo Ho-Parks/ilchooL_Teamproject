@@ -280,72 +280,147 @@ public class NewsSearchController {
 	   model.addAttribute("rank4", rank[4]);
 	   
 
-   
-   
+
+
 	   /** 뉴스 원문 크롤링 시작 */
 	   items[] item = new items[50];
 	   int j = 0;
 	   for(int i=0; i<50; i++) {
-	 	  if(list.get(i).getLink().contains("news.naver.com")) {
-	 		item[j] = list.get(i);
-	 		j++;
-	 	  }
-	   }
+		   if(list.get(i).getLink().contains("https://news.naver.com/main/read.naver?mode=LSD&mid=sec")) {
+			   item[j] = list.get(i);
+	      		j++;
+	      } else if(list.get(i).getLink().contains("https://news.naver.com/main/read.naver?mode=LSD&mid=shm")) {
+	      		item[j] = list.get(i);
+	      		j++;
+	      	  }
+	      }
 	   
-   
-  
+
+
 	  // 뉴스 제목
 	  String connUrl1 = item[0].getLink();
 	  Document doc1 = Jsoup.connect(connUrl1).get();
-	  Elements ele1 = doc1.select("h3#articleTitle");
+	  Elements ele1 = null;
+	  Elements element1 = null;
+	  if(connUrl1.contains("https://news.naver.com/main/read.naver?mode=LSD&mid=sec&sid1=106")) {
+		  ele1 = doc1.select("h2.end_tit");
+		  element1 = doc1.select("div.end_body_wrp");
+	  } else {
+		  ele1 = doc1.select("h3#articleTitle");
+		  element1 = doc1.select("div#articleBodyContents");
+	  }
 	  String str1 = ele1.text();
 	  model.addAttribute("str1",str1);
 	
 	  String connUrl2 = item[1].getLink();
 	  Document doc2 = Jsoup.connect(connUrl2).get();
-	  Elements ele2 = doc2.select("h3#articleTitle");
+	  Elements ele2 = null;
+	  Elements element2 = null;
+	  if(connUrl2.contains("https://news.naver.com/main/read.naver?mode=LSD&mid=sec&sid1=106")) {
+		  ele2 = doc2.select("h2.end_tit");
+		  element2 = doc2.select("div.end_body_wrp");
+	  } else {
+		  ele2 = doc2.select("h3#articleTitle");
+		  element2 = doc2.select("div#articleBodyContents");
+	  }
 	  String str2 = ele2.text();
 	  model.addAttribute("str2",str2);
 	
 	  String connUrl3 = item[2].getLink();
 	  Document doc3 = Jsoup.connect(connUrl3).get();
-	  Elements ele3 = doc3.select("h3#articleTitle");
+	  Elements ele3 = null;
+	  Elements element3 = null;
+	  if(connUrl3.contains("https://news.naver.com/main/read.naver?mode=LSD&mid=sec&sid1=106")) {
+		  ele3 = doc3.select("h2.end_tit");
+		  element3 = doc3.select("div.end_body_wrp");
+	  } else {
+		  ele3 = doc3.select("h3#articleTitle");
+		  element3 = doc3.select("div#articleBodyContents");
+	  }
 	  String str3 = ele3.text();
 	  model.addAttribute("str3",str3);
 	
 	  String connUrl4 = item[3].getLink();
 	  Document doc4 = Jsoup.connect(connUrl4).get();
-	  Elements ele4 = doc4.select("h3#articleTitle");
+	  Elements ele4 = null;
+	  Elements element4 = null;
+	  if(connUrl4.contains("https://news.naver.com/main/read.naver?mode=LSD&mid=sec&sid1=106")) {
+		  ele4 = doc4.select("h2.end_tit");
+		  element4 = doc4.select("div.end_body_wrp");
+	  } else {
+		  ele4 = doc4.select("h3#articleTitle");
+		  element4 = doc4.select("div#articleBodyContents");
+	  }
 	  String str4 = ele4.text();
 	  model.addAttribute("str4",str4);
 	
 	  String connUrl5 = item[4].getLink();
 	  Document doc5 = Jsoup.connect(connUrl5).get();
-	  Elements ele5 = doc5.select("h3#articleTitle");
+	  Elements ele5 = null;
+	  Elements element5 = null;
+	  if(connUrl5.contains("https://news.naver.com/main/read.naver?mode=LSD&mid=sec&sid1=106")) {
+		  ele5 = doc5.select("h2.end_tit");
+		  element5 = doc5.select("div.end_body_wrp");
+	  } else {
+		  ele5 = doc5.select("h3#articleTitle");
+		  element5 = doc5.select("div#articleBodyContents");
+	  }
 	  String str5 = ele5.text();
 	  model.addAttribute("str5",str5);
 	
 	  String connUrl6 = item[5].getLink();
 	  Document doc6 = Jsoup.connect(connUrl6).get();
-	  Elements ele6 = doc6.select("h3#articleTitle");
+	  Elements ele6 = null;
+	  Elements element6 = null;
+	  if(connUrl6.contains("https://news.naver.com/main/read.naver?mode=LSD&mid=sec&sid1=106")) {
+		  ele6 = doc6.select("h2.end_tit");
+		  element6 = doc6.select("div.end_body_wrp");
+	  } else {
+		  ele6 = doc6.select("h3#articleTitle");
+		  element6 = doc6.select("div#articleBodyContents");
+	  }
 	  String str6 = ele6.text();
 	  model.addAttribute("str6",str6);
 	
 	  String connUrl7 = item[6].getLink();
 	  Document doc7 = Jsoup.connect(connUrl7).get();
-	  Elements ele7 = doc7.select("h3#articleTitle");
+	  Elements ele7 = null;
+	  Elements element7 = null;
+	  if(connUrl7.contains("https://news.naver.com/main/read.naver?mode=LSD&mid=sec&sid1=106")) {
+		  ele7 = doc7.select("h2.end_tit");
+		  element7 = doc7.select("div.end_body_wrp");
+	  } else {
+		  ele7 = doc7.select("h3#articleTitle");
+		  element7 = doc7.select("div#articleBodyContents");
+	  }
 	  String str7 = ele7.text();
 	  model.addAttribute("str7",str7);
 	
 	  String connUrl8 = item[7].getLink();
 	  Document doc8 = Jsoup.connect(connUrl8).get();
-	  Elements ele8 = doc8.select("h3#articleTitle");
+	  Elements ele8 = null;
+	  Elements element8 = null;
+	  if(connUrl8.contains("https://news.naver.com/main/read.naver?mode=LSD&mid=sec&sid1=106")) {
+		  ele8 = doc8.select("h2.end_tit");
+		  element8 = doc8.select("div.end_body_wrp");
+	  } else {
+		  ele8 = doc8.select("h3#articleTitle");
+		  element8 = doc8.select("div#articleBodyContents");
+	  }
 	  String str8 = ele8.text();
 	  model.addAttribute("str8",str8);
 	
 	  String connUrl9 = item[8].getLink();
 	  Document doc9 = Jsoup.connect(connUrl9).get();
-	  Elements ele9 = doc9.select("h3#articleTitle");
+	  Elements ele9 = null;
+	  Elements element9 = null;
+	  if(connUrl9.contains("https://news.naver.com/main/read.naver?mode=LSD&mid=sec&sid1=106")) {
+		  ele9 = doc9.select("h2.end_tit");
+		  element9 = doc9.select("div.end_body_wrp");
+	  } else {
+		  ele9 = doc9.select("h3#articleTitle");
+		  element9 = doc9.select("div#articleBodyContents");
+	  }
 	  String str9 = ele9.text();
 	  model.addAttribute("str9",str9);
 	  
@@ -363,40 +438,15 @@ public class NewsSearchController {
 	  
 	
 	   // 뉴스 박스 클릭시 모달창에서 뉴스 원문 내용
-	  Elements element1 = doc1.select("div#articleBodyContents");
-	  String text1 = element1.text();
+	  
 	  model.addAttribute("element1", element1);
-	
-	  Elements element2 = doc2.select("div#articleBodyContents");
-	  String text2 = element2.text();
 	  model.addAttribute("element2", element2);
-	
-	  Elements element3 = doc3.select("div#articleBodyContents");
-	  String text3 = element3.text();
 	  model.addAttribute("element3", element3);
-	
-	  Elements element4 = doc4.select("div#articleBodyContents");
-	  String text4 = element4.text();
 	  model.addAttribute("element4", element4);
-	
-	  Elements element5 = doc5.select("div#articleBodyContents");
-	  String text5 = element5.text();
 	  model.addAttribute("element5", element5);
-	
-	  Elements element6 = doc6.select("div#articleBodyContents");
-	  String text6 = element6.text();
 	  model.addAttribute("element6", element6);
-	
-	  Elements element7 = doc7.select("div#articleBodyContents");
-	  String text7 = element7.text();
 	  model.addAttribute("element7", element7);
-	
-	  Elements element8 = doc8.select("div#articleBodyContents");
-	  String text8 = element8.text();
 	  model.addAttribute("element8", element8);
-	
-	  Elements element9 = doc9.select("div#articleBodyContents");
-	  String text9 = element9.text();
 	  model.addAttribute("element9", element9);
 	  
 	  System.out.println(connUrl1);

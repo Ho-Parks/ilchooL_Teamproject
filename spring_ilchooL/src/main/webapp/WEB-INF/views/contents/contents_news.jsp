@@ -87,9 +87,11 @@
 				</div>
 				<div>
 					<h3>${keyword}</h3>
-					<form action="${pageContext.request.contextPath}/contents/contents_search.do" method="post" >
-						<input id="search" type="text" name="search" placeholder="키워드를 입력하세요" />
-						<input type="submit" class="btn" value="전송" />
+					<form action="${pageContext.request.contextPath}/contents/contents_search.do" method="post" class="form-inline">
+						<div class="form-group col-md-10" >
+							<input id="search" type="text" name="search" placeholder="키워드를 입력하세요" class="form-control" />
+						</div>
+						<input type="submit" class="btn col-md-2" value="검색" />
 					</form>
 				</div>
 			</div>

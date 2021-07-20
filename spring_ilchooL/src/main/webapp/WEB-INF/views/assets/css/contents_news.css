@@ -10,7 +10,7 @@ div#container {
 }
 
 .row {
-	padding-top: 120px;
+	padding-top: 30px;
 }
 
 .news_ex #line {
@@ -19,6 +19,9 @@ div#container {
 
 .news_ex div {
 	padding-top: 20px;
+}
+.btn {
+	margin-top: 20px;
 }
 
 .news_ex p {
@@ -198,4 +201,10 @@ div#news5 {
     text-align: center;
     color: #f0f0f0f0;
 	
+}
+span.anychart-credits-text {
+    display: none;
+}
+img.anychart-credits-logo {
+    display: none;
 }
