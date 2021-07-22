@@ -4,9 +4,9 @@ body {
 	font-family: Dotum, '돋움', Helvetica, sans-serif;
 }
 
-#find_w {
+#new_box {
 	font-size: 18px;
-	width: 190px;
+	width: 83px;
 	text-align: center;
 	color: #fff;
 	margin-top: 30px;
@@ -21,7 +21,7 @@ body {
 	margin-bottom: 670px;
 }
 
-.tab-content {
+#inner_join {
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%);
@@ -30,7 +30,7 @@ body {
 }
 
 /* 입력폼 */
-.search {
+.join {
 	margin: 19px 0 8px;
 	font-size: 14px;
 	font-weight: 700;
@@ -47,6 +47,64 @@ body {
 	position: relative;
 }
 
+.address1 {
+	display: block;
+	height: 51px;
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.box1 {
+	display: block;
+	width: 35%;
+	height: 51px;
+	border: solid 2px #87CEFA;
+	padding: 10px 14px 10px 14px;
+	box-sizing: border-box;
+	background: #fff;
+	position: relative;
+	float: left;
+	margin-bottom: 10px;
+}
+
+.box2 {
+	display: block;
+	width: 100%;
+	height: 51px;
+	border: solid 2px #87CEFA;
+	padding: 10px 14px 10px 14px;
+	box-sizing: border-box;
+	background: #fff;
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.box3 {
+	display: block;
+	width: 100%;
+	height: 51px;
+	border: solid 2px #87CEFA;
+	padding: 10px 14px 10px 14px;
+	box-sizing: border-box;
+	background: #fff;
+	position: relative;
+	float: left;
+	margin-bottom: 30px;
+}
+
+.box4 {
+	display: block;
+	width: 48%;
+	height: 51px;
+	border: solid 2px #87CEFA;
+	padding: 10px 14px 10px 14px;
+	box-sizing: border-box;
+	background: #fff;
+	position: relative;
+	float: right;
+	margin-bottom: 30px;
+}
+
 .new {
 	display: block;
 	position: relative;
@@ -57,17 +115,7 @@ body {
 	font-size: 15px;
 }
 
-/* .form-control {
-	display: block;
-	position: relative;
-	width: 100%;
-	height: 29px;
-	border: none;
-	background: #fff;
-	font-size: 15px;
-}
-
-.form-control {
+.new_1 {
 	display: block;
 	position: relative;
 	width: 100%;
@@ -77,7 +125,7 @@ body {
 	font-size: 15px;
 	text-align: center;
 }
- */
+
 .box.new_id {
 	padding-right: 110px;
 }
@@ -178,7 +226,7 @@ select {
 	border: 0;
 	cursor: pointer;
 	color: #fff;
-	background-color: #18a0fb;
+	background-color: #428bca;
 	font-size: 20px;
 	font-weight: 400;
 	font-family: Dotum, '돋움', Helvetica, sans-serif;
@@ -198,4 +246,3 @@ select {
 	float: right;
 	margin-bottom: 20px;
 }
-

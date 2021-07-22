@@ -7,14 +7,14 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/css/login_new.css">
+	href="${pageContext.request.contextPath}/assets/css/id_pw_search.css">
 <c:import url="../assets/head.jsp" />
 <style type="text/css">
 
 	* { margin: 0; padding: 0; }
 	html, body { height: 100%; }
 
-	.main { padding: 20px 0; min-height: 100%; margin: 0 auto -200px; width: 460px !important; }
+	.main { padding: 20px 0; min-height: 100%; margin: 0 auto -200px; }
 	
 	/* 메뉴바 색상 변경 */
 	.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover { background-color: #428bca !important; }
@@ -32,9 +32,10 @@
 </head>
 <body>
 	<!-- header 파일 -->
-	<div class="header">
+	<div class="wrapper">
 		<c:import url="../assets/header.jsp" />
-	</div>
+		<div class="row">
+		<div class="container">
 	
 	<!-- Modal -->
 	<div id="Modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -55,7 +56,7 @@
 		</div>
 	</div>
 
-	<div class="container main">
+	<div class="id_pw">
 		<hr/>
 		<!-- 메뉴바 영역 (tab) -->
 		<nav class="navbar" role="navigation">
@@ -77,7 +78,7 @@
 								<hr/>
 							</div>
 							<div>
-								<div class="join">
+								<div class="search">
 									<label for="name">이름</label>
 								</div>
 								<span class="box new_id">
@@ -86,7 +87,7 @@
 								<span class="error_next_box"></span>
 							</div>
 							<div>
-								<div class="join">
+								<div class="search">
 									<label for="yy">생년월일</label>
 								</div>
 								<div id="bir_wrap">
@@ -148,7 +149,7 @@
 								<hr/>
 							</div>
 							<div>
-								<div class="join">
+								<div class="search">
 									<label for="name">이름</label>
 								</div>
 								<span class="box new_id">
@@ -157,7 +158,7 @@
 								<span class="error_next_box"></span>
 							</div>
 							<div>
-								<div class="join">
+								<div class="search">
 									<label for="name">아이디</label>
 								</div>
 								<span class="box new_id">
@@ -175,7 +176,7 @@
 								<hr/>
 							</div>
 							<div>
-								<div class="join">
+								<div class="search">
 									<label for="pswd">비밀번호</label>
 								</div>
 								<span class="box new_pass">
@@ -188,7 +189,7 @@
 	
 							<!-- PW2 -->
 							<div>
-								<div class="join">
+								<div class="search">
 									<label for="pswd_re">비밀번호 재확인</label>
 								</div>
 								<span class="box new_pass_check">
@@ -207,9 +208,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="push"></div>
+		<!-- <div class="push"></div> -->
 	</div>
-	
+	</div>
+	</div>
+	</div>
 	<div class="footer">
 		<c:import url="../assets/footer.jsp" />
 	</div>
