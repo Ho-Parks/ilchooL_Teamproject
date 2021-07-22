@@ -23,4 +23,35 @@
 		)
 	</insert>
 	
+	<update id="updateFinancePopular1"
+		parameterType="project.spring.ilchooL.model.FinancePopular">
+		UPDATE finance_popular SET 
+		p_name=#{p_name0}, p_amount=#{p_amount0}, p_updown=#{p_updown0}, p_prev=#{p_prev0}, p_date=now()
+		WHERE popular_id=1
+	</update>
+	<update id="updateFinancePopular2"
+		parameterType="project.spring.ilchooL.model.FinancePopular">
+		UPDATE finance_popular SET 
+		p_name=#{p_name0}, p_amount=#{p_amount0}, p_updown=#{p_updown0}, p_prev=#{p_prev0}, p_date=now()
+		WHERE popular_id=2
+	</update>
+	<update id="updateFinancePopular3"
+		parameterType="project.spring.ilchooL.model.FinancePopular">
+		UPDATE finance_popular SET 
+		p_name=#{p_name0}, p_amount=#{p_amount0}, p_updown=#{p_updown0}, p_prev=#{p_prev0}, p_date=now()
+		WHERE popular_id=3
+	</update>
+	<update id="updateFinancePopular4"
+		parameterType="project.spring.ilchooL.model.FinancePopular">
+		UPDATE finance_popular SET 
+		p_name=#{p_name0}, p_amount=#{p_amount0}, p_updown=#{p_updown0}, p_prev=#{p_prev0}, p_date=now()
+		WHERE popular_id=4
+	</update>
+	<update id="updateFinancePopular5"
+		parameterType="project.spring.ilchooL.model.FinancePopular">
+		UPDATE finance_popular SET 
+		p_name=#{p_name0}, p_amount=#{p_amount0}, p_updown=#{p_updown0}, p_prev=#{p_prev0}, p_date=now()
+		WHERE popular_id=5
+	</update>
+	
 </mapper>

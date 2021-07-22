@@ -23,5 +23,37 @@
 		)
 	</insert>
 	
+	<update id="updateFinance1"
+		parameterType="project.spring.ilchooL.model.Finance">
+		UPDATE finance SET 
+		f_name=#{f_name0}, f_amount=#{f_amount0}, f_updown=#{f_updown0}, f_prev=#{f_prev0}, f_date=now()
+		WHERE finance_id=1
+	</update>
+	<update id="updateFinance2"
+		parameterType="project.spring.ilchooL.model.Finance">
+		UPDATE finance SET 
+		f_name=#{f_name0}, f_amount=#{f_amount0}, f_updown=#{f_updown0}, f_prev=#{f_prev0}, f_date=now()
+		WHERE finance_id=2
+	</update>
+	<update id="updateFinance3"
+		parameterType="project.spring.ilchooL.model.Finance">
+		UPDATE finance SET 
+		f_name=#{f_name0}, f_amount=#{f_amount0}, f_updown=#{f_updown0}, f_prev=#{f_prev0}, f_date=now()
+		WHERE finance_id=3
+	</update>
+	<update id="updateFinance4"
+		parameterType="project.spring.ilchooL.model.Finance">
+		UPDATE finance SET 
+		f_name=#{f_name0}, f_amount=#{f_amount0}, f_updown=#{f_updown0}, f_prev=#{f_prev0}, f_date=now()
+		WHERE finance_id=4
+	</update>
+	<update id="updateFinance5"
+		parameterType="project.spring.ilchooL.model.Finance">
+		UPDATE finance SET 
+		f_name=#{f_name0}, f_amount=#{f_amount0}, f_updown=#{f_updown0}, f_prev=#{f_prev0}, f_date=now()
+		WHERE finance_id=5
+	</update>
+	
+	
 	
 </mapper>
