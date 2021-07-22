@@ -24,4 +24,35 @@
 		)
 	</insert>
 	
+	
+	<update id="updateFinanceTop1"
+		parameterType="project.spring.ilchooL.model.FinanceTop">
+		UPDATE finance_top SET 
+		t_name=#{t_name0}, t_amount=#{t_amount0}, t_updown=#{t_updown0}, t_prev=#{t_prev0},t_rate=#{t_rate0}, t_date=now()
+		WHERE top_id=1
+	</update>
+	<update id="updateFinanceTop2"
+		parameterType="project.spring.ilchooL.model.FinanceTop">
+		UPDATE finance_top SET 
+		t_name=#{t_name0}, t_amount=#{t_amount0}, t_updown=#{t_updown0}, t_prev=#{t_prev0},t_rate=#{t_rate0}, t_date=now()
+		WHERE top_id=2
+	</update>
+	<update id="updateFinanceTop3"
+		parameterType="project.spring.ilchooL.model.FinanceTop">
+		UPDATE finance_top SET 
+		t_name=#{t_name0}, t_amount=#{t_amount0}, t_updown=#{t_updown0}, t_prev=#{t_prev0},t_rate=#{t_rate0}, t_date=now()
+		WHERE top_id=3
+	</update>
+	<update id="updateFinanceTop4"
+		parameterType="project.spring.ilchooL.model.FinanceTop">
+		UPDATE finance_top SET 
+		t_name=#{t_name0}, t_amount=#{t_amount0}, t_updown=#{t_updown0}, t_prev=#{t_prev0},t_rate=#{t_rate0}, t_date=now()
+		WHERE top_id=4
+	</update>
+	<update id="updateFinanceTop5"
+		parameterType="project.spring.ilchooL.model.FinanceTop">
+		UPDATE finance_top SET 
+		t_name=#{t_name0}, t_amount=#{t_amount0}, t_updown=#{t_updown0}, t_prev=#{t_prev0},t_rate=#{t_rate0}, t_date=now()
+		WHERE top_id=5
+	</update>
 </mapper>

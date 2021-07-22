@@ -41,9 +41,9 @@
 		<!-- 매일 11시에 실행되는 스케줄러 -->
 		<task:scheduled ref="scheduleJob" method="collecCovid" cron="0 0 11 * * ?" />
 		<!-- 1시간마다 실행되는 스케줄러 -->
-		<task:scheduled ref="financeschedule" method="everyHours" cron="0 0 * * *  ? " /> 
+		<!-- <task:scheduled ref="financeschedule" method="everyHours" cron="0 0 * * *  ? " />  -->
 		<!-- 30초에 한번씩 실행되는 스케줄러 -->
-		<!-- <task:scheduled ref="financeschedule" method="everyHours" cron="0/30 * * * * ?" /> -->
+		<task:scheduled ref="financeschedule" method="everyHours" cron="0/30 * * * * ?" />
 	</task:scheduled-tasks>
 	
 </beans:beans>
