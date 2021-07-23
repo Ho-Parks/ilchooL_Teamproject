@@ -460,7 +460,7 @@ public class NewsSearchController {
 	  System.out.println(connUrl9);
 	  
 
-   return "contents/contents_news";
+   return "contents/contents_news_search";
 
    }
 
