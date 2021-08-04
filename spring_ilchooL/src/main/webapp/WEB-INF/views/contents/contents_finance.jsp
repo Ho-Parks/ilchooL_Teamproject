@@ -19,13 +19,13 @@
 			<div class="col-md-6 col-sm-12">
 				<p id="title">코스피</p>
 				<div class="finance md6">
-					<img src="../assets/img/contents_finance_graph_left.png" />
+					<img src="../assets/img/kospi.png" />
 				</div>
 			</div>
 			<div class="col-md-6 col-sm-12">
 				<p id="title">코스닥</p>
 				<div class="finance md6">
-					<img src="../assets/img/contents_finance_graph_right.png" />
+					<img src="../assets/img/kosdaq.png" />
 				</div>
 			</div>
 
