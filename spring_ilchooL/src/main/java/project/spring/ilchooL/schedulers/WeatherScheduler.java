@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import project.spring.ilchooL.helper.RetrofitHelper;
 import project.spring.ilchooL.model.forecastWeather;
 import project.spring.ilchooL.model.forecastWeather.Response.Body.Items.Item;
-import project.spring.ilchooL.service.CovidService;
 import project.spring.ilchooL.service.WeatherService;
 import project.spring.ilchooL.service.forecastWeatherService;
 import retrofit2.Call;
@@ -26,7 +25,6 @@ import retrofit2.Retrofit;
 @Controller
 public class WeatherScheduler {
 	@Autowired RetrofitHelper retrofitHelper;
-	@Autowired CovidService covidService;
 	@Autowired WeatherService weatherService;
 	
 	public void collectWeather() {
@@ -66,18 +64,22 @@ public class WeatherScheduler {
 			return;
 		}
 		
-		// 'SKY'와 'TMP'데이터만 담을 list_skytmp 생성
-		List<Item> list_skytmp = new ArrayList<Item>();
+		// 'SKY,TMP,TMN,TMX'데이터를 담을 list_category 생성
+		List<Item> list_category = new ArrayList<Item>();
         
-        for (int i = 0; i < list_weather.size(); i++) {
-           if(list_weather.get(i).getCategory().equals("SKY") || list_weather.get(i).getCategory().equals("TMP")) {
-             list_skytmp.add(list_weather.get(i));
-           }	
-        }	// end for
+		for (int i = 0; i < list_weather.size(); i++) {
+	           if(list_weather.get(i).getCategory().equals("SKY") || list_weather.get(i).getCategory().equals("TMP")) {
+	        	   list_category.add(list_weather.get(i));
+	           }else if (list_weather.get(i).getCategory().equals("TMN") || list_weather.get(i).getCategory().equals("TMX")) {
+	        	   list_category.add(list_weather.get(i));
+	           }else if (list_weather.get(i).getCategory().equals("PTY")) {
+	        	   list_category.add(list_weather.get(i));
+	           }
+	        }	// end for
         
         /** 4) 수집 결과를 weatherService에 보내기 (DB에 저장) -> w_item */
         try {
-         	 weatherService.collectWeather(list_skytmp);
+         	 weatherService.collectWeather(list_category);
           } catch (Exception e) {
         	  log.error(e.getLocalizedMessage());
         	  e.printStackTrace();

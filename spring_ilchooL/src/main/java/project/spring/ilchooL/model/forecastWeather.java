@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 /**
- * @description: API데이터를 DB에 넣기위한 Beans 
+ * 날씨 API데이터를 DB에 넣기위한 Beans 
  * @author: 박수인
  */
 

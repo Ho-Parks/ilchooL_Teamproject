@@ -20,7 +20,6 @@ import project.spring.ilchooL.service.CovidService;
 import project.spring.ilchooL.service.DustService;
 import project.spring.ilchooL.service.WeatherService;
 
-
 /**
  * 메인 페이지 컨트롤러
  */
@@ -28,16 +27,22 @@ import project.spring.ilchooL.service.WeatherService;
 @Slf4j
 @Controller
 public class MainController {
-	@Autowired WebHelper webHelper;
-	@Autowired RetrofitHelper retrofitHelper;
-	@Autowired CovidService covidService;
-	@Autowired WeatherService weatherService;
-	@Autowired DustService dustService;
+	@Autowired
+	WebHelper webHelper;
+	@Autowired
+	RetrofitHelper retrofitHelper;
+	@Autowired
+	CovidService covidService;
+	@Autowired
+	WeatherService weatherService;
+	@Autowired
+	DustService dustService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		/**
 		 * 미세먼지 데이터 조회
+		 * 
 		 * @author 박수인
 		 */
 
@@ -84,6 +89,7 @@ public class MainController {
 
 		/**
 		 * 날씨 데이터 조회
+		 * 
 		 * @author 박수인
 		 */
 
@@ -108,6 +114,8 @@ public class MainController {
 		int tmp = 0;
 		int tmn = 0;
 		int tmx = 0;
+		int pty = 0;
+
 
 		String fcst_time = String.format("%02d00", date.get(Calendar.HOUR_OF_DAY));
 		String fcst_date = String.format("%04d-%02d-%02d", date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1,
@@ -127,32 +135,43 @@ public class MainController {
 				}
 			}
 
+			// 'PTY':강수확률
+			if (ca.equals("PTY") && da.equals(fcst_date)) {
+				if (ti.equals(fcst_time)) {
+					pty = Integer.parseInt(w_item_list.get(i).getFcst_value());
+				}
+			}
+			
 			// 'TMP':1시간기온
 			if (ca.equals("TMP") && da.equals(fcst_date)) {
 				if (ti.equals(fcst_time)) {
 					tmp = Integer.parseInt(w_item_list.get(i).getFcst_value());
 				}
 			}
+			
 			// 'TMN':최저기온(6시)
 			if (ca.equals("TMN") && da.equals(fcst_date)) {
-					tmn = Integer.parseInt(w_item_list.get(i).getFcst_value());
+				tmn = Integer.parseInt(w_item_list.get(i).getFcst_value());
 			}
+			
 			// 'TMX':최고기온(15시)
 			if (ca.equals("TMX") && da.equals(fcst_date)) {
-					tmx = Integer.parseInt(w_item_list.get(i).getFcst_value());
+				tmx = Integer.parseInt(w_item_list.get(i).getFcst_value());
 			}
 		}
 
 		model.addAttribute("sky", sky);
+		model.addAttribute("pty", pty);
 		model.addAttribute("tmp", tmp);
 		model.addAttribute("tmn", tmn);
 		model.addAttribute("tmx", tmx);
-		
+
 		/**
 		 * 코로나 데이터 조회
+		 * 
 		 * @author 박준영
 		 */
-		
+
 		// pojo 클래스 선언
 		List<CovidItem> covid_output = null;
 		Covid19Item cI = new Covid19Item();
@@ -160,39 +179,39 @@ public class MainController {
 		try {
 			// 데이터 받는 부분
 			covid_output = covidService.getCovidList();
-			
+
 			for (CovidItem item : covid_output) {
 				System.out.println(item.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		int con_item = 0;
 		String date_item = null;
 		int death_item = 0;
 		int released_item = 0;
 		int active_item = 0;
-		
-		
-		for(int i = 0; i < covid_output.size(); i++) {
+
+		for (int i = 0; i < covid_output.size(); i++) {
 			con_item = covid_output.get(i).getConfirmed();
 			date_item = covid_output.get(i).getDate().substring(4);
-			date_item = Integer.parseInt(date_item.substring(0, 2)) + "월 " + Integer.parseInt(date_item.substring(2)) + "일";
+			date_item = Integer.parseInt(date_item.substring(0, 2)) + "월 " + Integer.parseInt(date_item.substring(2))
+					+ "일";
 			death_item = covid_output.get(i).getDeath();
 			released_item = covid_output.get(i).getReleased();
 			active_item = covid_output.get(i).getActive();
-			
+
 			model.addAttribute("date_" + i, date_item);
 			model.addAttribute("confirmed_" + i, con_item);
 			model.addAttribute("death_" + i, death_item);
 			model.addAttribute("released_" + i, released_item);
 			model.addAttribute("active_" + i, active_item);
 		}
-		
+
 		String datetime = null;
 		datetime = cI.getDatetime();
-		
+
 		model.addAttribute("datetime", datetime);
 		model.addAttribute("confirmed_acc", covid_output.get(0).getConfirmed_acc());
 		model.addAttribute("date", covid_output.get(0).getDate());
@@ -208,7 +227,5 @@ public class MainController {
 	public String transport(Model model) {
 		return "contents/contents_transport";
 	}
-
-	
 
 }

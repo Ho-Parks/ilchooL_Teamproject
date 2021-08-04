@@ -7,39 +7,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/css/forecast.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/forecast.css" />
 </head>
 <body>
-
-	<!-- 헤더 영역 끝 -->
 	<div class="carousel">
-		<!-- 캐러셀 영역 구성 -->
-		<div id="carousel-example-generic" class="carousel slide"
-			data-ride="carousel" data-interval="3000">
-
+		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3000">
 			<div class="carousel-inner" id="carouselImg">
 
 				<!-- 캐러셀 항목 (1): 날씨 -->
-
 				<div class="item active">
 
 					<!-- 캐러셀 배경 : 날씨 -->
-					<!-- '0~5': 맑음, '6~8':흐림, '9~10': 구름많음 -->
+					<!-- 'PTY'하늘상태 - '0': 없음, '1': 비, '2': 비/눈, '3': 눈, '4': 소나기 -->
+					<!-- 'SKY'하늘상태 - '1': 맑음, '3': 구름많음, '4': 흐림 -->
+					<c:if test="${pty == 0}">
+						<c:choose>
+							<c:when test="${sky == 1}">
+								<img src="${pageContext.request.contextPath}/assets/img/c01.gif" />
+							</c:when>
 
-					<c:choose>
-						<c:when test="${sky <= 5}">
-							<img src="${pageContext.request.contextPath}/assets/img/c01.gif" />
-						</c:when>
+							<c:when test="${sky == 3}">
+								<img src="${pageContext.request.contextPath}/assets/img/c01.gif" />
+							</c:when>
 
-						<c:when test="${sky >=9}">
-							<img src="${pageContext.request.contextPath}/assets/img/c05.gif" />
-						</c:when>
-
-						<c:otherwise>
-							<img src="${pageContext.request.contextPath}/assets/img/c02.gif" />
-						</c:otherwise>
-					</c:choose>
+							<c:when test="${sky == 4}">
+								<img src="${pageContext.request.contextPath}/assets/img/c01.gif" />
+							</c:when>
+						</c:choose>
+					</c:if>
+					<c:if test="${pty == 1}">
+						<img src="${pageContext.request.contextPath}/assets/img/c02.gif" />
+					</c:if>
+					<c:if test="${pty == 2}">
+						<img src="${pageContext.request.contextPath}/assets/img/c02.gif" />
+					</c:if>
+					<c:if test="${pty == 3}">
+						<img src="${pageContext.request.contextPath}/assets/img/c02.gif" />
+					</c:if>
+					<c:if test="${pty == 4}">
+						<img src="${pageContext.request.contextPath}/assets/img/c02.gif" />
+					</c:if>
 
 					<!-- 캐러셀 내용 : 날씨 -->
 					<div class="carousel-caption">
@@ -54,24 +61,41 @@
 							<div class="row row_forecast">
 								<div class="col-sm-4 col-md-4 text-center" id="weatherImg">
 
-									<!-- 날씨아이콘 '0~5': 맑음, '6~8':흐림, '9~10': 구름많음 -->
+									<c:if test="${pty == 0}">
+										<c:choose>
+											<c:when test="${sky == 1}">
+												<img
+													src="${pageContext.request.contextPath}/assets/img/icon_weather_Sunny.png" />
+											</c:when>
 
-									<c:choose>
-										<c:when test="${sky <= 5}">
-											<img
-												src="${pageContext.request.contextPath}/assets/img/icon_weather_Sunny.png" />
-										</c:when>
+											<c:when test="${sky == 3}">
+												<img
+													src="${pageContext.request.contextPath}/assets/img/icon_weather_Overcast.png" />
+											</c:when>
 
-										<c:when test="${sky >=9}">
-											<img
-												src="${pageContext.request.contextPath}/assets/img/icon_weather_Night_Rain.png" />
-										</c:when>
+											<c:when test="${sky == 4}">
+												<img
+													src="${pageContext.request.contextPath}/assets/img/icon_weather_Overcast.png" />
+											</c:when>
+										</c:choose>
+									</c:if>
+									<c:if test="${pty == 1}">
+										<img
+											src="${pageContext.request.contextPath}/assets/img/icon_weather_Hail_Heavy.png" />
+									</c:if>
+									<c:if test="${pty == 2}">
+										<img
+											src="${pageContext.request.contextPath}/assets/img/icon_weather_Sleet.png" />
+									</c:if>
+									<c:if test="${pty == 3}">
+										<img
+											src="${pageContext.request.contextPath}/assets/img/icon_weather_Snow.png" />
+									</c:if>
+									<c:if test="${pty == 4}">
+										<img
+											src="${pageContext.request.contextPath}/assets/img/icon_weather_Night_Rain.png" />
+									</c:if>
 
-										<c:otherwise>
-											<img
-												src="${pageContext.request.contextPath}/assets/img/icon_weather_Night_Rain.png" />
-										</c:otherwise>
-									</c:choose>
 								</div>
 								<div class="col-sm-5 col-md-4 text-center" id="weatherBox">
 									<p>${tmp}<span>&deg;&#67;</span>
@@ -161,18 +185,17 @@
 						</div>
 					</div>
 				</div>
-
 				<!-- 캐러셀 항목 (2): 미세먼지 -->
 				<div class="item">
+				
 					<!-- 캐러셀 배경 : 미세먼지 -->
-
 					<c:choose>
 						<c:when test="${pm10 <= 30}">
 							<img src="${pageContext.request.contextPath}/assets/img/c03.gif" />
 						</c:when>
 
 						<c:when test="${pm10 > 30 && pm10 <= 80}">
-							<img src="${pageContext.request.contextPath}/assets/img/c03.gif" />
+							<img src="${pageContext.request.contextPath}/assets/img/c01.gif" />
 						</c:when>
 
 						<c:when test="${pm10 > 80 && pm10 <= 150}">
@@ -227,11 +250,9 @@
 
 								<!-- 미세먼지 값 시작 -->
 								<div class="col-sm-12 col-md-4 text-center" id="dustBox">
-
 									<p>
-
 										<c:choose>
-											<c:when test="${pm10 <= 30 && pm25<=15}">
+											<c:when test="${pm10 <= 30}">
 												<span>좋음</span>
 											</c:when>
 
@@ -256,7 +277,6 @@
 								<div class="col-sm-12 col-md-4 text-center" id="dustValue">
 									<p>
 										미세먼지
-
 										<c:choose>
 											<c:when test="${pm10 <= 30}">
 												<span class="dust" style="color: #00AAEE;">${pm10}</span>
@@ -274,12 +294,10 @@
 												<span class="dust" style="color: #F70D1A;">${pm10}</span>
 											</c:otherwise>
 										</c:choose>
-
 										㎍/㎥
 									</p>
 									<p>
 										초미세먼지
-
 										<c:choose>
 											<c:when test="${pm25 <= 15}">
 												<span class="dust" style="color: #00AAEE;">${pm25}</span>
@@ -297,7 +315,6 @@
 												<span class="dust" style="color: #F70D1A;">${pm25}</span>
 											</c:otherwise>
 										</c:choose>
-
 										㎍/㎥
 									</p>
 								</div>
@@ -313,10 +330,6 @@
 				data-slide="next"> <span class="icon-next"></span>
 			</a>
 		</div>
-	</div>
-
-	<!-- // 캐러셀 영역 끝 -->
-
-
+	</div>	<!-- // 캐러셀 영역 끝 -->
 </body>
 </html>
