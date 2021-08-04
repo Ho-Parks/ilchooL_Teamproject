@@ -28,11 +28,11 @@
 					<!-- '0~5': 맑음, '6~8':흐림, '9~10': 구름많음 -->
 
 					<c:choose>
-						<c:when test="${sky} <= 5">
+						<c:when test="${sky <= 5}">
 							<img src="${pageContext.request.contextPath}/assets/img/c01.gif" />
 						</c:when>
 
-						<c:when test="${sky} >=9">
+						<c:when test="${sky >=9}">
 							<img src="${pageContext.request.contextPath}/assets/img/c05.gif" />
 						</c:when>
 
@@ -57,16 +57,19 @@
 									<!-- 날씨아이콘 '0~5': 맑음, '6~8':흐림, '9~10': 구름많음 -->
 
 									<c:choose>
-										<c:when test="${sky} <= 5">
-											<img src="${pageContext.request.contextPath}/assets/img/icon_weather_Sunny.png" />
+										<c:when test="${sky <= 5}">
+											<img
+												src="${pageContext.request.contextPath}/assets/img/icon_weather_Sunny.png" />
 										</c:when>
 
-										<c:when test="${sky} >=9">
-											<img src="${pageContext.request.contextPath}/assets/img/icon_weather_Night_Rain.png" />
+										<c:when test="${sky >=9}">
+											<img
+												src="${pageContext.request.contextPath}/assets/img/icon_weather_Night_Rain.png" />
 										</c:when>
 
 										<c:otherwise>
-											<img src="${pageContext.request.contextPath}/assets/img/icon_weather_Night_Rain.png" />
+											<img
+												src="${pageContext.request.contextPath}/assets/img/icon_weather_Night_Rain.png" />
 										</c:otherwise>
 									</c:choose>
 								</div>
@@ -79,76 +82,229 @@
 									<p>
 										<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"
 											style="color: #F70D1A; margin: 5px 0 0 0; vertical-align: top;"></span>
-										${tmp}&deg;&#67;
+										${tmx}&deg;&#67;
 									</p>
 									<p>
 										<span class="glyphicon glyphicon-arrow-down"
 											aria-hidden="true"
 											style="color: #00AAEE; margin: 0 0 5px 5px; vertical-align: bottom;"></span>
-										${tmp}&deg;&#67;
+										${tmn}&deg;&#67;
 									</p>
 								</div>
 
 							</div>
 							<div class="col-sm-12" id="weather_comment">
-								
-									<c:choose>
-										<c:when test="${tmp} <= -15">
-											<p>반도가 위험해</p>
-										</c:when>
-										
-										<c:when test="${tmp}> -15 && ${tmp} <= -10">
-											<p>이불밖은 위험해</p>
-										</c:when>
-										
-										<c:when test="${tmp}> -10 && ${tmp} <= -5">
-											<p>대장급 패딩 + 히트택</p>
-										</c:when>
-										
-										<c:when test="${tmp}> -5 && ${tmp} <= 0">
-											<p>사람이 나갈 수 없는 날씨<br />(대장급 패딩 출격허가)</p>
-										</c:when>
-										
-										<c:when test="${tmp}> 0 && ${tmp} <= 10">
-											<p>초겨울에서 겨울날씨<br />(패딩, 겨울코트 출격허가)</p>
-										</c:when>
-										
-										<c:when test="${tmp}> 10 && ${tmp} <= 15">
-											<p>완연한 봄&amp;가을 날씨<br />(트렌치코트, 가죽자켓, 울자켓 출격허가)</p>
-										</c:when>
-										
-										<c:when test="${tmp}> 15 && ${tmp} <= 20">
-											<p>애매한 봄&amp;가을 날씨<br />(긴팔티, 맨투맨, 니트 출격허가)</p>
-										</c:when>
-										
-										<c:when test="${tmp}> 20 && ${tmp} <=25">
-											<p>살짝 더운 초여름 날씨<br />(긴팔티, 반팔티 혼용기간)</p>
-										</c:when>
-										
-										<c:when test="${tmp}> 25 && ${tmp} <= 30">
-											<p>여름 날씨<br />(반팔, 반바지 출격허가)</p>
-										</c:when>
-										
-										<c:when test="${tmp}> 30 && ${tmp} <= 35">
-											<p>사람이 나갈 수 있는 날씨</p>
-										</c:when>
-										
-										<c:when test="${tmp}> 35 && ${tmp} <= 40">
-											<p>이게 바로 헬반도</p>
-										</c:when>
 
-										<c:otherwise>
-											<p>이민</p>
-										</c:otherwise>
-									</c:choose>
-									
+								<c:choose>
+									<c:when test="${tmp <= -15}">
+										<p>반도가 위험해</p>
+									</c:when>
+
+									<c:when test="${tmp > -15 && tmp <= -10}">
+										<p>이불밖은 위험해</p>
+									</c:when>
+
+									<c:when test="${tmp > -10 && tmp <= -5}">
+										<p>대장급 패딩 + 히트택</p>
+									</c:when>
+
+									<c:when test="${tmp > -5 && tmp <= 0}">
+										<p>
+											사람이 나갈 수 없는 날씨<br />(대장급 패딩 출격허가)
+										</p>
+									</c:when>
+
+									<c:when test="${tmp > 0 && tmp <= 10}">
+										<p>
+											초겨울에서 겨울날씨<br />(패딩, 겨울코트 출격허가)
+										</p>
+									</c:when>
+
+									<c:when test="${tmp > 10 && tmp <= 15}">
+										<p>
+											완연한 봄&amp;가을 날씨<br />(트렌치코트, 가죽자켓, 울자켓 출격허가)
+										</p>
+									</c:when>
+
+									<c:when test="${tmp > 15 && tmp <= 20}">
+										<p>
+											애매한 봄&amp;가을 날씨<br />(긴팔티, 맨투맨, 니트 출격허가)
+										</p>
+									</c:when>
+
+									<c:when test="${tmp > 20 && tmp <=25}">
+										<p>
+											살짝 더운 초여름 날씨<br />(긴팔티, 반팔티 혼용기간)
+										</p>
+									</c:when>
+
+									<c:when test="${tmp > 25 && tmp <= 30}">
+										<p>
+											여름 날씨<br />(반팔, 반바지 출격허가)
+										</p>
+									</c:when>
+
+									<c:when test="${tmp > 30 && tmp <= 35}">
+										<p>사람이 나갈 수 있는 날씨</p>
+									</c:when>
+
+									<c:when test="${tmp > 35 && tmp <= 40}">
+										<p>이게 바로 헬반도</p>
+									</c:when>
+
+									<c:otherwise>
+										<p>이민</p>
+									</c:otherwise>
+								</c:choose>
+
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<!-- 캐러셀 항목 (2): 미세먼지 -->
-	
+				<div class="item">
+					<!-- 캐러셀 배경 : 미세먼지 -->
+
+					<c:choose>
+						<c:when test="${pm10 <= 30}">
+							<img src="${pageContext.request.contextPath}/assets/img/c03.gif" />
+						</c:when>
+
+						<c:when test="${pm10 > 30 && pm10 <= 80}">
+							<img src="${pageContext.request.contextPath}/assets/img/c03.gif" />
+						</c:when>
+
+						<c:when test="${pm10 > 80 && pm10 <= 150}">
+							<img src="${pageContext.request.contextPath}/assets/img/c04.gif" />
+						</c:when>
+
+						<c:otherwise>
+							<img src="${pageContext.request.contextPath}/assets/img/c05.gif" />
+						</c:otherwise>
+					</c:choose>
+
+					<!-- 캐러셀 내용 : 미세먼지 -->
+					<div class="carousel-caption">
+
+						<div class="container" id="dust_region">
+							<div class="row forecast_region">
+								<div class="col-md-12 text-center">
+									<p>서울시 강남구
+									<p>
+								</div>
+							</div>
+							<div></div>
+
+							<div class="row row_forecast" id="dustImg">
+
+								<!-- 미세먼지 아이콘 얼굴 시작 -->
+								<!-- 'pm10': ~30:좋음, ~80:보통, ~150:나쁨, ~:매우나쁨 -->
+								<div class="col-sm-12 col-md-4 text-center">
+									<c:choose>
+										<c:when test="${pm10 <= 30}">
+											<img
+												src="${pageContext.request.contextPath}/assets/img/icon_face_love.png" />
+										</c:when>
+
+										<c:when test="${pm10 > 30 && pm10 <= 80}">
+											<img
+												src="${pageContext.request.contextPath}/assets/img/icon_face_smile.png" />
+										</c:when>
+
+										<c:when test="${pm10 > 80 && pm10 <= 150}">
+											<img
+												src="${pageContext.request.contextPath}/assets/img/icon_face_sad.png" />
+										</c:when>
+
+										<c:otherwise>
+											<img
+												src="${pageContext.request.contextPath}/assets/img/icon_face_bad.png" />
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<!-- 미세먼지 아이콘 얼굴 종료 -->
+
+								<!-- 미세먼지 값 시작 -->
+								<div class="col-sm-12 col-md-4 text-center" id="dustBox">
+
+									<p>
+
+										<c:choose>
+											<c:when test="${pm10 <= 30 && pm25<=15}">
+												<span>좋음</span>
+											</c:when>
+
+											<c:when test="${pm10 > 30 && pm10 <= 80}">
+												<span>보통</span>
+											</c:when>
+
+											<c:when test="${pm10 > 80 && pm10 <= 150}">
+												<span>나쁨</span>
+											</c:when>
+
+											<c:otherwise>
+												<span>위험</span>
+											</c:otherwise>
+										</c:choose>
+									<p>
+								</div>
+								<!-- 미세먼지 값 종료 -->
+
+								<!-- 미세먼지/초미세먼지 수치 시작 -->
+								<!-- 'pm25': ~15:좋음, ~35:보통, ~75:나쁨, ~:매우나쁨 -->
+								<div class="col-sm-12 col-md-4 text-center" id="dustValue">
+									<p>
+										미세먼지
+
+										<c:choose>
+											<c:when test="${pm10 <= 30}">
+												<span class="dust" style="color: #00AAEE;">${pm10}</span>
+											</c:when>
+
+											<c:when test="${pm10 > 30 && pm10 <= 80}">
+												<span class="dust" style="color: #A6D608;">${pm10}</span>
+											</c:when>
+
+											<c:when test="${pm10 > 80 && pm10 <= 150}">
+												<span class="dust" style="color: #FF5F00;">${pm10}</span>
+											</c:when>
+
+											<c:otherwise>
+												<span class="dust" style="color: #F70D1A;">${pm10}</span>
+											</c:otherwise>
+										</c:choose>
+
+										㎍/㎥
+									</p>
+									<p>
+										초미세먼지
+
+										<c:choose>
+											<c:when test="${pm25 <= 15}">
+												<span class="dust" style="color: #00AAEE;">${pm25}</span>
+											</c:when>
+
+											<c:when test="${pm25 > 15 && pm25 <= 35}">
+												<span class="dust" style="color: #A6D608;">${pm25}</span>
+											</c:when>
+
+											<c:when test="${pm25 > 35 && pm25 <= 75}">
+												<span class="dust" style="color: #FF5F00;">${pm25}</span>
+											</c:when>
+
+											<c:otherwise>
+												<span class="dust" style="color: #F70D1A;">${pm25}</span>
+											</c:otherwise>
+										</c:choose>
+
+										㎍/㎥
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<!-- 좌우 이동 버튼 -->
 			<a class="left carousel-control" href="#carousel-example-generic"
