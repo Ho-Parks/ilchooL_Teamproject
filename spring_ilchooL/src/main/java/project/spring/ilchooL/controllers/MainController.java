@@ -14,8 +14,10 @@ import project.spring.ilchooL.helper.RetrofitHelper;
 import project.spring.ilchooL.helper.WebHelper;
 import project.spring.ilchooL.model.Covid19Item;
 import project.spring.ilchooL.model.CovidItem;
+import project.spring.ilchooL.model.DustItem;
 import project.spring.ilchooL.model.Witem;
 import project.spring.ilchooL.service.CovidService;
+import project.spring.ilchooL.service.DustService;
 import project.spring.ilchooL.service.WeatherService;
 
 
@@ -30,14 +32,64 @@ public class MainController {
 	@Autowired RetrofitHelper retrofitHelper;
 	@Autowired CovidService covidService;
 	@Autowired WeatherService weatherService;
+	@Autowired DustService dustService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		
-		/** 날씨 데이터 조회 */
+		/**
+		 * 미세먼지 데이터 조회
+		 * @author 박수인
+		 */
+
+		List<DustItem> d_item_list = null;
+
+		// 데이터 조회
+		try {
+			d_item_list = dustService.getItemList();
+			for (DustItem d_item : d_item_list) {
+				System.out.println(">>>>>>>>>>>>>>>>>>>");
+				System.out.println(d_item.toString());
+			}
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+
+		String dt = null;
+		int pm10 = 0;
+		int pm25 = 0;
+
+		Calendar date = Calendar.getInstance();
+		String d_time = String.format("%04d-%02d-%02d %02d:00", date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1,
+				date.get(Calendar.DAY_OF_MONTH), date.get(Calendar.HOUR_OF_DAY));
+
+		System.out.println("현재시각: " + d_time);
+
+		for (int i = 0; i < d_item_list.size(); i++) {
+			dt = d_item_list.get(i).getDataTime();
+
+			// 'pm10' 값 조회
+			if (dt.equals(d_time)) {
+				pm10 = Integer.parseInt(d_item_list.get(i).getPm10Value());
+			}
+
+			// 'pm20' 값 조회
+			if (dt.equals(d_time)) {
+				pm25 = Integer.parseInt(d_item_list.get(i).getPm25Value());
+			}
+		}
+
+		model.addAttribute("pm10", pm10);
+		model.addAttribute("pm25", pm25);
+
+		/**
+		 * 날씨 데이터 조회
+		 * @author 박수인
+		 */
+
 		List<Witem> w_item_list = null;
-		
-		//데이터 조회
+
+		// 데이터 조회
 		try {
 			w_item_list = weatherService.getItemList();
 			for (Witem item : w_item_list) {
@@ -50,47 +102,60 @@ public class MainController {
 		}
 
 		String ca = null;
+		String ti = null;
 		String da = null;
 		int sky = 0;
 		int tmp = 0;
-		
-		Calendar date = Calendar.getInstance();
-		String w_time = String.format("%02d00", date.get(Calendar.HOUR_OF_DAY));
-		
-		//System.out.println(w_time);
+		int tmn = 0;
+		int tmx = 0;
+
+		String fcst_time = String.format("%02d00", date.get(Calendar.HOUR_OF_DAY));
+		String fcst_date = String.format("%04d-%02d-%02d", date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1,
+				date.get(Calendar.DAY_OF_MONTH));
+
+		// System.out.println(w_time);
 
 		for (int i = 0; i < w_item_list.size(); i++) {
 			ca = w_item_list.get(i).getCategory();
-			da = w_item_list.get(i).getFcst_time();
-			
-			// 'SKY'값 조회
-			if (ca.equals("SKY") && da.equals(w_time)) {
-				//System.out.println("SKY :" + w_item_list.get(i).getFcst_value());
-				sky = Integer.parseInt(w_item_list.get(i).getFcst_value());
-				//System.out.println(sky);
-			} 
-			
-			// 'TMP'값 조회
-			if (ca.equals("TMP") && da.equals(w_time)) {
-				//System.out.println("TMP :" + w_item_list.get(i).getFcst_value());
-				tmp = Integer.parseInt(w_item_list.get(i).getFcst_value());
-				//System.out.println(tmp);
+			ti = w_item_list.get(i).getFcst_time();
+			da = w_item_list.get(i).getFcst_date();
+
+			// 'SKY':하늘상태
+			if (ca.equals("SKY") && da.equals(fcst_date)) {
+				if (ti.equals(fcst_time)) {
+					sky = Integer.parseInt(w_item_list.get(i).getFcst_value());
+				}
+			}
+
+			// 'TMP':1시간기온
+			if (ca.equals("TMP") && da.equals(fcst_date)) {
+				if (ti.equals(fcst_time)) {
+					tmp = Integer.parseInt(w_item_list.get(i).getFcst_value());
+				}
+			}
+			// 'TMN':최저기온(6시)
+			if (ca.equals("TMN") && da.equals(fcst_date)) {
+					tmn = Integer.parseInt(w_item_list.get(i).getFcst_value());
+			}
+			// 'TMX':최고기온(15시)
+			if (ca.equals("TMX") && da.equals(fcst_date)) {
+					tmx = Integer.parseInt(w_item_list.get(i).getFcst_value());
 			}
 		}
-		
+
 		model.addAttribute("sky", sky);
 		model.addAttribute("tmp", tmp);
+		model.addAttribute("tmn", tmn);
+		model.addAttribute("tmx", tmx);
 		
-		// Service 인터페이스 선언부분
-		// 이부분에 수인님 코드 추가
-
-		// Call 객체를 service 인터페이스를 할당하여 선언
-		// 이부분에 수인님 코드 추가
+		/**
+		 * 코로나 데이터 조회
+		 * @author 박준영
+		 */
 		
 		// pojo 클래스 선언
 		List<CovidItem> covid_output = null;
 		Covid19Item cI = new Covid19Item();
-		// 이부분에 수인님 코드 추가
 
 		try {
 			// 데이터 받는 부분
@@ -99,7 +164,6 @@ public class MainController {
 			for (CovidItem item : covid_output) {
 				System.out.println(item.toString());
 			}
-			// 이부분에 수인님 코드 추가
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -134,7 +198,6 @@ public class MainController {
 		model.addAttribute("date", covid_output.get(0).getDate());
 		model.addAttribute("death_acc", covid_output.get(0).getDeath_acc());
 		model.addAttribute("released_acc", covid_output.get(0).getReleased_acc());
-		// 이부분에 수인님 코드 추가
 
 		// View 처리
 		return "main/main";
