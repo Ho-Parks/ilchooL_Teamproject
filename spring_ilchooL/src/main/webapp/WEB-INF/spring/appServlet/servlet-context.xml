@@ -36,12 +36,15 @@
 	<beans:bean id="scheduleJob" class="project.spring.ilchooL.schedulers.CovidScheduler" />
 	<beans:bean id="financeschedule" class="project.spring.ilchooL.schedulers.FinanceScheduler" />
 	<beans:bean id="weather_scheduleJob" class="project.spring.ilchooL.schedulers.WeatherScheduler" />
+	<beans:bean id="dust_scheduleJob" class="project.spring.ilchooL.schedulers.DustScheduler" />
 	
 	
 	<!-- 생성한 스케줄러 객체에 대한 작업 스케줄 지정 -->
 	<task:scheduled-tasks>
 		<!-- 매일 밤 11시 30분에 실행되는 스케줄러 -->
 		<task:scheduled ref="weather_scheduleJob" method="collectWeather" cron="0 30 23 * * ?" />
+		<task:scheduled ref="dust_scheduleJob" method="collectDust" cron="0 30 23 * * ?" />
+		
 		<!-- 매일 11시에 실행되는 스케줄러 -->
 		<task:scheduled ref="scheduleJob" method="collecCovid" cron="0 0 11 * * ?" />
 		<!-- 1시간마다 실행되는 스케줄러 -->

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dustMapper">
+	<resultMap id="dustMap"
+		type="project.spring.ilchooL.model.DustItem">
+		<result property="dust_id" column="dust_id" />
+		<result property="pm10Value" column="pm10Value" />
+		<result property="pm25Value" column="pm25Value" />
+		<result property="dataTime" column="dataTime" />
+	</resultMap>
+	
+	<insert id="insertDustItem" parameterType = "project.spring.ilchooL.model.forecastDust$Response$Body$Items">
+	 Insert Into dust (pm10Value, pm25Value, dataTime ) Values (#{pm10Value}, #{pm25Value}, #{dataTime,jdbcType=VARCHAR});
+	</insert>
+	
+	<update id="updateDustItem" parameterType="project.spring.ilchooL.model.forecastDust$Response$Body$Items">
+		Update dust Set pm10Value = #{pm10Value},pm25Value = #{pm25Value},dataTime = #{dataTime} Where dataTime = #{dataTime,jdbcType=VARCHAR};
+	</update>
+	
+	<select id="selectDustItem" parameterType="project.spring.ilchooL.model.DustItem" resultMap="dustMap">
+		Select pm10Value, pm25Value, dataTime From dust Where dust_id = #{dust_id};
+	</select>
+	
+	<select id="selectDustList" parameterType="project.spring.ilchooL.model.DustItem" resultMap="dustMap">
+		Select * From dust;
+	</select>
+	
+	
+	</mapper>

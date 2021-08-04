@@ -5,6 +5,11 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
+/**
+ * 미세먼지 OPEN API 데이터 가져오기 
+ * @author: 박수인
+ */
+
 public interface forecastDustService {
 public static final String BASE_URL = "http://apis.data.go.kr";
 	

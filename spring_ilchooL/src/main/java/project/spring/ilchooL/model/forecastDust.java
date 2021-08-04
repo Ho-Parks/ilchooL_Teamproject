@@ -4,11 +4,18 @@ import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * 미세먼지 API데이터를 DB에 넣기위한 Beans 
+ * @author: 박수인
+ */
 
 @Data
 public class forecastDust {
-@SerializedName("response") private Response response;
+	@SerializedName("response") private Response response;
 	
 	@Data
 	public class Response {
@@ -19,10 +26,15 @@ public class forecastDust {
 			@SerializedName("items") private List<Items> items;
 			
 			@Data
+			@NoArgsConstructor  //Default Constructor 추가
+			@AllArgsConstructor
 			public class Items {
-				@SerializedName("pm10Value")	private int pm10Value;
-				@SerializedName("pm25Value")	private int pm25Value;
-
+				
+				private int dust_id;
+				
+				@SerializedName("pm10Value")	private String pm10Value;
+				@SerializedName("pm25Value")	private String pm25Value;
+				@SerializedName("dataTime")		private String dataTime;
 			}
 
 		}
