@@ -223,23 +223,23 @@ public class FinanceScheduler {
 		/**
 		  input.setF_name0(f_name[0]); input.setF_amount0(f_amount[0]);
 		  input.setF_prev0(f_prev[0]); input.setF_updown0(f_updown[0]);
-		  sqlSession.update("financeMapper.insertFinance", input);
+		  sqlSession.insert("financeMapper.insertFinance", input);
 		  
 		  input.setF_name0(f_name[1]); input.setF_amount0(f_amount[1]);
 		  input.setF_prev0(f_prev[1]); input.setF_updown0(f_updown[1]);
-		  sqlSession.update("financeMapper.insertFinance", input);
+		  sqlSession.insert("financeMapper.insertFinance", input);
 		  
 		  input.setF_name0(f_name[2]); input.setF_amount0(f_amount[2]);
 		  input.setF_prev0(f_prev[2]); input.setF_updown0(f_updown[2]);
-		  sqlSession.update("financeMapper.insertFinance", input);
+		  sqlSession.insert("financeMapper.insertFinance", input);
 		  
 		  input.setF_name0(f_name[3]); input.setF_amount0(f_amount[3]);
 		  input.setF_prev0(f_prev[3]); input.setF_updown0(f_updown[3]);
-		  sqlSession.update("financeMapper.insertFinance", input);
+		  sqlSession.insert("financeMapper.insertFinance", input);
 		  
 		  input.setF_name0(f_name[4]); input.setF_amount0(f_amount[4]);
 		  input.setF_prev0(f_prev[4]); input.setF_updown0(f_updown[4]);
-		  sqlSession.update("financeMapper.insertFinance", input);
+		  sqlSession.insert("financeMapper.insertFinance", input);
 		  
 		  
 		  try { log.debug("finance 테이블 데이터 저장 >> " + financeService.addFinance()); }
@@ -367,7 +367,7 @@ public class FinanceScheduler {
 		} else {
 			input_p.setP_updown0("하락");
 		}
-		sqlSession.insert("financePopularMapper.updateFinancePopular1", input_p);
+		sqlSession.update("financePopularMapper.updateFinancePopular1", input_p);
 		
 		input_p.setP_name0(p_name[1]);
 		input_p.setP_amount0(p_amount[1]);
@@ -377,7 +377,7 @@ public class FinanceScheduler {
 		} else {
 			input_p.setP_updown0("하락");
 		}
-		sqlSession.insert("financePopularMapper.updateFinancePopular2", input_p);
+		sqlSession.update("financePopularMapper.updateFinancePopular2", input_p);
 		
 		input_p.setP_name0(p_name[2]);
 		input_p.setP_amount0(p_amount[2]);
@@ -387,7 +387,7 @@ public class FinanceScheduler {
 		} else {
 			input_p.setP_updown0("하락");
 		}
-		sqlSession.insert("financePopularMapper.updateFinancePopular3", input_p);
+		sqlSession.update("financePopularMapper.updateFinancePopular3", input_p);
 		
 		input_p.setP_name0(p_name[3]);
 		input_p.setP_amount0(p_amount[3]);
@@ -397,7 +397,7 @@ public class FinanceScheduler {
 		} else {
 			input_p.setP_updown0("하락");
 		}
-		sqlSession.insert("financePopularMapper.updateFinancePopular4", input_p);
+		sqlSession.update("financePopularMapper.updateFinancePopular4", input_p);
 		
 		input_p.setP_name0(p_name[4]);
 		input_p.setP_amount0(p_amount[4]);
@@ -407,7 +407,7 @@ public class FinanceScheduler {
 		} else {
 			input_p.setP_updown0("하락");
 		}
-		sqlSession.insert("financePopularMapper.updateFinancePopular5", input_p);
+		sqlSession.update("financePopularMapper.updateFinancePopular5", input_p);
 		
 		try {
 			log.debug("finance_popular 테이블 데이터 갱신 >> " + financeService.updateFinancePopular());
@@ -476,35 +476,35 @@ public class FinanceScheduler {
 		input_t.setT_prev0(t_prev[0]);
 		input_t.setT_updown0(t_updown[0]);
 		input_t.setT_rate0(t_rate[0]);
-		sqlSession.insert("financeTopMapper.updateFinanceTop1", input_t);
+		sqlSession.update("financeTopMapper.updateFinanceTop1", input_t);
 		
 		input_t.setT_name0(t_name[1]);
 		input_t.setT_amount0(t_amount[1]);
 		input_t.setT_prev0(t_prev[1]);
 		input_t.setT_updown0(t_updown[1]);
 		input_t.setT_rate0(t_rate[1]);
-		sqlSession.insert("financeTopMapper.updateFinanceTop2", input_t);
+		sqlSession.update("financeTopMapper.updateFinanceTop2", input_t);
 		
 		input_t.setT_name0(t_name[2]);
 		input_t.setT_amount0(t_amount[2]);
 		input_t.setT_prev0(t_prev[2]);
 		input_t.setT_updown0(t_updown[2]);
 		input_t.setT_rate0(t_rate[2]);
-		sqlSession.insert("financeTopMapper.updateFinanceTop3", input_t);
+		sqlSession.update("financeTopMapper.updateFinanceTop3", input_t);
 		
 		input_t.setT_name0(t_name[3]);
 		input_t.setT_amount0(t_amount[3]);
 		input_t.setT_prev0(t_prev[3]);
 		input_t.setT_updown0(t_updown[3]);
 		input_t.setT_rate0(t_rate[3]);
-		sqlSession.insert("financeTopMapper.updateFinanceTop4", input_t);
+		sqlSession.update("financeTopMapper.updateFinanceTop4", input_t);
 		
 		input_t.setT_name0(t_name[4]);
 		input_t.setT_amount0(t_amount[4]);
 		input_t.setT_prev0(t_prev[4]);
 		input_t.setT_updown0(t_updown[4]);
 		input_t.setT_rate0(t_rate[4]);
-		sqlSession.insert("financeTopMapper.updateFinanceTop5", input_t);
+		sqlSession.update("financeTopMapper.updateFinanceTop5", input_t);
 		
 		try {
 			log.debug("finance_top 테이블 데이터 갱신 >> " + financeService.updateFinanceTop());
