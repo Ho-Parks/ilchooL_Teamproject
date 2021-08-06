@@ -43,10 +43,10 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('new_postcode').value = data.zonecode;
-                document.getElementById("new_address").value = addr;
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("addr1").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("new_detailAddress").focus();
+                document.getElementById("addr2").focus();
 
                 // iframe을 넣은 element를 안보이게 한다.
                 // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)

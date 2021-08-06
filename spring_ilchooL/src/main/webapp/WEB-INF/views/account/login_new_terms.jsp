@@ -64,7 +64,7 @@
 							이때에도 수신 동의에 대해 별도로 안내하고 동의를 받습니다.</div>
 					</li>
 				</ul>
-				<button type="submit" class="next-button" disabled onclick="location.href='${pageContext.request.contextPath}/login/login_new.do'">확인</button>
+				<button type="submit" class="next-button" disabled onclick="location.href='${pageContext.request.contextPath}/account/login_new'">확인</button>
 			</form>
 		</div>
 	</div>

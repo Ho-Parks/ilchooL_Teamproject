@@ -17,7 +17,7 @@
 				<a href="${pageContext.request.contextPath}/contents/contents_news.do">News</a>
 				<a href="${pageContext.request.contextPath}/contents/contents_finance.do">Finance</a>
 				<a href="${pageContext.request.contextPath}/mypage/mypage.do" class="MyPage">MyPage</a>
-				<a href="${pageContext.request.contextPath}/login/Login.do" class="login">Login</a>
+				<a href="${pageContext.request.contextPath}/account/login" class="login">Login</a>
 			</div>
 		</div>
 		<div id="logo">
@@ -29,7 +29,7 @@
 	</div>
 
 
-	<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<!-- <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>  -->
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$(".hamburger").click(function() {

@@ -18,9 +18,14 @@
 	href="${pageContext.request.contextPath }/assets/css/bootstrap-theme.min.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/plugins/sweetalert/sweetalert2.min.css" />
+
+<script src="${pageContext.request.contextPath }/assets/plugins/ajax-form/jquery.form.min.js"></script>
+<script src="${pageContext.request.contextPath }/assets/plugins/ajax/ajax_helper.js"></script>
 <!-- validate 플러그인 참조 -->
 <script src="${pageContext.request.contextPath }/assets/plugins/validate/jquery.validate.min.js"></script>
+<script src="${pageContext.request.contextPath }/assets/plugins/validate/jquery.validate.js"></script>
 <script src="${pageContext.request.contextPath }/assets/plugins/validate/additional-methods.min.js"></script>
+<script src="${pageContext.request.contextPath }/assets/plugins/validate/additional-methods.js"></script>
 <!-- sweetalert 플러그인 참조 -->
 <script src="${pageContext.request.contextPath }/assets/plugins/sweetalert/sweetalert2.min.js"></script>
 

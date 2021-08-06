@@ -21,20 +21,21 @@
 		<!-- content-->
 		<div id="inner_join">
 			<div id="new_box">회원가입</div>
-			<form class="form-horizontal" name="join_form" id="join_form" action="${pageContext.request.contextPath}/login/Login.do" method="get">
+			<form class="form-horizontal" name="join_form" id="join_form" action="${pageContext.request.contextPath}/rest/account/login_new" method="post">
 			<!-- ID -->
 				<div>
 					<div class="join">
 						<label for="id">아이디</label>
 					</div>
-					<span class="box new_id"> 
-						<input type="text" id="new_id" class="new" name="new_id" maxlength="20">
-							<!-- <span
-								class="input-group-btn">
-								<button class="btn btn-primary" type="button" id="id_uniq_check">중복검사</button>
-							</span> -->
-					</span> 
-					<span class="error_next_box"></span>
+					<div class = "id">
+						<span class="box4 new_id"> 
+							<input type="text" id="user_id" class="new" name="user_id" maxlength="20">
+						</span> 
+						<span class="click">
+							<button class="btn btn-primary" type="button" id="id-unique-check">중복검사</button>
+						</span>
+					</div>
+						<span class="error_next_box"></span>
 				</div>
 				
 				<!-- PW1 -->
@@ -43,9 +44,9 @@
 						<label for="pswd">비밀번호</label>
 					</div>
 					<span class="box new_pass"> 
-						<input type="password"id="new_pw" class="new" maxlength="20" name="new_pw"> 
+						<input type="password"id="user_pw" class="new" maxlength="20" name="user_pw"> 
 							<span id="alertTxt">사용불가</span> 
-								<img src="../assets/img/login_new_pass.png" id="new_pw_img1" class="new_pw_img">
+								<img src="../assets/img/login_new_pass.png" id="user_pw_img1" class="user_pw_img">
 					</span>
 					<span class="error_next_box"></span>
 				</div>
@@ -56,19 +57,20 @@
 						<label for="pswd_re">비밀번호 재확인</label>
 					</div>
 					<span class="box new_pass_check">
-						<input type="password" id="new_pw_re" class="new" maxlength="20" name="new_pw_re">
-							<img src="../assets/img/login_new_check_disable.png" id="new_pw_re_img1" class="new_pw_img">
+						<input type="password" id="user_pw_confirm" class="new" maxlength="20" name="user_pw_confirm">
+							<img src="../assets/img/login_new_check_disable.png" id="user_pw_re_img1" class="user_pw_img">
 					</span> 
+					</div>
 					<span class="error_next_box"></span>
-				</div>
+				
 
 				<!-- NAME -->
 				<div>
 					<div class="join">
-						<label for="name">이름</label>
+						<label for="user_name">이름</label>
 					</div>
 					<span class="box int_name"> 
-						<input type="text" id="new_name" class="new" maxlength="20" name="new_name">
+						<input type="text" id="user_name" class="new" maxlength="20" name="user_name">
 					</span> 
 					<span class="error_next_box"></span>
 				</div>
@@ -76,47 +78,12 @@
 				<!-- BIRTH -->
 				<div>
 					<div class="join">
-						<label for="yy">생년월일</label>
+						<label for="birthday">생년월일</label>
 					</div>
-
-					<div id="bir_wrap">
-						<!-- BIRTH_YY -->
-						<div id="bir_yy">
-							<span class="box"> 
-								<input type="text" id="yy" class="new" maxlength="4" placeholder="년(4자)">
-							</span>
-						</div>
-
-						<!-- BIRTH_MM -->
-						<div id="bir_mm">
-							<span class="box"> <select id="mm" class="sel">
-									<option>월</option>
-									<option value="01">1</option>
-									<option value="02">2</option>
-									<option value="03">3</option>
-									<option value="04">4</option>
-									<option value="05">5</option>
-									<option value="06">6</option>
-									<option value="07">7</option>
-									<option value="08">8</option>
-									<option value="09">9</option>
-									<option value="10">10</option>
-									<option value="11">11</option>
-									<option value="12">12</option>
-							</select>
-							</span>
-						</div>
-
-						<!-- BIRTH_DD -->
-						<div id="bir_dd">
-							<span class="box"> 
-								<input type="text" id="dd" class="new" maxlength="2" placeholder="일">
-							</span>
-						</div>
-
-					</div>
-					<span class="error_next_box"></span>
-				</div>
+					<span class="box birthday"> 
+                        <input type="date" name="birthday" class="new" id="birthday" />
+                    </span>
+                </div>
 
 				<!-- GENDER -->
 				<div>
@@ -124,7 +91,7 @@
 						<label for="gender">성별</label>
 					</div>
 					<span class="box gender_code"> 
-						<select id="new_gender" class="sel">
+						<select id="gender" class="sel">
 							<option>성별</option>
 							<option value="M">남자</option>
 							<option value="F">여자</option>
@@ -139,7 +106,7 @@
 						<label for="email">이메일 주소</label>
 					</div>
 					<span class="box int_email"> 
-					<input type="email" id="new_email" class="new" maxlength="100" placeholder="선택입력" name="new_email">
+					<input type="email" id="email" class="new" maxlength="100" placeholder="선택입력" name="email">
 					</span> 
 					<span class="error_next_box"></span>
 				</div>
@@ -150,7 +117,7 @@
 						<label for="phoneNo">연락처</label>
 					</div>
 					<span class="box int_mobile"> 
-						<input type="tel" id="new_mobile" class="new" maxlength="16" placeholder="전화번호 입력" name="new_mobile">
+						<input type="tel" id="phone" class="new" maxlength="16" placeholder="전화번호 입력" name="phone">
 					</span> 
 					<span class="error_next_box"></span>
 				</div>
@@ -163,7 +130,7 @@
 
 					<div class="address1">
 						<span class="box1 new_post "> 
-							<input type="text" id="new_postcode" class="new_1" placeholder="우편번호" readonly>
+							<input type="text" id="postcode" name="postcode" class="new_1" placeholder="우편번호" readonly>
 						</span> 
 						<span class="click"> 
 							<input type="button" id="address_btn" class="btn btn-info" onclick="new_execDaumPostcode()" value="우편번호 찾기">
@@ -171,15 +138,11 @@
 					</div>
 
 					<span class="box2 new_address "> 
-						<input type="text" id="new_address" class="new" placeholder="주소" readonly>
+						<input type="text" id="addr1" class="new" name="addr1" placeholder="주소" readonly>
 					</span> 
 					<span class="box3 new_detailAddress "> 
-						<input type="text" id="new_detailAddress" class="new" placeholder="상세주소">
+						<input type="text" id="addr2" class="new" name="addr2" placeholder="상세주소">
 					</span> 
-					<!-- <span class="box4 new_extraAddress "> 
-						<input type="text" id="new_extraAddress" class="new" placeholder="참고항목" readonly>
-					</span>
- -->
 
 					<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 					<div id="layer" style="display: none; position: absolute; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
@@ -189,16 +152,18 @@
 
 				<!-- 프로필 사진 -->
 				<div class="join">
-					<label for='profile_img' class="">프로필사진</label>
-					<div class="">
-						<input type="file" name="profile_img" id="profile_img" />
-					</div>
+				 <label for='profile_img' class="">프로필사진</label>
+                    <div class="profile_img">
+                        <div class="image-upload">
+                            <input id="photo" type="file" name="photo" accept="image/jpg, image/gif, image/png" />
+                        </div>
+                    </div>
 				</div>
 
 				<!-- JOIN BTN-->
 				<div class="btn_area">
 					<button type="submit" id="btnJoin">
-						<span>가입하기</span>
+						가입하기
 					</button>
 				</div>
 			</form>
@@ -228,13 +193,13 @@
 				return false; 
 			});
 	-->
-	<script type="text/javascript">
+	  <!-- <script type="text/javascript">
 		$("#btnJoin").click(function(e) {
 			e.preventDefault();
 			console.log("11");
 			check();
 		});
-	</script>
+	</script> -->
 </body>
 
 </html>

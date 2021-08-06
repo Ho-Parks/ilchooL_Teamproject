@@ -54,6 +54,12 @@ body {
 	margin-bottom: 10px;
 }
 
+.id {
+	display: block;
+	
+	position: relative;
+	margin-bottom: 10px;
+}
 .box1 {
 	display: block;
 	width: 35%;
@@ -94,15 +100,15 @@ body {
 
 .box4 {
 	display: block;
-	width: 48%;
+	width: 75%;
 	height: 51px;
 	border: solid 2px #87CEFA;
 	padding: 10px 14px 10px 14px;
 	box-sizing: border-box;
 	background: #fff;
 	position: relative;
-	float: right;
-	margin-bottom: 30px;
+	float: left;
+	margin-bottom: 10px;
 }
 
 .new {
@@ -126,7 +132,7 @@ body {
 	text-align: center;
 }
 
-.box.new_id {
+.box.user_id {
 	padding-right: 110px;
 }
 
@@ -146,7 +152,7 @@ body {
 	color: #8e8e8e;
 }
 
-.new_pw_img {
+.user_pw_img {
 	width: 18px;
 	height: 20px;
 	display: inline-block;
@@ -155,31 +161,6 @@ body {
 	right: 16px;
 	margin-top: -10px;
 	cursor: pointer;
-}
-
-#bir_wrap {
-	display: table;
-	width: 100%;
-}
-
-#bir_yy {
-	display: table-cell;
-	width: 147px;
-}
-
-#bir_mm {
-	display: table-cell;
-	width: 147px;
-	vertical-align: middle;
-}
-
-#bir_dd {
-	display: table-cell;
-	width: 147px;
-}
-
-#bir_mm, #bir_dd {
-	padding-left: 10px;
 }
 
 select {

@@ -47,7 +47,7 @@ input {
 	transform: translate(-50%); */
 }
 
-.form-control {
+.control {
 	position: absolute !important;
 	padding: 0px !important;
 	width: 0 !important;
@@ -161,4 +161,12 @@ fieldset, img {
 
 .log_chk .txt_lab {
 	vertical-align: top;
+}
+
+label.error {
+    color: red;
+    font-weight: normal;
+    font-size: 13px;
+    padding: 5px;
+    margin-bottom: 0;
 }

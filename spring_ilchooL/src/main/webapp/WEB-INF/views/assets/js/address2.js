@@ -1,8 +1,8 @@
 $(document).on('click', '.postcode-finder', function(e) {
 	const current = $(e.currentTarget);
-	const postcode = $(current.data('new_postcode'));
-	const addr1 = $(current.data('new_address'));
-	const addr2 = $(current.data('new_detailAddress'));
+	const postcode = $(current.data('postcode'));
+	const addr1 = $(current.data('addr1'));
+	const addr2 = $(current.data('addr2'));
 	const frame = $(current.data('frame'));
 
 	// 현재 scroll 위치를 저장해놓는다.

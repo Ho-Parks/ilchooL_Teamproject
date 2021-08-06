@@ -1,17 +1,17 @@
 /*변수 선언*/
 
 
-var id = document.querySelector('#new_id');
+var id = document.querySelector('#user_id');
 
-var pw1 = document.querySelector('#new_pw');
+var pw1 = document.querySelector('#user_pw');
 var pwMsg = document.querySelector('#alertTxt');
-var pwImg1 = document.querySelector('#new_pw_img1');
+var pwImg1 = document.querySelector('#user_pw_img1');
 
-var pw2 = document.querySelector('#new_pw_re');
-var pwImg2 = document.querySelector('#new_pw_re_img1');
+var pw2 = document.querySelector('#user_pw_confirm');
+var pwImg2 = document.querySelector('#user_pw_re_img1');
 var pwMsgArea = document.querySelector('.new_pass');
 
-var userName = document.querySelector('#new_name');
+var userName = document.querySelector('#user_name');
 
 var yy = document.querySelector('#yy');
 var mm = document.querySelector('#mm');
@@ -19,9 +19,12 @@ var dd = document.querySelector('#dd');
 
 var gender = document.querySelector('#new_gender');
 
-var email = document.querySelector('#new_email');
+var email = document.querySelector('#email');
 
-var mobile = document.querySelector('#new_mobile');
+var birthday = document.querySelector('#birthday');
+
+
+var mobile = document.querySelector('#phone');
 
 var error = document.querySelectorAll('.error_next_box');
 
@@ -34,9 +37,7 @@ id.addEventListener("focusout", checkId);
 pw1.addEventListener("focusout", checkPw);
 pw2.addEventListener("focusout", comparePw);
 userName.addEventListener("focusout", checkName);
-yy.addEventListener("focusout", isBirthCompleted);
-mm.addEventListener("focusout", isBirthCompleted);
-dd.addEventListener("focusout", isBirthCompleted);
+birthday.addEventListener("focusout", isBirthCompleted);
 gender.addEventListener("focusout", function() {
 	if (gender.value === "성별") {
 		error[5].style.display = "block";
@@ -61,6 +62,7 @@ function checkId() {
 		error[0].style.display = "block";
 	} else if (!idPattern.test(id.value)) {
 		error[0].innerHTML = "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
+		error[0].style.color = "#08A600";
 		error[0].style.display = "block";
 	} else {
 		error[0].innerHTML = "사용 가능 한 아이디 입니다.";
@@ -159,7 +161,7 @@ function isBirthRight() {
 		checkAge();
 	}
 }
-
+/** 
 function checkAge() {
 	if (Number(yy.value) < 1920) {
 		error[4].innerHTML = "정말이세요?";
@@ -174,7 +176,7 @@ function checkAge() {
 		error[4].style.display = "none";
 	}
 }
-
+*/
 
 function isEmailCorrect() {
 	var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -206,30 +208,3 @@ function checkPhoneNum() {
 
 
 }
-
-$(function() { /** 버튼 클릭시 이벤트 */
-        $("#id_uniq_check").click(function() {
-            // 입력값을 취득하고, 내용의 존재여부를 검사한다.
-            var user_id_val = $("#new_id").val();
-
-            if (!user_id_val) { // 입력되지 않았다면?
-                alert("아이디를 입력하세요."); // <-- 메시지 표시
-                $("#new_id").focus(); // <-- 커서를 강제로 넣기
-                return false; // <-- 실행 중단
-            }
-
-            // 위의 if문을 무사히 통과했다면 내용이 존재한다는 의미이므로,
-            // 입력된 내용을 Ajax를 사용해서 웹 프로그램에게 전달한다.
-            $.post("../api/id_unique_check.php", { user_id: user_id_val }, function(req) {
-                // 사용 가능한 아이디인 경우 --> req = { result: "OK" }
-                // 사용 불가능한 아이디인 경우 --> req = { result: "FAIL" }
-                if (req.result == 'OK') {
-                    alert("사용 가능한 아이디 입니다.");
-                } else {
-                    alert("사용할 수 없는 아이디 입니다.");
-                    $("#new_id").val("");
-                    $("#new_id").focus();
-                }
-            }); // end $.get
-        }); // end click
-    });

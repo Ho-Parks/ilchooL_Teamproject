@@ -1,19 +1,27 @@
 package project.spring.ilchooL.helper;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.AbstractView;
 
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.Thumbnails.Builder;
+import net.coobird.thumbnailator.geometry.Positions;
 
 @Slf4j
 public class WebHelper {
@@ -27,18 +35,31 @@ public class WebHelper {
     /** JSP의 response 내장 객체 */
     // --> import javax.servlet.http.HttpServletResponse;
     private HttpServletResponse response;
+    
+    /** JSP의 session 내장 객체 */
+	// --> import javax.servlet.http.HttpSession;
+	private HttpSession session;
+	
+    /** 업로드 된 결과물이 저장될 폴더 */
+    private String uploadDir;
 
+    /** 업로드 된 파일이 식별될 URL경로 */
+    private String uploadPath;
+    
     // ----------- 싱글톤 객체 생성 시작 ----------
     /**
      * 싱글톤 객체가 생성될 때 호출되는 메서드로 JSP의 주요 내장객체를 멤버변수에 연결한다.
      *
      * @param request
      * @param response
+     * @param session
      */
-    public void init(HttpServletRequest request, HttpServletResponse response) {
+    public void init(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         this.request = request; // JSP 내장객체 참조하기
         this.response = response; // JSP 내장객체 참조하기
-
+        
+        this.session = session; // JSP 내장객체 참조하기
+        
         String methodName = request.getMethod(); // GET방식인지, POST방식인지 조회한다.
         String url = request.getRequestURL().toString(); // 현재 URL을 획득한다.
         String queryString = request.getQueryString(); // URL에서 "?"이후의 GET파라미터 문자열을 모두 가져온다.
@@ -71,6 +92,31 @@ public class WebHelper {
     public HttpServletResponse getResponse() { return response; }
 
     public void setResponse(HttpServletResponse response) { this.response = response; }
+    
+    public HttpSession getSession() { return session; }
+
+	public void setSession(HttpSession session) { this.session = session; }
+    
+    public String getUploadDir() { return uploadDir; }
+
+    public void setUploadDir(String uploadDir) { this.uploadDir = uploadDir; }
+
+    public String getUploadPath() { return uploadPath; }
+
+    public void setUploadPath(String uploadPath) { this.uploadPath = uploadPath; }
+
+    /**
+     * 업로드 폴더 하위에 저장되어 있는 파일이름을 전달받아 Web에서 접근 가능한 경로로 리턴한다.
+     */
+    public String getUploadUrl(String filePath) {
+        // URL상의 업로드 폴더와 파일 이름을 결합하여 파일 객체 생성
+        File f = new File(this.uploadPath, filePath);
+        // 결합된 경로 추출
+        String path = f.getPath();
+        // window의 경우 경로 구문을 역슬래시로 하는데, 이는 웹에 노출할 수 있는 형태가 아니므로
+        // 역슬래시를 슬래시로 변환하여 반환한다.
+        return path.replace("\\", "/");
+    }
 
     /**
      * 메시지 표시 후, 페이지를 지정된 곳으로 이동한다.
@@ -227,5 +273,238 @@ public class WebHelper {
      */
     public Map<String, Object> getJsonWarning(String rt) {
     	return this.getJsonData(400, rt, null);
+    }
+    
+    /**
+	 * 세션값을 저장한다.
+	 *
+	 * @param key   - 세션이름
+	 * @param value - 저장할 데이터
+	 */
+	public void setSession(String key, Object value) {
+		// 세션의 기록 정보를 로그로 남긴다.
+		log.debug(String.format("(s) <-- %s = %s", key, value.toString()));
+		// 세션을 저장한다.
+		this.session.setAttribute(key, value);
+		
+		String ss = (String) this.session.getAttribute("member");
+		
+		System.out.print(ss);
+	}
+
+	/**
+	 * 세션값을 조회한다.
+	 *
+	 * @param key          - 조회할 세션의 이름
+	 * @param defaultValue - 값이 없을 경우 대체할 기본값
+	 * @return Object이므로 명시적 형변환 필요함
+	 */
+	public Object getSession(String key, Object defaultValue) {
+		// 세션값 가져오기
+		Object value = this.session.getAttribute(key);
+
+		if (value == null) {
+			value = defaultValue;
+		}
+
+		// 조회된 세션 정보를 로그로 남긴다.
+		if (value == null) {
+			log.debug(String.format("(s) --> %s = null", key));
+		} else {
+			log.debug(String.format("(s) --> %s = %s", key, value.toString()));
+		}
+
+		return value;
+	}
+
+	/**
+	 * 세션값을 조회한다. 값이 없을 경우에 대한 기본값을 null로 설정
+	 *
+	 * @param key - 세션 이름
+	 * @return Object이므로 명시적 형변환 필요함
+	 */
+	public Object getSession(String key) {
+		return this.getSession(key, null);
+	}
+
+	/**
+	 * 특정 세션값을 삭제한다.
+	 *
+	 * @param key - 세션 이름
+	 */
+	public void removeSession(String key) {
+		log.debug(String.format("(s) <-- %s delete", key));
+		this.session.removeAttribute(key);
+	}
+
+	/**
+	 * 현재 사용자에 대한 모든 세션값을 일괄 삭제한다.
+	 */
+	public void removeAllSession() {
+		log.debug(String.format("(s) <-- delete all"));
+		this.session.invalidate();
+	}
+	
+    /**
+     * 컨트롤러로부터 업로드 된 파일의 정보를 전달받아 지정된 위치에 저장한다.
+     * 이 때, 파일 덮어쓰기를 방지하기 위해 파일의 이름을 변경하고 이름 중복 검사를 수행한다.
+     * @param multipartFile             업로드 된 파일 정보
+     * @return                          파일 정보를 담고 있는 객체
+     * @throws NullPointerException     업로드 된 파일이 없는 경우
+     * @throws Exception                파일 저장에 실패한 경우
+     */
+    public UploadItem saveMultipartFile(MultipartFile multipartFile) throws NullPointerException, Exception {
+        UploadItem item = null;
+
+        /** 1) 업로드 파일 저장하기 */
+        // 파일의 원본 이름 추출
+        String orginName = multipartFile.getOriginalFilename();
+
+        // 업로드 된 파일이 존재하는지 확인한다.
+        if (orginName.isEmpty()) {
+            throw new NullPointerException("업로드 된 파일이 없음.");
+        }
+
+        /** 2) 동일한 이름의 파일이 존재하는지 검사한다. */
+        // 파일의 원본 이름에서 확장자만 추출
+        String ext = orginName.substring(orginName.lastIndexOf("."));
+        String fileName = null; // 웹 서버에 저장될 파일이름
+        File targetFile = null; // 저장된 파일 정보를 담기 위한 File객체
+        int count = 0;          // 중복된 파일 수
+
+        // 일단 무한루프
+        while (true) {
+            // 저장될 파일 이름 --> 현재시각 + 카운트값 + 확장자
+            fileName = String.format("%d%d%s", System.currentTimeMillis(), count, ext);
+            // 업로드 파일이 저장될 폴더 + 파일이름으로 파일객체를 생성한다.
+            targetFile = new File(this.uploadDir, fileName);
+
+            // 동일한 이름의 파일이 없다면 반복 중단.
+            if (!targetFile.exists()) {
+                break;
+            }
+
+            // if문을 빠져나올 경우 중복된 이름의 파일이 존재한다는 의미이므로 count를 1증가
+            count++;
+        } // end while
+
+        /** 3) 업로드 된 파일을 결정된 파일 경로로 저장 */
+        multipartFile.transferTo(targetFile);
+
+        /** 4) 업로드 경로 정보 처리하기 */
+        // 복사된 파일의 절대경로를 추출한다.
+        // --> 운영체제 호환을 위해 역슬래시를 슬래시로 변환한다.
+        String absPath = targetFile.getAbsolutePath().replace("\\", "/");
+
+        // 절대경로에서 이미 root-context에 지정되어 있는 업로드 폴더 경로를 삭제한다.
+        String filePath = absPath.replace(this.uploadDir, "");
+
+        // 리턴할 정보를 구성한다.
+        item = new UploadItem();
+        item.setContentType(multipartFile.getContentType());
+        item.setFieldName(multipartFile.getName());
+        item.setFileSize(multipartFile.getSize());
+        item.setOrginName(orginName);
+        item.setFilePath(filePath);
+
+        // WebHelper에 의해 생성된 업로드 경로는 서버상의 위치일 뿐 웹상에 노출될 수 있는 형태는 아니다.
+        // View를 통해 웹 상에 노출하기 위해서는 업로드 위치의 URL PATH를 덧붙인 형태로 경로를 가공해야 한다.
+        String fileUrl = this.getUploadUrl(filePath);
+        item.setFileUrl(fileUrl);
+
+        return item;
+    }
+    
+    /**
+     * 리사이즈 된 썸네일 이미지를 생성하고 경로를 리턴한다.
+     *
+     * @param loadFile - 원본 파일의 경로
+     * @param width    - 최대 이미지 가로 크기
+     * @param height   - 최대 이미지 세로 크기
+     * @param crop     - 이미지 크롭 사용 여부
+     * @return 생성된 이미지의 절대 경로
+     * @throws Exception
+     */
+    public String createThumbnail(String path, int width, int height, boolean crop) throws Exception {
+
+        /** 1) 썸네일 생성 정보를 로그로 기록하기 */
+        log.debug(String.format("[Thumbnail] path: %s, size: %dx%d, crop: %s", path, width, height, String.valueOf(crop)));
+
+        /** 2) 저장될 썸네일 이미지의 경로 문자열 만들기 */
+        File loadFile = new File(this.uploadDir, path); // 원본파일의 전체경로 --> 업로드 폴더(상수값) + 파일명
+        String dirPath = loadFile.getParent();          // 전체 경로에서 파일이 위치한 폴더 경로 분리
+        String fileName = loadFile.getName();           // 전체 경로에서 파일 이름만 분리
+        int p = fileName.lastIndexOf(".");              // 파일이름에서 마지막 점(.)의 위치
+        String name = fileName.substring(0, p);         // 파일명 분리 -> 파일이름에서 마지막 점의 위치 전까지
+        String ext = fileName.substring(p + 1);         // 확장자 분리 -> 파일이름에서 마지막 점위 위치 다음부터 끝까지
+        String prefix = crop ? "_crop_" : "_resize_";   // 크롭인지 리사이즈 인지에 대한 문자열
+
+        // 최종 파일이름을 구성한다. --> 원본이름 + 크롭여부 + 요청된 사이즈
+        // -> ex) myphoto.jpg --> myphoto_resize_320x240.jpg
+        String thumbName = name + prefix + width + "x" + height + "." + ext;
+
+        File f = new File(dirPath, thumbName);          // 생성될 썸네일 파일 객체 --> 업로드폴더 + 썸네일이름
+        String saveFile = f.getAbsolutePath();          // 생성될 썸네일 파일 객체로부터 절대경로 추출 (리턴할 값)
+
+        // 생성될 썸네일 이미지의 경로를 로그로 기록
+        log.debug(String.format("[Thumbnail] saveFile: %s", saveFile));
+
+        /** 3) 썸네일 이미지 생성하고 최종 경로 리턴 */
+        // 해당 경로에 이미지가 없는 경우만 수행
+        if (!f.exists()) {
+            // 원본 이미지 가져오기
+            // --> import net.coobird.thumbnailator.Thumbnails;
+            // --> import net.coobird.thumbnailator.Thumbnails.Builder;
+            Builder<File> builder = Thumbnails.of(loadFile);
+            // 이미지 크롭 여부 파라미터에 따라 크롭 옵션을 지정한다.
+            if (crop == true) {
+                // import net.coobird.thumbnailator.geometry.Positions;
+                builder.crop(Positions.CENTER);
+            }
+
+            builder.size(width, height);        // 축소할 사이즈 지정
+            builder.useExifOrientation(true);   // 세로로 촬영된 사진을 회전시킴
+            builder.outputFormat(ext);          // 파일의 확장명 지정
+            builder.toFile(saveFile);           // 저장할 파일경로 지정
+        }
+
+        // 최종적으로 생성된 경로에서 업로드 폴더까지의 경로를 제거한다.
+        saveFile = saveFile.replace("\\", "/").replace(this.uploadDir, "");
+
+        return saveFile;
+    }
+
+
+    /**
+     * 컨트롤러로부터 업로드 된 파일의 정보를 전달받아 지정된 위치에 저장한다.
+     * @param uploadFiles               업로드 된 파일 정보
+     * @return                          파일 정보를 담고 있는 객체들을 저장하는 컬렉션
+     * @throws NullPointerException     업로드 된 파일이 없는 경우
+     * @throws Exception                파일 저장에 실패한 경우
+     */
+    public List<UploadItem> saveMultipartFile(MultipartFile[] uploadFiles) throws NullPointerException, Exception {
+
+        if (uploadFiles.length < 1) {
+            throw new NullPointerException("업로드 된 파일이 없음.");
+        }
+
+        List<UploadItem> uploadList = new ArrayList<UploadItem>();
+
+        for (int i=0; i<uploadFiles.length; i++) {
+            try {
+                UploadItem item = this.saveMultipartFile(uploadFiles[i]);
+                uploadList.add(item);
+            } catch (NullPointerException e) {
+                log.error(String.format("%d번째 항목이 업로드 되지 않음", i));
+            } catch (Exception e) {
+                log.error(String.format("%d번째 항목 저장 실패 ::: %s", e.getLocalizedMessage()));
+            }
+        }
+
+        if (uploadList.size() == 0) {
+            throw new Exception("업로드 실패");
+        }
+
+        return uploadList;
     }
 }	// end WebHelper
