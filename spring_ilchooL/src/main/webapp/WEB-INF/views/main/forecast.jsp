@@ -23,29 +23,29 @@
 					<c:if test="${pty == 0}">
 						<c:choose>
 							<c:when test="${sky == 1}">
-								<img src="${pageContext.request.contextPath}/assets/img/carousel/bg_sunny1.gif" />
+								<img src="${pageContext.request.contextPath}/assets/img/carouselbg/bg_sunny1.gif" />
 							</c:when>
 
 							<c:when test="${sky == 3}">
-								<img src="${pageContext.request.contextPath}/assets/img/carousel/bg_cloud.gif" />
+								<img src="${pageContext.request.contextPath}/assets/img/carouselbg/bg_cloud.gif" />
 							</c:when>
 
 							<c:when test="${sky == 4}">
-								<img src="${pageContext.request.contextPath}/assets/img/carousel/bg_dark.gif" />
+								<img src="${pageContext.request.contextPath}/assets/img/carouselbg/bg_dark.gif" />
 							</c:when>
 						</c:choose>
 					</c:if>
 					<c:if test="${pty == 1}">
-						<img src="${pageContext.request.contextPath}/assets/img/carousel/bg_rain.gif" />
+						<img src="${pageContext.request.contextPath}/assets/img/carouselbg/bg_rain1.gif" />
 					</c:if>
 					<c:if test="${pty == 2}">
-						<img src="${pageContext.request.contextPath}/assets/img/carousel/bg_sleet.gif" />
+						<img src="${pageContext.request.contextPath}/assets/img/carouselbg/bg_sleet.gif" />
 					</c:if>
 					<c:if test="${pty == 3}">
-						<img src="${pageContext.request.contextPath}/assets/img/carousel/bg_snow.gif" />
+						<img src="${pageContext.request.contextPath}/assets/img/carouselbg/bg_snow.gif" />
 					</c:if>
 					<c:if test="${pty == 4}">
-						<img src="${pageContext.request.contextPath}/assets/img/carousel/bg_shower.gif" />
+						<img src="${pageContext.request.contextPath}/assets/img/carouselbg/bg_rain1.gif" />
 					</c:if>
 
 					<!-- 캐러셀 내용 : 날씨 -->
@@ -191,19 +191,19 @@
 					<!-- 캐러셀 배경 : 미세먼지 -->
 					<c:choose>
 						<c:when test="${pm10 <= 30}">
-							<img src="${pageContext.request.contextPath}/assets/img/carousel/dust_bg_best.gif" />
+							<img src="${pageContext.request.contextPath}/assets/img/carouselbg/dust_bg_best.gif" />
 						</c:when>
 
 						<c:when test="${pm10 > 30 && pm10 <= 80}">
-							<img src="${pageContext.request.contextPath}/assets/img/carousel/dust_bg_good.gif" />
+							<img src="${pageContext.request.contextPath}/assets/img/carouselbg/dust_bg_good1.gif" />
 						</c:when>
 
 						<c:when test="${pm10 > 80 && pm10 <= 150}">
-							<img src="${pageContext.request.contextPath}/assets/img/carousel/dust_bg_bad.gif" />
+							<img src="${pageContext.request.contextPath}/assets/img/carouselbg/dust_bg_bad.gif" />
 						</c:when>
 
 						<c:otherwise>
-							<img src="${pageContext.request.contextPath}/assets/img/carousel/dust_bg_danger.gif" />
+							<img src="${pageContext.request.contextPath}/assets/img/carouselbg/dust_bg_danger.gif" />
 						</c:otherwise>
 					</c:choose>
 
