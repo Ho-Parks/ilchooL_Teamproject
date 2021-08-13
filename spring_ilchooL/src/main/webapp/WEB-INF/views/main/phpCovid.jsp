@@ -15,81 +15,79 @@
 		<div id="covid_title">
 			<h1>COVID-19 Statistics</h1>
 		</div>
-		<div id="covid_count" class="well">
-			<div class="row">
-				<ul>
-					<li style="text-align: left; padding-left: 30px;">
-						데이터 기준 : 
-						<fmt:parseDate value="${date }" var="parseDate" pattern="yyyymmdd" />
-						<fmt:formatDate value="${parseDate }" pattern="yyyy-mm-dd" />
-						(서울시)
-					</li>
-					<li id="today_title">오늘 확진자수<br/>
-						<span>${confirmed_0}명</span>
-					</li>
-					<li class="col-md-3 col-xs-6">누적 확진자<br/>
-						<span class="s_confirmed main_count">${confirmed_acc}</span>
-						<br/>
-						<span class="confirmed_box d_box">
-						<c:choose>
-							<c:when test="${confirmed_0 > 0 }">
-								${confirmed_0 }&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
-							</c:when>
-							<c:otherwise>
-								0
-							</c:otherwise>
-						</c:choose>
-						</span>
-					</li>
-					<li class="col-md-3 col-xs-6">누적 격리해제<br/>
-						<span class="s_released main_count">${released_acc}</span>
-						<br/>
-						<span class="released_box d_box">
-						<c:choose>
-							<c:when test="${released_0 > 0 }">
-								${released_0}&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
-							</c:when>
-							<c:otherwise>
-								0
-							</c:otherwise>
-						</c:choose>
-						</span>
-					</li>				
-					<li class="col-md-3 col-xs-6">격리중<br/>
-						<span class="s_active main_count">${active_0}</span>
-						<br/>
-						<span class="active_box d_box">
-						<c:choose>
-							<c:when test="${active_0 - active_1 > 0 }">
-								${active_0 - active_1 }&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
-							</c:when>
-							<c:when test="${active_0 - active_1 < 0 }">
-								${active_1 - active_0 }&nbsp;<i class="glyphicon glyphicon-arrow-down" id="down"></i>
-							</c:when>
-							<c:otherwise>
-								0
-							</c:otherwise>
-						</c:choose>
-						</span>
-					</li>
-					<li class="col-md-3 col-xs-6">누적 사망자<br/>
-						<span class="s_death main_count">${death_acc}</span>
-						<br/>
-						<span class="death_box d_box">
-						<c:choose>
-							<c:when test="${death_0 > 0 }">
-								${death_0}&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
-							</c:when>
-							<c:otherwise>
-								0
-							</c:otherwise>
-						</c:choose>
-						</span>
-					</li>					
-				</ul>
-			</div>
+		<div id="covid_count" class="row">
+			<ul>
+				<li style="text-align: left; padding-left: 30px;">
+					데이터 기준 : 
+					<fmt:parseDate value="${date }" var="parseDate" pattern="yyyymmdd" />
+					<fmt:formatDate value="${parseDate }" pattern="yyyy-mm-dd" />
+					(서울시)
+				</li>
+				<li id="today_title">오늘 확진자수<br/>
+					<span>${confirmed_0}명</span>
+				</li>
+				<li class="col-md-3 col-xs-6">누적 확진자<br/>
+					<span class="s_confirmed main_count">${confirmed_acc}</span>
+					<br/>
+					<span class="confirmed_box d_box">
+					<c:choose>
+						<c:when test="${confirmed_0 > 0 }">
+							${confirmed_0 }&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
+						</c:when>
+						<c:otherwise>
+							0
+						</c:otherwise>
+					</c:choose>
+					</span>
+				</li>
+				<li class="col-md-3 col-xs-6">누적 격리해제<br/>
+					<span class="s_released main_count">${released_acc}</span>
+					<br/>
+					<span class="released_box d_box">
+					<c:choose>
+						<c:when test="${released_0 > 0 }">
+							${released_0}&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
+						</c:when>
+						<c:otherwise>
+							0
+						</c:otherwise>
+					</c:choose>
+					</span>
+				</li>				
+				<li class="col-md-3 col-xs-6">격리중<br/>
+					<span class="s_active main_count">${active_0}</span>
+					<br/>
+					<span class="active_box d_box">
+					<c:choose>
+						<c:when test="${active_0 - active_1 > 0 }">
+							${active_0 - active_1 }&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
+						</c:when>
+						<c:when test="${active_0 - active_1 < 0 }">
+							${active_1 - active_0 }&nbsp;<i class="glyphicon glyphicon-arrow-down" id="down"></i>
+						</c:when>
+						<c:otherwise>
+							0
+						</c:otherwise>
+					</c:choose>
+					</span>
+				</li>
+				<li class="col-md-3 col-xs-6">누적 사망자<br/>
+					<span class="s_death main_count">${death_acc}</span>
+					<br/>
+					<span class="death_box d_box">
+					<c:choose>
+						<c:when test="${death_0 > 0 }">
+							${death_0}&nbsp;<i class="glyphicon glyphicon-arrow-up" id="up"></i>
+						</c:when>
+						<c:otherwise>
+							0
+						</c:otherwise>
+					</c:choose>
+					</span>
+				</li>					
+			</ul>
 		</div>
-		<div id="covid_graph" class="well row">
+		<div id="covid_graph" class="row">
 			<div class="covid_graph_btn_box col-md-12 col-xs-12 row">
 				<p class="pull-left col-xs-12">데이터 기준 :
 					<fmt:parseDate value="${date }" var="parseDate" pattern="yyyymmdd" />

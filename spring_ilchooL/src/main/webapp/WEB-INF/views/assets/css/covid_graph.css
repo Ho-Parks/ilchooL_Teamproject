@@ -23,6 +23,8 @@ ul li span { font-size: 15px; }
 .s_death { color: rgba(240, 173, 78, 1); font-weight: bold; }
 .death_box { background: rgba(240, 173, 78, 0.25); color: rgba(240, 173, 78, 1); font-weight: bold; }
 
+#covid_count { border: 1px solid; margin-bottom: 20px; }
+#covid_graph { border: 1px solid; }
 #covid_graph .row { margin: 0 !important; }
 
 .covid_graph_btn_box p { position: relative; font-size: 15px; }
