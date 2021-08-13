@@ -1,26 +1,44 @@
 package project.spring.ilchooL.controllers;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import project.spring.ilchooL.model.Finance;
-import project.spring.ilchooL.model.FinancePopular;
-import project.spring.ilchooL.model.FinanceTop;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import project.spring.ilchooL.helper.WebHelper;
+import project.spring.ilchooL.model.Kosdaq;
+import project.spring.ilchooL.model.Kospi;
+import project.spring.ilchooL.service.KosdaqService;
 
 @Controller
 public class FinanceController {
 	@Autowired
 	SqlSession sqlSession;
 	
+	@Autowired
+	KosdaqService kosdaqService;
+	
+	@Autowired
+	WebHelper webhelper;
+	
+	/** "/프로젝트이름" 에 해당하는 ContextPath 변수 주입 */
+	@Value("#{servletContext.contextPath}")
+	String contextPath;
+
 	@RequestMapping(value = "/contents/contents_finance.do", method = RequestMethod.GET)
 	public String Finance(Model model) throws IOException {
 		
@@ -293,10 +311,54 @@ public class FinanceController {
 		
 		
 		
+		/** 코스닥, 코스피 데이터 */
+		
+		List<Kosdaq> kosdaq = null;
+		List<Kospi> kospi = null;
+		
+		try {
+			kosdaq = kosdaqService.getKosdaqList();
+			kospi = kosdaqService.getKospiList();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		SimpleDateFormat new_format = new SimpleDateFormat("yyyy-MM-dd");
+		
+		for(int i=0; i<kospi.size(); i++) {
+			//kospi.get(i).setDate(new_format.format(kospi.get(i).getDate()));
+			kospi.get(i).setDate(kospi.get(i).getDate().substring(0, 10));
+		}
+		
+		for(int i=0; i<kosdaq.size(); i++) {
+			//kosdaq.get(i).setDate(new_format.format(kosdaq.get(i).getDate()));
+			kosdaq.get(i).setDate(kosdaq.get(i).getDate().substring(0, 10));
+		}
+		
+		
+		JSONArray kd_jsonArray = JSONArray.fromObject(kosdaq);
+		JSONArray kp_jsonArray = JSONArray.fromObject(kospi);
+		
+		Map<String, Object> kd_map = new HashMap<String, Object>();
+		Map<String, Object> kp_map = new HashMap<String, Object>();
+		kd_map.put("kosdaq", kd_jsonArray);
+		kp_map.put("kospi", kp_jsonArray);
+		
+		JSONObject kd_jsonObject = JSONObject.fromObject(kd_map);
+		JSONObject kp_jsonObject = JSONObject.fromObject(kp_map);
+		
+		
+		
+		model.addAttribute("kosdaq", kd_jsonObject);
+		model.addAttribute("kospi", kp_jsonObject);
+		model.addAttribute("kd_size", kosdaq);
+		model.addAttribute("kp_size", kospi);
+		
+		
 		
 		
 		return "contents/contents_finance";
 
 	}
-
 }

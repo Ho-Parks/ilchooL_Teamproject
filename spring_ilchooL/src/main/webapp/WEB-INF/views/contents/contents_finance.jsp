@@ -8,7 +8,7 @@
 <head>
 <c:import url="../assets/head.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/contents_finance.css" />
-
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" />
 </head>
 <body>
 	<div id="header">
@@ -16,16 +16,17 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6 col-sm-12">
-				<p id="title">코스피</p>
-				<div class="finance md6">
-					<img src="../assets/img/kospi.png" />
+			<div class="tabs col-md-12 col-sm-12">
+				<div class="pull-right">
+					<button type="button" id="kosdaq_btn" class="btn btn-light btn-lg">KOSDAQ</button>
 				</div>
-			</div>
-			<div class="col-md-6 col-sm-12">
-				<p id="title">코스닥</p>
-				<div class="finance md6">
-					<img src="../assets/img/kosdaq.png" />
+				<div class="pull-right">
+					<button type="button" id="kospi_btn" class="btn btn-light btn-lg">KOSPI</button>
+				</div>
+
+				<!-- 그래프를 표시할 위치 -->
+				<div class="col-md-12">
+					<canvas id="kospiChart" style="height: 600px"></canvas>
 				</div>
 			</div>
 
@@ -136,6 +137,7 @@
 	<!-- Option 1: Bootstrap Bundle with Popper -->
 	<script src="../assets/js/jquery-1.10.2.min.js"></script>
 	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 	<!-- <script src="../assets/js/contents_finance.js"></script> -->
 	<script type="text/javascript">
 		/*  $(function() {
@@ -357,6 +359,117 @@
 			
 			
 		});
+		 
+		 
+			/** 코스닥 코스피 데이터 */
+			
+			var kosdaq = ${kosdaq};
+			var kospi = ${kospi};
+			var kd_date = [];
+			var kd_close = [];
+			var kp_date = [];
+			var kp_close = [];
+			
+			
+			
+			kosdaq = JSON.stringify(kosdaq);
+			kospi = JSON.stringify(kospi);
+			//console.log(kosdaq);
+			//console.log(kospi);
+			
+			kosdaq = JSON.parse(kosdaq).kosdaq;
+			kospi = JSON.parse(kospi).kospi;
+			
+			for (var i=0; i<"${kd_size.size()}"; i++) {
+				kd_date.push(kosdaq[i].date);
+				kd_close.push(kosdaq[i].kd_close);
+			}
+			
+			for (var i=0; i<"${kp_size.size()}"; i++) {
+				kp_date.push(kospi[i].date);
+				kp_close.push(kospi[i].kp_close);
+			}
+			
+			//console.log(kd_date);
+			//console.log(kd_close);
+			//console.log(kp_date);
+			//console.log(kp_close);
+			
+			
+			var ctx = document.getElementById('kospiChart').getContext('2d');
+		      var kospiChart = new Chart(ctx, {
+		         type: 'line',
+		         data: {
+		            labels: kp_date,         // 각각의 bar에 표시할 x축 텍스트들
+		            datasets: [{                  
+		               label: 'KOSPI',      // 범주
+		               data: kp_close,         // 각 bar에 대한 y축 좌표 데이터 
+		               backgroundColor: 'rgba(255, 99, 132, 0.2)',      // 각 bar의 배경 색상
+		               borderColor: 'rgba(255, 99, 132, 1)',         // 각 bar의 테두리 색상
+		               borderWidth: 1,                           // 각 bar의 테두리 굵기
+		               lineTension: 0
+		            }]
+		         },
+		         options: {
+		        	 legend: {
+		        	      display: false
+		        	   },
+		              scales: {
+		                  xAxes: [{
+		                     offset: false,
+		                     gridLines: {
+		                    	 display:false
+		                     }
+		                  }],
+		                  yAxes: [{
+		                	  gridLines: {
+		                		  display:false
+		                	  }
+		                  }]
+		              },
+		             title: {
+		                display: true,
+		                position: 'top',
+		                text: 'KOSPI',
+		                fontSize: 24 
+		             },
+		             maintainAspectRatio: false,
+		             aspectRatio: 1
+		          }
+		      });  
+			
+
+			
+		      
+		      
+		      
+		      $(function() {
+		    	  
+		    	  $("#kospi_btn").click(function() {
+		    		 kospiChart.config.type='line';
+		    		 kospiChart.config.options.title.text='KOSPI';
+		    		 kospiChart.config.data.labels = kp_date;
+		    		 kospiChart.config.data.datasets[0].data = kp_close;
+		    		 kospiChart.update();
+		    	  });
+		    	  
+		    	  $("#kosdaq_btn").click(function() {
+		    		 kospiChart.config.type='line';
+		    		 kospiChart.config.options.title.text='KOSDAQ';
+		    		 kospiChart.config.data.labels = kd_date;
+		    		 kospiChart.config.data.datasets[0].data = kd_close;
+		    		 kospiChart.update(); 
+					});
+		    	
+		      });
+		      
+		      
+		      
+			 
+			
+			
+
+		</script>
 		
 		
 	</script>
