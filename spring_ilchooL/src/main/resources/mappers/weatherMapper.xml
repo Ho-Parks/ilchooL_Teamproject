@@ -40,4 +40,8 @@
 		Select *
 		From weather;
 	</select>
+	
+	<select id="selectChartList" parameterType="project.spring.ilchooL.model.Witem" resultMap="weatherMap" >
+		Select category, fcst_value, fcst_date, fcst_time From weather Where fcst_date like '202108%' ORDER BY fcst_date;
+	</select>
 </mapper>

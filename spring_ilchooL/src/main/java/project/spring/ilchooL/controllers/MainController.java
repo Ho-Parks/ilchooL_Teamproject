@@ -1,5 +1,6 @@
 package project.spring.ilchooL.controllers;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -40,9 +41,9 @@ public class MainController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
+		
 		/**
 		 * 미세먼지 데이터 조회
-		 * 
 		 * @author 박수인
 		 */
 
@@ -66,7 +67,7 @@ public class MainController {
 
 		Calendar date = Calendar.getInstance();
 		String d_time = String.format("%04d-%02d-%02d %02d:00", date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1,
-				date.get(Calendar.DAY_OF_MONTH), date.get(Calendar.HOUR_OF_DAY));
+				date.get(Calendar.DAY_OF_MONTH), date.get(Calendar.HOUR_OF_DAY) - 1);
 
 		System.out.println("현재시각: " + d_time);
 
@@ -78,7 +79,7 @@ public class MainController {
 				pm10 = Integer.parseInt(d_item_list.get(i).getPm10Value());
 			}
 
-			// 'pm20' 값 조회
+			// 'pm25' 값 조회
 			if (dt.equals(d_time)) {
 				pm25 = Integer.parseInt(d_item_list.get(i).getPm25Value());
 			}
@@ -89,7 +90,6 @@ public class MainController {
 
 		/**
 		 * 날씨 데이터 조회
-		 * 
 		 * @author 박수인
 		 */
 
@@ -118,7 +118,7 @@ public class MainController {
 
 
 		String fcst_time = String.format("%02d00", date.get(Calendar.HOUR_OF_DAY));
-		String fcst_date = String.format("%04d-%02d-%02d", date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1,
+		String fcst_date = String.format("%04d%02d%02d", date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1,
 				date.get(Calendar.DAY_OF_MONTH));
 
 		// System.out.println(w_time);
@@ -165,10 +165,93 @@ public class MainController {
 		model.addAttribute("tmp", tmp);
 		model.addAttribute("tmn", tmn);
 		model.addAttribute("tmx", tmx);
+		
+		/** Chart 구현을 위한 데이터 조회 */
+		List<Witem> chart_item_list = null;
+
+		// 데이터 조회
+		try {
+			chart_item_list = weatherService.getChartItemList();
+			for (Witem item : chart_item_list) {
+				//System.out.println("************");
+				System.out.println(item.toString());
+			}
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+
+		int sunny_0 = 0;
+		int rainy_1 = 0;
+		int sleet_2 = 0;
+		int snow_3 = 0;
+		int shower_4 = 0;
+		ArrayList<Integer> tmn_chart = new ArrayList<Integer>();
+		ArrayList<Integer> tmx_chart = new ArrayList<Integer>();
+		List<String> day_chart = new ArrayList<String>();
+
+		int value = 0;
+
+		for (int i = 0; i < chart_item_list.size(); i++) {
+			ca = chart_item_list.get(i).getCategory();
+
+			if (ca.equals("PTY")) {
+				value = Integer.parseInt(chart_item_list.get(i).getFcst_value());
+
+				if (value == 0) {
+					sunny_0 += 1;
+				} else if (value == 1) {
+					rainy_1 += 1;
+				} else if (value == 2) {
+					sleet_2 += 1;
+				} else if (value == 3) {
+					snow_3 += 1;
+				} else if (value == 4) {
+					shower_4 += 1;
+				}
+			}
+			
+			if (ca.equals("TMN")) {
+				tmn_chart.add(Integer.parseInt(chart_item_list.get(i).getFcst_value()));
+				day_chart.add(chart_item_list.get(i).getFcst_date());
+			}
+
+			if (ca.equals("TMX")) {
+				tmx_chart.add(Integer.parseInt(chart_item_list.get(i).getFcst_value()));
+			}
+		}
+		
+		for (int i=0; i<day_chart.size(); i++) {
+			String date_chart = day_chart.get(i);
+			String date_sub = "'"+date_chart.substring(6)+"일'";
+			
+			//System.out.println(date_sub);
+			
+			day_chart.set(i, date_sub);
+			
+		}
+		
+
+
+		System.out.println(">>>>>>>>>>>> sunny:" + sunny_0);
+		System.out.println(">>>>>>>>>>>> rainy:" + rainy_1);
+		System.out.println(">>>>>>>>>>>> shower:" + shower_4);
+		System.out.println(">>>>>>>>>>>> tmn_chart:" + tmn_chart);
+		System.out.println(">>>>>>>>>>>> tmx_chart:" + tmx_chart);
+		System.out.println(">>>>>>>>>>>> day_chart:" + day_chart);
+
+		model.addAttribute("sunny", sunny_0);
+		model.addAttribute("rainy", rainy_1);
+		model.addAttribute("sleet", sleet_2);
+		model.addAttribute("snow", snow_3);
+		model.addAttribute("shower", shower_4);
+		model.addAttribute("tmn_chart", tmn_chart);
+		model.addAttribute("tmx_chart", tmx_chart);
+		model.addAttribute("day_chart", day_chart);
+
 
 		/**
 		 * 코로나 데이터 조회
-		 * 
 		 * @author 박준영
 		 */
 
