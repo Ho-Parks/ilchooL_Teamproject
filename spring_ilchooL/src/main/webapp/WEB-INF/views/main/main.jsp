@@ -25,7 +25,7 @@
    
    	<c:import url="forecast.jsp"/>
    <div id="forecast_box" class="container p_container">
-	   <%-- <c:import url="forecast_graph.jsp" />  --%>
+	<c:import url="forecast_graph.jsp" />
    </div>
    
    <div id="covid_box" class="container p_container">
