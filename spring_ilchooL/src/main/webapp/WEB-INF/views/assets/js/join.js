@@ -38,13 +38,13 @@ pw1.addEventListener("focusout", checkPw);
 pw2.addEventListener("focusout", comparePw);
 userName.addEventListener("focusout", checkName);
 birthday.addEventListener("focusout", isBirthCompleted);
-gender.addEventListener("focusout", function() {
+/**  gender.addEventListener("focusout", function() {
 	if (gender.value === "성별") {
 		error[5].style.display = "block";
 	} else {
 		error[5].style.display = "none";
 	}
-})
+}) */
 email.addEventListener("focusout", isEmailCorrect);
 mobile.addEventListener("focusout", checkPhoneNum);
 

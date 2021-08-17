@@ -35,17 +35,17 @@ public class AccountRestController {
     MembersService membersService;
 
     /** 아이디 중복검사 */
-    @RequestMapping(value = "/rest/account/id_unique_check", method = RequestMethod.POST)
+    @RequestMapping(value = "/rest/account/id_unique_check.do", method = RequestMethod.POST)
     public Map<String, Object> idUniqueCheck(
             // 아이디
-            @RequestParam(value = "user_id", required = false) String userId) {
+            @RequestParam(value = "user_id", required = false) String user_id) {
 
-        if (!regexHelper.isValue(userId)) {
+        if (!regexHelper.isValue(user_id)) {
             return webHelper.getJsonWarning("아이디를 입력하세요.");
         }
 
         Members input = new Members();
-        input.setUserId(userId);
+        input.setUser_id(user_id);
 
         try {
             membersService.idUniqueCheck(input);
@@ -65,7 +65,7 @@ public class AccountRestController {
             @RequestParam(value = "user_id", required = false) String userId) {
 
         Members input = new Members();
-        input.setUserId(userId);
+        input.setUser_id(userId);
         String result = "true";
 
         try {
@@ -81,12 +81,12 @@ public class AccountRestController {
     }
 
     /** 회원가입 */
-    @RequestMapping(value = "/rest/account/login_new", method = RequestMethod.POST)
+    @RequestMapping(value = "/rest/account/join", method = RequestMethod.POST)
     public Map<String, Object> join(
-            @RequestParam(value = "user_id",        required = false) String userId,
-            @RequestParam(value = "user_pw",        required = false) String userPw,
-            @RequestParam(value = "user_pw_confirm",required = false) String userPwConfirm,
-            @RequestParam(value = "user_name",      required = false) String userName,
+            @RequestParam(value = "user_id",        required = false) String user_id,
+            @RequestParam(value = "user_pw",        required = false) String user_pw,
+            @RequestParam(value = "user_pw_confirm",required = false) String user_pw_confirm,
+            @RequestParam(value = "user_name",      required = false) String user_name,
             @RequestParam(value = "email",          required = false) String email,
             @RequestParam(value = "phone",          required = false) String phone,
             @RequestParam(value = "birthday",       required = false) String birthday,
@@ -99,13 +99,13 @@ public class AccountRestController {
         /** 1) 유효성 검증 */
         // POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
         // REST컨트롤러에서도 프론트의 유효성 검증과 별개로 자체 유효성 검증을 수행해야 한다.
-        if (!regexHelper.isValue(userId)) { return webHelper.getJsonWarning("아이디를 입력하세요."); }
-        if (!regexHelper.isEngNum(userId)) { return webHelper.getJsonWarning("아이디는 영어,숫자만 입력 가능합니다."); }
-        if (userId.length() < 4 || userId.length() > 30) { return webHelper.getJsonWarning("아이디는 4~30글자로 입력 가능합니다."); }
+        if (!regexHelper.isValue(user_id)) { return webHelper.getJsonWarning("아이디를 입력하세요."); }
+        if (!regexHelper.isEngNum(user_id)) { return webHelper.getJsonWarning("아이디는 영어,숫자만 입력 가능합니다."); }
+        if (user_id.length() < 4 || user_id.length() > 30) { return webHelper.getJsonWarning("아이디는 4~30글자로 입력 가능합니다."); }
 
-        if (!regexHelper.isValue(userPw)) { return webHelper.getJsonWarning("비밀번호를 입력하세요."); }
-        if (userPw.length() < 4 || userPw.length() > 30) { return webHelper.getJsonWarning("비밀번호는 4~30글자로 입력 가능합니다."); }
-        if (!userPw.equals(userPwConfirm)) { return webHelper.getJsonWarning("비밀번호는 확인이 잘못되었습니다."); }
+        if (!regexHelper.isValue(user_pw)) { return webHelper.getJsonWarning("비밀번호를 입력하세요."); }
+        if (user_pw.length() < 4 || user_pw.length() > 30) { return webHelper.getJsonWarning("비밀번호는 4~30글자로 입력 가능합니다."); }
+        if (!user_pw.equals(user_pw_confirm)) { return webHelper.getJsonWarning("비밀번호는 확인이 잘못되었습니다."); }
 
         if (!regexHelper.isEmail(email)) { return webHelper.getJsonWarning("이메일이 잘못되었습니다."); }
         if (!regexHelper.isCellPhone(phone) && !regexHelper.isTel(phone)) { return webHelper.getJsonWarning("연락처가 잘못되었습니다."); }
@@ -129,9 +129,9 @@ public class AccountRestController {
 
         /** 3) 데이터 저장 */
         Members input = new Members();
-        input.setUserId(userId);
-        input.setUserPw(userPw);
-        input.setUserName(userName);
+        input.setUser_id(user_id);
+        input.setUser_pw(user_pw);
+        input.setUser_name(user_name);
         input.setEmail(email);
         input.setPhone(phone);
         input.setBirthday(birthday);
@@ -140,8 +140,8 @@ public class AccountRestController {
         input.setAddr1(addr1);
         input.setAddr2(addr2);
         input.setPhoto(item);
-        input.setIsAdmin("N");  // 관리자 아님
-        input.setIsOut("N");    // 탈퇴아님 --> 탈퇴시 'Y'로 업데이트
+        input.setIs_admin("N");  // 관리자 아님
+        input.setIs_out("N");    // 탈퇴아님 --> 탈퇴시 'Y'로 업데이트
 
         try {
             membersService.addMembers(input);
@@ -167,8 +167,8 @@ public class AccountRestController {
 
         /** 2) 데이터 조회 */
         Members input = new Members();
-        input.setUserId(userId);
-        input.setUserPw(userPw);
+        input.setUser_id(userId);
+        input.setUser_pw(userPw);
 
         /** 3) 로그인 */
         Members output = null;
@@ -200,7 +200,7 @@ public class AccountRestController {
         return webHelper.getJsonData();
     }
 
-    /** 로그아웃 */
+    /** 회원가입 */
     @RequestMapping(value = "/rest/account/logout", method = RequestMethod.GET)
     public Map<String, Object> logout() {
         webHelper.removeAllSession();

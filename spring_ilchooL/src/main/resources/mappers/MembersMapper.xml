@@ -7,11 +7,11 @@
         <!-- 일련번호, IS NOT NULL, PRI -->
         <result property="id" column="id" />
         <!-- 아이디, IS NOT NULL -->
-        <result property="userId" column="user_id" />
+        <result property="user_id" column="user_id" />
         <!-- 비밀번호(암호화저장), IS NOT NULL -->
-        <result property="userPw" column="user_pw" />
+        <result property="user_pw" column="user_pw" />
         <!-- 회원이름, IS NOT NULL -->
-        <result property="userName" column="user_name" />
+        <result property="user_name" column="user_name" />
         <!-- 이메일, IS NOT NULL -->
         <result property="email" column="email" />
         <!-- 연락처, IS NOT NULL -->
@@ -29,15 +29,15 @@
         <!-- 프로필사진 정보{json=UploadItem}, IS NULL -->
         <result property="photoJson" column="photo" />
         <!-- 탈퇴여부(Y/N), IS NOT NULL -->
-        <result property="isOut" column="is_out" />
+        <result property="is_out" column="is_out" />
         <!-- 관리자 여부(Y/N), IS NOT NULL -->
-        <result property="isAdmin" column="is_admin" />
+        <result property="is_admin" column="is_admin" />
         <!-- 마지막 로그인 일시, IS NULL -->
-        <result property="loginDate" column="login_date" />
+        <result property="login_date" column="login_date" />
         <!-- 등록일시, IS NOT NULL -->
-        <result property="regDate" column="reg_date" />
+        <result property="reg_date" column="reg_date" />
         <!-- 변경일시, IS NOT NULL -->
-        <result property="editDate" column="edit_date" />
+        <result property="edit_date" column="edit_date" />
     </resultMap>
     <!-- 단일행 조회를 위한 기능 정의 -->
     <select id="selectItem" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
@@ -60,7 +60,7 @@
         INSERT INTO members (
         user_id, user_pw, user_name, email, phone, birthday, gender, postcode, addr1, addr2, photo, is_out, is_admin, login_date, reg_date, edit_date
         ) VALUES (
-        #{userId}, MD5(#{userPw}), #{userName}, #{email}, #{phone}, #{birthday}, #{gender}, #{postcode}, #{addr1}, #{addr2}, #{photoJson}, #{isOut}, #{isAdmin}, #{loginDate}, now(), now()
+        #{user_id}, MD5(#{user_pw}), #{user_name}, #{email}, #{phone}, #{birthday}, #{gender}, #{postcode}, #{addr1}, #{addr2}, #{photoJson}, #{is_out}, #{is_admin}, #{login_date}, now(), now()
         )
     </insert>
     <!-- 데이터 삭제를 위한 기능 정의 -->
@@ -70,9 +70,9 @@
     <!-- 데이터 갱신을 위한 기능 정의 -->
     <update id="updateItem" parameterType="project.spring.ilchooL.model.Members">
         UPDATE members SET
-        user_id=#{userId},
-        user_pw=MD5(#{userPw}),
-        user_name=#{userName},
+        user_id=#{user_id},
+        user_pw=MD5(#{user_pw}),
+        user_name=#{user_name},
         email=#{email},
         phone=#{phone},
         birthday=#{birthday},
@@ -81,21 +81,22 @@
         addr1=#{addr1},
         addr2=#{addr2},
         photo=#{photoJson},
-        is_out=#{isOut},
-        is_admin=#{isAdmin},
-        login_date=#{loginDate},
+        is_out=#{is_out},
+        is_admin=#{is_admin},
+        login_date=#{login_date},
         edit_date=now()
         WHERE id=#{id}
     </update>
     <!-- 아이디 중복검사 -->
     <select id="idUniqueCheck" parameterType="project.spring.ilchooL.model.Members" resultType="int">
-        SELECT COUNT(*) FROM members WHERE user_id=#{userId}
+        SELECT COUNT(*) FROM members WHERE user_id=#{user_id}
     </select>
     <!-- 로그인 조회 -->
     <select id="login" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
-        SELECT id, user_id, user_pw, user_name, email, phone, birthday, gender, postcode, addr1, addr2, photo, is_out, is_admin, login_date, reg_date, edit_date
+        SELECT *
+        <!-- id, user_id, user_pw, user_name, email, phone, birthday, gender, postcode, addr1, addr2, photo, is_out, is_admin, login_date, reg_date, edit_date -->
         FROM members
-        WHERE user_id=#{userId} AND user_pw=MD5(#{userPw}) AND is_out='N'
+        WHERE user_id=#{user_id} AND user_pw=MD5(#{user_pw}) AND is_out='N'
     </select>
     <!-- 최근 로그인 시간 갱신 -->
     <update id="updateLoginDate" parameterType="project.spring.ilchooL.model.Members">

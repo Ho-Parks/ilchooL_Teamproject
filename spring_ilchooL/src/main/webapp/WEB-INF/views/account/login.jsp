@@ -38,7 +38,7 @@
 						onclick="location.href='../account/login_new_terms.do'">회원가입</button>
 				</div> -->
 					<div class="form-group">
-	                    <a href="${pageContext.request.contextPath}/account/login_new_terms" class="btn_new">회원가입</a>
+	                    <a href="${pageContext.request.contextPath}/account/join_terms" class="btn_new">회원가입</a>
 	                </div>
 				</form>
 				<div class="login_append">

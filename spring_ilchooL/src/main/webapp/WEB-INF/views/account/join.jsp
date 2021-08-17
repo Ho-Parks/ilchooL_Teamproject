@@ -9,7 +9,7 @@
 <head>
 <c:import url="../assets/head.jsp" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/css/login_new.css">
+	href="${pageContext.request.contextPath}/assets/css/join.css">
 </head>
 
 <body>
@@ -21,7 +21,7 @@
 		<!-- content-->
 		<div id="inner_join">
 			<div id="new_box">회원가입</div>
-			<form class="form-horizontal" name="join_form" id="join_form" action="${pageContext.request.contextPath}/rest/account/login_new" method="post">
+			<form id="join-form" class="form-horizontal" name="join-form" method="post" action="${pageContext.request.contextPath}/rest/account/join">
 			<!-- ID -->
 				<div>
 					<div class="join">
@@ -177,29 +177,13 @@
 		<c:import url="../assets/footer.jsp" />
 	</div>
 
-	<script src="${pageContext.request.contextPath}/assets/js/login_new.js"></script>
-	<script src="${pageContext.request.contextPath}/assets/js/login_new2.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/join.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/join2.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/address_1.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/address.js"></script>
 	<!-- validate 플러그인 참조 -->
 	<script src="${pageContext.request.contextPath}/assets/plugins/validate/jquery.validate.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/plugins/validate/additional-methods.min.js"></script>
-	
-	<!-- 
-	$("#join_form").bind('submit', function() {
-				check();
-				console.log("gg");
-				
-				return false; 
-			});
-	-->
-	  <!-- <script type="text/javascript">
-		$("#btnJoin").click(function(e) {
-			e.preventDefault();
-			console.log("11");
-			check();
-		});
-	</script> -->
 </body>
 
 </html>

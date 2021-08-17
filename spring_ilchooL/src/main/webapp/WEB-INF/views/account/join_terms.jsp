@@ -7,7 +7,7 @@
 <html>
 <head>
 <c:import url="../assets/head.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/login_new_terms.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/join_terms.css">
 </head>
 <body>
 <body>
@@ -64,10 +64,10 @@
 							이때에도 수신 동의에 대해 별도로 안내하고 동의를 받습니다.</div>
 					</li>
 				</ul>
-				<button type="submit" class="next-button" disabled onclick="location.href='${pageContext.request.contextPath}/account/login_new'">확인</button>
+				<button type="submit" class="next-button" disabled onclick="location.href='${pageContext.request.contextPath}/account/join'">확인</button>
 			</form>
 		</div>
 	</div>
-	<script src="${pageContext.request.contextPath}/assets/js/login_new_terms.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/join_terms.js"></script>
 </body>
 </html>

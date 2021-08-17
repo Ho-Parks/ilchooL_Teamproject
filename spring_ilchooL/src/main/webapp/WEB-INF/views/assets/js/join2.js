@@ -46,7 +46,7 @@ $(function() {
 				minlength: 4,
 				maxlength: 30,
 				remote: {
-					url: ROOT_URL + '/rest/account/id_unique_check_jquery',
+					url: '${pageContext.request.contextPath}/rest/account/id_unique_check_jquery',
 					type: 'post',
 					data: {
 						user_id: function() {
@@ -135,7 +135,7 @@ $(function() {
 		},
 		success: function(json) {
 			swal('알림', '회원가입이 완료되었습니다. 로그인 해 주세요.', 'success').then(function(result) {
-				window.location = ROOT_URL + '/account/login';
+				window.location.href = getContextPath() + "/account/login";
 			});
 		},
 	}); // end ajaxForm
@@ -148,25 +148,18 @@ $(function() {
 			return;
 		}
 
-		$.post(ROOT_URL + '/rest/account/id_unique_check', {
+		$.post("" + '/rest/account/id_unique_check', {
 			user_id: userId
 		}, function(json) {
 			swal('확인', '사용가능한 아이디 입니다.', 'success');
 		});
 	});
 
-	/**  function check() {
-		// 확인, 취소버튼에 따른 후속 처리 구현
-		swal({
-			title: '알림',
-			text: '가입 하시겠습니까?',
-			type: 'success',
-			confirmButtonText: '확인', // 확인버튼 표시 문구
-		}).then(function(result) {
-			if (result.value) {
-				$("#join_form").submit();
-			}
-		});
-	} 
-	*/
+	function getContextPath() {
+      var hostIndex = location.href.indexOf(location.host)
+            + location.host.length;
+      var contextPath = location.href.substring(hostIndex, location.href
+            .indexOf('/', hostIndex + 1));
+      return contextPath;
+   }
 });

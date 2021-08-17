@@ -19,7 +19,15 @@ $(function() {
             return $(form).valid();
         },
         success: function(json) {
-            window.location = ROOT_URL;
+            window.location.href = getContextPath() + "/main/main";
         },
     }); // end ajaxForm
+
+	function getContextPath() {
+      var hostIndex = location.href.indexOf(location.host)
+            + location.host.length;
+      var contextPath = location.href.substring(hostIndex, location.href
+            .indexOf('/', hostIndex + 1));
+      return contextPath;
+   }
 });
