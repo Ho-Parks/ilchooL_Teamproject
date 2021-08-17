@@ -102,4 +102,54 @@
     <update id="updateLoginDate" parameterType="project.spring.ilchooL.model.Members">
         UPDATE members SET login_date=now() WHERE id=#{id}
     </update>
+    
+    <!-- ADMIN -->
+    
+   	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="adminSelectItem"
+		parameterType="project.spring.ilchooL.model.Members"
+		resultMap="membersMap">
+		SELECT id, user_id, user_pw, user_name, email, phone, birthday, gender, postcode, addr1, addr2, is_out, is_admin, login_date, reg_date, edit_date FROM members WHERE id=#{id};
+	</select>
+	
+   	<!-- 다중행 조회를 위한 기능 정의 -->
+    <select id="adminSelectList" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
+        SELECT id, user_id, user_pw, user_name, email, phone, birthday, gender, postcode, addr1, addr2, is_out, is_admin, login_date, reg_date, edit_date FROM members
+        <where>
+            <if test="user_id != null and user_id != ''">
+                user_id LIKE concat('%', #{user_id}, '%')
+            </if>
+            <if test="user_name != null and user_name != ''">
+                OR user_name LIKE concat('%', #{user_name}, '%')
+            </if>
+            <if test="email != null and email != ''">
+                OR email LIKE concat('%', #{email}, '%')
+            </if>            
+        </where>
+        ORDER BY id DESC
+         
+	<!-- 페이지 구현을 위한 LIMIT절 추가 -->
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>    
+    
+  	<!-- 데이터 갱신을 위한 기능 정의 -->
+    <update id="adminUpdateItem" parameterType="project.spring.ilchooL.model.Members">
+        UPDATE members SET user_id=#{user_id}, user_name=#{user_name}, email=#{email}, phone=#{phone}
+        WHERE id=#{id};
+    </update>
+    
+	<!-- 검색 COUNT 기능 정의 -->
+    <select id="adminSelectCountAll" parameterType="project.spring.ilchooL.model.Members" resultType="int">
+        SELECT COUNT(*) FROM members
+        <where>
+            <if test="user_id != null and user_id != ''">
+                user_id LIKE concat('%', #{user_id}, '%')
+            </if>
+            <if test="user_name != null and user_name != ''">
+                OR user_name LIKE concat('%', #{user_name}, '%')
+            </if>
+        </where>
+    </select>
 </mapper>

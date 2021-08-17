@@ -18,11 +18,6 @@ pageEncoding="UTF-8"%>
 				<li><a href="admin_dashboard.jsp">Dashboard</a></li>
 				<li><a href="admin_list.jsp">Users</a></li>
 			</ul>
-
-			<form class="navbar-form navbar-right">
-				<input type="text" class="form-control" placeholder="아이디 검색..." >
-				<button type="submit" class="btn btn-default btn-sm">검색</button>
-			</form>
 		</div>
 	</div>
 </div>

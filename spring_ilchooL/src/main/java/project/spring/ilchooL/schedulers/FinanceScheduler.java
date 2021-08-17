@@ -250,6 +250,7 @@ public class FinanceScheduler {
 
 		// 한번 실행 후 여기 주석 풀기
 		
+		
 		input.setF_name0(f_name[0]);
 		input.setF_amount0(f_amount[0]);
 		input.setF_prev0(f_prev[0]);
@@ -352,8 +353,8 @@ public class FinanceScheduler {
 			log.debug("데이터 저장에 실패했습니다.");
 			e.printStackTrace();
 		}
-		*/
 		
+		*/
 		
 		
 		
@@ -512,6 +513,7 @@ public class FinanceScheduler {
 			log.debug("데이터 갱신에 실패했습니다.");
 			e.printStackTrace();
 		}
+		
 		
 
 	}

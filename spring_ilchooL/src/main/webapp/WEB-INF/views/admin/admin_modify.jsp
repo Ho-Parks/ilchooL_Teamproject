@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -113,7 +115,8 @@ body {
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 							<h2 class="page-header">회원 정보 수정</h2>
-				<form class="form-horizontal" role="form">
+				<form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/admin/edit_ok.do">
+					<input type="hidden" name="id" value="${output.id}">
 					<!-- 입력양식 -->
 					<div class="form-group">
 						<label for="name" class="col-md-2">#</label>
@@ -125,9 +128,9 @@ body {
 
 					<!-- 입력양식 -->
 					<div class="form-group">
-						<label for="name" class="col-md-2">이름</label>
+						<label for="name" class="col-md-2">아이디</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" id="name"
+							<input type="text" class="form-control" id="user_id" name="user_id" value="${output.user_id}"
 								placeholder="이름을 입력하세요"> <span class="error_next_box"></span>
 							<hr />
 						</div>
@@ -136,9 +139,9 @@ body {
 
 					<!-- 입력양식 -->
 					<div class="form-group">
-						<label for="new_id" class="col-md-2">ID</label>
+						<label for="new_id" class="col-md-2">이름</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" id="id"
+							<input type="text" class="form-control" id="user_name" name="user_name" value="${output.user_name}"
 								placeholder="아이디를 입력하세요"> <span class="error_next_box"></span>
 							<hr />
 						</div>
@@ -147,9 +150,9 @@ body {
 
 					<!-- 입력양식 -->
 					<div class="form-group">
-						<label for="nickname" class="col-md-2">닉네임</label>
+						<label for="nickname" class="col-md-2">이메일</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" id="nickname"
+							<input type="text" class="form-control" id="email" name="email" value="${output.email}"
 								placeholder="닉네임을 입력하세요"> <span class="error_next_box"></span>
 							<hr />
 						</div>
@@ -158,9 +161,9 @@ body {
 
 					<!-- 입력양식 -->
 					<div class="form-group">
-						<label for="content" class="col-md-2">메모</label>
+						<label for="content" class="col-md-2">번호</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" id="content" placeholder="(Optional)">
+							<input type="text" class="form-control" id="phone" name="phone" value="${output.phone}" placeholder="(Optional)">
 							<hr />
 						</div>
 					</div>
@@ -197,9 +200,9 @@ body {
 					<!--//체크박스-->
 					<div class="form-group">
 						<div class="col-md-10">
-							<a href="admin_list.jsp"
-								class="btn btn-default btn-sm pull-right">취소</a> <a href="#"
-								id="btn1" class="btn btn-primary btn-sm pull-right">수정</a>
+							<a href="${pageContext.request.contextPath}/admin/admin_list.do"
+								class="btn btn-default btn-sm pull-right">취소</a>
+								<button type="submit">수정</button>
 						</div>
 					</div>
 				</form>
@@ -234,7 +237,7 @@ body {
 </script>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="../assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
-<script>
+<!-- <script>
 	$(function() {
 
 		$("#btn1").click(function() {
@@ -256,7 +259,7 @@ body {
 		});
 
 	});
-</script>
+</script> -->
 </body>
 
 </html>

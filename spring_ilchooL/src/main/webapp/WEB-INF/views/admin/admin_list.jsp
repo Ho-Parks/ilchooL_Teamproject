@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -106,57 +109,132 @@ body {
 				<h2 class="page-header">회원 리스트</h2>
 
 				<div class="table-responsive">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th class="text-center">#</th>
-								<th class="text-center">이름</th>
-								<th class="text-center">아이디</th>
-								<th class="text-center">닉네임</th>
-								<th class="text-center">메모</th>
-								<th class="text-center">회원번호</th>
-								<th class="text-center">가입일</th>
-								<th class="text-center">활동</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="text-center">1</td>
-								<td class="text-center">박보연</td>
-								<td class="text-center">BO3893</td>
-								<td class="text-center">보여니</td>
-								<td class="text-center"></td>
-								<td class="text-center">adfkln12390</td>
-								<td class="text-center">2021-03-23</td>
-								<td class="text-center"><a href="admin_modify.jsp"
-									class="btn btn-primary btn-sm">수정</a> <a data-toggle="modal"
-									href="#delete_user" class="btn btn-danger btn-sm">삭제</a> <a
-									href="admin_log.jsp" class="btn btn-success btn-sm">로그</a></td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr>
-								<td class="text-center">2</td>
-								<td class="text-center">박인호</td>
-								<td class="text-center">IBUSINHO</td>
-								<td class="text-center">이노</td>
-								<td class="text-center">부반장</td>
-								<td class="text-center">adakdfnadl0</td>
-								<td class="text-center">2021-03-23</td>
-								<td class="text-center"><a href="admin_modify.jsp"
-									class="btn btn-primary btn-sm">수정</a> <a data-toggle="modal"
-									href="#delete_user" class="btn btn-danger btn-sm">삭제</a> <a
-									href="admin_log.jsp" class="btn btn-success btn-sm">로그</a></td>
-							</tr>
-						</tbody>
-					</table>
-					<nav>
+   <!-- 검색폼 -->
+    <form method="get" action="${pageContext.request.contextPath}/admin/admin_list.do">
+        <label for="keyword">검색어: </label>
+        <input type="search" name="keyword" id="keyword" placeholder="검색" value="${keyword}" />
+        <button type="submit">검색</button>
+    </form>
+
+    <hr />
+
+    <!-- 조회 결과 목록 -->
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">아이디</th>
+                <th class="text-center">이름</th>
+                <th class="text-center">이메일</th>
+                <th class="text-center">번호</th>
+                <th class="text-center">활동</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:choose>
+                <%-- 조회결과가 없는 경우 --%>
+                <c:when test="${output == null || fn:length(output) == 0}">
+                    <tr>
+                        <td colspan="3" align="center">조회결과가 없습니다.</td>
+                    </tr>
+                </c:when>
+                <%-- 조회결과가 있는  경우 --%>
+                <c:otherwise>
+                    <%-- 조회 결과에 따른 반복 처리 --%>
+                    <c:forEach var="item" items="${output}" varStatus="status">
+                        <%-- 출력을 위해 준비한 학과이름과 위치 --%>
+                        <c:set var="user_id" value="${item.user_id}" />
+                        <c:set var="user_name" value="${item.user_name}" />
+                        <c:set var="email" value="${item.email}" />
+                        <c:set var="phone" value="${item.phone}" />
+
+                        <%-- 검색어가 있다면? --%>
+                        <c:if test="${keyword != ''}">
+                            <%-- 검색어에 <mark> 태그를 적용하여 형광팬 효과 준비 --%>
+                            <c:set var="mark" value="<mark>${keyword}</mark>" />
+                            <%-- 출력을 위해 준비한 학과이름과 위치에서 검색어와 일치하는 단어를 형광팬 효과로 변경 --%>
+                            <c:set var="user_id" value="${fn:replace(user_id, keyword, mark)}" />
+                            <c:set var="user_name" value="${fn:replace(user_name, keyword, mark)}" />
+                            <c:set var="email" value="${fn:replace(email, keyword, mark)}" />
+                            <c:set var="phone" value="${fn:replace(phone, keyword, mark)}" />
+                        </c:if>
+                        
+                        <tr>
+                            <td class="text-center">${item.id}</td>
+                            <td class="text-center">${user_id}</td>
+                            <td class="text-center">${user_name}</td>
+                            <td class="text-center">${email}</td>
+                            <td class="text-center">${phone}</td>
+                            <td class="text-center"><a href="${pageContext.request.contextPath}/admin/admin_modify.do?id=${item.id}" class="btn btn-primary btn-sm">수정</a>
+                            <a data-toggle="modal" href="${pageContext.request.contextPath}/admin/delete_ok.do?id=${item.id}" class="btn btn-danger btn-sm">삭제</a>
+                            <a href="${pageContext.request.contextPath}/admin/admin_log.do" class="btn btn-success btn-sm">로그</a></td>
+                        </tr>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
+        </tbody>
+    </table>
+    
+        <!-- 페이지 번호 구현 -->
+    <%-- 이전 그룹에 대한 링크 --%>
+    <c:choose>
+        <%-- 이전 그룹으로 이동 가능하다면? --%>
+        <c:when test="${pageData.prevPage > 0}">
+            <%-- 이동할 URL 생성 --%>
+            <c:url value="/admin/admin_list.do" var="prevPageUrl">
+                <c:param name="page" value="${pageData.prevPage}" />
+                <c:param name="keyword" value="${keyword}" />
+            </c:url>
+            <a href="${prevPageUrl}">[이전]</a>
+        </c:when>
+        <c:otherwise>
+            [이전]
+        </c:otherwise>
+    </c:choose>
+    
+    <%-- 페이지 번호 (시작 페이지 부터 끝 페이지까지 반복) --%>
+    <c:forEach var="i" begin="${pageData.startPage}" end="${pageData.endPage}" varStatus="status">
+        <%-- 이동할 URL 생성 --%>
+        <c:url value="/admin/admin_list.do" var="pageUrl">
+            <c:param name="page" value="${i}" />
+            <c:param name="keyword" value="${keyword}" />
+        </c:url>
+        
+        <%-- 페이지 번호 출력 --%>
+        <c:choose>
+            <%-- 현재 머물고 있는 페이지 번호를 출력할 경우 링크 적용 안함 --%>
+            <c:when test="${pageData.nowPage == i}">
+                <strong>[${i}]</strong>
+            </c:when>
+            <%-- 나머지 페이지의 경우 링크 적용함 --%>
+            <c:otherwise>
+                <a href="${pageUrl}">[${i}]</a>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+    
+    <%-- 다음 그룹에 대한 링크 --%>
+    <c:choose>
+        <%-- 다음 그룹으로 이동 가능하다면? --%>
+        <c:when test="${pageData.nextPage > 0}">
+            <%-- 이동할 URL 생성 --%>
+            <c:url value="/department/list.do" var="nextPageUrl">
+                <c:param name="page" value="${pageData.nextPage}" />
+                <c:param name="keyword" value="${keyword}" />
+            </c:url>
+            <a href="${nextPageUrl}">[다음]</a>
+        </c:when>
+        <c:otherwise>
+            [다음]
+        </c:otherwise>
+    </c:choose>
+<!-- 					<nav>
 						<ul class="pager">
 							<li><a href="#"><span>&laquo;</span></a></li>
 							<li class="active"><a href="#">1</a></li>
 							<li><a href="#"><span>&raquo;</span></a></li>
 						</ul>
-					</nav>
+					</nav> -->
 				</div>
 			</div>
 			<!-- contents -->
