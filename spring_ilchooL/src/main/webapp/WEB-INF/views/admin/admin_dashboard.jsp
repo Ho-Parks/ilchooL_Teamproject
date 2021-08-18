@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fnt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -13,6 +13,8 @@
 	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,
   maximum-scale=1.0,user-scalable=no">
 <title>Admin</title>
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css"/>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -20,9 +22,18 @@
 <link rel="stylesheet" href="../assets/css/admin_header.css">
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<!-- 차트 링크 --> 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
 <style type="text/css">
 * {
 	font-family: NanumGothic;
+	
 }
 
 body {
@@ -113,74 +124,196 @@ body {
 				<h2 class="page-header">대시보드</h2>
 				<div class="row placeholders">
 					<div class="col-xs-6 col-md-4 placeholder">
-						<h3 style="display: block; text-align: center;">DAU</h3>
-						<img src="../assets/img/graph_3.png" style="width: 100%"
-							class="img-responsive" alt="graph">
+						<h3 style="display: block; text-align: center;">서울시인원비율</h3>
+						<canvas id="dashboardChart1" style="width: 100%"
+							class="img-responsive"></canvas>
 					</div>
 					<div class="col-xs-6 col-md-4 placeholder">
-						<h3 style="display: block; text-align: center;">WAU</h3>
-						<img src="../assets/img/graph_2.png" style="width: 100%"
-							class="img-responsive" alt="graph">
+						<h3 style="display: block; text-align: center;">연령비율</h3>
+						<canvas id="dashboardChart2" style="width: 100%"
+							class="img-responsive"></canvas>
 					</div>
 					<div class="col-xs-6 col-md-4 placeholder">
-						<h3 style="display: block; text-align: center;">MAU</h3>
-						<img src="../assets/img/graph_1.png" style="width: 100%"
-							class="img-responsive" alt="graph">
+						<h3 style="display: block; text-align: center;">남녀비율</h3>
+						<canvas id="dashboardChart3" style="width: 100%"
+							class="img-responsive"></canvas>
 					</div>
-
+					
+					
+					
 				</div>
-				<div class="row placeholders">
-					<div class="col-xs-6 col-md-6 placeholder">
-						<h3 style="display: block; text-align: center;">사용자 수 추이</h3>
-						<img src="../assets/img/graph_4.png" style="width: 100%"
-							class="img-responsive" alt="graph">
-					</div>
-					<div class="col-xs-6 col-md-6 placeholder">
-						<h3 style="display: block; text-align: center;">OS/디바이스별</h3>
-						<img src="../assets/img/graph_5.png" style="width: 100%"
-							class="img-responsive" alt="graph">
-					</div>
-
+				
+				
+				<h3 class="sub-header" style="margin-top: 50px; text-align: center;">주간접속인원</h3>
+				<style="width: 100%", class="img-responsive" />
+					<canvas id="myChart"></canvas>
 				</div>
-				<h3 class="sub-header" style="margin-top: 50px; text-align: center;">페이지별/켐페인별</h3>
-				<img src="../assets/img/graph_6.png" style="width: 100%"
-					class="img-responsive" alt="graph">
-				<div class="table-responsive">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>컬럼1</th>
-								<th>컬럼2</th>
-								<th>컬럼3</th>
-								<th>컬럼4</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>101</td>
-								<td>101</td>
-								<td>101</td>
-								<td>101</td>
-								<td>101</td>
-							</tr>
-							<tr>
-								<td>101</td>
-								<td>101</td>
-								<td>101</td>
-								<td>101</td>
-								<td>101</td>
-							</tr>
-						</tbody>
-					</table>
+				
+					
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<!-- chartjs cdn 참조 -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+	
+	
+	
+	<!-- 데이터 시각화 구현 -->
+	<script src="js/chart/Chart.js"></script>
+<canvas id="myChart"></canvas>
+<script>
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        datasets: [{
+            data: [5, 2, 8, 7, 6, 5, 2],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(53, 53, 53, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(25,25,25,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
 
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+var ctx = document.getElementById("dashboardChart1");
+var dashboardChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ["seoul", "Gyeonggi-do"],
+        datasets: [{
+            label: '# of Votes',
+            data: [6, 4],
+            backgroundColor: [
+                'rgba(0, 216, 255, 1)',
+                'rgba(29, 219, 22, 1)',
+              
+            ],
+            borderColor: [
+                'rgba(255, 255, 255 ,1)',
+                'rgba(255, 255, 255 ,1)',
+       
+                
+            ],
+            borderWidth: 5
+        }]
+    },
+    options: {
+        rotation: 1 * Math.PI,
+        circumference: 1 * Math.PI,
+        legend: {
+            display: false
+        },
+        tooltip: {
+            enabled: false
+        },
+        cutoutPercentage: 50
+    }
+});
+</script>
+
+<script>
+var ctx = document.getElementById("dashboardChart2");
+var dashboardChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ["20대", "30대", "40대"],
+        datasets: [{
+            label: '# of Votes',
+            data: [6, 3, 1],
+            backgroundColor: [
+            	'rgba(231, 76, 60, 1)',
+                'rgba(255, 187, 0, 1)',
+                'rgba(29, 219, 	22, 1)'
+            ],
+            borderColor: [
+            	'rgba(255, 255, 255 ,1)',
+                'rgba(255, 255, 255 ,1)',
+                'rgba(255, 255, 255 ,1)'
+            ],
+            borderWidth: 5
+        }]
+    },
+    options: {
+        rotation: 1 * Math.PI,
+        circumference: 1 * Math.PI,
+        legend: {
+            display: false
+        },
+        tooltip: {
+            enabled: false
+        },
+        cutoutPercentage: 50
+    }
+});
+</script>
+
+<script>
+var ctx = document.getElementById("dashboardChart3");
+var dashboardChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ["남", "녀"],
+        datasets: [{
+            label: '# of Votes',
+            data: [7, 3],
+            backgroundColor: [
+                'rgba(1, 0, 255, 1)',
+                'rgba(255, 0, 0, 1)'
+                
+            ],
+            borderColor: [
+                'rgba(255, 255, 255 ,1)',
+                'rgba(255, 255, 255 ,1)'
+             
+            ],
+            borderWidth: 5
+        }]
+    },
+    options: {
+        rotation: 1 * Math.PI,
+        circumference: 1 * Math.PI,
+        legend: {
+            display: false
+        },
+        tooltip: {
+            enabled: false
+        },
+        cutoutPercentage: 50
+    }
+});
+</script>
+	
+
 </body>
 
 </html>
