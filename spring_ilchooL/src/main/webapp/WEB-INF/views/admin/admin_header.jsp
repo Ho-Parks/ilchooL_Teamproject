@@ -9,14 +9,14 @@ pageEncoding="UTF-8"%>
 				<span class="sr-only">nav_menu</span> <span class="icon-bar"></span>
 				<span class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="admin_dashboard.jsp"><img
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/admin/admin_dashboard.do"><img
 				src="../assets/img/Logo(white).png" alt="logo"
 				style="max-width: 100px"></a>
 		</div>
 		<div class="navbar-collapse collapse">
-			<ul class="nav navbar-nav navbar-right hidden sm hidden-md hidden-lg">
-				<li><a href="admin_dashboard.jsp">Dashboard</a></li>
-				<li><a href="admin_list.jsp">Users</a></li>
+			<ul class="nav navbar-nav navbar-right hidden-sm hidden-md hidden-lg">
+				<li><a href="${pageContext.request.contextPath}/admin/admin_dashboard.do">Dashboard</a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/admin_list.do">Users</a></li>
 			</ul>
 		</div>
 	</div>

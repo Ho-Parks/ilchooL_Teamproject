@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -100,9 +103,9 @@ body {
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li class="active"><a href="admin_dashboard.jsp"><span
+					<li class="active"><a href="${pageContext.request.contextPath}/admin/admin_dashboard.do"><span
 							class="glyphicon glyphicon-th"></span> 대시보드</a></li>
-					<li><a href="admin_list.jsp"><span
+					<li><a href="${pageContext.request.contextPath}/admin/admin_list.do"><span
 							class="glyphicon glyphicon-user"></span> 사용자</a></li>
 				</ul>
 			</div>

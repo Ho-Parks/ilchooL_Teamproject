@@ -106,9 +106,9 @@ body {
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a href="admin_dashboard.jsp"><span
+					<li><a href="${pageContext.request.contextPath}/admin/admin_dashboard.do"><span
 							class="glyphicon glyphicon-th"></span> 대시보드</a></li>
-					<li class="active"><a href="admin_list.jsp"><span
+					<li class="active"><a href="${pageContext.request.contextPath}/admin/admin_list.do"><span
 							class="glyphicon glyphicon-user"></span> 사용자</a></li>
 				</ul>
 			</div>
@@ -119,7 +119,7 @@ body {
 					<input type="hidden" name="id" value="${output.id}">
 					<!-- 입력양식 -->
 					<div class="form-group">
-						<label for="name" class="col-md-2">#</label>
+						<label for="id" class="col-md-2">#</label>
 						<div class="col-md-8">
 							<hr />
 						</div>
@@ -128,20 +128,9 @@ body {
 
 					<!-- 입력양식 -->
 					<div class="form-group">
-						<label for="name" class="col-md-2">아이디</label>
+						<label for="user_id" class="col-md-2">아이디</label>
 						<div class="col-md-8">
 							<input type="text" class="form-control" id="user_id" name="user_id" value="${output.user_id}"
-								placeholder="이름을 입력하세요"> <span class="error_next_box"></span>
-							<hr />
-						</div>
-					</div>
-					<!--//입력양식-->
-
-					<!-- 입력양식 -->
-					<div class="form-group">
-						<label for="new_id" class="col-md-2">이름</label>
-						<div class="col-md-8">
-							<input type="text" class="form-control" id="user_name" name="user_name" value="${output.user_name}"
 								placeholder="아이디를 입력하세요"> <span class="error_next_box"></span>
 							<hr />
 						</div>
@@ -150,10 +139,21 @@ body {
 
 					<!-- 입력양식 -->
 					<div class="form-group">
-						<label for="nickname" class="col-md-2">이메일</label>
+						<label for="user_name" class="col-md-2">이름</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" id="user_name" name="user_name" value="${output.user_name}"
+								placeholder="이름을 입력하세요"> <span class="error_next_box"></span>
+							<hr />
+						</div>
+					</div>
+					<!--//입력양식-->
+
+					<!-- 입력양식 -->
+					<div class="form-group">
+						<label for="email" class="col-md-2">이메일</label>
 						<div class="col-md-8">
 							<input type="text" class="form-control" id="email" name="email" value="${output.email}"
-								placeholder="닉네임을 입력하세요"> <span class="error_next_box"></span>
+								placeholder="이메일을 입력하세요"> <span class="error_next_box"></span>
 							<hr />
 						</div>
 					</div>
@@ -161,48 +161,50 @@ body {
 
 					<!-- 입력양식 -->
 					<div class="form-group">
-						<label for="content" class="col-md-2">번호</label>
+						<label for="phone" class="col-md-2">전화번호</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" id="phone" name="phone" value="${output.phone}" placeholder="(Optional)">
+							<input type="text" class="form-control" id="phone" name="phone" value="${output.phone}" placeholder="전화번호를 입력하세요">
+							<hr />
+						</div>
+					</div>
+					<!--//입력양식-->
+					
+					<!-- 입력양식 -->
+					<div class="form-group">
+						<label for="birthday" class="col-md-2">생일</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" id="birthday" name="birthday" value="${output.birthday}"
+								placeholder="XXXX-XX-XX"> <span class="error_next_box"></span>
 							<hr />
 						</div>
 					</div>
 					<!--//입력양식-->
 
-
 					<!-- 입력양식 -->
 					<div class="form-group">
-						<label for="content" class="col-md-2">Account #</label>
-						<div class="col-md-8"></div>
-					</div>
-					<br>
-					<div class="form-group">
-						<label for="content" class="col-md-2">날짜</label>
+						<label for="gender" class="col-md-2">성별</label>
 						<div class="col-md-8">
-							<button type="button" class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-calendar"></span>
-							</button>
+							<input type="text" class="form-control" id="gender" name="gender" value="${output.gender}"
+								placeholder="M / F"> <span class="error_next_box"></span>
+							<hr />
 						</div>
 					</div>
-
 					<!--//입력양식-->
-
 
 					<!--체크박스-->
 					<div class="form-group">
-						<label for="content" class="col-md-2">활성화</label>
+						<label for="content" class="col-md-2">계정 활성화</label>
 						<div class="col-md-8">
 							<input id="checkbox" type="checkbox"
 								class="btn btn-default btn-lg">
 						</div>
 					</div>
-
 					<!--//체크박스-->
+					
 					<div class="form-group">
 						<div class="col-md-10">
-							<a href="${pageContext.request.contextPath}/admin/admin_list.do"
-								class="btn btn-default btn-sm pull-right">취소</a>
-								<button type="submit">수정</button>
+						<button type="submit">수정</button>
+						<a href="${pageContext.request.contextPath}/admin/admin_list.do"><button type="submit">취소</button></a>
 						</div>
 					</div>
 				</form>
@@ -218,48 +220,9 @@ body {
 
 </body>
 
-<!-- Javascript -->
-<script src="../assets/js/admin_modify.js"></script>
-<script src="../assets/js/jquery.min.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
-<script src="../assets/js/jquery-scrollbar.js">
-	
-</script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		//Jquery Pages Scroll Progressbar default setting
-		$("#progress-bar").onscroll();
-		//Jquery Pages Scroll Progressbar addition setting
-		//Progressbar color, Progressbar thickness, Progressbar postion
-		//Progressbar position: fixed, absolute, relative
-		//$("#progress-bar").onscroll({backgroundColor: 'red', height: '5px', position: 'fixed'});
-	});
-</script>
-<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="../assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
-<!-- <script>
-	$(function() {
 
-		$("#btn1").click(function() {
-			// 확인, 취소버튼에 따른 후속 처리 구현
-			swal({
-				title : '확인', // 제목
-				text : "정말 선택하신 항목을 변경하시겠습니까?", // 내용
-				type : 'warning', // 종류
-				confirmButtonText : 'Yes', // 확인버튼 표시 문구
-				showCancelButton : true, // 취소버튼 표시 여부
-				cancelButtonText : 'No', // 취소버튼 표시 문구
-			}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
-				if (result.value) { // 확인 버튼이 눌러진 경우
-					swal('변경', '성공적으로 변경되었습니다.', 'success');
-				} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
-					swal('취소', '변경이 취소되었습니다.', 'error');
-				}
-			});
-		});
-
-	});
-</script> -->
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -146,4 +146,9 @@ public class AdminController {
     public String log() {
         return "admin/admin_log";
     }
+    
+    @RequestMapping(value = { "/admin/admin_dashboard.do" }, method = { RequestMethod.GET })
+    public String dashboard() {
+        return "admin/admin_dashboard";
+    }
 }

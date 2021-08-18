@@ -98,9 +98,9 @@ body {
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a href="admin_dashboard.jsp"><span
+					<li><a href="${pageContext.request.contextPath}/admin/admin_dashboard.do"><span
 							class="glyphicon glyphicon-th"></span> 대시보드</a></li>
-					<li class="active"><a href="admin_list.jsp"><span
+					<li class="active"><a href="${pageContext.request.contextPath}/admin/admin_list.do"><span
 							class="glyphicon glyphicon-user"></span> 사용자</a></li>
 				</ul>
 			</div>
@@ -111,8 +111,8 @@ body {
 				<div class="table-responsive">
    <!-- 검색폼 -->
     <form method="get" action="${pageContext.request.contextPath}/admin/admin_list.do">
-        <label for="keyword">검색어: </label>
-        <input type="search" name="keyword" id="keyword" placeholder="검색" value="${keyword}" />
+        <label for="keyword">검색: </label>
+        <input type="search" name="keyword" id="keyword" placeholder="" value="${keyword}" />
         <button type="submit">검색</button>
     </form>
 
@@ -166,7 +166,7 @@ body {
                             <td class="text-center">${email}</td>
                             <td class="text-center">${phone}</td>
                             <td class="text-center"><a href="${pageContext.request.contextPath}/admin/admin_modify.do?id=${item.id}" class="btn btn-primary btn-sm">수정</a>
-                            <a data-toggle="modal" href="${pageContext.request.contextPath}/admin/delete_ok.do?id=${item.id}" class="btn btn-danger btn-sm">삭제</a>
+                            <a href="${pageContext.request.contextPath}/admin/delete_ok.do?id=${item.id}" class="btn btn-danger btn-sm">삭제</a>
                             <a href="${pageContext.request.contextPath}/admin/admin_log.do" class="btn btn-success btn-sm">로그</a></td>
                         </tr>
                     </c:forEach>
@@ -228,13 +228,7 @@ body {
             [다음]
         </c:otherwise>
     </c:choose>
-<!-- 					<nav>
-						<ul class="pager">
-							<li><a href="#"><span>&laquo;</span></a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#"><span>&raquo;</span></a></li>
-						</ul>
-					</nav> -->
+
 				</div>
 			</div>
 			<!-- contents -->
@@ -258,16 +252,15 @@ body {
 			</div>
 		</div>
 	</div>
-	<!-- <footer>
+	<footer>
         <div class="container-fluid">
             <div class="col-md-12 text-right">
-                <p>&copy;2021 <span class="text-primary">ilchool.</span> All Rights Reserved.</p>
+                <p>&copy;2021 <span class="text-primary">ilchooL.</span> All Rights Reserved.</p>
             </div>
         </div>
-    </footer> -->
+    </footer>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>
