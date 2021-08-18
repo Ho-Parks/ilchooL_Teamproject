@@ -22,6 +22,21 @@ $(function() {
 			// 50x -> Server Error(웹 프로그램 에러)
 			// 200, 0 -> 내용의 형식 에러(JSON,XML)
 			console.log(">> 에러!!!! >> " + error.status);
+			
+			// 서버에서 반환하는 json 데이터가 존재한다면?
+            if (error.responseJSON) {
+                // 서버에서 반환하는 json 데이터에 rt라는 key가 있다면?
+                if (error.responseJSON.rt) {
+                    // 해당 내용을 메시지로 표시하고 처리 중단.
+                    if (swal !== undefined) {
+                        swal('알림', error.responseJSON.rt, 'error');
+                    } else {
+                        alert(error.responseJSON.rt);
+                    }
+
+                    return;
+                }
+            }
 
 			var error_msg = "[" + error.status + "] " + error.statusText;
 
@@ -34,7 +49,11 @@ $(function() {
             	error_msg = "서버의 응답이 잘못되었습니다.\n" + error_msg;
             }
             
-            alert(error_msg);
+             if (swal !== undefined) {
+                swal('알림', error_msg, 'error');
+            } else {
+                alert(eerror_msg);
+            }
 		},
 		// 성공,실패에 상관 없이 맨 마지막에 무조건 호출됨 ex) 로딩바 닫기
 		complete: function() {

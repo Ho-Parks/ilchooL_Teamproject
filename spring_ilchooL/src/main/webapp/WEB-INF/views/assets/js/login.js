@@ -1,6 +1,6 @@
 $(function() {
     /** 유효성 검사 플러그인이 ajaxForm보다 먼저 명시되어야 한다. */
-    $('#login-form').validate({
+    $('#login_form').validate({
         rules: {
             user_id: 'required',
             user_pw: 'required'
@@ -11,7 +11,7 @@ $(function() {
         },
     });
 
-    $('#login-form').ajaxForm({
+    $('#login_form').ajaxForm({
         // submit 전에 호출된다.
         beforeSubmit: function(arr, form, options) {
             // validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
@@ -19,7 +19,7 @@ $(function() {
             return $(form).valid();
         },
         success: function(json) {
-            window.location.href = getContextPath() + "/main/main";
+            window.location.href = getContextPath();
         },
     }); // end ajaxForm
 

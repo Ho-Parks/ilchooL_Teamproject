@@ -21,7 +21,7 @@
 		<!-- content-->
 		<div id="inner_join">
 			<div id="new_box">회원가입</div>
-			<form id="join-form" class="form-horizontal" name="join-form" method="post" action="${pageContext.request.contextPath}/rest/account/join">
+			<form id="join_form" class="form-horizontal" name="join_form" method="post" action="${pageContext.request.contextPath}/rest/account/join">
 			<!-- ID -->
 				<div>
 					<div class="join">
@@ -32,10 +32,9 @@
 							<input type="text" id="user_id" class="new" name="user_id" maxlength="20">
 						</span> 
 						<span class="click">
-							<button class="btn btn-primary" type="button" id="id-unique-check">중복검사</button>
+							<button class="btn btn-primary" type="button" id="id_unique_check">중복검사</button>
 						</span>
 					</div>
-						<span class="error_next_box"></span>
 				</div>
 				
 				<!-- PW1 -->
@@ -133,7 +132,7 @@
 							<input type="text" id="postcode" name="postcode" class="new_1" placeholder="우편번호" readonly>
 						</span> 
 						<span class="click"> 
-							<input type="button" id="address_btn" class="btn btn-info" onclick="new_execDaumPostcode()" value="우편번호 찾기">
+							<input type="button" id="address_btn" class="btn btn-primary" onclick="new_execDaumPostcode()" value="우편번호 찾기">
 						</span>
 					</div>
 

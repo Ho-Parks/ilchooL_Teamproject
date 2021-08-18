@@ -20,7 +20,7 @@
 		<div class="container">
 			<div class="inner_login">
 						<div id="login_w">로그인</div>
-				<form id="login-form" class="form" method="post" action="${pageContext.request.contextPath}/rest/account/login">
+				<form id="login_form" class="form" name="login_form" method="post" action="${pageContext.request.contextPath}/rest/account/login">
 						<div class="form-group">
 							<label for="loginId" class="control">아이디</label> 
 							<input type="text" id="user_id" class="form-control" name="user_id" placeholder="ID">
@@ -33,13 +33,13 @@
 					<div class="form-group">
 						<button type="submit" class="btn_login" id="btn_login">로그인</button>
 					</div>
-				<!-- <div class="form-group">
+				<div class="form-group">
 					<button type="button" class="btn_new"
-						onclick="location.href='../account/login_new_terms.do'">회원가입</button>
-				</div> -->
-					<div class="form-group">
+						onclick="location.href='../account/join_terms'">회원가입</button>
+				</div>
+					<%-- <div class="form-group">
 	                    <a href="${pageContext.request.contextPath}/account/join_terms" class="btn_new">회원가입</a>
-	                </div>
+	                </div> --%>
 				</form>
 				<div class="login_append">
 					<div class="log_chk">

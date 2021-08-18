@@ -24,7 +24,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="project.spring.ilchooL.controllers" />
-	 <context:component-scan base-package="project.spring.ilchooL.controllers.rest" />
+	<context:component-scan base-package="project.spring.ilchooL.controllers.rest" />
 	<!-- <context:component-scan base-package="project.spring.ilchooL.schedulers" /> -->
 	
 	<!-- 서비스 구현체가 배치될 패키지 정의하기 -->
@@ -51,12 +51,12 @@
 	<!-- 생성한 스케줄러 객체에 대한 작업 스케줄 지정 -->
 	<task:scheduled-tasks>
 		<!-- 매일 밤 11시 30분에 실행되는 스케줄러 -->
-		<task:scheduled ref="weather_scheduleJob" method="collectWeather" cron="0/30 * * * * ?" />
+		<task:scheduled ref="weather_scheduleJob" method="collectWeather" cron="0 30 23 * * ?" />
 		<!-- 매일 11시에 실행되는 스케줄러 -->
 		<task:scheduled ref="scheduleJob" method="collecCovid" cron="0 0 11 * * ?" />
 		<!-- 1시간마다 실행되는 스케줄러 -->
 		<!-- <task:scheduled ref="financeschedule" method="everyHours" cron="0 0 * * *  ? " />  -->
-		<task:scheduled ref="dust_scheduleJob" method="collectDust" cron="0/30 * * * * ?" />
+		<task:scheduled ref="dust_scheduleJob" method="collectDust" cron="0 0 0/1 * * ?" />
 		<!-- 30초에 한번씩 실행되는 스케줄러 -->
 		<task:scheduled ref="financeschedule" method="everyHours" cron="0/30 * * * * ?" />
 	</task:scheduled-tasks>
