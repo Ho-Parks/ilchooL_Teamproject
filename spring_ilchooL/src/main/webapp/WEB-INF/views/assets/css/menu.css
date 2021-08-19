@@ -34,11 +34,8 @@ body.is-active { overflow: hidden; }
 
 .overlay a:hover, .overlay a:focus { color: #FFFFFF; text-decoration: underline; }
 
-.login { font-family: sans-serif; font-style: italic; }
-
-.MyPage { padding-top: 30px; font-family: sans-serif; font-style: italic; visibility: hidden; opacity: 0; }
-.MyPage.is-active { opacity: 1; visibility: visible; }
-
+.overlay a span { font-family: sans-serif; font-style: italic; margin-top: 25;}
+.overlay a .mypage { font-family: sans-serif; font-style: italic; }
 @media screen and (max-height: 450px) { .overlay a {font-size: 20px} }
 /* 메뉴 영역 끝 */
 

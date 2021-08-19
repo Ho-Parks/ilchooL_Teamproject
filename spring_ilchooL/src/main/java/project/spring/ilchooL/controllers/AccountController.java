@@ -72,7 +72,7 @@ public class AccountController {
 	
 	
 	/** 마이페이지 이동 컨트롤러 */
-	@RequestMapping(value = "/mypage/mypage", method = RequestMethod.GET)
+	@RequestMapping(value = "/mypage/mypage.do", method = RequestMethod.GET)
 	public String mypage(Model model) {
 		return "mypage/mypage";
 	}

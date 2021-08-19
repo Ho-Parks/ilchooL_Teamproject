@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <head>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/menu.css">
 </head>
@@ -16,10 +19,29 @@
 				<a href="${pageContext.request.contextPath}/contents/contents_transport.do">Transport</a>
 				<a href="${pageContext.request.contextPath}/contents/contents_news.do">News</a>
 				<a href="${pageContext.request.contextPath}/contents/contents_finance.do">Finance</a>
-				<a href="${pageContext.request.contextPath}/mypage/mypage.do" class="MyPage">MyPage</a>
-				<a href="${pageContext.request.contextPath}/account/login.do" class="login">Login</a>
-			</div>
+				  <c:choose>
+                    <c:when test="${member == null}">
+                            <a href="${pageContext.request.contextPath}/account/login.do" title="로그인" class="login" style="margin-top: 25px;" >
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span>Login</span>
+                            </a>
+                    </c:when>
+                    <c:otherwise>
+                   		<c:if test="${fn:indexOf(path, 'account/logout') > -1}">class="active"</c:if>
+                            <a href="${pageContext.request.contextPath}/mypage/mypage.do" title="마이페이지" class="mypage" style="margin-top: 25px;">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Mypage</span>
+                            </a>
+                        <c:if test="${fn:indexOf(path, 'account/logout') > -1}">class="active"</c:if>
+                            <a href="${pageContext.request.contextPath}/rest/account/logout" title="로그아웃" class="logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                    </c:otherwise>
+                </c:choose>			
+                </div>
 		</div>
+		
 		<div id="logo">
 			<a href="${pageContext.request.contextPath}"> <img alt="logo"
 				src="${pageContext.request.contextPath}/assets/img/Logo(line).png"
@@ -27,22 +49,5 @@
 			</a>
 		</div>
 	</div>
-
-
-	<!-- <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>  -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$(".hamburger").click(function() {
-				$(this).toggleClass("is-active");
-				$("#menuNav").toggleClass("is-active");
-				$("body").toggleClass("is-active");
-			});
-			
-			$(".login").click(function() {
-				$(".MyPage").toggleClass("is-active");
-				$(this).html("Logout");
-				$(this).toggleClass("logout");
-			});
-		});
-	</script>
+	<script src="${pageContext.request.contextPath}/assets/js/header.js"></script>
 </header>
