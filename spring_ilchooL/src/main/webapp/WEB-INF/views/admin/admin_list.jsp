@@ -167,7 +167,7 @@ body {
                             <td class="text-center">${phone}</td>
                             <td class="text-center"><a href="${pageContext.request.contextPath}/admin/admin_modify.do?id=${item.id}" class="btn btn-primary btn-sm">수정</a>
                             <a href="${pageContext.request.contextPath}/admin/delete_ok.do?id=${item.id}" class="btn btn-danger btn-sm">삭제</a>
-                            <a href="${pageContext.request.contextPath}/admin/admin_log.do" class="btn btn-success btn-sm">로그</a></td>
+                            <a href="${pageContext.request.contextPath}/admin/admin_log.do?id=${item.id}" class="btn btn-success btn-sm">로그</a></td>
                         </tr>
                     </c:forEach>
                 </c:otherwise>
