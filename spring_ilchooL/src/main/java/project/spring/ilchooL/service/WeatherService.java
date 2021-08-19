@@ -30,9 +30,17 @@ public interface WeatherService {
 	public List<Witem> getItemList() throws Exception;
 	
 	/**
-	 * chart 시각화 데이터 조회
+	 * PTY 시각화 데이터 조회
 	 * @return
 	 * @throws Exception
 	 */
 	public List<Witem> getChartItemList() throws Exception;
+	
+	/**
+	 * TMX,TMN 시각화 데이터 조회
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Witem> getTmxItemList() throws Exception;
+	public List<Witem> getTmnItemList() throws Exception;
 }
