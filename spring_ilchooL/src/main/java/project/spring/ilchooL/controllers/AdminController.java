@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import project.spring.ilchooL.helper.PageData;
 import project.spring.ilchooL.model.Members;
+import project.spring.ilchooL.model.MembersLog;
 import project.spring.ilchooL.service.AdminMembersService;
+import project.spring.ilchooL.service.MembersLogService;
 
 @Controller
 public class AdminController {
@@ -24,11 +26,14 @@ public class AdminController {
     @Autowired
     AdminMembersService adminMembersService;
     
+    @Autowired
+    MembersLogService memberLogService;
+    
     /** "/프로젝트이름" 에 해당하는 ContextPath 변수 주입 */
     // --> import org.springframework.beans.factory.annotation.Value;
     @Value("#{servletContext.contextPath}")
     String contextPath;
-
+    
     /** 목록 페이지 */
     @RequestMapping(value = "/admin/admin_list.do", method = RequestMethod.GET)
     public String list(Model model, HttpServletResponse response,
@@ -141,13 +146,8 @@ public class AdminController {
             response.sendRedirect(redirectUrl);
         } catch (IOException e) { e.printStackTrace(); }
     }
-    
-    @RequestMapping(value = { "/admin/admin_log.do" }, method = { RequestMethod.GET })
-    public String log() {
-        return "admin/admin_log";
-    }
-    
 
+    
     /** 관리자 페이지 대쉬보드 컨트롤러 */
 	@RequestMapping(value = "/admin/admin_dashboard.do", method = RequestMethod.GET)
 	public String dashboard(Model model, HttpServletResponse response)
@@ -221,5 +221,30 @@ public class AdminController {
 		return "admin/admin_dashboard";
 	}
 	
-	
+    /** 로그페이지 */
+    @RequestMapping(value = { "/admin/admin_log.do" }, method = { RequestMethod.GET })
+    public String log(Model model, HttpServletResponse response,
+            @RequestParam(value="id") int id) {
+
+        // 데이터 조회에 필요한 조건값을 Beans에 저장하기
+    	Members input = new Members();
+    	MembersLog loginput = new MembersLog();
+        input.setId(id);
+        loginput.setId(id);
+        
+        // 수정할 데이터의 원본 조회하기
+        Members output = null;
+        List<MembersLog> logoutput = null; // 조회결과가 저장될 객체
+        
+        try {
+            output = adminMembersService.getMembersItem(input);
+            logoutput = memberLogService.getMembersLogList(loginput);
+        } catch (Exception e) { e.printStackTrace(); }
+        
+        // View 처리
+        model.addAttribute("output", output);
+        model.addAttribute("logoutput", logoutput);
+        return "admin/admin_log";
+    }
+
 }

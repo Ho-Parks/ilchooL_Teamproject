@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -103,19 +106,38 @@ body {
 			</div>
 			<!-- contents -->
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-							<h2 class="page-header">BO3893의 로그</h2>
+							<h2 class="page-header">${output.user_id}의 로그</h2>
 				<div class="table-responsive">
 					<table class="table table-hover">
+					
 						<thead>
 							<tr>
 								<th class="text-center">#</th>
-								<th class="text-center">시간</th>
-								<th class="text-center">섹션</th>
-								<th class="text-center">페이지</th>
-								<th class="text-center">타입</th>
-								<th class="text-center">로그</th>
+								<th class="text-center">접속 일자</th>
+								<th class="text-center">접속 시간</th>
+								<th class="text-center">접속 디바이스</th>
+								<th class="text-center">접속 페이지</th>
 							</tr>
 						</thead>
+						        <tbody>
+
+                    <%-- 조회 결과에 따른 반복 처리 --%>
+                    <c:forEach var="item" items="${logoutput}" varStatus="status">
+                        <%-- 출력을 위해 준비한 학과이름과 위치 --%>
+                        <c:set var="log_date" value="${item.log_date}" />
+                        <c:set var="log_time" value="${item.log_time}" />
+                        <c:set var="log_device" value="${item.log_device}" />
+                        <c:set var="log_page" value="${item.log_page}" />
+
+                        <tr>
+                            <td class="text-center">${item.log_id}</td>
+                            <td class="text-center">${log_date}</td>
+                            <td class="text-center">${log_time}</td>
+                            <td class="text-center">${log_device}</td>
+                            <td class="text-center">${log_page}</td>
+                        </tr>
+                    </c:forEach>
+        </tbody>
 					</table>
 					<nav>
 						<ul class="pager">
