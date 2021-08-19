@@ -115,6 +115,104 @@ public class AdminMembersServiceImpl implements AdminMembersService {
 
         return result;
 	}
-	
 
+	@Override
+	public int adminGenderCount(Members input) throws Exception {
+		int result = 0;
+		
+		try {
+			result = sqlSession.selectOne("MembersMapper.dashboardCF", input);
+			
+			if (result == 0) {
+                throw new NullPointerException("result=0");
+            }
+        } catch (NullPointerException e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("데이터가 없습니다.");
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("데이터 조회를 실패했습니다.");
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int adminaddr(Members input) throws Exception {
+		int result = 0;
+		
+		try {
+			result = sqlSession.selectOne("MembersMapper.dashboardaddr1", input);
+			
+			if (result == 0) {
+                throw new NullPointerException("result=0");
+            }
+        } catch (NullPointerException e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("데이터가 없습니다.");
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("데이터 조회를 실패했습니다.");
+			
+		}
+		
+		return result;
+	}
+
+
+
+
+
+	@Override
+	public int adminOld20() throws Exception {
+		int result = 0;
+		
+		try {
+	         result = sqlSession.selectOne("MembersMapper.dashboardOld20");
+	        
+	        } catch (NullPointerException e) {
+	            log.error(e.getLocalizedMessage());
+	            throw new Exception("조회된 데이터가 없습니다.");
+	        } catch (Exception e) {
+	            log.error(e.getLocalizedMessage());
+	            throw new Exception("데이터 조회에 실패했습니다.");
+	        }
+		
+		return result;
+	}
+
+	@Override
+	public int adminOld30() throws Exception {
+int result = 0;
+		
+		try {
+	         result = sqlSession.selectOne("MembersMapper.dashboardOld30");
+	         
+	        } catch (NullPointerException e) {
+	            log.error(e.getLocalizedMessage());
+	            throw new Exception("조회된 데이터가 없습니다.");
+	        } catch (Exception e) {
+	            log.error(e.getLocalizedMessage());
+	            throw new Exception("데이터 조회에 실패했습니다.");
+	        }
+		return result;
+	}
+
+	@Override
+	public int adminOld40() throws Exception {
+int result = 0;
+		
+		try {
+	         result = sqlSession.selectOne("MembersMapper.dashboardOld40");
+	        
+	        } catch (NullPointerException e) {
+	            log.error(e.getLocalizedMessage());
+	            throw new Exception("조회된 데이터가 없습니다.");
+	        } catch (Exception e) {
+	            log.error(e.getLocalizedMessage());
+	            throw new Exception("데이터 조회에 실패했습니다.");
+	        }
+		return result;
+	}
+	
 }

@@ -43,4 +43,31 @@ public interface AdminMembersService {
      * @throws Exception
      */
     public int deleteMembers(Members input) throws Exception;
+    
+    /**
+     * 성별 구분
+     * @param Department 삭제할 학과의 일련번호를 담고 있는 Beans
+     * @return int
+     * @throws Exception
+     */
+    public int adminGenderCount(Members input) throws Exception;
+    
+    /**
+     * 주소 구분
+     * @param Department 삭제할 학과의 일련번호를 담고 있는 Beans
+     * @return int
+     * @throws Exception
+     */
+    public int adminaddr(Members input) throws Exception;
+    
+    /**
+     * 성별 구분
+     * @return
+     * @throws Exception
+     */
+    public int adminOld20( ) throws Exception;
+    
+    public int adminOld30( ) throws Exception;
+    
+    public int adminOld40( ) throws Exception;
 }

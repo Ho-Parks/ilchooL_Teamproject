@@ -212,7 +212,7 @@ var dashboardChart = new Chart(ctx, {
         labels: ["seoul", "Gyeonggi-do"],
         datasets: [{
             label: '# of Votes',
-            data: [6, 4],
+            data: ['${addr1}', '${addr2}'],
             backgroundColor: [
                 'rgba(0, 216, 255, 1)',
                 'rgba(29, 219, 22, 1)',
@@ -249,7 +249,7 @@ var dashboardChart = new Chart(ctx, {
         labels: ["20대", "30대", "40대"],
         datasets: [{
             label: '# of Votes',
-            data: [6, 3, 1],
+            data: ['${Old0}', '${Old1}', '${Old2}'],
             backgroundColor: [
             	'rgba(231, 76, 60, 1)',
                 'rgba(255, 187, 0, 1)',
@@ -285,7 +285,7 @@ var dashboardChart = new Chart(ctx, {
         labels: ["남", "녀"],
         datasets: [{
             label: '# of Votes',
-            data: [7, 3],
+            data: ['${genderM}', '${genderF}'],
             backgroundColor: [
                 'rgba(1, 0, 255, 1)',
                 'rgba(255, 0, 0, 1)'

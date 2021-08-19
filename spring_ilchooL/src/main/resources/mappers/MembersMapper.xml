@@ -152,4 +152,54 @@
             </if>
         </where>
     </select>
+    
+    <!-- 대시보드 여성 숫자 -->
+	<select id="dashboardCF" parameterType="project.spring.ilchooL.model.Members" resultType="int">
+		Select Count(*) From members 
+		<where>
+			gender = #{gender}
+		</where>
+	</select>
+	<!-- 대시보드 남자 숫자 -->
+	<select id="dashboardCM" parameterType="project.spring.ilchooL.model.Members" resultType="int">
+		Select Count(*) From members 
+		<where>
+			gender = "M"
+		</where>
+	</select>        
+	
+	<select id="dashboardaddr1" parameterType="project.spring.ilchooL.model.Members" resultType="int">
+		Select Count(*) From members
+		<where>
+			addr1 Like concat('%', #{addr1} , '%');
+		</where>
+	</select>
+	
+	
+	<select id="dashboardold" parameterType="project.spring.ilchooL.model.Members">
+		Select Count(*) From members
+		<where>
+			Date_Format(now(), '%Y')- Date_Format(birthday. '%Y')+ 1>20;
+			
+		</where>
+	</select>
+	
+	<select id="dashboardOld20" parameterType="project.spring.ilchooL.model.Members" resultType="int">
+      Select Count(*)
+      From members
+      Where Date_Format(now(), '%Y')- Date_Format(birthday, '%Y') + 1 >= 20 AND 30 > Date_Format(now(), '%Y') - Date_Format(birthday, '%Y') + 1;   
+   </select>
+   
+    <select id="dashboardOld30" parameterType="project.spring.ilchooL.model.Members" resultType="int">
+      Select Count(*)
+      From members
+      Where Date_Format(now(), '%Y')- Date_Format(birthday, '%Y') + 1 >= 30 AND 40 > Date_Format(now(), '%Y') - Date_Format(birthday, '%Y') + 1;  
+   </select>
+   
+    <select id="dashboardOld40" parameterType="project.spring.ilchooL.model.Members" resultType="int">
+      Select Count(*)
+      From members
+      Where Date_Format(now(), '%Y')- Date_Format(birthday, '%Y') + 1 >= 40 AND 50 > Date_Format(now(), '%Y') - Date_Format(birthday, '%Y') + 1;  
+   </select>
+	
 </mapper>

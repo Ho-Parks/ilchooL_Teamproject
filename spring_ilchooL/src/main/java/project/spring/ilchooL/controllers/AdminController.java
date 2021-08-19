@@ -147,8 +147,79 @@ public class AdminController {
         return "admin/admin_log";
     }
     
-    @RequestMapping(value = { "/admin/admin_dashboard.do" }, method = { RequestMethod.GET })
-    public String dashboard() {
-        return "admin/admin_dashboard";
-    }
+
+    /** 관리자 페이지 대쉬보드 컨트롤러 */
+	@RequestMapping(value = "/admin/admin_dashboard.do", method = RequestMethod.GET)
+	public String dashboard(Model model, HttpServletResponse response)
+	{
+		Members input = new Members();
+	       input.setGender("F");
+	       int result = 0;
+	       
+	       try {
+	          result = adminMembersService.adminGenderCount(input);
+	      } catch (Exception e) {
+	    	  e.printStackTrace();
+	      } 
+	    model.addAttribute("genderF", result);
+	    
+	    input.setGender("M");
+	       
+	       try {
+	          result = adminMembersService.adminGenderCount(input);
+	      } catch (Exception e) {
+	    	  e.printStackTrace();
+	      } 
+	    model.addAttribute("genderM", result);
+	    
+	    	input.setAddr1("서울");
+	    
+	       try {
+		          result = adminMembersService.adminaddr(input);
+		      } catch (Exception e) {
+		    	  e.printStackTrace();
+		      } 
+	       
+		    model.addAttribute("addr1", result);
+		    
+		    input.setAddr1("경기");
+		       
+		       try {
+		          result = adminMembersService.adminaddr(input);
+		      } catch (Exception e) {
+		    	  e.printStackTrace();
+		      } 
+		    
+		    model.addAttribute("addr2", result);
+		    
+		   
+		    
+		       try {
+		    	   result = adminMembersService.adminOld20();
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		      }
+		      
+		      model.addAttribute("Old0", result);
+		      
+		      try {
+		    	   result = adminMembersService.adminOld30();
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		      }
+		      
+		      model.addAttribute("Old1", result);
+		      
+		      try {
+		    	   result = adminMembersService.adminOld40();
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		      }
+		      
+		      model.addAttribute("Old2", result);
+		
+		return "admin/admin_dashboard";
+	}
+	
+	
 }
