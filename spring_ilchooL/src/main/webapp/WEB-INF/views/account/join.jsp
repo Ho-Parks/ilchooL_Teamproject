@@ -104,10 +104,12 @@
 					<div class="join">
 						<label for="email">이메일 주소</label>
 					</div>
-					<span class="box int_email"> 
-					<input type="email" id="email" class="new" maxlength="100" placeholder="선택입력" name="email">
+					<span class="box4 int_email"> 
+					<input type="email" id="email" class="new" maxlength="100" name="email">
 					</span> 
-					<span class="error_next_box"></span>
+					<span class="click">
+							<button class="btn btn-primary" type="button" id="email_unique_check">중복검사</button>
+					</span>
 				</div>
 
 				<!-- MOBILE -->

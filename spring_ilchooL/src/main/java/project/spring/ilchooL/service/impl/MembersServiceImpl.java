@@ -196,6 +196,29 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
             throw new Exception("아이디 중복검사에 실패했습니다.");
         }
     }
+    
+    /**
+     * 이메일 중복검사
+     * @param input
+     * @throws Exception
+     */
+    @Override
+    public void emailUniqueCheck(Members input) throws Exception {
+        int result = 0;
+
+        try {
+            result = sqlSession.selectOne("MembersMapper.emailUniqueCheck", input);
+            if (result > 0) {
+                throw new NullPointerException("result=" + result);
+            }
+        } catch (NullPointerException e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("이미 사용중인 이메일 입니다.");
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("이메일 중복검사에 실패했습니다.");
+        }
+    }
 
     /**
      * 로그인

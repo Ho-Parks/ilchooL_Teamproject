@@ -73,7 +73,20 @@ $(function() {
 			// [이름] 필수
 			user_name: { required: true, kor: true },
 			// [이메일] 필수 + 이메일 형식 일치 필요
-			email: { required: true, email: true },
+			email: {
+        		required: true,
+		        email: true,	
+		        maxlength: 255,
+		        remote: {
+		            url: getContextPath() + '/rest/account/email_unique_check_jquery',
+		            type: 'post',
+		            data: {
+		                email: function() {
+		                    return $("#email").val();
+		                }
+		            }
+		        }
+		    },
 			// [연락처] 필수
 			phone: { required: true, phone: true, minlength: 9, maxlength: 11 },
 			// [생년월일] 필수 + 날짜 형식 일치 필요
@@ -113,8 +126,10 @@ $(function() {
 				kor: "이름은 한글만 입력 가능합니다."
 			},
 			email: {
-				required: "이메일을 입력하세요.",
-				email: "이메일 형식이 잘못되었습니다."
+                required: '이메일을 입력하세요.',
+                email: '이메일 형식이 잘못되었습니다.',
+                maxlength: '이메일은 최대 {0}글자까지 가능합니다.',
+                remote: '이미 사용중인 이메일 입니다.'
 			},
 			phone: {
 				required: '연락처를 입력하세요.',
@@ -165,5 +180,19 @@ $(function() {
 			swal('확인', '사용가능한 아이디 입니다.', 'success');
 		});
 	});
+	
+	$("#email_unique_check").click(function(e) {
+        const email = $("#email").val();
 
+        if (!email) {
+            swal('알림', '이메일을 입력하세요.', 'warning');
+            return;
+        }
+
+        $.post(getContextPath() + '/rest/account/email_unique_check', {
+            email: email
+        }, function(json) {
+            swal('확인', '사용가능한 이메일 입니다.', 'success');
+        });
+	});
 });

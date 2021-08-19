@@ -82,6 +82,56 @@ public class AccountRestController {
             response.getWriter().print(result);
         } catch (IOException e) {}
     }
+    
+    /** 이메일 중복검사 */
+    @RequestMapping(value = "/rest/account/email_unique_check", method = RequestMethod.POST)
+    public Map<String, Object> emailUniqueCheck(
+            // 아이디
+            @RequestParam(value = "email", required = false) String email) {
+
+        if (!regexHelper.isValue(email)) {
+            return webHelper.getJsonWarning("이메일 주소를 입력하세요.");
+        }
+        
+        if (!regexHelper.isEmail(email)) {
+            return webHelper.getJsonWarning("이메일 주소가 잘못되었습니다.");
+        }
+        
+        Members input = new Members();
+        input.setEmail(email);
+        
+        try {
+            membersService.emailUniqueCheck(input);
+        } catch (Exception e) {
+            return webHelper.getJsonError(e.getLocalizedMessage());
+        }
+
+        return webHelper.getJsonData();
+    }
+    
+    /** 이메일 중복검사 (jQuery Form Validate 플러그인용) */
+    // controller에서 out 객체의 출력결과를 웹브라우저에게 전달할 수 있게 하는 옵션
+    @ResponseBody
+    @RequestMapping(value = "/rest/account/email_unique_check_jquery", method = RequestMethod.POST)
+    public void emailUniqueCheckjQuery(HttpServletResponse response,
+            // 아이디
+            @RequestParam(value = "email", required = false) String email) {
+        
+        Members input = new Members();
+        input.setEmail(email);
+        String result = "true";
+        
+        try {
+            membersService.emailUniqueCheck(input);
+        } catch (Exception e) {
+            result = "false";
+        }
+
+        // out객체를 생성하여 문자열을 직접 출력함
+        try {
+            response.getWriter().print(result);
+        } catch (IOException e) {}
+    }
 
     /** 회원가입 */
     @RequestMapping(value = "/rest/account/join", method = RequestMethod.POST)

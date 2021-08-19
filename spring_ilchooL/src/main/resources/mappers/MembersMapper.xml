@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MembersMapper">
+
     <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
     <resultMap id="membersMap" type="project.spring.ilchooL.model.Members">
         <!-- 일련번호, IS NOT NULL, PRI -->
@@ -39,10 +40,12 @@
         <!-- 변경일시, IS NOT NULL -->
         <result property="edit_date" column="edit_date" />
     </resultMap>
+    
     <!-- 단일행 조회를 위한 기능 정의 -->
     <select id="selectMember" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
         SELECT id, user_id, user_pw, user_name, email, phone, birthday, gender, postcode, addr1, addr2, photo, is_out, is_admin, login_date, reg_date, edit_date FROM members WHERE id=#{id}
     </select>
+    
     <!-- 다중행 조회를 위한 기능 정의 -->
     <select id="selectMembers" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
         SELECT id, user_id, user_pw, user_name, email, phone, birthday, gender, postcode, addr1, addr2, photo, is_out, is_admin, login_date, reg_date, edit_date FROM members
@@ -51,10 +54,12 @@
             LIMIT #{offset}, #{listCount}
         </if>
     </select>
+    
     <!-- 데이터 수 조회를 위한 기능 정의 -->
     <select id="selectCountAll" parameterType="project.spring.ilchooL.model.Members" resultType="int">
         SELECT COUNT(*) FROM members
     </select>
+    
     <!-- 데이터 저장을 위한 기능 정의 -->
     <insert id="insertMember" parameterType="project.spring.ilchooL.model.Members" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO members (
@@ -63,10 +68,12 @@
         #{user_id}, MD5(#{user_pw}), #{user_name}, #{email}, #{phone}, #{birthday}, #{gender}, #{postcode}, #{addr1}, #{addr2}, #{photoJson}, #{is_out}, #{is_admin}, #{login_date}, now(), now()
         )
     </insert>
+    
     <!-- 데이터 삭제를 위한 기능 정의 -->
     <delete id="deleteMember" parameterType="project.spring.ilchooL.model.Members">
         DELETE FROM members WHERE id=#{id}
     </delete>
+    
     <!-- 데이터 갱신을 위한 기능 정의 -->
     <update id="updateMember" parameterType="project.spring.ilchooL.model.Members">
         UPDATE members SET
@@ -93,10 +100,17 @@
         SELECT user_id FROM members WHERE name=#{name} AND
         phone=#{phone} AND is_out='N';
     </select>
+    
     <!-- 아이디 중복검사 -->
     <select id="idUniqueCheck" parameterType="project.spring.ilchooL.model.Members" resultType="int">
         SELECT COUNT(*) FROM members WHERE user_id=#{user_id}
     </select>
+    
+    <!-- 이메일 중복검사 -->
+    <select id="emailUniqueCheck" parameterType="project.spring.ilchooL.model.Members" resultType="int">
+        SELECT COUNT(*) FROM members WHERE email=#{email}
+    </select>
+    
     <!-- 로그인 조회 -->
     <select id="login" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
         SELECT *
@@ -104,6 +118,7 @@
         FROM members
         WHERE user_id=#{user_id} AND user_pw=MD5(#{user_pw}) AND is_out='N'
     </select>
+    
     <!-- 최근 로그인 시간 갱신 -->
     <update id="updateLoginDate" parameterType="project.spring.ilchooL.model.Members">
         UPDATE members SET login_date=now() WHERE id=#{id}

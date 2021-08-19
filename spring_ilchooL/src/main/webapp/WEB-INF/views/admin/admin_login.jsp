@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></i></div>
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></div>
                         <input type="password" id="user_pw" name="password" class="form-control" placeholder="Password">
                     </div>
                 </div>
