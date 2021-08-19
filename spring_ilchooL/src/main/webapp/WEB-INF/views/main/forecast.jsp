@@ -53,8 +53,12 @@
 						<div class="container" id="weather_region">
 							<div class="row forecast_region">
 								<div class="col-md-12 text-center">
-									<p>서울시 강남구
-									<p>
+									<c:if test="${loc == null }">
+										<p>서울시 강남구</p>
+									</c:if>
+									<c:if test="${loc != null }">
+										<p>서울시 ${loc}</p>
+									</c:if>
 								</div>
 							</div>
 							<div></div>
@@ -213,8 +217,12 @@
 						<div class="container" id="dust_region">
 							<div class="row forecast_region">
 								<div class="col-md-12 text-center">
-									<p>서울시 강남구
-									<p>
+									<c:if test="${loc == null }">
+										<p>서울시 강남구</p>
+									</c:if>
+									<c:if test="${loc != null }">
+										<p>서울시 ${loc}</p>
+									</c:if>
 								</div>
 							</div>
 							<div></div>

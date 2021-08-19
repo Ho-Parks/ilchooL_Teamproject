@@ -27,20 +27,20 @@ public interface WeatherService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Witem> getItemList() throws Exception;
+	public List<Witem> getItemList(Witem witem) throws Exception;
 	
 	/**
 	 * PTY 시각화 데이터 조회
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Witem> getChartItemList() throws Exception;
+	public List<Witem> getChartItemList(Witem witem) throws Exception;
 	
 	/**
 	 * TMX,TMN 시각화 데이터 조회
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Witem> getTmxItemList() throws Exception;
-	public List<Witem> getTmnItemList() throws Exception;
+	public List<Witem> getTmxItemList(Witem witem) throws Exception;
+	public List<Witem> getTmnItemList(Witem witem) throws Exception;
 }

@@ -52,6 +52,13 @@ public class MainController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
 		
+		Witem witem = new Witem();
+		witem.setNx("61");
+		witem.setNy("126");
+		
+		DustItem ditem = new DustItem();
+		ditem.setStationName("강남구");
+		
 		HttpSession session = request.getSession();		
 		Members loginSession = (Members) session.getAttribute("member");
 		
@@ -73,14 +80,18 @@ public class MainController {
 				e.printStackTrace();
 			}	// end try
 			
-			System.out.println("===============받아온 데이터 : " + s_locItem.getLoc());
-			System.out.println("===============받아온 데이터 : " + s_locItem.getLoc_x());
-			System.out.println("===============받아온 데이터 : " + s_locItem.getLoc_y());
-			
 			DustScheduler.getLoc(s_locItem.getLoc());
 			WeatherScheduler.getLoc(s_locItem.getLoc_x(), s_locItem.getLoc_y());
 			
-		}	// end if
+			witem.setNx(Integer.toString(s_locItem.getLoc_x()));
+			witem.setNy(Integer.toString(s_locItem.getLoc_y()));
+			
+			ditem.setStationName(s_locItem.getLoc());
+			
+			model.addAttribute("loc", s_locItem.getLoc());
+			
+			
+		}
 		
 		/**
 		 * 캐러셀 - 날씨,미세먼지 데이터 조회
@@ -91,8 +102,8 @@ public class MainController {
 		List<DustItem> d_item_list = null;
 
 		try {
-			w_item_list = weatherService.getItemList();
-			d_item_list = dustService.getItemList();
+			w_item_list = weatherService.getItemList(witem);
+			d_item_list = dustService.getItemList(ditem);
 			
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
@@ -107,8 +118,6 @@ public class MainController {
 		Calendar date = Calendar.getInstance();
 		String d_time = String.format("%04d-%02d-%02d %02d:00", date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1,
 				date.get(Calendar.DAY_OF_MONTH), date.get(Calendar.HOUR_OF_DAY)-1);
-
-		System.out.println("현재시각: " + d_time);
 
 		for (int i = 0; i < d_item_list.size(); i++) {
 			dt = d_item_list.get(i).getDataTime();
@@ -197,15 +206,10 @@ public class MainController {
 		List<DustItem> chart_pm_list = null;
 		
 		try {
-			chart_item_list = weatherService.getChartItemList();
-			chart_tmx_list = weatherService.getTmxItemList();
-			chart_tmn_list = weatherService.getTmnItemList();
-			chart_pm_list = dustService.getPmList();
-			
-			for (DustItem item : chart_pm_list) {
-				System.out.println("*****************");
-				System.out.println(item.toString());
-			}
+			chart_item_list = weatherService.getChartItemList(witem);
+			chart_tmx_list = weatherService.getTmxItemList(witem);
+			chart_tmn_list = weatherService.getTmnItemList(witem);
+			chart_pm_list = dustService.getPmList(ditem);
 			
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
@@ -240,8 +244,6 @@ public class MainController {
 				pm10_worst +=1;
 			}
 			
-			System.out.println(pm25_data);
-			
 			  if(!pm25_data.equals(bar)) { 
 				  int pm25value = Integer.parseInt(pm25_data);
 				  System.out.println(pm25value);
@@ -254,10 +256,8 @@ public class MainController {
 					  pm25_bad += 1; 
 				  }else {
 					  pm25_worst += 1; 
-			  } 
+				  } 
 			  }
-			 
-			
 		}
 		
 			model.addAttribute("pm10_great",pm10_great );
@@ -268,7 +268,6 @@ public class MainController {
 			model.addAttribute("pm25_good",pm25_good );
 			model.addAttribute("pm25_bad",pm25_bad );
 			model.addAttribute("pm25_worst",pm25_worst );
-
 
 		// PTY 시각화 데이터 요청
 		int sunny_0 = 0;
@@ -322,7 +321,6 @@ public class MainController {
 				model.addAttribute("day_data"+i, day_data);
 		}
 
-
 		/**
 		 * 코로나 데이터 조회
 		 * @author 박준영
@@ -335,10 +333,6 @@ public class MainController {
 		try {
 			// 데이터 받는 부분
 			covid_output = covidService.getCovidList();
-
-			for (CovidItem item : covid_output) {
-				System.out.println(item.toString());
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -73,11 +73,11 @@ public class WeatherServiceImpl implements WeatherService {
 	 * @throws Exception
 	 */
 	@Override
-	public List<Witem> getItemList() throws Exception {
+	public List<Witem> getItemList(Witem witem) throws Exception {
 		List<Witem> result = null;
 		
 		try {
-			result = sqlSession.selectList("weatherMapper.selectWeatherList");
+			result = sqlSession.selectList("weatherMapper.selectWeatherList", witem);
 			if (result == null) {
 				throw new NullPointerException("result=null");
 			}
@@ -98,11 +98,11 @@ public class WeatherServiceImpl implements WeatherService {
 	 * @throws Exception
 	 */
 	@Override
-	public List<Witem> getChartItemList() throws Exception {
+	public List<Witem> getChartItemList(Witem witem) throws Exception {
 		List<Witem> result = null;
 		
 		try {
-			result = sqlSession.selectList("weatherMapper.selectChartList");
+			result = sqlSession.selectList("weatherMapper.selectChartList", witem);
 			if(result ==null) {
 				throw new NullPointerException("result=null");
 			}
@@ -118,11 +118,11 @@ public class WeatherServiceImpl implements WeatherService {
 
 
 	@Override
-	public List<Witem> getTmxItemList() throws Exception {
+	public List<Witem> getTmxItemList(Witem witem) throws Exception {
 		List<Witem> result = null;
 		
 		try {
-			result = sqlSession.selectList("weatherMapper.selectTmxList");
+			result = sqlSession.selectList("weatherMapper.selectTmxList", witem);
 			if(result ==null) {
 				throw new NullPointerException("result=null");
 			}
@@ -138,11 +138,11 @@ public class WeatherServiceImpl implements WeatherService {
 
 
 	@Override
-	public List<Witem> getTmnItemList() throws Exception {
+	public List<Witem> getTmnItemList(Witem witem) throws Exception {
 		List<Witem> result = null;
 		
 		try {
-			result = sqlSession.selectList("weatherMapper.selectTmnList");
+			result = sqlSession.selectList("weatherMapper.selectTmnList", witem);
 			if(result ==null) {
 				throw new NullPointerException("result=null");
 			}

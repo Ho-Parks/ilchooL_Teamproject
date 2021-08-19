@@ -73,11 +73,11 @@ public class DustServiceImpl implements DustService {
 	 * @throws Exception
 	 */
 	@Override
-	public List<DustItem> getItemList() throws Exception {
+	public List<DustItem> getItemList(DustItem ditem) throws Exception {
 		List<DustItem> result = null;
 		
 		try {
-			result = sqlSession.selectList("dustMapper.selectDustList");
+			result = sqlSession.selectList("dustMapper.selectDustList", ditem);
 			if (result == null) {
 				throw new NullPointerException("result=null");
 			}
@@ -97,11 +97,11 @@ public class DustServiceImpl implements DustService {
 	 * @throws Exception
 	 */
 	@Override
-	public List<DustItem> getPmList() throws Exception {
+	public List<DustItem> getPmList(DustItem ditem) throws Exception {
 		List<DustItem> result = null;
 		
 		try {
-			result = sqlSession.selectList("dustMapper.selectPmList");
+			result = sqlSession.selectList("dustMapper.selectPmList", ditem);
 			if (result == null) {
 				throw new NullPointerException("result=null");
 			}
@@ -114,6 +114,4 @@ public class DustServiceImpl implements DustService {
 		}
 		return result;
 	}
-
-	
 }

@@ -38,18 +38,25 @@
 	
 	<select id="selectWeatherList" parameterType="project.spring.ilchooL.model.Witem" resultMap="weatherMap" >
 		Select *
-		From weather;
+		From weather
+		Where nx = #{nx} And ny = #{ny};
 	</select>
 	
 	<select id="selectChartList" parameterType="project.spring.ilchooL.model.Witem" resultMap="weatherMap" >
-		Select category, fcst_value, fcst_date, fcst_time From weather Where category ='PTY' ORDER BY fcst_date limit 0,720;
+		Select category, fcst_value, fcst_date, fcst_time From weather
+		Where category ='PTY' And nx = #{nx} And ny = #{ny}
+		ORDER BY fcst_date limit 0,720;
 	</select>
 	
 	<select id="selectTmxList" parameterType="project.spring.ilchooL.model.Witem" resultMap="weatherMap" >
-		Select category, fcst_value, fcst_date, fcst_time From weather Where category='TMX' ORDER BY fcst_date desc limit 0,10;
+		Select category, fcst_value, fcst_date, fcst_time From weather
+		Where category='TMX' And nx = #{nx} And ny = #{ny}
+		ORDER BY fcst_date desc limit 0,10;
 	</select>
 		
 	<select id="selectTmnList" parameterType="project.spring.ilchooL.model.Witem" resultMap="weatherMap" >
-		Select category, fcst_value, fcst_date, fcst_time From weather Where category='TMN' ORDER BY fcst_date desc limit 0,10;
+		Select category, fcst_value, fcst_date, fcst_time From weather
+		Where category='TMN' And nx = #{nx} And ny = #{ny}
+		ORDER BY fcst_date desc limit 0,10;
 	</select>
 </mapper>

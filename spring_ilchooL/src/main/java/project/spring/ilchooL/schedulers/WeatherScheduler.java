@@ -37,7 +37,6 @@ public class WeatherScheduler {
 	
 	public void collectWeather() {
 		
-		String strBaseUrl = null;
 		int nx = 61;
 		int ny = 126;
 		if (s_loc_x != 0 && s_loc_y != 0) {
