@@ -25,7 +25,7 @@ public class FinanceScheduler {
 	@Autowired
 	SqlSession sqlSession;
 	
-	public void everyHours() throws IOException {
+	public void finance() throws IOException {
 		
 		String url = "https://finance.naver.com/main/main.nhn";
 		Document doc = Jsoup.connect(url).get();

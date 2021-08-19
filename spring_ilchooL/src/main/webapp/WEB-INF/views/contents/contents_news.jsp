@@ -79,21 +79,23 @@
 				</div>
 			</div>
 			
+			<div>
+				<form id="form" action="${pageContext.request.contextPath}/contents/contents_search.do" method="post" class="form-inline">
+					<div class="form-group col-sm-10" >
+						<input id="search" type="text" name="search" placeholder="키워드를 입력하세요" class="form-control" />
+					</div>
+					<input id="btn" type="submit" class="btn col-sm-2" value="검색" />
+				</form>
+			</div>
+			
 			<div class="col-xs-12 news_ex">
 				<div id="line">
 					<div class="circle_grey"></div>
 					<div class="circle"></div>
-					<p>키워드를 선택하시면 시간대별 주요 뉴스를 확인할 수 있습니다.</p>
+					<p>키워드를 선택하시면 주요 뉴스를 확인할 수 있습니다.</p>
 				</div>
-				<div>
-					<h3>키워드를 입력하세요.</h3>
-					<form action="${pageContext.request.contextPath}/contents/contents_search.do" method="post" class="form-inline">
-						<div class="form-group col-md-10" >
-							<input id="search" type="text" name="search" placeholder="키워드를 입력하세요" class="form-control" />
-						</div>
-						<input type="submit" class="btn col-md-2" value="검색" />
-					</form>
-				</div>
+				<h3>키워드를 입력하세요.</h3>
+				
 			</div>
 
 		</div>
@@ -103,7 +105,15 @@
 	
 	
 	<c:import url="../assets/footer.jsp" />
-	
+	<script>
+	$("#btn").click(function(){
+		if($.trim($("#search").val())=='') {
+			alert('검색어를 입력하세요.');
+			return false;
+		}
+		$("#form").submit();
+	});
+	</script>
 	
 </body>
 </html>

@@ -4,7 +4,6 @@
 	padding: 0;
 }
 
-
 div#container {
     height: 800px;
     width: 1000px;
@@ -13,6 +12,10 @@ div#container {
 
 .row {
 	padding-top: 30px;
+}
+
+.news_ex {
+	padding-top: 20px;
 }
 
 .news_ex #line {
@@ -29,7 +32,6 @@ div#container {
 }
 
 .btn {
-	margin-top: 20px;
 	height: 50px;
 }
 
