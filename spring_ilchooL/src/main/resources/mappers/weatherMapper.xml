@@ -27,7 +27,7 @@
 			fcst_time = #{fcst_time},
 			nx = #{nx},
 			ny = #{ny}
-		Where category = #{category} And fcst_date = #{fcst_date} And fcst_time = #{fcst_time};
+		Where category = #{category} And fcst_date = #{fcst_date} And fcst_time = #{fcst_time} And nx = #{nx} And ny = #{ny};
 	</update>
 	
 	<select id="selectWeatherItem" parameterType="project.spring.ilchooL.model.Witem" resultMap="weatherMap" >

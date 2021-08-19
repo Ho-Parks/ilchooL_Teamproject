@@ -145,62 +145,30 @@
 					<div class="content_box">
 						<form class="form-horizontal" name="id_pw_form" id="id_pw_form" action="" method="post">
 							<div style="padding-top: 40px;">
-								<h2>회원 인증</h2>
+								<h2>비밀번호 초기화</h2>
 								<hr/>
-							</div>
-							<div>
-								<div class="search">
-									<label for="name">이름</label>
-								</div>
-								<span class="box new_id">
-									<input type="text" name="user_name" class="new" placeholder="한글로 입력해주세요!" maxlength="20" />
-								</span>
-								<span class="error_next_box"></span>
 							</div>
 							<div>
 								<div class="search">
 									<label for="name">아이디</label>
 								</div>
 								<span class="box new_id">
-									<input type="text" name="user_name" class="new" maxlength="20" />
+									<input type="text" name="user_id" class="new" placeholder="아이디를 입력해주세요!" maxlength="50" />
+								</span>
+								<span class="error_next_box"></span>
+							</div>
+							<div>
+								<div class="search">
+									<label for="name">이메일</label>
+								</div>
+								<span class="box new_id">
+									<input type="text" name="subject" class="new" placeholder="이메일을 입력해주세요!" maxlength="50" />
 								</span>
 								<span class="error_next_box"></span>
 							</div>
 							<div class="btn_area">
 								<button type="submit" id="btnJoin">
-									<span>검색하기</span>
-								</button>
-							</div>
-							<div style="padding-top: 40px;">
-								<h2>비밀번호 초기화</h2>
-								<hr/>
-							</div>
-							<div>
-								<div class="search">
-									<label for="pswd">비밀번호</label>
-								</div>
-								<span class="box new_pass">
-									<input type="password" id="new_pw" class="new" maxlength="20" name="new_pw">
-									<span id="alertTxt">사용불가</span>
-									<img src="../assets/img/login_new_pass.png" id="new_pw_img1" class="new_pw_img">
-								</span>
-								<span class="error_next_box"></span>
-							</div>
-	
-							<!-- PW2 -->
-							<div>
-								<div class="search">
-									<label for="pswd_re">비밀번호 재확인</label>
-								</div>
-								<span class="box new_pass_check">
-									<input type="password" id="new_pw_re" class="new" maxlength="20" name="new_pw_re">
-									<img src="../assets/img/login_new_check_disable.png" id="new_pw_re_img1" class="new_pw_img">
-								</span>
-								<span class="error_next_box"></span>
-							</div>
-							<div class="btn_area">
-								<button type="submit" id="btnJoin">
-									<span>변경하기</span>
+									<span>초기화 하기</span>
 								</button>
 							</div>
 						</form>
@@ -224,10 +192,7 @@
 				$("#result").html("<h3>" + name + " 님의 아이디는 *** 입니다.</h3>");
 			});
 			
-			$("#success_search").click(function() {
-				$("#reset_pw").removeAttr("disabled");
-				$("#re_reset_pw").removeAttr("disabled");
-			});
+			
 			
 		});
 	</script>

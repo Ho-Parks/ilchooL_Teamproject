@@ -35,6 +35,8 @@ public class forecastDust {
 				@SerializedName("pm10Value")	private String pm10Value;
 				@SerializedName("pm25Value")	private String pm25Value;
 				@SerializedName("dataTime")		private String dataTime;
+				
+				private String stationName;
 			}
 
 		}

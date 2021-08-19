@@ -2,6 +2,8 @@ package project.spring.ilchooL.schedulers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -10,6 +12,7 @@ import project.spring.ilchooL.helper.RetrofitHelper;
 import project.spring.ilchooL.model.forecastDust;
 import project.spring.ilchooL.model.forecastDust.Response.Body.Items;
 import project.spring.ilchooL.service.DustService;
+import project.spring.ilchooL.service.LocService;
 import project.spring.ilchooL.service.forecastDustService;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -26,22 +29,33 @@ public class DustScheduler {
 	RetrofitHelper retrofitHelper;
 	@Autowired
 	DustService dustService;
+	
+	private static String s_loc;
+	
+	public static void getLoc(String loc) {
+		s_loc = loc;
+	}
 
 	public void collectDust() {
-
+		
 		/** 1) API 연동 객체 생성 */
 		// Retrofit 객체 생성
 		Retrofit retrofit_dust = retrofitHelper.getRetrofit(forecastDustService.BASE_URL);
 
 		// Service 객체를 생성한다. 구현체는 Retrofit이 자동 생성
 		forecastDustService ForecastDustService = retrofit_dust.create(forecastDustService.class);
-
+		
 		/** 2) 검색 파라미터 처리 */
 		// API 요청하기
-		String stationName = "강남구";
+		String stationName = null;
+		
+		if (s_loc == null) {
+			stationName = "강남구";
+		} else {
+			stationName = s_loc;
+		}
 
 		/** 3) 미세먼지 데이터 받아오기 */
-
 		// 검색 결과 받아오기
 		Call<forecastDust> call_dust = ForecastDustService.getforecastDust(stationName);
 		forecastDust ForecastDust = null;
@@ -61,8 +75,12 @@ public class DustScheduler {
 		} else {
 			log.debug(">>>>>API 데이터 조회결과 없음");
 			return;
-		}	
-
+		}
+		
+		for(int i = 0; i < list_dust.size(); i++) {
+			list_dust.get(i).setStationName(stationName);
+		}
+		
 		/** 4) 수집 결과를 dustService에 보내기 (DB에 저장) -> d_item */
         try {
          	 dustService.collectdust(list_dust);

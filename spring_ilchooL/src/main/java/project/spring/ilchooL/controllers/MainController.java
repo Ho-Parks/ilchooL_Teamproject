@@ -1,14 +1,17 @@
 package project.spring.ilchooL.controllers;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 import project.spring.ilchooL.helper.RetrofitHelper;
@@ -16,9 +19,14 @@ import project.spring.ilchooL.helper.WebHelper;
 import project.spring.ilchooL.model.Covid19Item;
 import project.spring.ilchooL.model.CovidItem;
 import project.spring.ilchooL.model.DustItem;
+import project.spring.ilchooL.model.Members;
 import project.spring.ilchooL.model.Witem;
+import project.spring.ilchooL.model.locItem;
+import project.spring.ilchooL.schedulers.DustScheduler;
+import project.spring.ilchooL.schedulers.WeatherScheduler;
 import project.spring.ilchooL.service.CovidService;
 import project.spring.ilchooL.service.DustService;
+import project.spring.ilchooL.service.LocService;
 import project.spring.ilchooL.service.WeatherService;
 
 /**
@@ -38,9 +46,41 @@ public class MainController {
 	WeatherService weatherService;
 	@Autowired
 	DustService dustService;
+	
+	@Autowired LocService locService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();		
+		Members loginSession = (Members) session.getAttribute("member");
+		
+		if(loginSession != null) { 
+			
+			String []tokens = loginSession.getAddr1().split(" ");
+			
+			String loc = tokens[1];
+			
+			locItem litem = new locItem();
+			
+			litem.setLoc(loc);
+			
+			locItem s_locItem = null;
+			
+			try {
+				s_locItem = locService.searchLocItem(litem);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	// end try
+			
+			System.out.println("===============받아온 데이터 : " + s_locItem.getLoc());
+			System.out.println("===============받아온 데이터 : " + s_locItem.getLoc_x());
+			System.out.println("===============받아온 데이터 : " + s_locItem.getLoc_y());
+			
+			DustScheduler.getLoc(s_locItem.getLoc());
+			WeatherScheduler.getLoc(s_locItem.getLoc_x(), s_locItem.getLoc_y());
+			
+		}	// end if
 		
 		/**
 		 * 캐러셀 - 날씨,미세먼지 데이터 조회
@@ -333,16 +373,20 @@ public class MainController {
 		model.addAttribute("date", covid_output.get(0).getDate());
 		model.addAttribute("death_acc", covid_output.get(0).getDeath_acc());
 		model.addAttribute("released_acc", covid_output.get(0).getReleased_acc());
-
+		
 		// View 처리
 		return "main/main";
 	}
 
 	/** 교통 페이지 이동 컨트롤러 */
 	@RequestMapping(value = "/contents/contents_transport.do", method = RequestMethod.GET)
-	public String transport(Model model) {
-		return "contents/contents_transport";
+	public ModelAndView transport(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();		
+		Members loginSession = (Members) session.getAttribute("member");
+		
+		if(loginSession == null) { 
+			return webHelper.redirect(null, "로그인 후 이용해주세요.");
+		}
+		return new ModelAndView("contents/contents_transport");
 	}
-	
-
 }

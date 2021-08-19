@@ -13,4 +13,5 @@ public class DustItem {
 	private String pm10Value;
 	private String pm25Value;
 	private String dataTime;
+	private String stationName;
 }

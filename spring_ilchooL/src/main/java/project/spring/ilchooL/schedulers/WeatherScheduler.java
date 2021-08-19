@@ -27,7 +27,23 @@ public class WeatherScheduler {
 	@Autowired RetrofitHelper retrofitHelper;
 	@Autowired WeatherService weatherService;
 	
+	private static int s_loc_x;
+	private static int s_loc_y;
+	
+	public static void getLoc(int loc_x, int loc_y) {
+		s_loc_x = loc_x;
+		s_loc_y = loc_y;
+	}
+	
 	public void collectWeather() {
+		
+		String strBaseUrl = null;
+		int nx = 61;
+		int ny = 126;
+		if (s_loc_x != 0 && s_loc_y != 0) {
+			nx = s_loc_x;
+			ny = s_loc_y;
+		}
 		
 		/** 1) API 연동 객체 생성 */
 		// Retrofit 객체 생성
@@ -43,7 +59,7 @@ public class WeatherScheduler {
 		String prev_date = String.format("%04d%02d%02d", past_c.get(Calendar.YEAR), past_c.get(Calendar.MONTH)+1, past_c.get(Calendar.DAY_OF_MONTH));
 		
 		/** 3) 날씨 데이터 받아오기 */
-		Call<forecastWeather> call_weather = ForecastWeatherService.getforecastWeather(prev_date);
+		Call<forecastWeather> call_weather = ForecastWeatherService.getforecastWeather(prev_date, nx, ny);
 	
 		forecastWeather ForecastWeather = null;
 		
