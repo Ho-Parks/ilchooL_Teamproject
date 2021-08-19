@@ -19,8 +19,8 @@
         <!-- 업로드 디렉토리에 대한 WebPath (server.xml의 path 값과 일치해야 함) -->
         <prop key="uploadPath">/Project_P4JO/upload</prop>
         <!-- 기본 도메인(쿠키설정용) -->
-<prop key="domain">localhost</prop>
-</util:properties>
+		<prop key="domain">localhost</prop>
+		</util:properties>
     <!-- DB연동에 필요한 환경설정 값 -->
     <util:properties id="dbConfig">
         <!-- DB 호스트 이름 -->

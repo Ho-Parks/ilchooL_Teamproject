@@ -100,7 +100,7 @@ body {
 
 .box4 {
 	display: block;
-	width: 75%;
+	width: 71%;
 	height: 51px;
 	border: solid 2px #87CEFA;
 	padding: 10px 14px 10px 14px;
@@ -108,7 +108,7 @@ body {
 	background: #fff;
 	position: relative;
 	float: left;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
 .new {
@@ -208,22 +208,14 @@ select {
 	cursor: pointer;
 	color: #fff;
 	background-color: #428bca;
+	border-radius: 4px;
 	font-size: 20px;
 	font-weight: 400;
 	font-family: Dotum, '돋움', Helvetica, sans-serif;
 }
 
-/* #btnJoin:hover:enabled {
-	background-color: #a3a2a2;
-}
-#btnJoin:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-} */
-
 .click {
 	margin-top: 10px;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	float: right;
-	margin-bottom: 20px;
 }

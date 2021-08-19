@@ -35,7 +35,7 @@ public class AccountRestController {
     MembersService membersService;
 
     /** 아이디 중복검사 */
-    @RequestMapping(value = "/rest/account/id_unique_check.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/rest/account/id_unique_check", method = RequestMethod.POST)
     public Map<String, Object> idUniqueCheck(
             // 아이디
             @RequestParam(value = "user_id", required = false) String user_id) {
@@ -62,10 +62,10 @@ public class AccountRestController {
     @RequestMapping(value = "/rest/account/id_unique_check_jquery", method = RequestMethod.POST)
     public void idUniqueCheckjQuery(HttpServletResponse response,
             // 아이디
-            @RequestParam(value = "user_id", required = false) String userId) {
+            @RequestParam(value = "user_id", required = false) String user_id) {
 
         Members input = new Members();
-        input.setUser_id(userId);
+        input.setUser_id(user_id);
         String result = "true";
 
         try {
@@ -156,19 +156,19 @@ public class AccountRestController {
     /** 로그인 */
     @RequestMapping(value = "/rest/account/login", method = RequestMethod.POST)
     public Map<String, Object> login(
-            @RequestParam(value = "user_id",        required = false) String userId,
-            @RequestParam(value = "user_pw",        required = false) String userPw) {
+            @RequestParam(value = "user_id",        required = false) String user_id,
+            @RequestParam(value = "user_pw",        required = false) String user_pw) {
 
         /** 1) 유효성 검증 */
         // POSTMAN 등의 클라이언트 프로그램으로 백엔드에 직접 접속하는 경우를 방지하기 위해
         // REST컨트롤러에서도 프론트의 유효성 검증과 별개로 자체 유효성 검증을 수행해야 한다.
-        if (!regexHelper.isValue(userId)) { return webHelper.getJsonWarning("아이디를 입력하세요."); }
-        if (!regexHelper.isValue(userPw)) { return webHelper.getJsonWarning("비밀번호를 입력하세요."); }
+        if (!regexHelper.isValue(user_id)) { return webHelper.getJsonWarning("아이디를 입력하세요."); }
+        if (!regexHelper.isValue(user_pw)) { return webHelper.getJsonWarning("비밀번호를 입력하세요."); }
 
         /** 2) 데이터 조회 */
         Members input = new Members();
-        input.setUser_id(userId);
-        input.setUser_pw(userPw);
+        input.setUser_id(user_id);
+        input.setUser_pw(user_pw);
 
         /** 3) 로그인 */
         Members output = null;
@@ -200,7 +200,7 @@ public class AccountRestController {
         return webHelper.getJsonData();
     }
 
-    /** 회원가입 */
+    /** 로그아웃 */
     @RequestMapping(value = "/rest/account/logout", method = RequestMethod.GET)
     public Map<String, Object> logout() {
         webHelper.removeAllSession();

@@ -1,4 +1,13 @@
 $(function() {
+	
+	function getContextPath() {
+      var hostIndex = location.href.indexOf(location.host)
+            + location.host.length;
+      var contextPath = location.href.substring(hostIndex, location.href
+            .indexOf('/', hostIndex + 1));
+      return contextPath;
+   }
+
 	/** 플러그인의 기본 설정 옵션 추가 */
 	jQuery.validator.setDefaults({
 		onkeyup: false, // 키보드입력시 검사 안함
@@ -26,6 +35,7 @@ $(function() {
 			}
 		}
 	});
+	
 	/** 유효성 검사 추가 함수 */
 	$.validator.addMethod("kor", function(value, element) {
 		return this.optional(element) || /^[ㄱ-ㅎ가-힣]*$/i.test(value);
@@ -35,6 +45,7 @@ $(function() {
 			/^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/i.test(value) ||
 			/^\d{2,3}\d{3,4}\d{4}$/i.test(value);
 	});
+	
 	/** form태그에 부여한 id속성에 대한 유효성 검사 함수 호출 */
 	$('#join_form').validate({
 		/** 입력검사 규칙 */
@@ -46,7 +57,7 @@ $(function() {
 				minlength: 4,
 				maxlength: 30,
 				remote: {
-					url: '${pageContext.request.contextPath}/rest/account/id_unique_check_jquery',
+					url: getContextPath() + '/rest/account/id_unique_check_jquery',
 					type: 'post',
 					data: {
 						user_id: function() {
@@ -126,7 +137,7 @@ $(function() {
 	}); // end validate()
 
 
-	$('#join-form').ajaxForm({
+	$('#join_form').ajaxForm({
 		// submit 전에 호출된다.
 		beforeSubmit: function(arr, form, options) {
 			// validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
@@ -140,26 +151,19 @@ $(function() {
 		},
 	}); // end ajaxForm
 
-	$("#id-unique-check").click(function(e) {
-		const userId = $("#user_id").val();
+	$("#id_unique_check").click(function(e) {
+		const user_id = $("#user_id").val();
 
-		if (!userId) {
+		if (!user_id) {
 			swal('알림', '아이디를 입력하세요.', 'warning');
 			return;
 		}
 
-		$.post("" + '/rest/account/id_unique_check', {
-			user_id: userId
+		$.post(getContextPath() + '/rest/account/id_unique_check', {
+			user_id: user_id
 		}, function(json) {
 			swal('확인', '사용가능한 아이디 입니다.', 'success');
 		});
 	});
 
-	function getContextPath() {
-      var hostIndex = location.href.indexOf(location.host)
-            + location.host.length;
-      var contextPath = location.href.substring(hostIndex, location.href
-            .indexOf('/', hostIndex + 1));
-      return contextPath;
-   }
 });
