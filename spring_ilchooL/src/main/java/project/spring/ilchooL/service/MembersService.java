@@ -1,6 +1,9 @@
 package project.spring.ilchooL.service;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import project.spring.ilchooL.model.Members;
 
 public interface MembersService {
@@ -73,4 +76,28 @@ public interface MembersService {
      * @throws Exception
      */
     public Members login(Members input) throws Exception;
+    
+    /**
+     * 비밀번호찾기
+     * @param response
+     * @param input
+     */
+    public void findPw(HttpServletResponse response, Members input) throws Exception;
+   
+    /**
+     * 이메일 발송
+     * @param input
+     * @param div
+     * @throws Exception
+     */
+    public void sendEmail(Members input) throws Exception;
+    
+    /**
+     * 가입 아이디 여부
+     * @param input
+     * @throws Exception
+     */
+    public Members id_check(Members input) throws Exception;
+    
+
 }

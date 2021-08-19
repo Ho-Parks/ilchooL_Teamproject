@@ -222,5 +222,14 @@
       From members
       Where Date_Format(now(), '%Y')- Date_Format(birthday, '%Y') + 1 >= 40 AND 50 > Date_Format(now(), '%Y') - Date_Format(birthday, '%Y') + 1;  
    </select>
+   
+   <update id="updatePw" parameterType="project.spring.ilchooL.model.Members">
+         UPDATE members SET user_pw=MD5(#{user_pw}) WHERE user_id=#{user_id};
+   </update>
+   
+   <select id="id_select" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
+         SELECT * FROM members WHERE user_id=#{user_id} AND email=#{email}
+   </select>
+
 	
 </mapper>
