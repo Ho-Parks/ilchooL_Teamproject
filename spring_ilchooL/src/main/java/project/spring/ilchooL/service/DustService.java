@@ -28,6 +28,13 @@ public interface DustService {
 	 * @throws Exception
 	 */
 	public List<DustItem> getItemList() throws Exception;
+	
+	/**
+	 * 시각화 데이터 조회
+	 * @return
+	 * @throws Exception
+	 */
+	public List<DustItem> getPmList() throws Exception;
 
 }
 

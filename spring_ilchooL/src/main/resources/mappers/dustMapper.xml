@@ -27,5 +27,8 @@
 		Select * From dust;
 	</select>
 	
+	<select id="selectPmList" parameterType="project.spring.ilchooL.model.DustItem" resultMap="dustMap">
+		Select pm10Value, pm25Value, dataTime From dust ORDER BY dataTime limit 0,720;
+	</select>
 	
 	</mapper>
