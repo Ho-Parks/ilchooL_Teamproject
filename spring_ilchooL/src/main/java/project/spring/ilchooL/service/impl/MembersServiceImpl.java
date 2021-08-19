@@ -29,7 +29,7 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
         Members result = null;
 
         try {
-            result = sqlSession.selectOne("MembersMapper.selectItem", input);
+            result = sqlSession.selectOne("MembersMapper.selectMember", input);
 
             if (result == null) {
                 throw new NullPointerException("result=null");
@@ -56,7 +56,7 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
         List<Members> result = null;
 
         try {
-            result = sqlSession.selectList("MembersMapper.selectList", input);
+            result = sqlSession.selectList("MembersMapper.selectMembers", input);
             if (result == null) {
                 throw new NullPointerException("result=null");
             }
@@ -106,7 +106,7 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
         
 
         try {
-            result = sqlSession.insert("MembersMapper.insertItem", input);
+            result = sqlSession.insert("MembersMapper.insertMember", input);
 
             if (result == 0) {
                 throw new NullPointerException("result=0");
@@ -123,7 +123,7 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
     }
 
     /**
-     * 회원 데이터 수정하기
+     * 회원 (마이페이지) 수정하기
      * @param input 수정할 정보를 담고 있는 Beans
      * @return int
      * @throws Exception
@@ -133,7 +133,7 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
         int result = 0;
 
         try {
-            result = sqlSession.update("MembersMapper.updateItem", input);
+            result = sqlSession.update("MembersMapper.updateMember", input);
             if (result == 0) {
                 throw new NullPointerException("result=0");
             }
@@ -159,7 +159,7 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
         int result = 0;
 
         try {
-            result = sqlSession.delete("MembersMapper.deleteItem", input);
+            result = sqlSession.delete("MembersMapper.deleteMember", input);
             if (result == 0) {
                 throw new NullPointerException("result=0");
             }

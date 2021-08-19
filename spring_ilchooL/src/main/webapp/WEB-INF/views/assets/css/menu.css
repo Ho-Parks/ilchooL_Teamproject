@@ -34,8 +34,8 @@ body.is-active { overflow: hidden; }
 
 .overlay a:hover, .overlay a:focus { color: #FFFFFF; text-decoration: underline; }
 
-.overlay a span { font-family: sans-serif; font-style: italic; margin-top: 25;}
-.overlay a .mypage { font-family: sans-serif; font-style: italic; }
+.overlay a span { font-family: sans-serif; font-style: italic; }
+
 @media screen and (max-height: 450px) { .overlay a {font-size: 20px} }
 /* 메뉴 영역 끝 */
 

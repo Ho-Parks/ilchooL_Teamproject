@@ -3,7 +3,9 @@ package project.spring.ilchooL.controllers.rest;
 import java.io.IOException;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import project.spring.ilchooL.helper.RegexHelper;
 import project.spring.ilchooL.helper.UploadItem;
@@ -199,11 +202,80 @@ public class AccountRestController {
         webHelper.setSession("member", output);
         return webHelper.getJsonData();
     }
-
+    
     /** 로그아웃 */
     @RequestMapping(value = "/rest/account/logout", method = RequestMethod.GET)
     public Map<String, Object> logout() {
         webHelper.removeAllSession();
         return webHelper.getJsonData();
     }
+    
+   /** 회원 정보 수정에 대한 action 페이지 */
+	@RequestMapping(value = "/rest/mypage/mypage", method = RequestMethod.POST)
+	public Map<String, Object> editMembers(HttpServletRequest request,
+            @RequestParam(value = "user_pw",        required = false) String user_pw,
+            @RequestParam(value = "user_pw_re",required = false) String user_pw_re,
+            @RequestParam(value = "phone",          required = false) String phone,
+            @RequestParam(value = "postcode",       required = false) String postcode,
+            @RequestParam(value = "addr1",          required = false) String addr1,
+            @RequestParam(value = "addr2",          required = false) String addr2,
+            @RequestParam(required = false)         MultipartFile photo) {
+		
+		
+		//세션값 받아오기
+		HttpSession session = request.getSession();		
+		Members loginSession = (Members) session.getAttribute("member");
+
+		/** 1) 사용자가 입력한 파라미터에 대한 유효성 검사 */
+		
+		// 비밀번호+비밀번호 확인 유효성 검사
+				if(user_pw.equals("")) {return webHelper.getJsonWarning("비밀번호를 입력하세요.");}
+				if(user_pw_re.equals("")) {return webHelper.getJsonWarning("비밀번호 확인란에 비밀번호를 입력하세요.");}
+				
+				// 핸드폰 번호 유효성 검사
+				if(phone.equals("")) {return webHelper.getJsonWarning("핸드폰 번호를 입력하세요.");}
+				if(!regexHelper.isCellPhone(phone)) {return webHelper.getJsonWarning("핸드폰 번호를 - 없이 올바른 양식으로 입력해 주세요.");}
+
+				// 주소 유효성 검사
+				if(postcode.equals("")) {return webHelper.getJsonWarning("우편번호를 입력하세요.");}
+				if(addr1.equals("")) {return webHelper.getJsonWarning("주소를 입력하세요.");}
+				if(addr2.equals("")) {return webHelper.getJsonWarning("상세주소를 입력하세요.");}
+
+		/** 2) 데이터 저장하기 */
+		// 저장할 값들을 Beans에 담는다.
+		Members input = new Members();
+		// 세션 데이터에서 받아올 값 (수정 불가 값)
+		input.setId(loginSession.getId());
+		input.setUser_id(loginSession.getUser_id());
+		input.setEmail(loginSession.getEmail());
+		input.setUser_name(loginSession.getUser_name());
+		input.setGender(loginSession.getGender());
+		input.setBirthday(loginSession.getBirthday());
+		input.setIs_out(loginSession.getIs_out());
+		input.setIs_admin(loginSession.getIs_admin());
+		input.setLogin_date(loginSession.getLogin_date());
+		
+		
+		// 수정 페이지에서 수정하는 값
+		input.setUser_pw(user_pw);
+		input.setPhone(phone);
+		input.setPostcode(postcode);
+        input.setAddr1(addr1);
+        input.setAddr2(addr2);
+		
+		Members output = null;		 // 사용자가 수정한 정보로 DB를 조회한 결과를 받을 객체 준비
+		
+		try {
+			// 데이터 수정
+			membersService.editMembers(input);
+			output = membersService.getMembersItem(input);
+		} catch (Exception e) {
+			return webHelper.getJsonError(e.getLocalizedMessage());
+		}
+	
+		/** ) 결과 표시 */
+	    return webHelper.getJsonData();
+	}
 }
+    
+

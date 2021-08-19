@@ -40,11 +40,11 @@
         <result property="edit_date" column="edit_date" />
     </resultMap>
     <!-- 단일행 조회를 위한 기능 정의 -->
-    <select id="selectItem" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
+    <select id="selectMember" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
         SELECT id, user_id, user_pw, user_name, email, phone, birthday, gender, postcode, addr1, addr2, photo, is_out, is_admin, login_date, reg_date, edit_date FROM members WHERE id=#{id}
     </select>
     <!-- 다중행 조회를 위한 기능 정의 -->
-    <select id="selectList" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
+    <select id="selectMembers" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
         SELECT id, user_id, user_pw, user_name, email, phone, birthday, gender, postcode, addr1, addr2, photo, is_out, is_admin, login_date, reg_date, edit_date FROM members
         ORDER BY id DESC
         <if test="listCount > 0">
@@ -56,7 +56,7 @@
         SELECT COUNT(*) FROM members
     </select>
     <!-- 데이터 저장을 위한 기능 정의 -->
-    <insert id="insertItem" parameterType="project.spring.ilchooL.model.Members" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertMember" parameterType="project.spring.ilchooL.model.Members" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO members (
         user_id, user_pw, user_name, email, phone, birthday, gender, postcode, addr1, addr2, photo, is_out, is_admin, login_date, reg_date, edit_date
         ) VALUES (
@@ -64,11 +64,11 @@
         )
     </insert>
     <!-- 데이터 삭제를 위한 기능 정의 -->
-    <delete id="deleteItem" parameterType="project.spring.ilchooL.model.Members">
+    <delete id="deleteMember" parameterType="project.spring.ilchooL.model.Members">
         DELETE FROM members WHERE id=#{id}
     </delete>
     <!-- 데이터 갱신을 위한 기능 정의 -->
-    <update id="updateItem" parameterType="project.spring.ilchooL.model.Members">
+    <update id="updateMember" parameterType="project.spring.ilchooL.model.Members">
         UPDATE members SET
         user_id=#{user_id},
         user_pw=MD5(#{user_pw}),
@@ -87,6 +87,12 @@
         edit_date=now()
         WHERE id=#{id}
     </update>
+    
+    <!-- 아이디 찾기를 위한 기능 정의 -->
+    <select id="findId" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
+        SELECT user_id FROM members WHERE name=#{name} AND
+        phone=#{phone} AND is_out='N';
+    </select>
     <!-- 아이디 중복검사 -->
     <select id="idUniqueCheck" parameterType="project.spring.ilchooL.model.Members" resultType="int">
         SELECT COUNT(*) FROM members WHERE user_id=#{user_id}

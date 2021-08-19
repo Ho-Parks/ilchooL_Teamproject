@@ -26,33 +26,19 @@
 		<!-- content-->
 		<!-- content-->
 		<div id="inner_join">
-			<form class="form-horizontal" name="mypage_form" id="mypage_form" method="post">
+			<form class="form-horizontal" name="mypage_form" id="mypage_form" method="post" action="${pageContext.request.contextPath}/rest/mypage/mypage">
 				<div id="new_box">
 					<h2>비밀번호 변경</h2>
 				</div>
-				<!-- PW1 -->
-				<div>
-					<div class="mypage">
-						<label for="old_pswd">비밀번호 확인</label>
-					</div>
-					<span class="box old_pass"> 
-						<input type="password" id="old_pw" class="old" name="old_pw" maxlength="20"> 
-							<span id="alertTxt1">사용불가</span> 
-							<img src="../assets/img/login_new_pass.png" id="old_pw_img1" class="new_pw_img">
-					</span> 
-					<span class="error_next_box"></span>
-				</div>
-
-
 				<!-- PW2 -->
 				<div>
 					<div class="mypage">
-						<label for="new_pswd">새 비밀번호</label>
+						<label for="user_pw">새 비밀번호</label>
 					</div>
 					<span class="box new_pass"> 
-						<input type="password" id="new_pw" class="new" name="new_pw" maxlength="20">
-							<span id="alertTxt2">사용불가</span> 
-								<img src="../assets/img/login_new_pass.png" id="new_pw_img2" class="new_pw_img">
+						<input type="password" id="user_pw" class="new" name="user_pw" maxlength="20">
+							<span id="alertTxt1">사용불가</span> 
+								<img src="../assets/img/login_new_pass.png" id="new_pw_img1" class="new_pw_img">
 					</span> 
 					<span class="error_next_box"></span>
 				</div>
@@ -60,25 +46,11 @@
 				<!-- PW3 -->
 				<div>
 					<div class="mypage">
-						<label for="pswd_re">비밀번호 재확인</label>
+						<label for="user_pw_re">비밀번호 재확인</label>
 					</div>
 					<span class="box new_pass_check"> 
-						<input type="password" id="new_pw_re" name="new_pw_re" class="new" maxlength="20">
+						<input type="password" id="user_pw_re" name="user_pw_re" class="new" maxlength="20">
 							<img src="../assets/img/login_new_check_disable.png" id="new_pw_re_img1" class="new_pw_img">
-					</span> 
-					<span class="error_next_box"></span>
-				</div>
-
-				<!-- EMAIL -->
-				<div id="new_box">
-					<h2>이메일 주소 변경</h2>
-				</div>
-				<div>
-					<div class="mypage">
-						<label for="email">이메일 주소</label>
-					</div>
-					<span class="box int_email"> 
-						<input type="email" id="new_email" class="new" name="new_email" maxlength="100" placeholder="선택입력">
 					</span> 
 					<span class="error_next_box"></span>
 				</div>
@@ -92,7 +64,7 @@
 						<label for="phoneNo">연락처</label>
 					</div>
 					<span class="box int_mobile"> 
-						<input type="tel" id="new_mobile" class="new" name="new_mobile" maxlength="16" placeholder="전화번호 입력">
+						<input type="tel" id="phone" class="new" name="phone" maxlength="16" placeholder="전화번호 입력">
 					</span> 
 					<span class="error_next_box"></span>
 				</div>
@@ -108,21 +80,19 @@
 
 					<div class="address1">
 						<span class="box1 new_post "> 
-							<input type="text" id="new_postcode" class="new_1" name="new_postcode" placeholder="우편번호">
-						</span> <span class="click"> 
-							<input type="button" id="address_btn" onclick="new_execDaumPostcode()" value="우편번호 찾기">
+							<input type="text" id="postcode" name="postcode" class="new_1" placeholder="우편번호" readonly>
+						</span> 
+						<span class="click"> 
+							<input type="button" id="address_btn" class="btn btn-primary" onclick="new_execDaumPostcode()" value="우편번호 찾기">
 						</span>
 					</div>
 
 					<span class="box2 new_address "> 
-						<input type="text" id="new_address" class="new" name="new_address" placeholder="주소">
+						<input type="text" id="addr1" class="new" name="addr1" placeholder="주소" readonly>
 					</span> 
 					<span class="box3 new_detailAddress "> 
-						<input type="text" id="new_detailAddress" class="new" name="new_detailAddress" placeholder="상세주소">
+						<input type="text" id="addr2" class="new" name="addr2" placeholder="상세주소">
 					</span> 
-					<span class="box4 new_extraAddress "> 
-						<input type="text" id="new_extraAddress" class="new" placeholder="참고항목">
-					</span>
 
 
 					<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
@@ -175,20 +145,20 @@
 	<script src="../assets/js/mypage2.js"></script>
 	<script src="../assets/js/user_delete.js"></script>
 	<script src="../assets/js/address_1.js"></script>
-	<script src="../assets/js/address.js"></script>
+	<script src="../assets/js/address3.js"></script>
 	
 	<!-- validate 플러그인 참조 -->
 	<script src="../assets/plugins/validate/jquery.validate.min.js"></script>
 	<script src="../assets/plugins/validate/additional-methods.min.js"></script>
 	
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$("#btnJoin").click(function(e) {
 			e.preventDefault();
 			console.log("11");
 			check();
 
 		});
-	</script>
+	</script> -->
 </body>
 
 </html>

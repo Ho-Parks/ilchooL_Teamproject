@@ -36,17 +36,18 @@ public class AccountController {
 	@RequestMapping(value = "/account/join.do", method = RequestMethod.GET)
 	public ModelAndView join(Model model,
 			HttpServletRequest request) {
-		//세션값 받아오기
+				//세션값 받아오기
 				HttpSession session = request.getSession();		
-				Members loginSession = (Members) session.getAttribute("member");
+				Members loginSession = (Members) session.getAttribute("loginInfo");
 						
-				//로그인 세션이 없을 경우 = 로그인되어있지 않을 경우 alert 발생
+				//로그인 세션이 있을 경우 = 로그인 되어 있을 경우 alert 발생
 				if(loginSession!=null) { 
 					return webHelper.redirect(null,"로그아웃 후 이용해주세요.");
 				}
 		return new ModelAndView("account/join");
 	}
- 
+	
+	/** 로그인 페이지로 이동 */
     @RequestMapping(value = "/account/login.do", method = RequestMethod.GET)
 	public ModelAndView login(Model model,
 			HttpServletRequest request) {
@@ -55,7 +56,7 @@ public class AccountController {
 		Members loginSession = (Members) session.getAttribute("member");
 				
 						
-		//로그인 세션이 없을 경우 = 로그인되어있지 않을 경우 alert 발생
+		//로그인 세션이 있을 경우 = 로그인 되어 있을 경우 alert 발생
 		if(loginSession!=null) { 
 			return webHelper.redirect(null,"로그아웃 후 이용해주세요.");
 		}
@@ -66,20 +67,54 @@ public class AccountController {
     
 	/** 이용약관 페이지 이동 컨트롤러 */
 	@RequestMapping(value = "/account/join_terms", method = RequestMethod.GET)
-	public String login_new_terms() {
-		return "account/join_terms";
+	public ModelAndView join_terms(Model model,
+			HttpServletRequest request) {
+		//세션값 받아오기
+		HttpSession session = request.getSession();		
+		Members loginSession = (Members) session.getAttribute("loginInfo");
+				
+						
+		//로그인 세션이 있을 경우 = 로그인 되어 있을 경우 alert 발생
+		if(loginSession!=null) { 
+			return webHelper.redirect(null,"로그아웃 후 이용해주세요.");
+		}
+				
+		return new ModelAndView("account/join_terms");
 	}
 	
 	
 	/** 마이페이지 이동 컨트롤러 */
 	@RequestMapping(value = "/mypage/mypage.do", method = RequestMethod.GET)
-	public String mypage(Model model) {
-		return "mypage/mypage";
+	public ModelAndView update_info(Model model,
+			HttpServletRequest request) {
+		
+		//세션값 받아오기
+		HttpSession session = request.getSession();		
+		Members loginSession = (Members) session.getAttribute("member");
+				
+						
+		//로그인 세션이 없을 경우 = 로그인되어있지 않을 경우 alert 발생
+		if(loginSession==null) { 
+			return webHelper.redirect("../account/login.do","로그인 후 이용해주세요.");
+		} 
+		
+		return new ModelAndView("mypage/mypage");
 	}
 	
 	/** 아이디/비밀번호 찾기 이동 컨트롤러 */
 	@RequestMapping(value = "/account/id_pw_search.do", method = RequestMethod.GET)
-	public String id_pw_search(Model model) {
-		return "account/id_pw_search";
+	public ModelAndView id_pw_search(Model model, 
+			HttpServletRequest request) {
+		
+			//세션값 받아오기
+			HttpSession session = request.getSession();		
+			Members loginSession = (Members) session.getAttribute("loginInfo");			
+									
+			//로그인 세션이 없을 경우 = 로그인되어있지 않을 경우 alert 발생
+			if(loginSession !=null) { 
+			return webHelper.redirect(null,"로그아웃 후 이용해주세요.");
+			}		
+			
+			return new ModelAndView("account/id_pw_search");
 	}
 }

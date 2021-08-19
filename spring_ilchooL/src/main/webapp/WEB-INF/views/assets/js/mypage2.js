@@ -1,4 +1,13 @@
 $(function() {
+	
+	function getContextPath() {
+      var hostIndex = location.href.indexOf(location.host)
+            + location.host.length;
+      var contextPath = location.href.substring(hostIndex, location.href
+            .indexOf('/', hostIndex + 1));
+      return contextPath;
+   }
+
 	/** 플러그인의 기본 설정 옵션 추가 */
 	jQuery.validator.setDefaults({
 		onkeyup: false, // 키보드입력시 검사 안함
@@ -26,6 +35,7 @@ $(function() {
 			}
 		}
 	});
+	
 	/** 유효성 검사 추가 함수 */
 	$.validator.addMethod("kor", function(value, element) {
 		return this.optional(element) || /^[ㄱ-ㅎ가-힣]*$/i.test(value);
@@ -40,63 +50,53 @@ $(function() {
 		/** 입력검사 규칙 */
 		rules: {
 			// [비밀번호] 필수 + 글자수 길이 제한
-			old_pw: { required: true, minlength: 4, maxlength: 20 },
-			// [비밀번호] 필수 + 글자수 길이 제한
-			new_pw: { required: true, minlength: 4, maxlength: 20 },
+			user_pw: { required: true, minlength: 4, maxlength: 20 },
 			// [비밀번호 확인] 필수 + 특정 항목과 일치 (id로 연결)
-			new_pw_re: { required: true, equalTo: "#new_pw" },
-			// [이메일] 필수 + 이메일 형식 일치 필요
-			new_email: { required: true, email: true },
+			user_pw_re: { required: true, equalTo: "#user_pw" },
 			// [연락처] 필수
-			new_mobile: { required: true, phone: true },
-			// [생년월일] 필수 + 날짜 형식 일치 필요
-			birthdate: { required: true, date: true },
+			phone: { required: true, phone: true },
+			
 			// [우편번호] 필수 입력
-			new_postcode: 'required',
+			postcode: 'required',
 			// [주소1] 우편번호가 입력된 경우만 필수
-			new_address: 'required',
+			addr1: 'required',
 			// [주소2] 우편번호가 입력된 경우만 필수
-			new_detailAddress: 'required',
+			addr2: 'required',
 			// 허용할 확장자 명시
 			profile_img: { extension: "jpg|gif|png" }
 		},
 		/** 규칙이 맞지 않을 경우의 메시지 */
 		messages: {
-			old_pw: {
+			user_pw: {
 				required: "비밀번호를 입력하세요.",
 				minlength: "비밀번호는 4글자 이상 입력하셔야 합니다.",
 				maxlength: "비밀번호는 최대 20자까지 가능합니다."
 			},
-			new_pw: {
-				required: "비밀번호를 입력하세요.",
-				minlength: "비밀번호는 4글자 이상 입력하셔야 합니다.",
-				maxlength: "비밀번호는 최대 20자까지 가능합니다."
-			},
-			new_pw_re: {
+			user_pw_re: {
 				required: "비밀번호 확인값을 입력하세요.",
 				equalTo: "비밀번호 확인이 잘못되었습니다."
 			},
-			new_email: {
-				required: "이메일을 입력하세요.",
-				email: "이메일 형식이 잘못되었습니다."
-			},
-			new_mobile: {
+			phone: {
 				required: "연락처를 입력하세요.",
 				phone: "연락처 형식이 잘못되었습니다."
 			},
-			new_postcode: '우편번호를 입력해 주세요.',
-			new_address: '기본주소를 입력해 주세요.',
-			new_detailAddress: '상세주소를 입력해 주세요.',
+			postcode: '우편번호를 입력해 주세요.',
+			addr1: '기본주소를 입력해 주세요.',
+			addr2: '상세주소를 입력해 주세요.',
 			profile_img: {
 				extension: "프로필 사진은 jpg,png,gif 형식만 가능합니다."
 			}
 		}
 	}); // end validate()
-});
-
-function check() {
-	// 확인, 취소버튼에 따른 후속 처리 구현
-	swal({
+	$('#mypage_form').ajaxForm({
+		// submit 전에 호출된다.
+		beforeSubmit: function(arr, form, options) {
+			// validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
+			// 검사규칙에 위배되어 false가 리턴될 경우 submit을 중단한다.
+			return $(form).valid();
+		},
+		success: function(json) {
+			swal({
 		title: '알림',
 		text: '수정 사항을 저장 하시겠습니까?',
 		type: 'question',
@@ -106,15 +106,18 @@ function check() {
 	}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 		if (result.value) { // 확인 버튼이 눌러진 경우
 			swal('수정', '성공적으로 수정 되었습니다.', 'success');
+			window.location.href = getContextPath();
 		} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
 			swal('수정', '수정이 취소되었습니다.', 'error');
-		}
+		} 
+			});
+		},
+	}); // end ajaxForm
+});
 
-		if (result.value) {
-			console.log("gg");
-			$("#btnJoin").submit();
-		}
-	});
-}
+	
+	
+
+
 
 
