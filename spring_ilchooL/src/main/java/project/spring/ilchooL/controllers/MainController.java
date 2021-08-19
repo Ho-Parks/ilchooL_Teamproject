@@ -43,31 +43,30 @@ public class MainController {
 	public String home(Model model) {
 		
 		/**
-		 * 미세먼지 데이터 조회
+		 * 캐러셀 - 날씨,미세먼지 데이터 조회
 		 * @author 박수인
 		 */
 
+		List<Witem> w_item_list = null;
 		List<DustItem> d_item_list = null;
 
-		// 데이터 조회
 		try {
+			w_item_list = weatherService.getItemList();
 			d_item_list = dustService.getItemList();
-			for (DustItem d_item : d_item_list) {
-				System.out.println(">>>>>>>>>>>>>>>>>>>");
-				System.out.println(d_item.toString());
-			}
+			
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 
+		//미세먼지 데이터
 		String dt = null;
 		int pm10 = 0;
 		int pm25 = 0;
 
 		Calendar date = Calendar.getInstance();
 		String d_time = String.format("%04d-%02d-%02d %02d:00", date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1,
-				date.get(Calendar.DAY_OF_MONTH), date.get(Calendar.HOUR_OF_DAY) - 1);
+				date.get(Calendar.DAY_OF_MONTH), date.get(Calendar.HOUR_OF_DAY)-1);
 
 		System.out.println("현재시각: " + d_time);
 
@@ -88,25 +87,8 @@ public class MainController {
 		model.addAttribute("pm10", pm10);
 		model.addAttribute("pm25", pm25);
 
-		/**
-		 * 날씨 데이터 조회
-		 * @author 박수인
-		 */
-
-		List<Witem> w_item_list = null;
-
-		// 데이터 조회
-		try {
-			w_item_list = weatherService.getItemList();
-			for (Witem item : w_item_list) {
-				System.out.println(">>>>>>>>>>>>>>>>>>>");
-				System.out.println(item.toString());
-			}
-		} catch (Exception e) {
-			log.error(e.getLocalizedMessage());
-			e.printStackTrace();
-		}
-
+		
+		//날씨 데이터
 		String ca = null;
 		String ti = null;
 		String da = null;
@@ -116,12 +98,10 @@ public class MainController {
 		int tmx = 0;
 		int pty = 0;
 
-
 		String fcst_time = String.format("%02d00", date.get(Calendar.HOUR_OF_DAY));
 		String fcst_date = String.format("%04d%02d%02d", date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1,
 				date.get(Calendar.DAY_OF_MONTH));
 
-		// System.out.println(w_time);
 
 		for (int i = 0; i < w_item_list.size(); i++) {
 			ca = w_item_list.get(i).getCategory();
@@ -141,14 +121,14 @@ public class MainController {
 					pty = Integer.parseInt(w_item_list.get(i).getFcst_value());
 				}
 			}
-			
+
 			// 'TMP':1시간기온
 			if (ca.equals("TMP") && da.equals(fcst_date)) {
 				if (ti.equals(fcst_time)) {
 					tmp = Integer.parseInt(w_item_list.get(i).getFcst_value());
 				}
 			}
-			
+
 			// 'TMN':최저기온(6시)
 			if (ca.equals("TMN") && da.equals(fcst_date)) {
 				tmn = Integer.parseInt(w_item_list.get(i).getFcst_value());
@@ -165,37 +145,101 @@ public class MainController {
 		model.addAttribute("tmp", tmp);
 		model.addAttribute("tmn", tmn);
 		model.addAttribute("tmx", tmx);
-		
-		/** Chart 구현을 위한 데이터 조회 */
-		List<Witem> chart_item_list = null;
 
-		// 데이터 조회
+		
+		/**
+		 *  시각화 구현을 위한 데이터 조회 
+		 */
+		
+		List<Witem> chart_item_list = null;
+		List<Witem> chart_tmx_list = null;
+		List<Witem> chart_tmn_list = null;
+		List<DustItem> chart_pm_list = null;
+		
 		try {
 			chart_item_list = weatherService.getChartItemList();
-			for (Witem item : chart_item_list) {
-				//System.out.println("************");
+			chart_tmx_list = weatherService.getTmxItemList();
+			chart_tmn_list = weatherService.getTmnItemList();
+			chart_pm_list = dustService.getPmList();
+			
+			for (DustItem item : chart_pm_list) {
+				System.out.println("*****************");
 				System.out.println(item.toString());
 			}
+			
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());
 			e.printStackTrace();
+			}
+		
+		// pm10, pm25 시각화 데이터 요청
+		// 'pm10': ~30:좋음, ~80:보통, ~150:나쁨, ~:매우나쁨
+		// 'pm25': ~15:좋음, ~35:보통, ~75:나쁨, ~:매우나쁨
+		int pm10_great =0;
+		int pm10_good =0;
+		int pm10_bad =0;
+		int pm10_worst =0;
+		int pm25_great =0;
+		int pm25_good =0;
+		int pm25_bad =0;
+		int pm25_worst =0;
+		
+		for (int i = 0; i < chart_pm_list.size(); i++) {
+			int pm10value = Integer.parseInt(chart_pm_list.get(i).getPm10Value());
+			String pm25_data = chart_pm_list.get(i).getPm25Value();
+			String bar = "-";
+			
+			
+			if(pm10value <= 15) {
+				pm10_great +=1;
+			}else if(pm10value >15 && pm10value <=35) {
+				pm10_good +=1;
+			}else if(pm10value >35 && pm10value <=75) {
+				pm10_bad +=1;
+			}else {
+				pm10_worst +=1;
+			}
+			
+			System.out.println(pm25_data);
+			
+			  if(!pm25_data.equals(bar)) { 
+				  int pm25value = Integer.parseInt(pm25_data);
+				  System.out.println(pm25value);
+			  
+				  if(pm25value <= 30) {
+					  pm25_great += 1; 
+				  }else if(pm25value >30 && pm25value <=80) {
+					  pm25_good += 1; 
+				  }else if(pm25value >80 && pm25value <=150) {
+					  pm25_bad += 1; 
+				  }else {
+					  pm25_worst += 1; 
+			  } 
+			  }
+			 
+			
 		}
+		
+			model.addAttribute("pm10_great",pm10_great );
+			model.addAttribute("pm10_good",pm10_good );
+			model.addAttribute("pm10_bad",pm10_bad );
+			model.addAttribute("pm10_worst",pm10_worst );
+			model.addAttribute("pm25_great",pm25_great );
+			model.addAttribute("pm25_good",pm25_good );
+			model.addAttribute("pm25_bad",pm25_bad );
+			model.addAttribute("pm25_worst",pm25_worst );
 
+
+		// PTY 시각화 데이터 요청
 		int sunny_0 = 0;
 		int rainy_1 = 0;
 		int sleet_2 = 0;
 		int snow_3 = 0;
 		int shower_4 = 0;
-		ArrayList<Integer> tmn_chart = new ArrayList<Integer>();
-		ArrayList<Integer> tmx_chart = new ArrayList<Integer>();
-		List<String> day_chart = new ArrayList<String>();
-
 		int value = 0;
 
 		for (int i = 0; i < chart_item_list.size(); i++) {
-			ca = chart_item_list.get(i).getCategory();
 
-			if (ca.equals("PTY")) {
 				value = Integer.parseInt(chart_item_list.get(i).getFcst_value());
 
 				if (value == 0) {
@@ -209,45 +253,34 @@ public class MainController {
 				} else if (value == 4) {
 					shower_4 += 1;
 				}
-			}
-			
-			if (ca.equals("TMN")) {
-				tmn_chart.add(Integer.parseInt(chart_item_list.get(i).getFcst_value()));
-				day_chart.add(chart_item_list.get(i).getFcst_date());
-			}
-
-			if (ca.equals("TMX")) {
-				tmx_chart.add(Integer.parseInt(chart_item_list.get(i).getFcst_value()));
-			}
 		}
-		
-		for (int i=0; i<day_chart.size(); i++) {
-			String date_chart = day_chart.get(i);
-			String date_sub = "'"+date_chart.substring(6)+"일'";
-			
-			//System.out.println(date_sub);
-			
-			day_chart.set(i, date_sub);
-			
-		}
-		
-
-
-		System.out.println(">>>>>>>>>>>> sunny:" + sunny_0);
-		System.out.println(">>>>>>>>>>>> rainy:" + rainy_1);
-		System.out.println(">>>>>>>>>>>> shower:" + shower_4);
-		System.out.println(">>>>>>>>>>>> tmn_chart:" + tmn_chart);
-		System.out.println(">>>>>>>>>>>> tmx_chart:" + tmx_chart);
-		System.out.println(">>>>>>>>>>>> day_chart:" + day_chart);
 
 		model.addAttribute("sunny", sunny_0);
 		model.addAttribute("rainy", rainy_1);
 		model.addAttribute("sleet", sleet_2);
 		model.addAttribute("snow", snow_3);
 		model.addAttribute("shower", shower_4);
-		model.addAttribute("tmn_chart", tmn_chart);
-		model.addAttribute("tmx_chart", tmx_chart);
-		model.addAttribute("day_chart", day_chart);
+		
+		
+		// TMX, TMN 시각화 데이터 요청
+		int tmn_data = 0;
+		int tmx_data = 0;
+		int day_dt = 0;
+		String day_data = null;
+		
+		for (int i = 0; i < chart_tmx_list.size(); i++) {
+				tmx_data = Integer.parseInt(chart_tmx_list.get(i).getFcst_value());
+				model.addAttribute("tmx_data"+i, tmx_data);
+		}
+		
+		for (int i = 0; i < chart_tmn_list.size(); i++) {
+				tmn_data = Integer.parseInt(chart_tmn_list.get(i).getFcst_value());
+				day_dt = Integer.parseInt(chart_tmn_list.get(i).getFcst_date().substring(6));
+				day_data = "'"+ day_dt + "일'";
+
+				model.addAttribute("tmn_data"+i, tmn_data);
+				model.addAttribute("day_data"+i, day_data);
+		}
 
 
 		/**
