@@ -92,7 +92,7 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
     }
 
     /**
-     * 회원 데이터 등록하기
+     * 회원가입
      * @param input 저장할 정보를 담고 있는 Beans
      * @return int
      * @throws Exception
@@ -113,10 +113,10 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
             }
         } catch (NullPointerException e) {
             log.error(e.getLocalizedMessage());
-            throw new Exception("저장된 데이터가 없습니다.");
+            throw new Exception("회원가입이 완료되지 않았습니다. 다시 수행해 주세요.");
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());
-            throw new Exception("데이터 저장에 실패했습니다.");
+            throw new Exception("회원가입에 실패했습니다.");
         }
 
         return result;
