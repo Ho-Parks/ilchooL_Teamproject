@@ -97,7 +97,7 @@ public class AccountController {
 		if(loginSession==null) { 
 			return webHelper.redirect("../account/login.do","로그인 후 이용해주세요.");
 		} 
-		
+		model.addAttribute("user_name", loginSession.getUser_name());
 		return new ModelAndView("mypage/mypage");
 	}
 	

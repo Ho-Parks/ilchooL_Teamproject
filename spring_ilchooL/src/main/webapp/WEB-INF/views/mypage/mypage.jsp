@@ -116,22 +116,24 @@
 			</form>
 		</div>
 		<!-- content-->
-		<div class="mypage_delete">
-			<hr />
-			<div class="user_delete">
-				<h2>회원 탈퇴</h2>
-				회원 탈퇴시
-				<h4>user</h4>
-				님의 데이터 사용 및 복구가 불가능하오니 신중하게 <br> 선택하시기 바랍니다. 그래도 탈퇴 하시겠습니까?
-				<div class="check_delete">
-					<input type="checkbox" name="delete" id="delete" value="delete" />
-					<label for="delete" class="required">위 내용을 확인 하였으며, 이에 동의 합니다.</label>
-				</div>
-				<div class="input_check">
-					<button type="submit" id="next-button">회원탈퇴하기</button>
+		<form class="form-horizontal" name="delete_form" id="delete_form" method="GET" action="${pageContext.request.contextPath}/rest/mypage/delete" >
+			<div class="mypage_delete">
+				<hr />
+				<div class="user_delete">
+					<h2>회원 탈퇴</h2>
+					회원 탈퇴시
+					<h5>${user_name}</h5>
+					님의 데이터 사용 및 복구가 불가능하오니 신중하게 <br> 선택하시기 바랍니다. 그래도 탈퇴 하시겠습니까?
+					<div class="check_delete">
+						<input type="checkbox" name="delete" id="delete" value="delete" />
+						<label for="delete" class="required">위 내용을 확인 하였으며, 이에 동의 합니다.</label>
+					</div>
+					<div class="input_check">
+						<button type="submit" id="next-button">회원탈퇴하기</button>
+					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 		<!-- content-->
 		</div>
 	</div>

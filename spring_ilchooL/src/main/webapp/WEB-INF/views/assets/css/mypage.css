@@ -274,7 +274,7 @@ select {
     margin: 15px 0;
 }
 
-.user_delete h4 {
+.user_delete h5 {
     color: #70C1AB;
     display: inline-block;
 }

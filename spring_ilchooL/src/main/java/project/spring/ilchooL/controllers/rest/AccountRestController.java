@@ -8,13 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.web.servlet.ModelAndView;
 
 import project.spring.ilchooL.helper.RegexHelper;
 import project.spring.ilchooL.helper.UploadItem;
@@ -314,7 +315,7 @@ public class AccountRestController {
         input.setAddr2(addr2);
 		
 		Members output = null;		 // 사용자가 수정한 정보로 DB를 조회한 결과를 받을 객체 준비
-		
+			
 		try {
 			// 데이터 수정
 			membersService.editMembers(input);
@@ -326,6 +327,28 @@ public class AccountRestController {
 		/** ) 결과 표시 */
 	    return webHelper.getJsonData();
 	}
-}
+	
+	/** 탈퇴하기 */
+	@RequestMapping(value = "/rest/mypage/delete", method = RequestMethod.GET)
+	public Map<String, Object> deleteMembers(HttpServletRequest request) {
+		// 세션값 받아오기
+		HttpSession session = request.getSession();		
+		Members loginSession = (Members) session.getAttribute("member");
+		int output = 0;
+		
+			Members member = new Members();
+			member.setId(loginSession.getId());
+
+			try {
+				output = membersService.deleteMembers(member);
+				session.invalidate();
+			} catch (Exception e) {
+				return webHelper.getJsonError(e.getLocalizedMessage());
+			}
+		
+			/** ) 결과 표시 */
+		    return webHelper.getJsonData();
+			}
+		}
     
 

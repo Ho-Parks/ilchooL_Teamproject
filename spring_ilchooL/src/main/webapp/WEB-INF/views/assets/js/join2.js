@@ -161,7 +161,7 @@ $(function() {
 		},
 		success: function(json) {
 			swal('알림', '회원가입이 완료되었습니다. 로그인 해 주세요.', 'success').then(function(result) {
-				window.location.href = getContextPath() + "/account/login";
+				window.location.href = getContextPath() + "/account/login.do";
 			});
 		},
 	}); // end ajaxForm

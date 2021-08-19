@@ -97,23 +97,23 @@ $(function() {
 		},
 		success: function(json) {
 			swal({
-		title: '알림',
-		text: '수정 사항을 저장 하시겠습니까?',
-		type: 'question',
-		confirmButtonText: 'Yes', // 확인버튼 표시 문구
-		showCancelButton: true, // 취소버튼 표시 여부
-		cancelButtonText: 'No', // 취소버튼 표시 문구
-	}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
-		if (result.value) { // 확인 버튼이 눌러진 경우
-			swal('수정', '성공적으로 수정 되었습니다.', 'success');
-			window.location.href = getContextPath();
-		} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
-			swal('수정', '수정이 취소되었습니다.', 'error');
-		} 
-			});
-		},
-	}); // end ajaxForm
-});
+				title: '알림',
+				text: '수정 사항을 저장 하시겠습니까?',
+				type: 'question',
+				confirmButtonText: 'Yes', // 확인버튼 표시 문구
+				showCancelButton: true, // 취소버튼 표시 여부
+				cancelButtonText: 'No', // 취소버튼 표시 문구
+		}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+			if (result.value) { // 확인 버튼이 눌러진 경우
+				swal('수정', '성공적으로 수정 되었습니다.', 'success');
+				window.location.href = getContextPath();
+			} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+				swal('수정', '수정이 취소되었습니다.', 'error');
+			} 
+				});
+			},
+		}); // end ajaxForm
+	});
 
 	
 	
