@@ -8,7 +8,7 @@
 	<c:import url="../assets/head.jsp" />
 	 <style type="text/css">
    	  .p_container { padding: 30px 0; }
-      #contents { text-align: center; overflow: hidden; padding-bottom: 100px; }
+      #contents { text-align: center; overflow: hidden; padding-bottom: 100px; padding-top: 100px; }
       h1 { padding-bottom: 30px; }
       #contents_box { height: 500px; overflow: hidden !important; padding: 0 40px !important; }
       #contents_box span { position: absolute; font-size: 30px; margin: auto; color: white; z-index: 1;
