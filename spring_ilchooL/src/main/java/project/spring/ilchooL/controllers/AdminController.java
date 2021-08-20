@@ -132,7 +132,9 @@ public class AdminController {
             @RequestParam(value="user_id", defaultValue="") String user_id,
             @RequestParam(value="user_name", defaultValue="") String user_name,
             @RequestParam(value="email") String email,
-            @RequestParam(value="phone") String phone) {
+            @RequestParam(value="phone") String phone,
+            @RequestParam(value="gender") String gender,
+            @RequestParam(value="birthday") String birthday) {
         
         // 수정할 값들을 Beans에 담는다.
         Members input = new Members();
@@ -141,10 +143,12 @@ public class AdminController {
         input.setUser_name(user_name);
         input.setEmail(email);
         input.setPhone(phone);
+        input.setGender(gender);
+        input.setBirthday(birthday);
 
         try {
             // 데이터 수정
-        	adminMembersService.editMembers(input);
+           adminMembersService.editMembers(input);
         } catch (Exception e) { e.printStackTrace(); }
 
         // 수정한 대상을 상세페이지에 알려주기 위해서 PK값을 전달해야 한다. 
@@ -153,6 +157,7 @@ public class AdminController {
             response.sendRedirect(redirectUrl);
         } catch (IOException e) { e.printStackTrace(); }
     }
+
 
     
     /** 관리자 페이지 대쉬보드 컨트롤러 */
