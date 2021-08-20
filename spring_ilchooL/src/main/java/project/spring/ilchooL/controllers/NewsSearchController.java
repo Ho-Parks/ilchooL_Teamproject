@@ -52,7 +52,7 @@ public class NewsSearchController {
 		Members loginSession = (Members) session.getAttribute("member");
 		
 		if(loginSession == null) { 
-			return webHelper.redirect(null, "로그인 후 이용해주세요.");
+			return webHelper.redirect("/ilchooL/account/login.do", "로그인 후 이용해주세요.");
 		}
 	   
 	   
