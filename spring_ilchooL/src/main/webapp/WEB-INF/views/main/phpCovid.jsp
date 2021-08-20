@@ -89,11 +89,6 @@
 		</div>
 		<div id="covid_graph" class="row">
 			<div class="covid_graph_btn_box col-md-12 col-xs-12 row">
-				<p class="pull-left col-xs-12">데이터 기준 :
-					<fmt:parseDate value="${date }" var="parseDate" pattern="yyyymmdd" />
-					<fmt:formatDate value="${parseDate }" pattern="yyyy-mm-dd" />
-					(서울시)
-				</p>
 				<div class="btn_box col-md-3 col-xs-6">
 					<button type="button" id="con_btn" class="btn btn-danger graph_btn">확진자</button>
 				</div>

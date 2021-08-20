@@ -360,6 +360,37 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
         return sqlSession.selectOne("MembersMapper.id_select", input);
         
     }
+
+	@Override
+	public Members searchMembersID(Members input) throws Exception {
+		Members result = null;
+
+		try {
+			result = sqlSession.selectOne("MembersMapper.searchID", input);
+		} catch (NullPointerException e) {
+			throw new Exception("저장된 아이디가 없습니다.");
+		} catch (Exception e) {
+			throw new Exception("아이디 조회에 실패했습니다.");
+		}
+		
+		return result;
+	}
+	
+	@Override
+    public void findId(HttpServletResponse response, String uid) throws Exception {
+       response.setContentType("text/html;charset=utf-8");
+       //Members ck = mdao.id_select(input.getUser_id());
+       //Members ck = mdao.id_select(input);
+       PrintWriter out = response.getWriter();
+       
+       if(uid == null) {
+          out.print("<script>alert('가입된 정보가 없습니다.');history.go(-1);</script>");
+       }
+       
+       out.print("<script>alert('가입하신 아이디는 " + uid + " 입니다.');history.go(-1);</script>");
+       out.close();
+       
+    }
  }
 
 

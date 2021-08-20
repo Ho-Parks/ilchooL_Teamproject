@@ -99,5 +99,15 @@ public interface MembersService {
      */
     public Members id_check(Members input) throws Exception;
     
+    /**
+     * 
+     * @param input
+     * @return
+     * @throws Exception
+     */
+    public Members searchMembersID(Members input) throws Exception;
+    
+    public void findId(HttpServletResponse response, String uid) throws Exception;
+    
 
 }

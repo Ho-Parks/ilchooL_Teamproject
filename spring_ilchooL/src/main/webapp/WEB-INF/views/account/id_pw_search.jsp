@@ -72,11 +72,12 @@
          <div class="tab-pane fade in active" id="id_search">
             <div class="id_pw_box">
                <div class="content_box">
-                  <form class="form-horizontal" name="id_pw_form" id="id_pw_form" action="${pageContext.request.contextPath}/account/id_pw_search.do" method="post">
+                  <form class="form-horizontal" name="id_pw_form" id="id_pw_form" action="${pageContext.request.contextPath}/account/id_search.do" method="post">
                      <div style="padding-top: 40px;">
                         <h2>아이디 찾기</h2>
                         <hr/>
                      </div>
+                     
                      <div>
                         <div class="search">
                            <label for="name">이름</label>
@@ -87,49 +88,26 @@
                         <span class="error_next_box"></span>
                      </div>
                      <div>
+						<div class="search">
+							<label for="birthday">생년월일</label>
+						</div>
+						<span class="box birthday"> 
+	                        <input type="date" name="birthday" class="new" id="birthday" />
+	                    </span>
+	                </div>
+	                
+	                <div>
                         <div class="search">
-                           <label for="yy">생년월일</label>
+                           <label for="name">이메일</label>
                         </div>
-                        <div id="bir_wrap">
-                           <!-- BIRTH_YY -->
-                           <div id="bir_yy">
-                              <span class="box"> <input type="text" id="yy" class="new"
-                                 maxlength="4" placeholder="년(4자)">
-                              </span>
-                           </div>
-         
-                           <!-- BIRTH_MM -->
-                           <div id="bir_mm">
-                              <span class="box"> <select id="mm" class="sel">
-                                    <option>월</option>
-                                    <option value="01">1</option>
-                                    <option value="02">2</option>
-                                    <option value="03">3</option>
-                                    <option value="04">4</option>
-                                    <option value="05">5</option>
-                                    <option value="06">6</option>
-                                    <option value="07">7</option>
-                                    <option value="08">8</option>
-                                    <option value="09">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                              </select>
-                              </span>
-                           </div>
-         
-                           <!-- BIRTH_DD -->
-                           <div id="bir_dd">
-                              <span class="box"> <input type="text" id="dd" class="new"
-                                 maxlength="2" placeholder="일">
-                              </span>
-                           </div>
-                        </div>
+                        <span class="box new_id">
+                           <input type="text" name="email" id="email" class="new" placeholder="이메일을 입력해주세요!" maxlength="50" />
+                        </span>
                         <span class="error_next_box"></span>
                      </div>
             
                      <div class="btn_area">
-                        <button type="submit" id="btnJoin">
+                        <button type="submit" id="btnJoin_id">
                            <span>검색하기</span>
                         </button>
                      </div>
@@ -143,7 +121,7 @@
          <div class="tab-pane fade" id="pw_search">
             <div class="id_pw_box">
                <div class="content_box">
-                  <form class="form-horizontal" name="id_pw_form" id="id_pw_form" action="${pageContext.request.contextPath}/account/id_pw_search.do" method="post">
+                  <form class="form-horizontal" name="id_pw_form" id="id_pw_form" action="${pageContext.request.contextPath}/account/pw_search.do" method="post">
                      <div style="padding-top: 40px;">
                         <h2>비밀번호 초기화</h2>
                         <hr/>
@@ -186,14 +164,6 @@
    </div>
    
    <script type="text/javascript">
-      $(function() {
-         $("#id_re_btn").click(function() {
-            var name = $("input[name=user_name]").val();
-            $("#result").html("<h3>" + name + " 님의 아이디는 *** 입니다.</h3>");
-         });
-      });
-      
-      
       
       $(function(){
          $("#btnJoin").click(function(){
