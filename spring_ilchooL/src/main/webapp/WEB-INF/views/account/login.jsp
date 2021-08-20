@@ -44,10 +44,9 @@
 				<div class="login_append">
 					<div class="log_chk">
 						<!-- 체크시 checked 추가 -->
-						<input type="checkbox" id="keepLogin" class="chk_radio"
+						<input type="checkbox" id="keepLogin" name="remember" value="1" class="chk_radio"
 							name="keepLogin"> <label for="keepLogin" class="lab_g">
-							<span class="img_top ico_check"></span> <span class="txt_lab">로그인
-								상태 유지</span>
+							<span class="img_top ico_check"></span> <span class="txt_lab">아이디 기억하기</span>
 						</label>
 					</div>
 					<span class="txt_find"> <a
@@ -62,6 +61,7 @@
 
 	<c:import url="../assets/footer.jsp" />
 	<script src="${pageContext.request.contextPath}/assets/js/login.js?ver=<%=System.currentTimeMillis()%>"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/login_cookie.js?ver=<%=System.currentTimeMillis()%>"></script>
 	
 </body>
 

@@ -90,7 +90,7 @@
 						<label for="gender">성별</label>
 					</div>
 					<span class="box gender_code"> 
-						<select id="gender" class="sel">
+						<select id="gender" name="gender" class="sel">
 							<option>성별</option>
 							<option value="M">남자</option>
 							<option value="F">여자</option>
