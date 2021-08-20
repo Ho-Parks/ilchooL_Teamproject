@@ -223,15 +223,16 @@ public class AccountRestController {
         Members input = new Members();
         input.setUser_id(user_id);
         input.setUser_pw(user_pw);
-
+        
         /** 3) 로그인 */
         Members output = null;
-
+        
         try {
             output = membersService.login(input);
         } catch (Exception e) {
             return webHelper.getJsonError(e.getLocalizedMessage());
         }
+        
 
         /** 4) 프로필 사진이 존재하는 경우 썸네일 이미지 생성 */
         UploadItem photo = output.getPhoto();
@@ -253,6 +254,8 @@ public class AccountRestController {
         webHelper.setSession("member", output);
         return webHelper.getJsonData();
     }
+    
+    
     
     /** 로그아웃 */
     @RequestMapping(value = "/rest/account/logout", method = RequestMethod.GET)

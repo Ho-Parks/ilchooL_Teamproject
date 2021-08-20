@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import project.spring.ilchooL.helper.PageData;
+import project.spring.ilchooL.helper.WebHelper;
 import project.spring.ilchooL.model.Members;
 import project.spring.ilchooL.model.MembersLog;
 import project.spring.ilchooL.service.AdminMembersService;
 import project.spring.ilchooL.service.MembersLogService;
+import project.spring.ilchooL.service.MembersService;
 
 @Controller
 public class AdminController {
@@ -28,6 +30,11 @@ public class AdminController {
     
     @Autowired
     MembersLogService memberLogService;
+    
+    @Autowired
+	WebHelper webHelper;
+	@Autowired
+    MembersService membersService;
     
     /** "/프로젝트이름" 에 해당하는 ContextPath 변수 주입 */
     // --> import org.springframework.beans.factory.annotation.Value;
@@ -149,10 +156,33 @@ public class AdminController {
 
     
     /** 관리자 페이지 대쉬보드 컨트롤러 */
-	@RequestMapping(value = "/admin/admin_dashboard.do", method = RequestMethod.GET)
-	public String dashboard(Model model, HttpServletResponse response)
+	@RequestMapping(value = "/admin/admin_dashboard.do", method = {RequestMethod.POST, RequestMethod.GET})
+	public String dashboard(Model model, HttpServletResponse response,
+			@RequestParam(value = "user_id",        required = false) String user_id,
+            @RequestParam(value = "user_pw",        required = false) String user_pw,
+            @RequestParam(value = "login",        required = false) String login)
 	{
 		Members input = new Members();
+		
+		if (login == "Y") {
+			input.setUser_id(user_id);
+	        input.setUser_pw(user_pw);
+	        
+	        Members output = null;
+	        
+	        try {
+	            output = membersService.login(input);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        
+	        System.out.println("================" + output.getIs_admin());
+	        
+	        if(!output.getIs_admin().equals("Y")) {
+	        	webHelper.redirect(null, "로그인 실패");
+	        }
+		}	//end if
+        
 	       input.setGender("F");
 	       int result = 0;
 	       

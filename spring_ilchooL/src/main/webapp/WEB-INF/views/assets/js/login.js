@@ -29,7 +29,9 @@ $(function() {
 		}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
 			if (result.value) { // 확인 버튼이 눌러진 경우
 				swal('확인', '성공적으로 로그인 되었습니다.', 'success');
+				
 				window.location.href = getContextPath();
+				
 			} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
 				swal('확인', '로그인이 취소되었습니다.', 'error');
 			} 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,7 @@ import project.spring.ilchooL.schedulers.WeatherScheduler;
 import project.spring.ilchooL.service.CovidService;
 import project.spring.ilchooL.service.DustService;
 import project.spring.ilchooL.service.LocService;
+import project.spring.ilchooL.service.MembersService;
 import project.spring.ilchooL.service.WeatherService;
 
 /**
@@ -39,6 +41,8 @@ public class MainController {
 	@Autowired
 	WebHelper webHelper;
 	@Autowired
+    MembersService membersService;
+	@Autowired
 	RetrofitHelper retrofitHelper;
 	@Autowired
 	CovidService covidService;
@@ -46,6 +50,7 @@ public class MainController {
 	WeatherService weatherService;
 	@Autowired
 	DustService dustService;
+	
 	
 	@Autowired LocService locService;
 
@@ -380,4 +385,11 @@ public class MainController {
 		}
 		return new ModelAndView("contents/contents_transport");
 	}
+	
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public ModelAndView adminPage() {
+        return new ModelAndView("/account/adminLogin");
+    }
+	
+	
 }
