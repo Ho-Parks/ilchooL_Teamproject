@@ -7,6 +7,14 @@
 	font-weight: 600;	
 }
 
+.canvasgraph {
+	position: relative; resize: both; padding-top: 30px;
+}
+
+#kospiChart {
+	width: 400px; height: 400px;
+}
+
 
 .md4 {
 	min-height: 200px;

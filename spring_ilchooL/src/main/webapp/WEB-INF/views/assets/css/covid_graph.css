@@ -34,4 +34,4 @@ ul li span { font-size: 15px; }
 
 .canvas_chart_container { position: relative; resize: both; padding-top: 30px; }
 
-#covidChart { width: 400px; height: 400px; }
+#covidChart { width: 400px; height: 500px; }

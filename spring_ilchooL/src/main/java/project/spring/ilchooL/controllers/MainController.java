@@ -80,8 +80,10 @@ public class MainController {
 				e.printStackTrace();
 			}	// end try
 			
-			DustScheduler.getLoc(s_locItem.getLoc());
-			WeatherScheduler.getLoc(s_locItem.getLoc_x(), s_locItem.getLoc_y());
+			/*
+			 * DustScheduler.getLoc(s_locItem.getLoc());
+			 * WeatherScheduler.getLoc(s_locItem.getLoc_x(), s_locItem.getLoc_y());
+			 */
 			
 			witem.setNx(Integer.toString(s_locItem.getLoc_x()));
 			witem.setNy(Integer.toString(s_locItem.getLoc_y()));

@@ -25,8 +25,8 @@
 				</div>
 
 				<!-- 그래프를 표시할 위치 -->
-				<div class="col-sm-12">
-					<canvas id="kospiChart" style="width: 100%; height: 600px !important"></canvas>
+				<div id="canvasgraph" class="col-md-12 col-xs-12">
+					<canvas id="kospiChart"></canvas>
 				</div>
 			</div>
 
