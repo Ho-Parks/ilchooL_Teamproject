@@ -231,20 +231,24 @@ public class MainController {
 		int pm25_worst =0;
 		
 		for (int i = 0; i < chart_pm_list.size(); i++) {
-			int pm10value = Integer.parseInt(chart_pm_list.get(i).getPm10Value());
+			String pm10_data = chart_pm_list.get(i).getPm10Value();
 			String pm25_data = chart_pm_list.get(i).getPm25Value();
 			String bar = "-";
 			
-			
-			if(pm10value <= 15) {
-				pm10_great +=1;
-			}else if(pm10value >15 && pm10value <=35) {
-				pm10_good +=1;
-			}else if(pm10value >35 && pm10value <=75) {
-				pm10_bad +=1;
-			}else {
-				pm10_worst +=1;
-			}
+			  if(!pm10_data.equals(bar)) { 
+				  int pm10value = Integer.parseInt(pm10_data);
+				  System.out.println(pm10value);
+			  
+				  if(pm10value <= 15) {
+					  pm10_great += 1; 
+				  }else if(pm10value >15 && pm10value <=35) {
+					  pm10_good += 1; 
+				  }else if(pm10value >35 && pm10value <=75) {
+					  pm10_bad += 1; 
+				  }else {
+					  pm10_worst += 1; 
+				  } 
+			  }
 			
 			  if(!pm25_data.equals(bar)) { 
 				  int pm25value = Integer.parseInt(pm25_data);
