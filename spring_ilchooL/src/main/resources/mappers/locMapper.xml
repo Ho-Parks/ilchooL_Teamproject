@@ -17,4 +17,9 @@
 		From seoul_loc
 		Where loc = #{loc};
 	</select>
+	
+	<select id="searchLocAll" parameterType="project.spring.ilchooL.model.locItem" resultMap="locMap">
+		Select loc, loc_x, loc_y 
+		From seoul_loc;
+	</select>
 </mapper>
