@@ -126,12 +126,20 @@ public class MainController {
 
 			// 'pm10' 값 조회
 			if (dt.equals(d_time)) {
-				pm10 = Integer.parseInt(d_item_list.get(i).getPm10Value());
+				if (d_item_list.get(i).getPm10Value() == "-") {
+					pm10 = 0;
+				} else {
+					pm10 = Integer.parseInt(d_item_list.get(i).getPm10Value());
+				}
 			}
 
 			// 'pm25' 값 조회
 			if (dt.equals(d_time)) {
-				pm25 = Integer.parseInt(d_item_list.get(i).getPm25Value());
+				if (d_item_list.get(i).getPm25Value() == "-") {
+					pm25 = 0;
+				} else {
+					pm25 = Integer.parseInt(d_item_list.get(i).getPm25Value());
+				}
 			}
 		}
 
