@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,12 +19,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import project.spring.ilchooL.helper.WebHelper;
 import project.spring.ilchooL.model.Kosdaq;
 import project.spring.ilchooL.model.Kospi;
+import project.spring.ilchooL.model.Members;
 import project.spring.ilchooL.service.KosdaqService;
 
 @Controller
@@ -33,14 +38,21 @@ public class FinanceController {
 	KosdaqService kosdaqService;
 	
 	@Autowired
-	WebHelper webhelper;
+	WebHelper webHelper;
 	
 	/** "/프로젝트이름" 에 해당하는 ContextPath 변수 주입 */
 	@Value("#{servletContext.contextPath}")
 	String contextPath;
 
 	@RequestMapping(value = "/contents/contents_finance.do", method = RequestMethod.GET)
-	public String Finance(Model model) throws IOException {
+	public ModelAndView Finance(Model model, HttpServletRequest request) throws IOException {
+		
+		HttpSession session = request.getSession();		
+		Members loginSession = (Members) session.getAttribute("member");
+		
+		if(loginSession == null) { 
+			return webHelper.redirect(null, "로그인 후 이용해주세요.");
+		}
 		
 		String url = "https://finance.naver.com/main/main.nhn";
 		Document doc = Jsoup.connect(url).get();
@@ -358,7 +370,7 @@ public class FinanceController {
 		
 		
 		
-		return "contents/contents_finance";
+		return new ModelAndView("contents/contents_finance");
 
 	}
 }

@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,12 +18,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import project.spring.ilchooL.helper.RetrofitHelper;
 import project.spring.ilchooL.helper.WebHelper;
 import project.spring.ilchooL.model.Keyword;
+import project.spring.ilchooL.model.Members;
 import project.spring.ilchooL.model.NewsSearch;
 import project.spring.ilchooL.model.NewsSearch.items;
 import project.spring.ilchooL.service.KeywordService;
@@ -42,7 +46,14 @@ public class NewsSearchController {
    String contextPath;   
 
    @RequestMapping(value = "/contents/contents_news.do", method = RequestMethod.GET)
-   public String NaverNewsSearch(Model model) throws IOException {
+   public ModelAndView NaverNewsSearch(Model model, HttpServletRequest request) throws IOException {
+	   
+	    HttpSession session = request.getSession();		
+		Members loginSession = (Members) session.getAttribute("member");
+		
+		if(loginSession == null) { 
+			return webHelper.redirect(null, "로그인 후 이용해주세요.");
+		}
 	   
 	   
 	   /** 뉴스 키워드 크롤링 */
@@ -71,15 +82,22 @@ public class NewsSearchController {
 	   
 	   
 
-      return "contents/contents_news";
+      return new ModelAndView("contents/contents_news");
 
    }
    
 /** --------- 키워드 검색 후 ---------- */
    
    @RequestMapping(value = "/contents/contents_search.do", method = RequestMethod.POST)
-	   public String NaverNewsSearch2(Model model, HttpServletResponse response,
+	   public ModelAndView NaverNewsSearch2(Model model, HttpServletResponse response, HttpServletRequest request,
 		   @RequestParam("search") String search) throws IOException {
+	   
+	    HttpSession session = request.getSession();		
+		Members loginSession = (Members) session.getAttribute("member");
+		
+		if(loginSession == null) { 
+			return webHelper.redirect(null, "로그인 후 이용해주세요.");
+		}
 	   
 	   /** API 연동 객체 생성 */
 	      // Retrofit 객체 생성
@@ -363,7 +381,7 @@ public class NewsSearchController {
 	  
 	  
 
-return "contents/contents_news_search";
+	  return new ModelAndView("contents/contents_news_search");
    }
 
 }
