@@ -73,7 +73,7 @@
 	<div class="container">
 		<div class="row">
 
-			<div class="col-md-11 col-sm-12 news_graph">
+			<div class="col-sm-12 news_graph">
 				<div id="container">
 					
 				</div>
