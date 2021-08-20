@@ -164,9 +164,10 @@ public class AdminController {
 	{
 		Members input = new Members();
 		
-		if (login == "Y") {
+		if (login != null && login.equals("Y")) {
 			input.setUser_id(user_id);
 	        input.setUser_pw(user_pw);
+	        System.out.println("=sdfsdgsdjlgheraiulgheralighreljg");
 	        
 	        Members output = null;
 	        
@@ -176,10 +177,9 @@ public class AdminController {
 	            e.printStackTrace();
 	        }
 	        
-	        System.out.println("================" + output.getIs_admin());
-	        
 	        if(!output.getIs_admin().equals("Y")) {
 	        	webHelper.redirect(null, "로그인 실패");
+	        	return "/account/adminLogin";
 	        }
 		}	//end if
         
