@@ -1,6 +1,7 @@
 package project.spring.ilchooL.controllers.rest;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -229,9 +230,18 @@ public class AccountRestController {
         
         try {
             output = membersService.login(input);
-            input = membersService.admin_check(output);
         } catch (Exception e) {
             return webHelper.getJsonError(e.getLocalizedMessage());
+        }
+        
+        String y_admin = output.getIs_admin();
+        
+        Map<String, Object> map = new HashMap<String, Object>();
+        
+        map.put("y_admin", y_admin);
+        
+        if(y_admin.equals("Y")) {
+           return webHelper.getJsonData(map);
         }
         
 

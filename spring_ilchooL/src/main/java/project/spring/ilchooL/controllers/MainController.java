@@ -389,11 +389,4 @@ public class MainController {
 		}
 		return new ModelAndView("contents/contents_transport");
 	}
-	
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public ModelAndView adminPage() {
-        return new ModelAndView("/account/adminLogin");
-    }
-	
-	
 }

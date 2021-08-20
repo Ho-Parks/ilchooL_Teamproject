@@ -161,32 +161,10 @@ public class AdminController {
 
     
     /** 관리자 페이지 대쉬보드 컨트롤러 */
-	@RequestMapping(value = "/admin/admin_dashboard.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public String dashboard(Model model, HttpServletResponse response,
-			@RequestParam(value = "user_id",        required = false) String user_id,
-            @RequestParam(value = "user_pw",        required = false) String user_pw,
-            @RequestParam(value = "login",        required = false) String login)
+	@RequestMapping(value = "/admin/admin_dashboard.do", method = RequestMethod.GET)
+	public String dashboard(Model model)
 	{
 		Members input = new Members();
-		
-		if (login != null && login.equals("Y")) {
-			input.setUser_id(user_id);
-	        input.setUser_pw(user_pw);
-	        System.out.println("=sdfsdgsdjlgheraiulgheralighreljg");
-	        
-	        Members output = null;
-	        
-	        try {
-	            output = membersService.login(input);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	        
-	        if(!output.getIs_admin().equals("Y")) {
-	        	webHelper.redirect(null, "로그인 실패");
-	        	return "/account/adminLogin";
-	        }
-		}	//end if
         
 	       input.setGender("F");
 	       int result = 0;

@@ -64,7 +64,7 @@
 		
 		<task:scheduled ref="dust_scheduleJob" method="collectDust" cron="0 0 0/1 * * ?" /> 
 		
-		<!-- <task:scheduled ref="dust_scheduleJob" method="collectDust" cron="0/20 * * * * ?" />  -->
+		<!-- <task:scheduled ref="dust_scheduleJob" method="collectDust" cron="0/20 * * * * ?" /> -->
 		<!-- 30초에 한번씩 실행되는 스케줄러 -->
 		<!-- <task:scheduled ref="financeschedule" method="everyHours" cron="0/30 * * * * ?" /> -->
 		<!-- 20초에 한번씩 실행되는 스케줄러 -->

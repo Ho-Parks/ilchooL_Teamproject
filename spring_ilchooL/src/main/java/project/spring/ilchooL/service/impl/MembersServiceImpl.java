@@ -377,21 +377,6 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
 	}
 	
 	@Override
-	public Members admin_check(Members input) throws Exception {
-		Members result = null;
-
-		try {
-			result = sqlSession.selectOne("MembersMapper.isAdmin", input);
-		} catch (NullPointerException e) {
-			throw new Exception("관리자 조회를 할 수 없습니다..");
-		} catch (Exception e) {
-			throw new Exception("관리자 조회에 실패했습니다.");
-		}
-		
-		return result;
-	}
-	
-	@Override
     public void findId(HttpServletResponse response, String uid) throws Exception {
        response.setContentType("text/html;charset=utf-8");
        //Members ck = mdao.id_select(input.getUser_id());
