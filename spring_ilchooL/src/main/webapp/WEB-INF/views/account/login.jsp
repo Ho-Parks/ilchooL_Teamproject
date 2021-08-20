@@ -37,9 +37,11 @@
 					<button type="button" class="btn_new"
 						onclick="location.href='../account/join_terms'">회원가입</button>
 				</div>
-					<%-- <div class="form-group">
+					<%-- 
+						<div class="form-group">
 	                    <a href="${pageContext.request.contextPath}/account/join_terms" class="btn_new">회원가입</a>
-	                </div> --%>
+	                	 </div> 
+	               	--%>
 				</form>
 				<div class="login_append">
 					<div class="log_chk">

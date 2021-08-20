@@ -115,7 +115,7 @@ public class AccountRestController {
     @ResponseBody
     @RequestMapping(value = "/rest/account/email_unique_check_jquery", method = RequestMethod.POST)
     public void emailUniqueCheckjQuery(HttpServletResponse response,
-            // 아이디
+            // 이메일
             @RequestParam(value = "email", required = false) String email) {
         
         Members input = new Members();
@@ -229,6 +229,7 @@ public class AccountRestController {
         
         try {
             output = membersService.login(input);
+            input = membersService.admin_check(output);
         } catch (Exception e) {
             return webHelper.getJsonError(e.getLocalizedMessage());
         }
@@ -276,24 +277,24 @@ public class AccountRestController {
             @RequestParam(required = false)         MultipartFile photo) {
 		
 		
-		//세션값 받아오기
-		HttpSession session = request.getSession();		
-		Members loginSession = (Members) session.getAttribute("member");
+			//세션값 받아오기
+			HttpSession session = request.getSession();		
+			Members loginSession = (Members) session.getAttribute("member");
 
-		/** 1) 사용자가 입력한 파라미터에 대한 유효성 검사 */
+			/** 1) 사용자가 입력한 파라미터에 대한 유효성 검사 */
 		
-		// 비밀번호+비밀번호 확인 유효성 검사
-				if(user_pw.equals("")) {return webHelper.getJsonWarning("비밀번호를 입력하세요.");}
-				if(user_pw_re.equals("")) {return webHelper.getJsonWarning("비밀번호 확인란에 비밀번호를 입력하세요.");}
+			// 비밀번호+비밀번호 확인 유효성 검사
+			if(user_pw.equals("")) {return webHelper.getJsonWarning("비밀번호를 입력하세요.");}
+			if(user_pw_re.equals("")) {return webHelper.getJsonWarning("비밀번호 확인란에 비밀번호를 입력하세요.");}
 				
-				// 핸드폰 번호 유효성 검사
-				if(phone.equals("")) {return webHelper.getJsonWarning("핸드폰 번호를 입력하세요.");}
-				if(!regexHelper.isCellPhone(phone)) {return webHelper.getJsonWarning("핸드폰 번호를 - 없이 올바른 양식으로 입력해 주세요.");}
+			// 핸드폰 번호 유효성 검사
+			if(phone.equals("")) {return webHelper.getJsonWarning("핸드폰 번호를 입력하세요.");}
+			if(!regexHelper.isCellPhone(phone)) {return webHelper.getJsonWarning("핸드폰 번호를 - 없이 올바른 양식으로 입력해 주세요.");}
 
-				// 주소 유효성 검사
-				if(postcode.equals("")) {return webHelper.getJsonWarning("우편번호를 입력하세요.");}
-				if(addr1.equals("")) {return webHelper.getJsonWarning("주소를 입력하세요.");}
-				if(addr2.equals("")) {return webHelper.getJsonWarning("상세주소를 입력하세요.");}
+			// 주소 유효성 검사
+			if(postcode.equals("")) {return webHelper.getJsonWarning("우편번호를 입력하세요.");}
+			if(addr1.equals("")) {return webHelper.getJsonWarning("주소를 입력하세요.");}
+			if(addr2.equals("")) {return webHelper.getJsonWarning("상세주소를 입력하세요.");}
 
 		/** 2) 데이터 저장하기 */
 		// 저장할 값들을 Beans에 담는다.

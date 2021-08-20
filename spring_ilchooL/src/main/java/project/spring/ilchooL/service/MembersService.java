@@ -78,6 +78,13 @@ public interface MembersService {
     public Members login(Members input) throws Exception;
     
     /**
+     * 관리자 확인 여부
+     * @param input
+     * @throws Exception
+     */
+    public Members admin_check(Members input) throws Exception;
+    
+    /**
      * 비밀번호찾기
      * @param response
      * @param input

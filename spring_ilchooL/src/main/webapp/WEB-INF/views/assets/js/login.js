@@ -17,6 +17,7 @@ $(function() {
 			// validation 플러그인을 수동으로 호출하여 결과를 리턴한다.
 			// 검사규칙에 위배되어 false가 리턴될 경우 submit을 중단한다.
 			return $(form).valid();
+			
 		},
 		success: function(json) {
 			swal({
@@ -30,7 +31,8 @@ $(function() {
 			if (result.value) { // 확인 버튼이 눌러진 경우
 				swal('확인', '성공적으로 로그인 되었습니다.', 'success');
 				
-				window.location.href = getContextPath();
+				if($('#user_id').val() == "admin" ){ window.location.href = getContextPath() + "/admin/admin_dashboard.do"; }
+				else{ window.location.href = getContextPath(); }
 				
 			} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
 				swal('확인', '로그인이 취소되었습니다.', 'error');
