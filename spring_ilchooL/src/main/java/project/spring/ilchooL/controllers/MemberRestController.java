@@ -1,18 +1,16 @@
 package project.spring.ilchooL.controllers;
 
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import project.spring.ilchooL.helper.WebHelper;
 import project.spring.ilchooL.model.Members;
@@ -30,9 +28,14 @@ public class MemberRestController {
 	
 	@Autowired
 	MemberDao memberDao;
+	
+	@RequestMapping(value = "/account/id_pw_search.do", method = RequestMethod.GET)
+	public void findGET() throws Exception {
+		
+	}
 
 	// 비밀번호 찾기
-	@RequestMapping(value = "/account/id_pw_search.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/account/pw_search.do", method = RequestMethod.GET)
 	public void findPwGET() throws Exception {
 		
 	}
@@ -57,8 +60,6 @@ public class MemberRestController {
 		input.setEmail(email);
 		input.setUser_id(user_id);
 		
-		PrintWriter out = response.getWriter();
-		
 		membersService.findPw(response, member);
 		membersService.sendEmail(member);
 		
@@ -66,7 +67,7 @@ public class MemberRestController {
 	
 	// 아이디 찾기
 	@RequestMapping(value = "/account/id_search.do", method = RequestMethod.POST)
-	public void findIdPOST(@ModelAttribute Members member, 
+	public String findIdPOST(@ModelAttribute Members member, Model model,
 			HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value="email") String email,
 			@RequestParam(value="birthday") String birthday,
@@ -94,11 +95,18 @@ public class MemberRestController {
 			e.printStackTrace();
 		}
 		
-		String uid = result.getUser_id();
+		if (result != null) {
+			String uid = result.getUser_id();
+			
+			model.addAttribute("user_id", uid);
+			model.addAttribute("user_name", user_name);
+			model.addAttribute("success", "T");
+			
+			return "/account/id_pw_search";
+		}
 		
-		PrintWriter out = response.getWriter();
+		model.addAttribute("success", "F");
 		
-		membersService.findId(response, uid);
-		
+		return "/account/id_pw_search";
 	}
 }

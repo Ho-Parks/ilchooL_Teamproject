@@ -107,7 +107,4 @@ public interface MembersService {
      */
     public Members searchMembersID(Members input) throws Exception;
     
-    public void findId(HttpServletResponse response, String uid) throws Exception;
-    
-
 }

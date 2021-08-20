@@ -164,24 +164,56 @@
    </div>
    
    <script type="text/javascript">
+   
+   
       
       $(function(){
+    	  function getContextPath() {
+    	      var hostIndex = location.href.indexOf(location.host)
+    	            + location.host.length;
+    	      var contextPath = location.href.substring(hostIndex, location.href
+    	            .indexOf('/', hostIndex + 1));
+    	      return contextPath;
+    	   }
+    	  
          $("#btnJoin").click(function(){
             $.ajax({
-               url : "account/id_pw_search.do",
+               url : "/ilchooL/account/pw_search.do",
                type : "POST",
+               dataType : 'text',
                data : {
-                  id : $("#id").val(),
+            	  user_id : $("#id").val(),
                   email : $("#email").val()
                },
                success : function(result) {
-                  alert(result);
-               }
-            })
-         });
-      });
+            	   swal({
+						title: '알림',
+						text: '비밀번호를 초기화 하시겠습니까?',
+						type: 'question',
+						confirmButtonText: 'Yes', // 확인버튼 표시 문구
+						showCancelButton: true, // 취소버튼 표시 여부
+						cancelButtonText: 'No' // 취소버튼 표시 문구
+					}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
+						if (result.value) { // 확인 버튼이 눌러진 경우
+							swal('초기화', '성공적으로 초기화 되었습니다.', 'success');
+			            	   window.location.href = getContextPath() + "/account/id_pw_search.do";
+						} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
+							swal('초기화', '초기화가 취소되었습니다.', 'error');
+			     		}
+     				});
+     			},
+     		});
+     	});
+     });
       
-      
+   $("#btnJoin_id").click(function() {
+	  if ('${success}' == "T") {
+		  alert('${user_name}' + ' 님의 아이디는' + '${user_id}' + '입니다.');
+		  
+	  } else if('${success}' == "F") {
+		  alert('아이디 찾기에 실패했습니다.');
+	  }
+   });
 
    </script>
 </body>

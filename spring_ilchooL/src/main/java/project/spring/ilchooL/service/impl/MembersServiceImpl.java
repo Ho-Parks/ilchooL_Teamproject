@@ -318,20 +318,6 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
     @Override
     public void findPw(HttpServletResponse response, Members input) throws Exception {
        response.setContentType("text/html;charset=utf-8");
-       //Members ck = mdao.id_select(input.getUser_id());
-       //Members ck = mdao.id_select(input);
-       PrintWriter out = response.getWriter();
-       
-       if(input == null) {
-          out.print("<script>alert('가입된 정보가 없습니다.');history.go(-1);</script>");
-       }
-       
-       
-       // 가입된 아이디가 없으면
-       //if(ck == null) {
-       //   out.print("<script>alert('가입된 아이디가 없습니다.');history.go(-1);</script>");
-       //   out.close();
-       //}
        
        // 가입된 이메일이 아니면
        
@@ -347,12 +333,6 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
        
        // 비밀번호 변경 메일 발송
        sendEmail(input);
-       
-       out.print("<script>alert('이메일로 임시 비밀번호를 발송하였습니다.');history.go(-1);</script>");
-       out.close();
-       
-       
-       
     }
 
     @Override
@@ -375,22 +355,6 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
 		
 		return result;
 	}
-	
-	@Override
-    public void findId(HttpServletResponse response, String uid) throws Exception {
-       response.setContentType("text/html;charset=utf-8");
-       //Members ck = mdao.id_select(input.getUser_id());
-       //Members ck = mdao.id_select(input);
-       PrintWriter out = response.getWriter();
-       
-       if(uid == null) {
-          out.print("<script>alert('가입된 정보가 없습니다.');history.go(-1);</script>");
-       }
-       
-       out.print("<script>alert('가입하신 아이디는 " + uid + " 입니다.');history.go(-1);</script>");
-       out.close();
-       
-    }
  }
 
 

@@ -100,21 +100,4 @@ public class AccountController {
 		model.addAttribute("user_name", loginSession.getUser_name());
 		return new ModelAndView("mypage/mypage");
 	}
-	
-	/** 아이디/비밀번호 찾기 이동 컨트롤러 */
-//	@RequestMapping(value = "/account/id_pw_search.do", method = RequestMethod.GET)
-//	public ModelAndView id_pw_search(Model model, 
-//			HttpServletRequest request) {
-//		
-//			//세션값 받아오기
-//			HttpSession session = request.getSession();		
-//			Members loginSession = (Members) session.getAttribute("loginInfo");			
-//									
-//			//로그인 세션이 없을 경우 = 로그인되어있지 않을 경우 alert 발생
-//			if(loginSession !=null) { 
-//			return webHelper.redirect(null,"로그아웃 후 이용해주세요.");
-//			}		
-//			
-//			return new ModelAndView("account/id_pw_search");
-//	}
 }
