@@ -100,7 +100,7 @@ public class AdminMembersServiceImpl implements AdminMembersService {
         int result = 0;
 
         try {
-            result = sqlSession.delete("MembersMapper.deleteItem", input);
+            result = sqlSession.delete("MembersMapper.deleteMembers", input);
 
             if (result == 0) {
                 throw new NullPointerException("result=0");
