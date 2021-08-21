@@ -26,6 +26,7 @@ body {
 	left: 50%;
 	transform: translate(-50%);
 	margin-top: 50px;
+	width: fit-content;
 	
 }
 
@@ -178,7 +179,8 @@ select {
 	border: 0;
 	cursor: pointer;
 	color: #fff;
-	background-color: #18a0fb;
+	background-color: #428bca;
+	border-radius: 4px;
 	font-size: 20px;
 	font-weight: 400;
 	font-family: Dotum, '돋움', Helvetica, sans-serif;
