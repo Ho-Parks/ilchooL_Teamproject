@@ -52,8 +52,7 @@
 	<!-- 생성한 스케줄러 객체에 대한 작업 스케줄 지정 -->
 	<task:scheduled-tasks>
 		<!-- 매일 밤 11시 30분에 실행되는 스케줄러 -->
-		<task:scheduled ref="weather_scheduleJob" method="collectWeather" cron="0 30 23 * * ?" /> 
-		<!-- <task:scheduled ref="weather_scheduleJob" method="collectWeather" cron="0/20 * * * * ?" /> -->
+		<!-- <task:scheduled ref="weather_scheduleJob" method="collectWeather" cron="0 30 23 * * ?" /> -->
 		<!-- 매일 11시에 실행되는 스케줄러 -->
 		<task:scheduled ref="scheduleJob" method="collecCovid" cron="0 0 11 * * ?" />
 		<!-- 1시간마다 실행되는 스케줄러 -->
@@ -66,6 +65,7 @@
 		
 		<!-- <task:scheduled ref="dust_scheduleJob" method="collectDust" cron="0/20 * * * * ?" /> -->
 		<!-- 30초에 한번씩 실행되는 스케줄러 -->
+		<task:scheduled ref="weather_scheduleJob" method="collectWeather" cron="0/30 * * * * ?" />
 		<!-- <task:scheduled ref="financeschedule" method="everyHours" cron="0/30 * * * * ?" /> -->
 		<!-- 20초에 한번씩 실행되는 스케줄러 -->
 		<!-- <task:scheduled ref="scheduleKeyword" method="keyword" cron="0/20 * * * * ?" /> -->

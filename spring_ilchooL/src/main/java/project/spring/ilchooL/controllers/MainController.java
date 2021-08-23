@@ -63,6 +63,7 @@ public class MainController {
 		
 		DustItem ditem = new DustItem();
 		ditem.setStationName("강남구");
+		String loc = null;
 		
 		HttpSession session = request.getSession();		
 		Members loginSession = (Members) session.getAttribute("member");
@@ -71,7 +72,12 @@ public class MainController {
 			
 			String []tokens = loginSession.getAddr1().split(" ");
 			
-			String loc = tokens[1];
+			if(tokens[0] != "서울") {
+				loc = "강남구";
+				
+			}else {
+				loc = tokens[1];
+			}
 			
 			locItem litem = new locItem();
 			
