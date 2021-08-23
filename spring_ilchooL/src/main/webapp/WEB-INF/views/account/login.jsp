@@ -15,8 +15,10 @@
 </head>
 
 <body>
-	<div class="wrapper">
-		<c:import url="../assets/header.jsp" />
+	<div id="header">
+	<c:import url="../assets/header.jsp" />
+	</div>
+	 <div class="wrapper"> 
 		<div class="container">
 			<div class="inner_login">
 						<div id="login_w">로그인</div>
@@ -59,7 +61,7 @@
 
 			</div>
 		</div>
-	</div>
+	 </div> 
 
 	<c:import url="../assets/footer.jsp" />
 	<script src="${pageContext.request.contextPath}/assets/js/login.js?ver=<%=System.currentTimeMillis()%>"></script>

@@ -34,7 +34,7 @@
    
    <div id="contents" class="container p_container">
       <h1>CONTENTS</h1>
-      <div id="contents_list" class="row">
+      <div id="contents_list" class="row" style="margin-top: 30px;">
          <div id="contents_box" class="col-md-4">
             <div id="img_box">
                <a href="${pageContext.request.contextPath}/contents/contents_transport.do">

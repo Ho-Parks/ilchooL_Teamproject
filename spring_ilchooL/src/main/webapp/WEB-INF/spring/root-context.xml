@@ -15,7 +15,7 @@
         <prop key="smtpPassword">oudxqoxloeifpuji</prop>
         <!-- 업로드 디렉토리 (server.xml의 docBase 값과 일치해야 함)
         각자의 폴더 지정해야 함 -->
-        <prop key="uploadDir"> /home/student/ilchooL/upload</prop>
+        <prop key="uploadDir">/home/student/ilchooL/upload</prop>
         <!-- 업로드 디렉토리에 대한 WebPath (server.xml의 path 값과 일치해야 함) -->
         <prop key="uploadPath">/ilchooL/upload</prop>
         <!-- 기본 도메인(쿠키설정용) -->
