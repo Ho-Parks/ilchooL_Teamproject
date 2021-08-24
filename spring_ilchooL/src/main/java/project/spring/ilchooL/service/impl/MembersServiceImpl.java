@@ -264,6 +264,7 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
      */
     @Override
     public void sendEmail(Members input) throws Exception {
+    	
        // Mail Server 설정
        String charSet = "utf-8";
        String hostSMTP = "smtp.gmail.com"; //네이버 이용시 smtp.naver.com
@@ -290,6 +291,7 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
        // 받는 사람 E-Mail 주소
        String mail = input.getEmail();
        
+       
        try {
           HtmlEmail email = new HtmlEmail();
           email.setDebug(true);
@@ -308,6 +310,7 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
        } catch (Exception e) {
           System.out.println("메일발송 실패 : " + e);
           e.printStackTrace();
+          
        }
        
     }
@@ -318,6 +321,7 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
     @Override
     public void findPw(HttpServletResponse response, Members input) throws Exception {
        response.setContentType("text/html;charset=utf-8");
+       PrintWriter out = response.getWriter();
        
        // 가입된 이메일이 아니면
        
@@ -330,6 +334,11 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
        
        // 비밀번호 변경
        mdao.updatePw(input);
+       
+       if(mdao.id_select(input)==null) {
+    	   out.print("<script>alert('아이디와 이메일을 확인하세요'); history.go(-1);</script>");
+    	   out.close();
+       }
        
        // 비밀번호 변경 메일 발송
        sendEmail(input);

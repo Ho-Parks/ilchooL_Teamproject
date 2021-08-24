@@ -28,8 +28,8 @@ public class MemberDaoImpl implements MemberDao{
 
 	@Override
 	public Members id_select(Members members) throws Exception {
-		return memberDao.id_select(members);
-		
+		//return memberDao.id_select(members);
+		return sqlSession.selectOne("MembersMapper.id_select", members);
 	}
 
 	

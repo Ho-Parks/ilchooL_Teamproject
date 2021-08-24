@@ -228,7 +228,7 @@
    </update>
    
    <select id="id_select" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
-         SELECT * FROM members WHERE user_id=#{user_id} AND email=#{email}
+         SELECT * FROM members WHERE user_id=#{user_id} AND email=#{email};
    </select>
    
    <select id="searchID" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
