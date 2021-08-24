@@ -298,7 +298,7 @@ if(k&&j[k]&&(e||j[k].data)||void 0!==d||"string"!=typeof b)return k||(k=i?a[h]=c
 		});
 		
 		var xhr = new XMLHttpRequest();
-		var apiKey = encodeURIComponent("XiSNzAUkok/EZU+UmQ3EqYMQk/lZ/OVS7PwJOU664NY");
+		var apiKey = encodeURIComponent("MGLBfan4Zmidl78ttXDWng");
 			//ODsay apiKey 입력
 		var url = "https://api.odsay.com/v1/api/searchPubTransPath?SX="+SX+"&SY="+SY+"&EX="+EX+"&EY="+EY+"&apiKey="+apiKey+"";
 			
@@ -329,7 +329,7 @@ if(k&&j[k]&&(e||j[k].data)||void 0!==d||"string"!=typeof b)return k||(k=i?a[h]=c
 		});
 		
 		var xhr = new XMLHttpRequest();
-		var apiKey = encodeURIComponent("XiSNzAUkok/EZU+UmQ3EqYMQk/lZ/OVS7PwJOU664NY");
+		var apiKey = encodeURIComponent("MGLBfan4Zmidl78ttXDWng");
 			//ODsay apiKey 입력
 		var url = "https://api.odsay.com/v1/api/searchPubTransPath?SX="+SX+"&SY="+SY+"&EX="+EX+"&EY="+EY+"&apiKey="+apiKey+"";
 			
@@ -355,7 +355,7 @@ if(k&&j[k]&&(e||j[k].data)||void 0!==d||"string"!=typeof b)return k||(k=i?a[h]=c
 	// 길찾기 결과에 따른 노선그래픽을 그려주는 함수
 	function callMapObjApiAJAX(mabObj){
 		var xhr = new XMLHttpRequest();
-		var apiKey = encodeURIComponent("XiSNzAUkok/EZU+UmQ3EqYMQk/lZ/OVS7PwJOU664NY");
+		var apiKey = encodeURIComponent("MGLBfan4Zmidl78ttXDWng");
 		//ODsay apiKey 입력
 		var url = "https://api.odsay.com/v1/api/loadLane?mapObject=0:0@"+mabObj+"&apiKey="+apiKey+"";
 		xhr.open("GET", url, true);
