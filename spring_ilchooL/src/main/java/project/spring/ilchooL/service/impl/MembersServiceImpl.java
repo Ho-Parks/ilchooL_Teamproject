@@ -323,7 +323,11 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
        response.setContentType("text/html;charset=utf-8");
        PrintWriter out = response.getWriter();
        
-       // 가입된 이메일이 아니면
+       // 아이디, 이메일 오류 시
+       if(mdao.id_select(input)==null) {
+    	   out.print("<script>alert('아이디와 이메일을 확인하세요'); history.go(-1);</script>");
+    	   out.close();
+       }
        
        // 임시 비밀번호 생성
        String pw = "";
@@ -335,10 +339,7 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
        // 비밀번호 변경
        mdao.updatePw(input);
        
-       if(mdao.id_select(input)==null) {
-    	   out.print("<script>alert('아이디와 이메일을 확인하세요'); history.go(-1);</script>");
-    	   out.close();
-       }
+       
        
        // 비밀번호 변경 메일 발송
        sendEmail(input);
