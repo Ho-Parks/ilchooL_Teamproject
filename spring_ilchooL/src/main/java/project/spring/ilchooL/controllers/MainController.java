@@ -70,12 +70,11 @@ public class MainController {
 		
 		if(loginSession != null) { 
 			
-			String []tokens = loginSession.getAddr1().split(" ");
+			String[] tokens = loginSession.getAddr1().split(" ");
 			
-			if(tokens[0] != "서울") {
+			if(!tokens[0].equals("서울")) {
 				loc = "강남구";
-				
-			}else {
+			} else {
 				loc = tokens[1];
 			}
 			
@@ -97,7 +96,6 @@ public class MainController {
 			ditem.setStationName(s_locItem.getLoc());
 			
 			model.addAttribute("loc", s_locItem.getLoc());
-			
 			
 		}
 		
