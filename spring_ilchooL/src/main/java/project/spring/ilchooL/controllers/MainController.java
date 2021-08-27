@@ -130,7 +130,7 @@ public class MainController {
 
 			// 'pm10' 값 조회
 			if (dt.equals(d_time)) {
-				if (d_item_list.get(i).getPm10Value() == "-") {
+				if (d_item_list.get(i).getPm10Value().equals("-")){
 					pm10 = 0;
 				} else {
 					pm10 = Integer.parseInt(d_item_list.get(i).getPm10Value());
@@ -139,7 +139,7 @@ public class MainController {
 
 			// 'pm25' 값 조회
 			if (dt.equals(d_time)) {
-				if (d_item_list.get(i).getPm25Value() == "-") {
+				if (d_item_list.get(i).getPm25Value().equals("-")) {
 					pm25 = 0;
 				} else {
 					pm25 = Integer.parseInt(d_item_list.get(i).getPm25Value());
