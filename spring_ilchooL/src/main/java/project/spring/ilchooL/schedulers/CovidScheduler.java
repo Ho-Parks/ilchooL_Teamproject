@@ -19,6 +19,9 @@ public class CovidScheduler {
 	@Autowired RetrofitHelper retrofitHelper;
 	@Autowired CovidService covidService;
 	
+	/**
+	 * covid19 데이터 수집 메서드
+	 */
 	public void collecCovid() {
 		Retrofit retrofit = retrofitHelper.getRetrofit(PhpCovidService.BASE_URL);
 		

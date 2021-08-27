@@ -110,6 +110,7 @@
 	
 	<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 	<script>
+		// controller에서 전달한 데이터를 jstl문법을 사용하여 Chart.js 라이브러리에서 사용할 데이터 배열 생성
 		let con_data = [ ${confirmed_6}, ${confirmed_5}, ${confirmed_4}, ${confirmed_3}, ${confirmed_2}, ${confirmed_1}, ${confirmed_0} ];
 		let death_data = [ ${death_6}, ${death_5}, ${death_4}, ${death_3}, ${death_2}, ${death_1}, ${death_0} ];
 		let rel_data = [ ${released_6}, ${released_5}, ${released_4}, ${released_3}, ${released_2}, ${released_1}, ${released_0} ];
@@ -117,6 +118,7 @@
 			${active_6 - active_7}, ${active_5 - active_6}, ${active_4 - active_5}, ${active_3 - active_4},
 			${active_2 - active_3}, ${active_1 - active_2}, ${active_0 - active_1} ];
 		
+		// Chart.js 라이브러리 -> 데이터 시각화 (선,막대 그래프 구현)
 		var ctx = document.getElementById('covidChart').getContext('2d');
 		var covidChart = new Chart(ctx, {
 		    type: 'line',
