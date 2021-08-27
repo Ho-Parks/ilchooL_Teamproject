@@ -1,8 +1,11 @@
- package project.spring.ilchooL.model;
+package project.spring.ilchooL.model;
 
 import com.google.gson.Gson;
+
+import lombok.Data;
 import project.spring.ilchooL.helper.UploadItem;
 
+@Data
 /** `회원` 테이블의 POJO 클래스 */
 public class Members {
     /** 일련번호, IS NOT NULL, PRI */
@@ -42,10 +45,10 @@ public class Members {
     private UploadItem photo;
 
     /** 탈퇴여부(Y/N), IS NOT NULL */
-    private String is_out;
+    private boolean is_out;
 
     /** 관리자 여부(Y/N), IS NOT NULL */
-    private String is_admin;
+    private boolean is_admin;
 
     /** 마지막 로그인 일시, IS NULL */
     private String login_date;
@@ -55,6 +58,12 @@ public class Members {
 
     /** 변경일시, IS NOT NULL */
     private String edit_date;
+    
+    /** LIMIT 절에서 사용할 조회 시작 위치 */
+    private static int offset;
+    
+    /** LIMIT 절에서 사용할 조회할 데이터 수 */
+    private static int listCount;
 
     
     /** 일련번호, IS NOT NULL, PRI */
@@ -188,24 +197,25 @@ public class Members {
 	}
 	
 	/** 탈퇴여부(Y/N), IS NOT NULL */
-	public String getIs_out() {
+	public boolean isIs_out() {
 		return is_out;
 	}
 	
 	/** 탈퇴여부(Y/N), IS NOT NULL */
-	public void setIs_out(String is_out) {
+	public void setIs_out(boolean is_out) {
 		this.is_out = is_out;
 	}
 	
 	/** 관리자 여부(Y/N), IS NOT NULL */
-	public String getIs_admin() {
+	public boolean isIs_admin() {
 		return is_admin;
 	}
 	
 	/** 관리자 여부(Y/N), IS NOT NULL */
-	public void setIs_admin(String is_admin) {
+	public void setIs_admin(boolean is_admin) {
 		this.is_admin = is_admin;
 	}
+	
 	
 	/** 마지막 로그인 일시, IS NULL */
 	public String getLogin_date() {
@@ -237,11 +247,6 @@ public class Members {
 		this.edit_date = edit_date;
 	}
 	
-	/** LIMIT 절에서 사용할 조회 시작 위치 */
-	private static int offset;
-	
-	/** LIMIT 절에서 사용할 조회할 데이터 수 */
-	private static int listCount;
 
 	public static int getListCount() {
 		return listCount;
@@ -259,7 +264,6 @@ public class Members {
 		Members.offset = offset;
 	}
 
-	
     @Override
     public String toString() {
         String str = "\n[Members]\n";
@@ -282,4 +286,6 @@ public class Members {
         str += "edit_date: " + this.edit_date + " (변경일시, IS NOT NULL)\n";
         return str;
     }
+
+	
 }

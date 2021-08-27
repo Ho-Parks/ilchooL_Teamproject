@@ -18,7 +18,7 @@
 	href="${pageContext.request.contextPath }/assets/css/bootstrap-theme.min.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/plugins/sweetalert/sweetalert2.min.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/ajax/ajax_helper.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/ajax/ajax_helper.css" />
 
 <script src="${pageContext.request.contextPath }/assets/plugins/ajax-form/jquery.form.min.js"></script>
 <script src="${pageContext.request.contextPath }/assets/plugins/ajax/ajax_helper.js"></script>

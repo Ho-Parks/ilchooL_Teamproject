@@ -72,7 +72,7 @@
          <div class="tab-pane fade in active" id="id_search">
             <div class="id_pw_box">
                <div class="content_box">
-                  <form class="form-horizontal" name="id_pw_form" id="id_pw_form" action="${pageContext.request.contextPath}/account/id_search.do" method="post">
+                  <form class="form-horizontal" name="id_search_form" id="id_search_form" action="${pageContext.request.contextPath}/rest/account/id_search" method="post">
                      <div style="padding-top: 40px;">
                         <h2>아이디 찾기</h2>
                         <hr/>
@@ -83,7 +83,7 @@
                            <label for="name">이름</label>
                         </div>
                         <span class="box new_id">
-                           <input type="text" name="user_name" class="new" placeholder="한글로 입력해주세요!" maxlength="20" />
+                           <input type="text" name="user_name" id="user_name" class="new" placeholder="한글로 입력해주세요!" maxlength="20" />
                         </span>
                         <span class="error_next_box"></span>
                      </div>
@@ -101,7 +101,7 @@
                            <label for="name">이메일</label>
                         </div>
                         <span class="box new_id">
-                           <input type="text" name="email" id="email" class="new" placeholder="이메일을 입력해주세요!" maxlength="50" />
+                           <input type="email" name="email" id="email" class="new" placeholder="이메일을 입력해주세요!" maxlength="50" />
                         </span>
                         <span class="error_next_box"></span>
                      </div>
@@ -111,8 +111,9 @@
                            <span>검색하기</span>
                         </button>
                      </div>
-                  </form>
+                  
                   <div class="content_area col-md-12" id="result"></div>
+                  </form>
                </div>
             </div>
          </div>
@@ -121,7 +122,7 @@
          <div class="tab-pane fade" id="pw_search">
             <div class="id_pw_box">
                <div class="content_box">
-                  <form class="form-horizontal" name="id_pw_form" id="id_pw_form" action="${pageContext.request.contextPath}/account/pw_search.do" method="post">
+                  <form class="form-horizontal" name="pw_search_form" id="pw_search_form" action="${pageContext.request.contextPath}/rest/account/pw_search" method="post">
                      <div style="padding-top: 40px;">
                         <h2>비밀번호 초기화</h2>
                         <hr/>
@@ -131,7 +132,7 @@
                            <label for="name">아이디</label>
                         </div>
                         <span class="box new_id">
-                           <input type="text" name="user_id" id="id" class="new" placeholder="아이디를 입력해주세요!" maxlength="50" />
+                           <input type="text" name="user_id" id="user_id" class="new" placeholder="아이디를 입력해주세요!" maxlength="50" />
                         </span>
                         <span class="error_next_box"></span>
                      </div>
@@ -140,7 +141,7 @@
                            <label for="name">이메일</label>
                         </div>
                         <span class="box new_id">
-                           <input type="text" name="email" id="email" class="new" placeholder="이메일을 입력해주세요!" maxlength="50" />
+                           <input type="email" name="search_email" id="search_email" class="new" placeholder="이메일을 입력해주세요!" maxlength="50" />
                         </span>
                         <span class="error_next_box"></span>
                      </div>
@@ -163,58 +164,6 @@
       <c:import url="../assets/footer.jsp" />
    </div>
    
-   <script type="text/javascript">
-   
-   
-      
-      $(function(){
-    	  function getContextPath() {
-    	      var hostIndex = location.href.indexOf(location.host)
-    	            + location.host.length;
-    	      var contextPath = location.href.substring(hostIndex, location.href
-    	            .indexOf('/', hostIndex + 1));
-    	      return contextPath;
-    	   }
-    	  
-         $("#btnJoin").click(function(){
-            $.ajax({
-               url : "/ilchooL/account/pw_search.do",
-               type : "POST",
-               dataType : 'text',
-               data : {
-            	  user_id : $("#id").val(),
-                  email : $("#email").val()
-               },
-               success : function(result) {
-            	   swal({
-						title: '알림',
-						text: '비밀번호를 초기화 하시겠습니까?',
-						type: 'question',
-						confirmButtonText: 'Yes', // 확인버튼 표시 문구
-						showCancelButton: true, // 취소버튼 표시 여부
-						cancelButtonText: 'No' // 취소버튼 표시 문구
-					}).then(function(result) { // 버튼이 눌러졌을 경우의 콜백 연결
-						if (result.value) { // 확인 버튼이 눌러진 경우
-							swal('초기화', '성공적으로 초기화 되었습니다.', 'success');
-			            	   window.location.href = getContextPath() + "/account/id_pw_search.do";
-						} else if (result.dismiss === 'cancel') { // 취소버튼이 눌러진 경우
-							swal('초기화', '초기화가 취소되었습니다.', 'error');
-			     		}
-     				});
-     			},
-     		});
-     	});
-     });
-      
-   $("#btnJoin_id").click(function() {
-	  if ('${success}' == "T") {
-		  alert('${user_name}' + ' 님의 아이디는' + '${user_id}' + '입니다.');
-		  
-	  } else if('${success}' == "F") {
-		  alert('아이디 찾기에 실패했습니다.');
-	  }
-   });
-
-   </script>
+   <script src="${pageContext.request.contextPath}/assets/js/id_pw_search.js"></script>
 </body>
 </html>

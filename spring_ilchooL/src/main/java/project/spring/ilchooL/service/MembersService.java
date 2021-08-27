@@ -2,8 +2,6 @@ package project.spring.ilchooL.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import project.spring.ilchooL.model.Members;
 
 public interface MembersService {
@@ -47,7 +45,16 @@ public interface MembersService {
      * @throws Exception
      */
     public int editMembers(Members input) throws Exception;
+    
+    /**
+     * 회원 비밀번호 수정하기
+     * @param input 수정할 정보를 담고 있는 Beans
+     * @return int
+     * @throws Exception
+     */
+    public int editMembersPw(Members input) throws Exception;
 
+    
     /**
      * 회원 데이터 삭제하기
      * @param input 삭제할 회원의 일련번호를 담고 있는 Beans
@@ -55,7 +62,28 @@ public interface MembersService {
      * @throws Exception
      */
     public int deleteMembers(Members input) throws Exception;
-
+    
+    /**
+     * 로그인
+     * @param input
+     * @throws Exception
+     */
+    public Members login(Members input) throws Exception;
+    
+    /**
+     * 아이디 찾기
+     * @param input
+     * @throws Exception
+     */
+    public Members findId(Members input) throws Exception;
+    
+    /**
+     * 비밀번호 찾기
+     * @param response
+     * @param input
+     */
+    public Members findPw(Members input) throws Exception;
+    
     /**
      * 아이디 중복검사
      * @param input
@@ -71,40 +99,10 @@ public interface MembersService {
     public void emailUniqueCheck(Members input) throws Exception;
     
     /**
-     * 로그인
-     * @param input
-     * @throws Exception
-     */
-    public Members login(Members input) throws Exception;
-    
-    /**
-     * 비밀번호찾기
+     * 회원탈퇴(유지)
      * @param response
      * @param input
      */
-    public void findPw(HttpServletResponse response, Members input) throws Exception;
-   
-    /**
-     * 이메일 발송
-     * @param input
-     * @param div
-     * @throws Exception
-     */
-    public void sendEmail(Members input) throws Exception;
-    
-    /**
-     * 가입 아이디 여부
-     * @param input
-     * @throws Exception
-     */
-    public Members id_check(Members input) throws Exception;
-    
-    /**
-     * 
-     * @param input
-     * @return
-     * @throws Exception
-     */
-    public Members searchMembersID(Members input) throws Exception;
+    public void OutMembers(Members input) throws Exception;
     
 }

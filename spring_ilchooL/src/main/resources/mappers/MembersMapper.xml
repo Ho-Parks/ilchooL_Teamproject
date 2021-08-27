@@ -43,12 +43,22 @@
     
     <!-- 단일행 조회를 위한 기능 정의 -->
     <select id="selectMember" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
-        SELECT id, user_id, user_pw, user_name, email, phone, birthday, gender, postcode, addr1, addr2, photo, is_out, is_admin, login_date, reg_date, edit_date FROM members WHERE id=#{id}
+        SELECT id, user_id, user_name, email, phone,
+		birthday, gender, postcode, addr1, addr2,
+		photo, is_out, is_admin,login_date, reg_date, edit_date
+		FROM members
+		WHERE id=#{id}
     </select>
     
     <!-- 다중행 조회를 위한 기능 정의 -->
     <select id="selectMembers" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
-        SELECT id, user_id, user_pw, user_name, email, phone, birthday, gender, postcode, addr1, addr2, photo, is_out, is_admin, login_date, reg_date, edit_date FROM members
+        SELECT id, user_id, user_name, email, phone,
+		birthday, gender, postcode, addr1, addr2,
+		photo, is_out, is_admin,login_date, reg_date, edit_date
+		FROM members
+		<where>
+			<if test="user_name !=null and user_name !=''">user_name LIKE concat ('%', #{user_name},'%')</if>
+		</where>
         ORDER BY id DESC
         <if test="listCount > 0">
             LIMIT #{offset}, #{listCount}
@@ -65,42 +75,54 @@
         INSERT INTO members (
         user_id, user_pw, user_name, email, phone, birthday, gender, postcode, addr1, addr2, photo, is_out, is_admin, login_date, reg_date, edit_date
         ) VALUES (
-        #{user_id}, MD5(#{user_pw}), #{user_name}, #{email}, #{phone}, #{birthday}, #{gender}, #{postcode}, #{addr1}, #{addr2}, #{photoJson}, #{is_out}, #{is_admin}, #{login_date}, now(), now()
+        #{user_id}, MD5(#{user_pw}), #{user_name}, #{email}, #{phone}, #{birthday}, #{gender}, #{postcode}, #{addr1}, #{addr2}, #{photoJson}, "N", "N", #{login_date}, now(), now()
         )
     </insert>
     
     <!-- 데이터 삭제를 위한 기능 정의 -->
     <delete id="deleteMembers" parameterType="project.spring.ilchooL.model.Members">
-        DELETE FROM members WHERE id=#{id}
+        DELETE FROM members WHERE user_id=#{user_id}
     </delete>
     
-    <!-- 데이터 갱신을 위한 기능 정의 -->
+    <!-- 회원정보 수정 -->
     <update id="updateMember" parameterType="project.spring.ilchooL.model.Members">
         UPDATE members SET
-        user_id=#{user_id},
-        user_pw=MD5(#{user_pw}),
-        user_name=#{user_name},
-        email=#{email},
         phone=#{phone},
-        birthday=#{birthday},
-        gender=#{gender},
         postcode=#{postcode},
         addr1=#{addr1},
         addr2=#{addr2},
         photo=#{photoJson},
-        is_out=#{is_out},
-        is_admin=#{is_admin},
-        login_date=#{login_date},
         edit_date=now()
         WHERE id=#{id}
     </update>
     
-    <!-- 아이디 찾기를 위한 기능 정의 -->
-    <select id="findId" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
-        SELECT user_id FROM members WHERE name=#{name} AND
-        phone=#{phone} AND is_out='N';
-    </select>
+   <!-- 회원정보(비밀번호) 수정 -->
+   <update id="updateMemberPw" parameterType="project.spring.ilchooL.model.Members">
+        UPDATE members SET
+        user_pw=MD5(#{user_pw}),
+        edit_date=now()
+        WHERE user_id=#{user_id}
+    </update> 
     
+    
+   <!-- 아이디 찾기를 위한 조회 기능 -->
+	<select id="findId" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
+		SELECT id, user_id, user_name, email, phone,
+		birthday, gender, postcode, addr1, addr2,
+		photo, is_out, is_admin,login_date, reg_date, edit_date
+		FROM members
+		WHERE user_name=#{user_name} AND email=#{email} AND birthday=#{birthday}
+	</select>
+    
+    <!-- 비밀번호 찾기를 위한 조회 기능 -->
+	<select id="findPw" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
+		SELECT id, user_id, user_name, email, phone,
+		birthday, gender, postcode, addr1, addr2,
+		photo, is_out, is_admin, login_date, reg_date, edit_date
+		FROM members
+		WHERE user_id=#{user_id} AND email=#{email}
+	</select>
+	
     <!-- 아이디 중복검사 -->
     <select id="idUniqueCheck" parameterType="project.spring.ilchooL.model.Members" resultType="int">
         SELECT COUNT(*) FROM members WHERE user_id=#{user_id}
@@ -113,10 +135,11 @@
     
     <!-- 로그인 조회 -->
     <select id="login" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
-        SELECT *
-        <!-- id, user_id, user_pw, user_name, email, phone, birthday, gender, postcode, addr1, addr2, photo, is_out, is_admin, login_date, reg_date, edit_date -->
-        FROM members
-        WHERE user_id=#{user_id} AND user_pw=MD5(#{user_pw}) AND is_out='N'
+        SELECT id, user_id, user_name, email, phone,
+		birthday, gender, postcode, addr1, addr2,
+		photo, is_out, is_admin, login_date, reg_date, edit_date
+		FROM members
+		WHERE user_id=#{user_id} AND user_pw=MD5(#{user_pw})
     </select>
     
     <!-- 최근 로그인 시간 갱신 -->
@@ -124,6 +147,17 @@
         UPDATE members SET login_date=now() WHERE id=#{id}
     </update>
     
+    <!-- 관리자 여부 확인 검사 -->
+	<select id="selectAdmin" parameterType="project.spring.ilchooL.model.Members" resultMap="membersMap">
+		SELECT is_admin FROM id WHERE is_admin = 'Y';
+	</select>
+	
+    <!-- 회원 탈퇴 여부 확인 -->
+	<update id="userOut" parameterType="project.spring.ilchooL.model.Members">
+		UPDATE members SET is_out = 'Y', edit_date = now()
+		WHERE id = #{id};
+	</update>
+	
     <!-- ADMIN -->
     
    	<!-- 단일행 조회를 위한 기능 정의 -->

@@ -1,17 +1,13 @@
 package project.spring.ilchooL.service.impl;
 
-import java.io.PrintWriter;
+
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.mail.HtmlEmail;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import project.spring.ilchooL.model.Members;
-import project.spring.ilchooL.service.MemberDao;
 
 
 /** 회원 데이터 관리 기능을 제공하기 위한 Service 계층에 대한 구현체 */
@@ -24,8 +20,7 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
     @Autowired
     SqlSession sqlSession;
     
-    @Autowired
-    MemberDao mdao;
+    
 
 
     /**
@@ -157,7 +152,63 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
 
         return result;
     }
+    
+    /**
+     * 회원 (마이페이지) 수정하기
+     * @param input 수정할 정보를 담고 있는 Beans
+     * @return int
+     * @throws Exception
+     */
+    @Override
+    public int editMembersPw(Members input) throws Exception {
+        int result = 0;
 
+        try {
+            result = sqlSession.update("MembersMapper.updateMemberPw", input);
+            if (result == 0) {
+                throw new NullPointerException("result=0");
+            }
+        } catch (NullPointerException e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("수정된 데이터가 없습니다.");
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new Exception("데이터 수정에 실패했습니다.");
+        }
+
+        return result;
+    }
+    
+
+    /**
+     * 로그인
+     * @param input
+     * @throws Exception
+     */
+    @Override
+    public Members login(Members input) throws Exception {
+    	Members result = null;
+    	
+    	try {
+    		result = sqlSession.selectOne("MembersMapper.login", input);
+    		
+    		if (result == null) {
+    			throw new NullPointerException("result=null");
+    		}
+    		
+    		// 조회에 성공하면 result에 저장되어 있는 PK를 활용하여 로그인 시간을 갱신한다.
+    		sqlSession.update("MembersMapper.updateLoginDate", result);
+    	} catch (NullPointerException e) {
+    		log.error(e.getLocalizedMessage());
+    		throw new Exception("아이디나 비밀번호가 잘못되었습니다.");
+    	} catch (Exception e) {
+    		log.error(e.getLocalizedMessage());
+    		throw new Exception("데이터 조회에 실패했습니다.");
+    	}
+    	
+    	return result;
+    }
+    
     /**
      * 회원 데이터 삭제하기
      * @param input 삭제할 데이터의 일련번호(PK)를 담고 있는 Beans
@@ -231,142 +282,62 @@ public class MembersServiceImpl implements project.spring.ilchooL.service.Member
     }
 
     /**
-     * 로그인
-     * @param input
-     * @throws Exception
+     * 아이디 찾기
      */
     @Override
-    public Members login(Members input) throws Exception {
-        Members result = null;
-
-        try {
-            result = sqlSession.selectOne("MembersMapper.login", input);
-
-            if (result == null) {
-                throw new NullPointerException("result=null");
-            }
-
-            // 조회에 성공하면 result에 저장되어 있는 PK를 활용하여 로그인 시간을 갱신한다.
-            sqlSession.update("MembersMapper.updateLoginDate", result);
-        } catch (NullPointerException e) {
-            log.error(e.getLocalizedMessage());
-            throw new Exception("아이디나 비밀번호가 잘못되었습니다.");
-        } catch (Exception e) {
-            log.error(e.getLocalizedMessage());
-            throw new Exception("데이터 조회에 실패했습니다.");
-        }
-
-        return result;
-    }
-    
-    /**
-     * 이메일 발송
-     */
-    @Override
-    public void sendEmail(Members input) throws Exception {
-    	
-       // Mail Server 설정
-       String charSet = "utf-8";
-       String hostSMTP = "smtp.gmail.com"; //네이버 이용시 smtp.naver.com
-       String hostSMTPid = "bo3893@gmail.com"; //서버 이메일 주소(보내는 사람 이메일 주소)
-       String hostSMTPpwd = "sos8824960"; //서버 이메일 비번(보내는 사람 이메일 비번)
-
-       // 보내는 사람 EMail, 제목, 내용
-       String fromEmail = "bo3893@gmail.com"; //보내는 사람 이메일주소(받는 사람 이메일에 표시됨)
-       String fromName = "ilchooL";  //프로젝트이름 또는 보내는 사람 이름
-       String subject = "";
-       String msg = "";
-       
-       
-       subject = "임시 비밀번호 입니다.";
-       msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-       msg += "<h3 style='color: blue;'>";
-       msg += input.getUser_id() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
-       msg += "<p>임시 비밀번호 : ";
-       msg += input.getUser_pw() + "</p></div>";
-       
-    
-       
-       
-       // 받는 사람 E-Mail 주소
-       String mail = input.getEmail();
-       
-       
-       try {
-          HtmlEmail email = new HtmlEmail();
-          email.setDebug(true);
-          email.setCharset(charSet);
-          email.setSSL(true);
-          email.setHostName(hostSMTP);
-          email.setSmtpPort(465); //네이버 이용시 587
-
-          email.setAuthentication(hostSMTPid, hostSMTPpwd);
-          email.setTLS(true);
-          email.addTo(mail, charSet);
-          email.setFrom(fromEmail, fromName, charSet);
-          email.setSubject(subject);
-          email.setHtmlMsg(msg);
-          email.send();
-       } catch (Exception e) {
-          System.out.println("메일발송 실패 : " + e);
-          e.printStackTrace();
-          
-       }
-       
-    }
+	public Members findId(Members input) throws Exception {
+	    Members result = null;
+	    try {
+	      result = (Members)sqlSession.selectOne("MembersMapper.findId", input);
+	      if (result == null)
+	        throw new NullPointerException("result=null"); 
+	    } catch (NullPointerException e) {
+	      log.error(e.getLocalizedMessage());
+	      throw new Exception("이름 또는 이메일이 잘못되었습니다.");
+	    } catch (Exception e) {
+	      log.error(e.getLocalizedMessage());
+	      throw new Exception("데이터 조회에 실패했습니다.");
+	    } 
+	    return result;
+	  }
     
     /**
      * 비밀번호 찾기
      */
     @Override
-    public void findPw(HttpServletResponse response, Members input) throws Exception {
-       response.setContentType("text/html;charset=utf-8");
-       PrintWriter out = response.getWriter();
-       
-       // 아이디, 이메일 오류 시
-       if(mdao.id_select(input)==null) {
-    	   out.print("<script>alert('아이디와 이메일을 확인하세요'); history.go(-1);</script>");
-    	   out.close();
-       }
-       
-       // 임시 비밀번호 생성
-       String pw = "";
-       for (int i=0; i<12; i++) {
-          pw += (char) ((Math.random() * 26) + 97);
-       }
-       input.setUser_pw(pw);
-       
-       // 비밀번호 변경
-       mdao.updatePw(input);
-       
-       
-       
-       // 비밀번호 변경 메일 발송
-       sendEmail(input);
+    public Members findPw(Members input) throws Exception {
+    	Members result = null;
+        try {
+          result = (Members)sqlSession.selectOne("MembersMapper.findPw", input);
+          if (result == null)
+            throw new NullPointerException("result=null"); 
+        } catch (NullPointerException e) {
+          log.error(e.getLocalizedMessage());
+          throw new Exception("입력하신 정보가 잘못되었습니다.");
+        } catch (Exception e) {
+          log.error(e.getLocalizedMessage());
+          throw new Exception("데이터 조회에 실패했습니다.");
+        } 
+        return result;
+      }
+    
+    /**
+     * 회원 탈퇴(유지)
+     */
+    public void OutMembers(Members input) throws Exception {
+        try {
+          sqlSession.selectOne("MembersMapper.selectMember", input);
+          sqlSession.update("MembersMapper.userOut", input);
+
+        } catch (NullPointerException e) {
+          log.error(e.getLocalizedMessage());
+          throw new Exception("삭제된 데이터가 없습니다.");
+        } catch (Exception e) {
+          log.error(e.getLocalizedMessage());
+          throw new Exception("데이터 삭제에 실패했습니다.");
+        } 
     }
 
-    @Override
-    public Members id_check(Members input) throws Exception {
-        return sqlSession.selectOne("MembersMapper.id_select", input);
-        
-    }
-
-	@Override
-	public Members searchMembersID(Members input) throws Exception {
-		Members result = null;
-
-		try {
-			result = sqlSession.selectOne("MembersMapper.searchID", input);
-		} catch (NullPointerException e) {
-			throw new Exception("저장된 아이디가 없습니다.");
-		} catch (Exception e) {
-			throw new Exception("아이디 조회에 실패했습니다.");
-		}
-		
-		return result;
-	}
- }
-
-
+}
 
 

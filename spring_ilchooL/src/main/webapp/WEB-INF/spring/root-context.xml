@@ -12,7 +12,7 @@
         <!-- 메일발송 서버 계정 -->
         <prop key="smtpUsername">ebusinho@gmail.com</prop>
         <!-- 메일발송 서버 비밀번호 -->
-        <prop key="smtpPassword">oudxqoxloeifpuji</prop>
+        <prop key="smtpPassword">vywcvxcijhujzvpk</prop>
         <!-- 업로드 디렉토리 (server.xml의 docBase 값과 일치해야 함)
         각자의 폴더 지정해야 함 -->
         <prop key="uploadDir">/home/student/ilchooL/upload</prop>
@@ -66,10 +66,12 @@
             </props>
         </property>
     </bean>
+    
     <!-- Mail Helper 주입 설정 -->
     <bean id="mailHelper" class="project.spring.ilchooL.helper.MailHelper">
         <constructor-arg ref="mailSender" />
     </bean>
+    
     <!-- Upload를 위한 Multipart 지원 라이브러리 주입 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 업로드 최대 용량 (-1로 지정할 경우 제한없음) -->
