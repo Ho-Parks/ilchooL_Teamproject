@@ -32,7 +32,7 @@
         <!-- DB 문자셋 -->
         <prop key="dbCharset">utf8</prop>
         <!-- DB 계정명 -->
-        <prop key="dbUsername">ilchooL</prop>
+        <prop key="dbUsername">root</prop>
         <!-- DB 비밀번호 -->
         <prop key="dbPassword">123qwe!@#</prop>
         <!-- Mapper 파일들이 위치할 경로 -->

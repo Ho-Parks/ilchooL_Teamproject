@@ -109,8 +109,7 @@ public class AccountController {
 		//세션값 받아오기
 		HttpSession session = request.getSession();		
 		Members loginSession = (Members) session.getAttribute("member");
-						
-								
+										
 		//로그인 세션이 없을 경우 = 로그인되어있지 않을 경우 alert 발생
 		if(loginSession!=null) { 
 		return webHelper.redirect("../","로그아웃 후 이용해주세요.");

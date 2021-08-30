@@ -81,7 +81,7 @@
     
     <!-- 데이터 삭제를 위한 기능 정의 -->
     <delete id="deleteMembers" parameterType="project.spring.ilchooL.model.Members">
-        DELETE FROM members WHERE user_id=#{user_id}
+        DELETE FROM members WHERE id=#{id}
     </delete>
     
     <!-- 회원정보 수정 -->
