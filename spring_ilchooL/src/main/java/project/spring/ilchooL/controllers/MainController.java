@@ -165,43 +165,37 @@ public class MainController {
 		String fcst_date = String.format("%04d%02d%02d", date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1,
 				date.get(Calendar.DAY_OF_MONTH));
 
-
 		for (int i = 0; i < w_item_list.size(); i++) {
 			ca = w_item_list.get(i).getCategory();
 			ti = w_item_list.get(i).getFcst_time();
 			da = w_item_list.get(i).getFcst_date();
-
-			// 'SKY':하늘상태
-			if (ca.equals("SKY") && da.equals(fcst_date)) {
-				if (ti.equals(fcst_time)) {
-					sky = Integer.parseInt(w_item_list.get(i).getFcst_value());
-				}
-			}
-
-			// 'PTY':강수확률
-			if (ca.equals("PTY") && da.equals(fcst_date)) {
-				if (ti.equals(fcst_time)) {
-					pty = Integer.parseInt(w_item_list.get(i).getFcst_value());
-				}
-			}
-
-			// 'TMP':1시간기온
-			if (ca.equals("TMP") && da.equals(fcst_date)) {
-				if (ti.equals(fcst_time)) {
-					tmp = Integer.parseInt(w_item_list.get(i).getFcst_value());
-				}
-			}
-
-			// 'TMN':최저기온(6시)
-			if (ca.equals("TMN") && da.equals(fcst_date)) {
-				tmn = Integer.parseInt(w_item_list.get(i).getFcst_value());
-			}
 			
-			// 'TMX':최고기온(15시)
-			if (ca.equals("TMX") && da.equals(fcst_date)) {
-				tmx = Integer.parseInt(w_item_list.get(i).getFcst_value());
-			}
-		}
+			if (da.equals(fcst_date) && ti.equals(fcst_time)) {
+				if (ca.equals("SKY")) {
+					sky = Integer.parseInt(w_item_list.get(i).getFcst_value());
+				} else if (ca.equals("PTY")) {
+					pty = Integer.parseInt(w_item_list.get(i).getFcst_value());
+				} else if (ca.equals("TMP")) {
+					tmp = Integer.parseInt(w_item_list.get(i).getFcst_value());
+				} else if (ca.equals("TMN")) {
+					tmn = Integer.parseInt(w_item_list.get(i).getFcst_value());
+				} else if (ca.equals("TMX")) {
+					tmx = Integer.parseInt(w_item_list.get(i).getFcst_value());
+				} // end if
+			} else {
+				if (ca.equals("SKY")) {
+					sky = Integer.parseInt(w_item_list.get(i).getFcst_value());
+				} else if (ca.equals("PTY")) {
+					pty = Integer.parseInt(w_item_list.get(i).getFcst_value());
+				} else if (ca.equals("TMP")) {
+					tmp = Integer.parseInt(w_item_list.get(i).getFcst_value());
+				} else if (ca.equals("TMN")) {
+					tmn = Integer.parseInt(w_item_list.get(i).getFcst_value());
+				} else if (ca.equals("TMX")) {
+					tmx = Integer.parseInt(w_item_list.get(i).getFcst_value());
+				} // end if
+			}	// end if
+		} // end for
 
 		model.addAttribute("sky", sky);
 		model.addAttribute("pty", pty);
