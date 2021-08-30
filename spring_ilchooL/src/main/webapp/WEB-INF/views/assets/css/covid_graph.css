@@ -30,7 +30,7 @@ ul li span { font-size: 15px; }
 
 .btn_box { text-align: center; }
 
-.graph_btn { width: 80% !important; }
+.graph_btn { width: 80% !important; margin-bottom: 15px; }
 
 .canvas_chart_container { position: relative; resize: both; padding-top: 30px; }
 
