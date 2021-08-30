@@ -45,8 +45,11 @@
   border-color: #ccc;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  transition: all 0.5s;
 }
-
+.btn-default:hover{
+	transition: all 0.5s;
+}
 .btn-default:hover,
 .btn-default:focus {
   background-color: #e0e0e0;
@@ -66,8 +69,12 @@
   border-color: #2b669a;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff428bca', endColorstr='#ff2d6ca2', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  transition: all 0.5s;
 }
 
+.btn-primary:hover{
+	transition: all 0.5s;
+}
 .btn-primary:hover,
 .btn-primary:focus {
   background-color: #2d6ca2;
@@ -87,8 +94,12 @@
   border-color: #3e8f3e;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5cb85c', endColorstr='#ff419641', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  transition: all 0.5s;
 }
 
+.btn-success:hover{
+	transition: all 0.5s;
+}
 .btn-success:hover,
 .btn-success:focus {
   background-color: #419641;
@@ -108,6 +119,11 @@
   border-color: #e38d13;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff0ad4e', endColorstr='#ffeb9316', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  transition: all 0.5s;
+}
+
+.btn-warning:hover{
+	transition: all 0.5s;
 }
 
 .btn-warning:hover,
@@ -129,6 +145,11 @@
   border-color: #b92c28;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd9534f', endColorstr='#ffc12e2a', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  transition: all 0.5s;
+}
+
+.btn-danger:hover{
+	transition: all 0.5s;
 }
 
 .btn-danger:hover,
@@ -150,6 +171,11 @@
   border-color: #28a4c9;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2aabd2', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  transition: all 0.5s;
+}
+
+.btn-info:hover{
+	transition: all 0.5s;
 }
 
 .btn-info:hover,

@@ -13,6 +13,7 @@
 	href="${pageContext.request.contextPath}/assets/css/mypage.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/assets/css/flexboxgrid.min.css" />
+	
 </head>
 
 <body>
@@ -33,12 +34,11 @@
 						<h2>비밀번호 변경</h2>
 					</div>
 					<div id="form_password" class="hidden"></div>
-
 					<form class="form-horizontal" name="password_form" id="password_form" method="post" action="${pageContext.request.contextPath}/rest/mypage/pw">
 						<div class="row center-sm">
 							<div class="col-sm-12">
 								<p>
-									<button type="button" id='pw_btn' class='btn btn-primary'>비밀번호 찾기</button>
+									<button type="button" id='pw_btn' class='btn btn-primary outline'>비밀번호 변경</button>
 								</p>
 							</div>
 						</div>
@@ -74,7 +74,7 @@
 									id="postcode" name="postcode" class="new_1" placeholder="우편번호"
 									value="${member.getPostcode()}" readonly>
 								</span> <span class="click"> <input type="button"
-									id="address_btn" class="btn btn-primary"
+									id="address_btn" class="btn btn-primary outline"
 									onclick="new_execDaumPostcode()" value="우편번호 찾기">
 								</span>
 							</div>
@@ -108,7 +108,7 @@
 
 						<!-- Mypage BTN-->
 						<div class="btn_area">
-							<button type="submit" id="btnJoin">변경된 정보 저장</button>
+							<button type="submit" id="btnJoin" class="btn btn-primary outline">변경된 정보 저장</button>
 						</div>
 					</form>
 				</div>

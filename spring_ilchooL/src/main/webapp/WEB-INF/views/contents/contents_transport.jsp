@@ -33,8 +33,8 @@
 								</a>
 							</div>
 						</div>
-						<a href="#" id="change" class="btn btn-block btn_change" onclick="" style="margin-top: 5px;" onclick="">change</a>
-						<a href="#" id="search" class="btn btn-block btn_search" onclick="">길찾기</a>
+						<a href="#" id="change" class="btn btn-block btn-primary outline btn_change" onclick="" style="margin-top: 5px;" onclick="">change</a>
+						<a href="#" id="search" class="btn btn-block btn-primary outline btn_search" onclick="">길찾기</a>
 					</div>
 
 					<div id="result_findWayMode" style="overflow: auto; max-height: 628px;">

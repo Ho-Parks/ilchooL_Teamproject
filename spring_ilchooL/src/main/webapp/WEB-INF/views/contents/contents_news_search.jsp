@@ -81,10 +81,10 @@
 			
 			<div>
 				<form id="form" action="${pageContext.request.contextPath}/contents/contents_search.do" method="post" class="form-inline">
-					<div class="form-group col-sm-10" >
+					<div class="form-group col-xs-10" style="padding-left: 0px;">
 						<input id="search" type="text" name="search" placeholder="키워드를 입력하세요" class="form-control" />
 					</div>
-					<input id="btn" type="submit" class="btn col-sm-2" value="검색" />
+					<input id="btn" type="submit" class="btn btn-default outline col-xs-2" value="검색" />
 				</form>
 			</div>
 			
@@ -99,7 +99,7 @@
 
 			<div class="row">
 				<div class="col-md-12">
-					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
+					<div class="col-lg-4 col-md-6 col-xs-12 news_box">
 						<a data-toggle="modal" href="#news_modal1"> <span
 							class="news_contents_box"> <span id="text"> ${str1}
 							</span> <span id="text_date"> ${news_date1}
@@ -108,7 +108,7 @@
 						</a>
 					</div>
 				
-					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
+					<div class="col-lg-4 col-md-6 col-xs-12 news_box">
 						<a data-toggle="modal" href="#news_modal2"> <span
 							class="news_contents_box"> <span id="text"> ${str2}
 							</span> <span id="text_date"> ${news_date2}
@@ -117,7 +117,7 @@
 						</a>
 					</div>
 				
-					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
+					<div class="col-lg-4 col-md-6 col-xs-12 news_box">
 						<a data-toggle="modal" href="#news_modal3"> <span
 							class="news_contents_box"> <span id="text"> ${str3}
 							</span> <span id="text_date"> ${news_date3}
@@ -126,7 +126,7 @@
 						</a>
 					</div>
 				
-					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
+					<div class="col-lg-4 col-md-6 col-xs-12 news_box">
 						<a data-toggle="modal" href="#news_modal4"> <span
 							class="news_contents_box"> <span id="text"> ${str4}
 							</span> <span id="text_date"> ${news_date4}
@@ -135,7 +135,7 @@
 						</a>
 					</div>
 				
-					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
+					<div class="col-lg-4 col-md-6 col-xs-12 news_box">
 						<a data-toggle="modal" href="#news_modal5"> <span
 							class="news_contents_box"> <span id="text"> ${str5}
 							</span> <span id="text_date"> ${news_date5}
@@ -144,7 +144,7 @@
 						</a>
 					</div>
 				
-					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
+					<div class="col-lg-4 col-md-6 col-xs-12 news_box">
 						<a data-toggle="modal" href="#news_modal6"> <span
 							class="news_contents_box"> <span id="text"> ${str6}
 							</span> <span id="text_date"> ${news_date6}
@@ -153,7 +153,7 @@
 						</a>
 					</div>
 				
-					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
+					<div class="col-lg-4 col-md-6 col-xs-12 news_box">
 						<a data-toggle="modal" href="#news_modal7"> <span
 							class="news_contents_box"> <span id="text"> ${str7}
 							</span> <span id="text_date"> ${news_date7}
@@ -162,7 +162,7 @@
 						</a>
 					</div>
 				
-					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
+					<div class="col-lg-4 col-md-6 col-xs-12 news_box">
 						<a data-toggle="modal" href="#news_modal8"> <span
 							class="news_contents_box"> <span id="text"> ${str8}
 							</span> <span id="text_date"> ${news_date8}
@@ -171,7 +171,7 @@
 						</a>
 					</div>
 				
-					<div class="col-lg-4 col-md-6 col-sm-12 news_box">
+					<div class="col-lg-4 col-md-6 col-xs-12 news_box">
 						<a data-toggle="modal" href="#news_modal9"> <span
 							class="news_contents_box"> <span id="text"> ${str9}
 							</span> <span id="text_date"> ${news_date9}

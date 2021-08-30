@@ -79,12 +79,13 @@
 				</div>
 			</div>
 			
-			<div>
+			<div class="col-sm-12">
 				<form id="form" action="${pageContext.request.contextPath}/contents/contents_search.do" method="post" class="form-inline">
-					<div class="form-group col-sm-10" >
+					<div class="form-group col-xs-10" style="padding-left: 0px;">
+    
 						<input id="search" type="text" name="search" placeholder="키워드를 입력하세요" class="form-control" />
 					</div>
-					<input id="btn" type="submit" class="btn col-sm-2" value="검색" />
+					<input id="btn" type="submit" class="btn btn-default outline col-xs-2" value="검색" />
 				</form>
 			</div>
 			

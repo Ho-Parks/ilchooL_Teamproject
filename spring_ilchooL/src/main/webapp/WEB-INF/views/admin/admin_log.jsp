@@ -13,10 +13,13 @@
 	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,
   maximum-scale=1.0,user-scalable=no">
 <title>Admin</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath }/assets/ico/favicon.png" />
+<link rel="apple-touch-icon-precomposed"
+	href="${pageContext.request.contextPath }/assets/ico/apple-touch-icon-144-precomposed.png" />
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+	href="${pageContext.request.contextPath}/assets/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="../assets/css/admin_header.css">
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

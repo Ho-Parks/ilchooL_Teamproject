@@ -67,7 +67,7 @@ public interface AdminMembersService {
      */
     public int adminOld20( ) throws Exception;
     
-    public int adminOld30( ) throws Exception;
+    public int adminOld25( ) throws Exception;
     
-    public int adminOld40( ) throws Exception;
+    public int adminOld30( ) throws Exception;
 }

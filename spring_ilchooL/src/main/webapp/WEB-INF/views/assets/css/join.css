@@ -217,6 +217,17 @@ select {
 	font-size: 20px;
 	font-weight: 400;
 	font-family: Dotum, '돋움', Helvetica, sans-serif;
+	transition: all 0.5s;
+}
+
+#btnJoin:hover{
+	transition: all 0.5s;
+}
+
+#btnJoin:hover,
+#btnJoin:focus {
+    background-color: #429bca;
+    background-position: 0 -15px
 }
 
 .click {

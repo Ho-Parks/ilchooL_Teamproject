@@ -176,7 +176,7 @@ public class LoginController {
     
     try {
       String mailSubjcet = "[ilchooL] 임시비밀번호 입니다.";
-      String mailContent = String.valueOf("안녕하세요^^ " + output.getUser_name()) + " 회원님의 임시 비밀번호는 " + pw + " 입니다."
+      String mailContent = String.valueOf(output.getUser_name()) + " 회원님의 임시 비밀번호는 " + pw + " 입니다."
     		  + "로그인 후 비밀번호를 변경하여 사용해 주시길 바랍니다.";
       mailHelper.sendMail(output.getEmail(), mailSubjcet, mailContent);
     } catch (Exception e) {

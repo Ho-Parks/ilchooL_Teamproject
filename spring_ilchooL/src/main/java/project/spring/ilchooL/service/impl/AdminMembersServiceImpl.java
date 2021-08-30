@@ -182,11 +182,11 @@ public class AdminMembersServiceImpl implements AdminMembersService {
 	}
 
 	@Override
-	public int adminOld30() throws Exception {
+	public int adminOld25() throws Exception {
 int result = 0;
 		
 		try {
-	         result = sqlSession.selectOne("MembersMapper.dashboardOld30");
+	         result = sqlSession.selectOne("MembersMapper.dashboardOld25");
 	         
 	        } catch (NullPointerException e) {
 	            log.error(e.getLocalizedMessage());
@@ -199,11 +199,11 @@ int result = 0;
 	}
 
 	@Override
-	public int adminOld40() throws Exception {
+	public int adminOld30() throws Exception {
 int result = 0;
 		
 		try {
-	         result = sqlSession.selectOne("MembersMapper.dashboardOld40");
+	         result = sqlSession.selectOne("MembersMapper.dashboardOld30");
 	        
 	        } catch (NullPointerException e) {
 	            log.error(e.getLocalizedMessage());

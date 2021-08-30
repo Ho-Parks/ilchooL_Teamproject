@@ -103,9 +103,12 @@ div#container {
 	padding: 0 40px 0 40px;
 }
 
-.modal-dialog {
-	width: 1000px !important;
+@media screen and (min-width: 769px) {
+   .modal-dialog{
+   width: 1000px;
+   }
 }
+
 
 .modal-dialog .modal-header {
 	padding: 70px 50px;

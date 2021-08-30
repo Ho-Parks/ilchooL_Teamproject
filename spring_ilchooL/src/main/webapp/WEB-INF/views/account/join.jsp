@@ -32,7 +32,7 @@
 							<input type="text" id="user_id" class="new" name="user_id" maxlength="20">
 						</span> 
 						<span class="click">
-							<button class="btn btn-primary" type="button" id="id_unique_check">중복검사</button>
+							<button class="btn btn-primary outline" type="button" id="id_unique_check">중복검사</button>
 						</span>
 					</div>
 				</div>
@@ -108,7 +108,7 @@
 					<input type="email" id="email" class="new" maxlength="100" name="email">
 					</span> 
 					<span class="click">
-							<button class="btn btn-primary" type="button" id="email_unique_check">중복검사</button>
+							<button class="btn btn-primary outline" type="button" id="email_unique_check">중복검사</button>
 					</span>
 				</div>
 
@@ -134,7 +134,7 @@
 							<input type="text" id="postcode" name="postcode" class="new_1" placeholder="우편번호" readonly>
 						</span> 
 						<span class="click"> 
-							<input type="button" id="address_btn" class="btn btn-primary" onclick="new_execDaumPostcode()" value="우편번호 찾기">
+							<input type="button" id="address_btn" class="btn btn-primary outline" onclick="new_execDaumPostcode()" value="우편번호 찾기">
 						</span>
 					</div>
 

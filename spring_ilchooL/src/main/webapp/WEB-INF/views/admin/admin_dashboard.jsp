@@ -13,6 +13,9 @@
 	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,
   maximum-scale=1.0,user-scalable=no">
 <title>Admin</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath }/assets/ico/favicon.png" />
+<link rel="apple-touch-icon-precomposed"
+	href="${pageContext.request.contextPath }/assets/ico/apple-touch-icon-144-precomposed.png" />
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css"/>
 <link rel="stylesheet"
@@ -152,8 +155,7 @@ body {
 					
 				</div>
 			</div>
-		</div>
-	</div>
+		
 	
 	<!-- chartjs cdn 참조 -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
@@ -214,8 +216,8 @@ var dashboardChart = new Chart(ctx, {
             label: '# of Votes',
             data: ['${addr1}', '${addr2}'],
             backgroundColor: [
-                'rgba(0, 216, 255, 1)',
-                'rgba(29, 219, 22, 1)',
+                '#F5dF4D',
+                '#939597',
               
             ],
             borderColor: [
@@ -246,14 +248,14 @@ var ctx = document.getElementById("dashboardChart2");
 var dashboardChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
-        labels: ["20대", "30대", "40대"],
+        labels: ["20-24세", "25-29세", "30-34세"],
         datasets: [{
             label: '# of Votes',
             data: ['${Old0}', '${Old1}', '${Old2}'],
             backgroundColor: [
-            	'rgba(231, 76, 60, 1)',
-                'rgba(255, 187, 0, 1)',
-                'rgba(29, 219, 	22, 1)'
+            	'#a299ca',
+                '#7ccaae',
+                '#84c0e9'
             ],
             borderColor: [
             	'rgba(255, 255, 255 ,1)',
@@ -287,8 +289,8 @@ var dashboardChart = new Chart(ctx, {
             label: '# of Votes',
             data: ['${genderM}', '${genderF}'],
             backgroundColor: [
-                'rgba(1, 0, 255, 1)',
-                'rgba(255, 0, 0, 1)'
+                '#a8dff1',
+                '#fed5d9'
                 
             ],
             borderColor: [

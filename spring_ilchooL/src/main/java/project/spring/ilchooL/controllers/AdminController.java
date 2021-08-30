@@ -216,7 +216,7 @@ public class AdminController {
 		      model.addAttribute("Old0", result);
 		      
 		      try {
-		    	   result = adminMembersService.adminOld30();
+		    	   result = adminMembersService.adminOld25();
 		      } catch (Exception e) {
 		         e.printStackTrace();
 		      }
@@ -224,7 +224,7 @@ public class AdminController {
 		      model.addAttribute("Old1", result);
 		      
 		      try {
-		    	   result = adminMembersService.adminOld40();
+		    	   result = adminMembersService.adminOld30();
 		      } catch (Exception e) {
 		         e.printStackTrace();
 		      }

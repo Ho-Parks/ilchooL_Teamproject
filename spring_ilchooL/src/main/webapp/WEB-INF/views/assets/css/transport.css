@@ -11,7 +11,7 @@ input:focus-visible { outline: 1px auto #428bca; }
 }
 .well { margin-bottom: 0 !important; }
 
-.btn_change, .btn_search { color: #fff; background-color: #428bca; border-color: #2e6da4; }
+.btn_change, .btn_search { color: #fff; }
 
 .trans_main_box { padding: 0; margin: 0 auto; }
 .row { margin: 0 !important;}

@@ -12,11 +12,13 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>admin</title>
-
+<link rel="shortcut icon" href="${pageContext.request.contextPath }/assets/ico/favicon.png" />
+<link rel="apple-touch-icon-precomposed"
+	href="${pageContext.request.contextPath }/assets/ico/apple-touch-icon-144-precomposed.png" />
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+	href="${pageContext.request.contextPath}/assets/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="../assets/css/admin_header.css">
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -96,6 +98,17 @@ body {
 	padding: 30px;
 	text-align: left;
 }
+
+#btn {
+	text-align: center;
+}
+
+.modify{
+	height: 40px;
+    border: solid 2px #333333;
+    border-radius: 5px;
+    padding: 10px 14px 10px 14px;
+}
 </style>
 
 </head>
@@ -130,7 +143,7 @@ body {
 					<div class="form-group">
 						<label for="user_id" class="col-md-2">아이디</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" id="user_id" name="user_id" value="${output.user_id}"
+							<input type="text" class="form-control modify" id="user_id" name="user_id" value="${output.user_id}"
 								placeholder="아이디를 입력하세요"> <span class="error_next_box"></span>
 							<hr />
 						</div>
@@ -141,7 +154,7 @@ body {
 					<div class="form-group">
 						<label for="user_name" class="col-md-2">이름</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" id="user_name" name="user_name" value="${output.user_name}"
+							<input type="text" class="form-control modify" id="user_name" name="user_name" value="${output.user_name}"
 								placeholder="이름을 입력하세요"> <span class="error_next_box"></span>
 							<hr />
 						</div>
@@ -152,7 +165,7 @@ body {
 					<div class="form-group">
 						<label for="email" class="col-md-2">이메일</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" id="email" name="email" value="${output.email}"
+							<input type="text" class="form-control modify" id="email" name="email" value="${output.email}"
 								placeholder="이메일을 입력하세요"> <span class="error_next_box"></span>
 							<hr />
 						</div>
@@ -163,7 +176,7 @@ body {
 					<div class="form-group">
 						<label for="phone" class="col-md-2">전화번호</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" id="phone" name="phone" value="${output.phone}" placeholder="전화번호를 입력하세요">
+							<input type="text" class="form-control modify" id="phone" name="phone" value="${output.phone}" placeholder="전화번호를 입력하세요">
 							<hr />
 						</div>
 					</div>
@@ -173,7 +186,7 @@ body {
 					<div class="form-group">
 						<label for="birthday" class="col-md-2">생일</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control" id="birthday" name="birthday" value="${output.birthday}"
+							<input type="text" class="form-control modify" id="birthday" name="birthday" value="${output.birthday}"
 								placeholder="XXXX-XX-XX"> <span class="error_next_box"></span>
 							<hr />
 						</div>
@@ -183,8 +196,8 @@ body {
 					<!-- 입력양식 -->
 					<div class="form-group">
 						<label for="gender" class="col-md-2">성별</label>
-						<div class="col-md-8">
-							<input type="text" class="form-control" id="gender" name="gender" value="${output.gender}"
+						<div class="col-md-8"> 
+							<input type="text" class="form-control modify" id="gender" name="gender" value="${output.gender}"
 								placeholder="M / F"> <span class="error_next_box"></span>
 							<hr />
 						</div>
@@ -196,15 +209,15 @@ body {
 						<label for="content" class="col-md-2">계정 활성화</label>
 						<div class="col-md-8">
 							<input id="checkbox" type="checkbox"
-								class="btn btn-default btn-lg">
+								class="btn btn-default outline btn-lg">
 						</div>
 					</div>
 					<!--//체크박스-->
 					
 					<div class="form-group">
-						<div class="col-md-10">
-						<button type="submit">수정</button>
-						<a href="${pageContext.request.contextPath}/admin/admin_list.do"><button type="submit">취소</button></a>
+						<div id="btn" class="col-md-10">
+						<button type="submit" class="btn btn-primary outline">수정</button>
+						<a href="${pageContext.request.contextPath}/admin/admin_list.do"><button type="submit" class="btn btn-danger outline">취소</button></a>
 						</div>
 					</div>
 				</form>

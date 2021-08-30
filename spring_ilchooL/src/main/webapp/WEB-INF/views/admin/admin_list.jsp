@@ -13,10 +13,13 @@
 	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,
   maximum-scale=1.0,user-scalable=no">
 <title>Admin</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath }/assets/ico/favicon.png" />
+<link rel="apple-touch-icon-precomposed"
+	href="${pageContext.request.contextPath }/assets/ico/apple-touch-icon-144-precomposed.png" />
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+	href="${pageContext.request.contextPath}/assets/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="../assets/css/admin_header.css">
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -88,6 +91,20 @@ body {
 .main {
 	color: #333;
 }
+
+input {
+	display: inline-block;
+	height: 33px;
+	font-size: 13px;
+	color: #000;
+	border: 2px solid#87CEFA;
+	border-radius: 4px;
+	vertical-align: middle;
+	padding: 5px 10px ;
+	outline: 0;
+	-webkit-appearance: none;
+	background-color: transparent;
+}
 </style>
 </head>
 
@@ -111,9 +128,9 @@ body {
 				<div class="table-responsive">
    <!-- 검색폼 -->
     <form method="get" action="${pageContext.request.contextPath}/admin/admin_list.do">
-        <label for="keyword">검색: </label>
-        <input type="search" name="keyword" id="keyword" placeholder="" value="${keyword}" />
-        <button type="submit">검색</button>
+        <label for="keyword" class="search">검색: </label>
+        <input type="search" name="keyword" id="keyword" placeholder="회원 찾기" value="${keyword}" />
+        <button type="submit" class="btn btn-info outline">검색</button>
     </form>
 
     <hr />
@@ -165,9 +182,9 @@ body {
                             <td class="text-center">${user_name}</td>
                             <td class="text-center">${email}</td>
                             <td class="text-center">${phone}</td>
-                            <td class="text-center"><a href="${pageContext.request.contextPath}/admin/admin_modify.do?id=${item.id}" class="btn btn-primary btn-sm">수정</a>
-                            <a href="${pageContext.request.contextPath}/admin/delete_ok.do?id=${item.id}" class="btn btn-danger btn-sm">삭제</a>
-                            <a href="${pageContext.request.contextPath}/admin/admin_log.do?id=${item.id}" class="btn btn-success btn-sm">로그</a></td>
+                            <td class="text-center"><a href="${pageContext.request.contextPath}/admin/admin_modify.do?id=${item.id}" class="btn btn-primary outline btn-sm">수정</a>
+                            <a href="${pageContext.request.contextPath}/admin/delete_ok.do?id=${item.id}" class="btn btn-danger outline btn-sm">삭제</a>
+                            <a href="${pageContext.request.contextPath}/admin/admin_log.do?id=${item.id}" class="btn btn-success outline btn-sm">로그</a></td>
                         </tr>
                     </c:forEach>
                 </c:otherwise>

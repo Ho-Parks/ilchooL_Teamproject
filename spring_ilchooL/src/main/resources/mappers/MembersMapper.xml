@@ -242,19 +242,19 @@
 	<select id="dashboardOld20" parameterType="project.spring.ilchooL.model.Members" resultType="int">
       Select Count(*)
       From members
-      Where Date_Format(now(), '%Y')- Date_Format(birthday, '%Y') + 1 >= 20 AND 30 > Date_Format(now(), '%Y') - Date_Format(birthday, '%Y') + 1;   
+      Where Date_Format(now(), '%Y')- Date_Format(birthday, '%Y') + 1 >= 20 AND 25 > Date_Format(now(), '%Y') - Date_Format(birthday, '%Y') + 1;   
+   </select>
+   
+    <select id="dashboardOld25" parameterType="project.spring.ilchooL.model.Members" resultType="int">
+      Select Count(*)
+      From members
+      Where Date_Format(now(), '%Y')- Date_Format(birthday, '%Y') + 1 >= 25 AND 30 > Date_Format(now(), '%Y') - Date_Format(birthday, '%Y') + 1;  
    </select>
    
     <select id="dashboardOld30" parameterType="project.spring.ilchooL.model.Members" resultType="int">
       Select Count(*)
       From members
-      Where Date_Format(now(), '%Y')- Date_Format(birthday, '%Y') + 1 >= 30 AND 40 > Date_Format(now(), '%Y') - Date_Format(birthday, '%Y') + 1;  
-   </select>
-   
-    <select id="dashboardOld40" parameterType="project.spring.ilchooL.model.Members" resultType="int">
-      Select Count(*)
-      From members
-      Where Date_Format(now(), '%Y')- Date_Format(birthday, '%Y') + 1 >= 40 AND 50 > Date_Format(now(), '%Y') - Date_Format(birthday, '%Y') + 1;  
+      Where Date_Format(now(), '%Y')- Date_Format(birthday, '%Y') + 1 >= 30 AND 35 > Date_Format(now(), '%Y') - Date_Format(birthday, '%Y') + 1;  
    </select>
    
    <update id="updatePw" parameterType="project.spring.ilchooL.model.Members">

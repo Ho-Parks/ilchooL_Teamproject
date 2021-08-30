@@ -90,16 +90,16 @@
 		<div id="covid_graph" class="row">
 			<div class="covid_graph_btn_box col-md-12 col-xs-12 row">
 				<div class="btn_box col-md-3 col-xs-6">
-					<button type="button" id="con_btn" class="btn btn-danger graph_btn">확진자</button>
+					<button type="button" id="con_btn" class="btn btn-danger outline graph_btn">확진자</button>
 				</div>
 				<div class="btn_box col-md-3 col-xs-6">
-					<button type="button" id="rel_btn" class="btn btn-primary graph_btn">격리해제</button>
+					<button type="button" id="rel_btn" class="btn btn-primary outline graph_btn">격리해제</button>
 				</div>
 				<div class="btn_box col-md-3 col-xs-6">
-					<button type="button" id="act_btn" class="btn btn-success graph_btn">격리중</button>
+					<button type="button" id="act_btn" class="btn btn-success outline graph_btn">격리중</button>
 				</div>
 				<div class="btn_box col-md-3 col-xs-6">
-					<button type="button" id="dea_btn" class="btn btn-warning graph_btn">사망자</button>
+					<button type="button" id="dea_btn" class="btn btn-warning outline graph_btn">사망자</button>
 				</div>
 			</div>
 			<div class="canvas_chart_container col-md-12 col-xs-12">

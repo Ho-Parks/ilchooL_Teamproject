@@ -18,10 +18,10 @@
 		<div class="row">
 			<div class="tabs col-md-12 col-sm-12">
 				<div class="pull-right">
-					<button type="button" id="kosdaq_btn" class="btn btn-light btn-lg">KOSDAQ</button>
+					<button type="button" id="kosdaq_btn" class="btn btn-default outline btn-lg">KOSDAQ</button>
 				</div>
 				<div class="pull-right">
-					<button type="button" id="kospi_btn" class="btn btn-light btn-lg">KOSPI</button>
+					<button type="button" id="kospi_btn" class="btn btn-default outline btn-lg">KOSPI</button>
 				</div>
 
 				<!-- 그래프를 표시할 위치 -->
