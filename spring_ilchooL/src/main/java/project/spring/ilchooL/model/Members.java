@@ -247,15 +247,6 @@ public class Members {
 		this.edit_date = edit_date;
 	}
 	
-
-	public static int getListCount() {
-		return listCount;
-	}
-
-	public static void setListCount(int listCount) {
-		Members.listCount = listCount;
-	}
-	
 	public static int getOffset() {
 		return offset;
 	}
@@ -264,6 +255,14 @@ public class Members {
 		Members.offset = offset;
 	}
 
+	public static int getListCount() {
+		return listCount;
+	}
+	
+	public static void setListCount(int listCount) {
+		Members.listCount = listCount;
+	}
+	
     @Override
     public String toString() {
         String str = "\n[Members]\n";

@@ -64,7 +64,7 @@
 		<task:scheduled ref="scheduleKeyword" method="keyword" cron="0 0 * * *  ? " />
 		
 		<task:scheduled ref="dust_scheduleJob" method="collectDust" cron="0 0 0/1 * * ?" /> 
-		<!-- <task:scheduled ref="dust_scheduleJob" method="collectDust" cron="0/30 * * * * ?" />  -->
+		<!-- <task:scheduled ref="dust_scheduleJob" method="collectDust" cron="0/30 * * * * ?" /> --> 
 
 		<!-- <task:scheduled ref="dust_scheduleJob" method="collectDust" cron="0/20 * * * * ?" /> -->
 		<!-- 30초에 한번씩 실행되는 스케줄러 -->
